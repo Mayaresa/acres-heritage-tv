@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BCE47V4Y57"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BCE47V4Y57',{anonymize_ip:true});
+function track(name,params){try{gtag('event',name,params||{});}catch(_){}}</script>
+<meta property="og:title" content="ACRES HERITAGE TV"><meta property="og:description" content="Watch this week's fonio episode free. Unlock all 31 with your Season Pass."><meta property="og:image" content="https://mayaresa.github.io/acres-heritage-tv/media/share.jpg"><meta property="og:image:width" content="720"><meta property="og:image:height" content="900"><meta property="og:url" content="https://mayaresa.github.io/acres-heritage-tv/"><meta property="og:type" content="website">
+<style>html,body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>ACRES Heritage TV</title>
+
+</head><body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Outfit:wght@400;600;800;900&display=swap">
+<style>
+/* Layout: a TV set (green bezel) on a charcoal studio wall, a news ticker under the screen, then the programme guide and the order desk */
+:root{
+  --wall:#1f1f1f; --panel:#272727; --panel-2:#303030; --line:#3d3f3a;
+  --fg:#f4f6f1; --muted:#a9afa3; --green:#80CD29; --green-ink:#1d2a0c; --lemon:#FFF200;
+  --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif; --body:"Outfit","Segoe UI",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{background:var(--wall);color:var(--fg)}
+body{font-family:var(--body);font-size:16px;line-height:1.45;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 40px}
+.wrap{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--lemon);outline-offset:2px}
+
+/* station bar */
+.station{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}
+.brand b{font-family:var(--display);font-weight:800;font-size:28px;line-height:1;letter-spacing:.5px}
+.brand b span{color:var(--green)}
+.bname{display:inline-flex;flex-direction:column;align-items:center;text-align:center}
+.brand small{display:block;font-weight:600;font-size:14px;letter-spacing:.2px;color:var(--muted);margin-top:3px}
+.dot{width:12px;height:12px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(128,205,41,.2)}
+.channels{display:flex;gap:8px;flex-wrap:wrap}
+.ch{display:flex;align-items:center;gap:8px;border:2px solid var(--line);border-radius:999px;padding:5px 14px 5px 5px;font-weight:800;font-size:13px;letter-spacing:1px;background:transparent;cursor:default}
+.ch img{width:28px;height:28px;border-radius:50%}
+.ch.on{border-color:var(--green);background:rgba(128,205,41,.1)}
+.ch.soon{color:var(--muted);padding-left:14px}
+.ch .n{font-family:var(--display);font-size:12px;color:var(--muted)}
+
+/* the set */
+.set{background:var(--panel);border:10px solid var(--green);border-radius:30px;padding:10px;box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.screen{position:relative;border-radius:18px;overflow:hidden;background:#000;aspect-ratio:16/9;max-width:100%}
+.screen video{width:100%;height:100%;display:block;background:#000}
+.sound{position:absolute;left:50%;bottom:64px;transform:translateX(-50%);z-index:3;background:var(--lemon);color:#272727;border:0;border-radius:999px;padding:12px 22px;font:inherit;font-weight:900;font-size:16px;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.45)}
+.bug{position:absolute;top:12px;right:12px;display:flex;align-items:center;gap:8px;background:rgba(20,20,20,.72);border-radius:999px;padding:4px 12px 4px 4px;font-weight:900;font-size:12px;letter-spacing:2px;pointer-events:none}
+.bug img{width:26px;height:26px;border-radius:50%}
+.now{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 8px 4px}
+.now .lab{font-weight:900;font-size:12px;letter-spacing:3px;color:var(--green)}
+.now h1{font-family:var(--display);font-weight:800;font-size:clamp(24px,4.4vw,36px);line-height:1.05;margin:2px 0 4px;text-wrap:balance}
+.now p{margin:0;color:var(--muted)}
+.ctrls{display:flex;gap:8px}
+.btn{border:2px solid var(--line);background:var(--panel-2);border-radius:12px;padding:9px 14px;font-weight:800;font-size:14px;cursor:pointer}
+.btn:hover{border-color:var(--green)}
+.btn:disabled{opacity:.4;cursor:default}
+
+/* ticker */
+.ticker{display:flex;align-items:stretch;border-radius:14px;overflow:hidden;background:var(--panel);border:2px solid var(--line)}
+.tk-lab{flex:none;background:var(--lemon);color:#272727;font-weight:900;font-size:13px;letter-spacing:2px;padding:10px 14px;display:flex;align-items:center}
+.tk-view{overflow:hidden;flex:1;min-width:0;display:flex;align-items:center}
+.tk-run{display:flex;gap:40px;white-space:nowrap;padding-left:20px;animation:run 70s linear infinite;font-weight:600}
+.tk-run b{color:var(--green);font-weight:900}
+.tk-run i{font-style:normal;color:var(--lemon);font-weight:800}
+@keyframes run{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.tk-run{animation:none;flex-wrap:wrap;white-space:normal;gap:8px 24px;padding:10px 14px}}
+
+/* lower grid */
+.grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:22px;align-items:start}
+@media (max-width:760px){.grid{grid-template-columns:minmax(0,1fr)}.desk{order:-1;position:static}}
+@media (max-width:520px){.ep{grid-template-columns:76px minmax(0,1fr)}.ep img{width:76px;height:43px}.ep .tag{grid-column:2;justify-self:start}.ep .t{font-size:16px}}
+h2{font-family:var(--display);font-weight:800;font-size:24px;margin:0 0 4px}
+.sub{color:var(--muted);margin:0 0 14px;font-size:14px}
+.guide{background:var(--panel);border-radius:20px;padding:18px}
+.list{display:flex;flex-direction:column;gap:10px}
+.grp{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;width:100%;text-align:left;background:var(--panel-2);border:2px solid var(--line);border-radius:14px;padding:14px 16px;cursor:pointer;min-height:56px}
+.grp:hover,.grp.open{border-color:var(--green)}
+.grp .gl{display:block;font-family:var(--display);font-weight:800;font-size:20px;line-height:1.1}
+.grp .gm{display:block;margin-top:3px;font-size:12px;font-weight:800;letter-spacing:1px;color:var(--muted);text-transform:uppercase}
+.grp .chev{font-size:26px;line-height:1;color:var(--green);transition:transform .2s}
+.grp.open .chev{transform:rotate(90deg)}
+.grp-body[hidden]{display:none}
+.grp-body{display:flex;flex-direction:column;gap:8px;max-height:430px;overflow:auto;padding:2px 4px 2px 0}
+@media (prefers-reduced-motion:reduce){.grp .chev{transition:none}}
+.ep{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:12px;align-items:center;padding:8px;border-radius:14px;border:2px solid transparent;background:var(--panel-2);text-align:left;width:100%}
+.ep img{width:96px;height:54px;object-fit:cover;border-radius:8px;display:block}
+.ep .t{font-family:var(--display);font-weight:700;font-size:17px;line-height:1.15}
+.ep .m{font-size:12px;font-weight:800;letter-spacing:1.5px;color:var(--muted);margin-top:2px}
+.ep .tag{font-size:11px;font-weight:900;letter-spacing:1.5px;border-radius:999px;padding:5px 10px;white-space:nowrap}
+.ep.ready{cursor:pointer}
+.ep.ready .tag{background:var(--green);color:var(--green-ink)}
+.ep.ready:hover{border-color:var(--line)}
+.ep.playing{border-color:var(--green)}
+.ep.playing .tag{background:var(--lemon);color:#272727}
+.ep.later .tag{border:2px solid var(--line);color:var(--muted)}
+.ep.later img{filter:grayscale(.7) brightness(.7)}
+.ep.next .tag{border-color:var(--lemon);color:var(--lemon)}
+
+.desk{background:var(--green);color:#272727;border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:12px}
+.desk .k{font-weight:900;font-size:12px;letter-spacing:3px}
+.desk h3{font-family:var(--display);font-weight:800;font-size:28px;line-height:1.05;margin:0}
+.price{font-family:var(--display);font-weight:800;font-size:58px;line-height:1;font-variant-numeric:tabular-nums}
+.price s{font-size:24px;opacity:.55;margin-left:6px}
+.desk .note{font-weight:600;font-size:14px;margin:0}
+.offer{display:flex;align-items:center;gap:10px}
+.offer-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px}
+.bag{flex:none;width:118px;height:auto;margin:-26px -6px -10px 0;filter:drop-shadow(0 10px 14px rgba(0,0,0,.35));transform:rotate(4deg)}
+@media (max-width:760px){.bag{width:140px}}
+.wa{background:#272727;color:var(--fg);border-radius:14px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.wa small{display:block;font-weight:900;font-size:11px;letter-spacing:2px;color:var(--lemon)}
+.wa span{font-family:var(--display);font-weight:800;font-size:22px;user-select:all}
+.copy{background:var(--lemon);color:#272727;border:0;border-radius:10px;padding:8px 12px;font-weight:900;font-size:13px;cursor:pointer}
+.join{display:block;text-align:center;background:#272727;color:var(--green);text-decoration:none;font-weight:900;letter-spacing:1px;border-radius:14px;padding:12px}
+.join:hover{color:var(--lemon)}
+.order{color-scheme:light;display:flex;flex-direction:column;gap:12px;background:rgba(255,255,255,.35);border-radius:16px;padding:14px}
+.fl{display:block;font-weight:900;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.row.qty{display:flex;align-items:center;justify-content:space-between;gap:10px}.row.qty .fl{margin:0}
+.step{display:flex;align-items:center;background:#272727;border-radius:12px;overflow:hidden}
+.step button{width:44px;height:44px;border:0;background:transparent;color:var(--lemon);font-size:24px;font-weight:900;cursor:pointer}
+.step output{min-width:36px;text-align:center;color:var(--fg);font-family:var(--display);font-weight:800;font-size:22px}
+.how{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.how label{display:flex;align-items:center;gap:10px;background:#fff;border-radius:12px;padding:10px 12px;font-weight:700;cursor:pointer;border:2px solid transparent}
+.how label:has(input:checked){border-color:#272727}
+.how input{accent-color:#272727;width:18px;height:18px;margin:0}
+.fld{display:flex;flex-direction:column}
+.fld input,.fld select{font:inherit;font-weight:600;background:#fff;color:#272727;border:2px solid transparent;border-radius:12px;padding:11px 12px;min-height:44px;width:100%}
+.fld input:focus,.fld select:focus{border-color:#272727;outline:none}
+.fld input.bad{border-color:#b3261e}
+.total{display:flex;justify-content:space-between;align-items:baseline;border-top:2px solid rgba(39,39,39,.25);padding-top:10px;font-weight:900;letter-spacing:1px}
+.total b{font-family:var(--display);font-size:32px;font-variant-numeric:tabular-nums}
+.err{margin:0;color:#7a120c;font-weight:800;font-size:14px}
+.send{border:0;border-radius:14px;background:#272727;color:var(--lemon);font-family:var(--display);font-weight:800;font-size:20px;padding:14px;cursor:pointer;min-height:48px}
+.send:hover{color:#fff}
+.note.small{font-size:13px}
+.ch.pass{cursor:pointer;color:var(--lemon);border-color:var(--lemon);padding-left:14px;background:transparent;font:inherit;font-weight:800;font-size:13px;letter-spacing:1px}
+.ch.pass.on{background:var(--lemon);color:#272727}
+.still i{display:none}.still span{font-family:var(--display,inherit);font-size:24px}.still small{font-weight:600;opacity:.85}.still button{margin-top:6px;font:inherit;font-weight:900;font-size:17px;background:#80CD29;color:#272727;border:0;border-radius:999px;padding:12px 26px;cursor:pointer}
+.loading{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:rgba(20,20,20,.72);font-weight:800;text-align:center;padding:0 20px}
+.loading i{width:38px;height:38px;border-radius:50%;border:4px solid rgba(255,255,255,.2);border-top-color:var(--green);animation:spin 1s linear infinite}
+.loading b{font-family:var(--display);font-size:24px;color:var(--lemon)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.passcta{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;margin:0 0 14px;padding:14px 16px;border:2px dashed var(--lemon);border-radius:14px;background:rgba(255,242,0,.07);color:var(--fg);text-align:left;cursor:pointer;font:inherit}
+.passcta b{display:block;font-family:var(--display);font-size:19px;color:var(--lemon)}
+.passcta small{display:block;color:var(--muted);font-weight:600;font-size:13px}
+.passcta em{font-style:normal;font-weight:900;color:var(--lemon);white-space:nowrap}
+.passcta.done{border-style:solid;border-color:var(--green);background:rgba(128,205,41,.1)}.passcta.done b,.passcta.done em{color:var(--green)}
+.modal{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.mbox{position:relative;width:100%;max-width:440px;background:var(--panel);border:3px solid var(--lemon);border-radius:22px;padding:24px}
+.mx{position:absolute;right:10px;top:8px;width:44px;height:44px;border:0;background:transparent;color:var(--muted);font-size:30px;cursor:pointer}
+.mk{font-weight:900;font-size:12px;letter-spacing:3px;color:var(--lemon)}
+.mbox h3{font-family:var(--display);font-weight:800;font-size:28px;margin:4px 0 6px}
+.mbox p{margin:0 0 12px;color:var(--muted)}
+.fl2{display:block;font-weight:900;font-size:11px;letter-spacing:2px;margin-bottom:6px}
+#pmCode{width:100%;font:inherit;font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:2px;text-transform:uppercase;background:#fff;color:#272727;border:2px solid transparent;border-radius:12px;padding:12px;min-height:48px;margin-bottom:10px}
+#pmCode:focus{border-color:var(--lemon);outline:none}
+.perr{color:#ff8a80!important;font-weight:800}
+.mbox .send{width:100%;background:var(--lemon);color:#272727}
+.mnote{font-size:13px;margin-top:12px!important}
+footer{color:var(--muted);font-size:13px;text-align:center}
+</style>
+
+<div class="wrap">
+  <header class="station">
+    <div class="brand"><div class="dot" aria-hidden="true"></div><div class="bname"><b>ACRES HERITAGE <span>TV</span></b><small>Showcasing Our Indigenous Crops</small></div></div>
+    <nav class="channels" aria-label="Channels">
+      <span class="ch on"><img src="media/fonio-tv-icon.jpg" alt=""><span><span class="n">CH 1:</span> FONIO</span></span>
+      <button class="ch pass" id="passBtn" type="button">🔑 <span id="passLabel">Season Pass</span></button>
+    </nav>
+  </header>
+
+  <section class="set" aria-label="Now playing">
+    <div class="screen">
+      <video id="tv" controls playsinline muted autoplay preload="auto" poster="media/p01.jpg"></video>
+      <button class="sound" id="sound" type="button">🔊 Tap for sound</button>
+      <div class="loading" id="loading" hidden><i></i><span>Loading episode</span><b>0%</b></div>
+      <div class="loading still" id="still" hidden><span>Still watching?</span><small>We paused to save your data.</small><button type="button" id="stillGo">▶ Keep watching</button></div>
+      <div class="bug"><img src="media/fonio-tv-icon.jpg" alt="">CH 1: FONIO</div>
+    </div>
+    <div class="now">
+      <div style="min-width:0">
+        <div class="lab" id="nowLab">NOW PLAYING · EPISODE 1</div>
+        <h1 id="nowTitle">Quick Whole-Grain Fonio Swallow</h1>
+        <p id="nowSub">One pot, a few minutes, and dinner is ready.</p>
+      </div>
+      <div class="ctrls"><button class="btn" id="prev" type="button">‹ Previous</button><button class="btn" id="next" type="button">Next ›</button></div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-label="Programme schedule">
+    <div class="tk-lab">CH 1: FONIO</div>
+    <div class="tk-view"><div class="tk-run" id="tk"></div></div>
+  </div>
+
+  <div class="grid">
+    <section class="guide" aria-labelledby="gh">
+      <h2 id="gh">Season 1 programme guide</h2>
+      <p class="sub">A new episode is free every Friday. Season Pass holders can watch all 31 now.</p>
+      <button class="passcta" id="passCta" type="button"><span><b>🔑 Full Season Pass</b><small>All 31 episodes · free with your first 5kg fonio order</small></span><em>Enter code ›</em></button>
+      <div class="list" id="list"></div>
+    </section>
+    <aside class="desk" aria-label="Order fonio">
+      <div class="k">COOK IT AT HOME</div>
+      <h3>5kg DIM Fonio</h3>
+      <div class="offer">
+        <div class="offer-txt"><div class="price">₵330<s>₵375</s></div>
+        <p class="note">Club member price · Pickup or express delivery in Accra</p></div>
+        <img class="bag" src="media/bag.png" alt="5kg bag of DIM Fonio">
+      </div>
+      <form class="order" id="order" novalidate>
+        <div class="row qty"><span class="fl">Bags of 5kg</span>
+          <div class="step"><button type="button" id="qm" aria-label="One bag fewer">−</button><output id="qty">1</output><button type="button" id="qp" aria-label="One bag more">+</button></div></div>
+        <fieldset class="how"><legend class="fl">How do you want it?</legend>
+          <label><input type="radio" name="how" value="pickup" checked> Easy pickup</label>
+          <label><input type="radio" name="how" value="delivery"> Express delivery +₵20</label>
+        </fieldset>
+        <label class="fld"><span class="fl">Your zone</span>
+          <select id="zone">
+            <option value="1 · Kasoa – Weija">1 · Kasoa – Weija</option>
+            <option value="2 · Dansoman – Mamprobi">2 · Dansoman – Mamprobi</option>
+            <option value="3 · Kaneshie – Circle">3 · Kaneshie – Circle</option>
+            <option value="4 · Achimota – Dome – Taifa">4 · Achimota – Dome – Taifa</option>
+            <option value="5 · Madina – Adenta">5 · Madina – Adenta</option>
+            <option value="6 · East Legon – Airport – Labone">6 · East Legon – Airport – Labone</option>
+            <option value="7 · Spintex – Teshie – Nungua">7 · Spintex – Teshie – Nungua</option>
+            <option value="Not sure / area not listed">Not sure / area not listed</option>
+          </select></label>
+        <label class="fld" id="addrWrap" hidden><span class="fl">Delivery address or landmark</span><input id="addr" type="text" autocomplete="street-address" placeholder="e.g. Near Labone Senior High, house no. 12"></label>
+        <label class="fld"><span class="fl">Your name</span><input id="nm" type="text" autocomplete="name" required></label>
+        <label class="fld"><span class="fl">Your phone (WhatsApp)</span><input id="ph" type="tel" autocomplete="tel" inputmode="tel" required placeholder="e.g. 024 123 4567"></label>
+        <div class="total"><span>Total</span><b id="tot">₵330</b></div>
+        <p class="err" id="err" hidden>Please add your name and phone number.</p>
+        <button class="send" type="submit">Send my order on WhatsApp</button>
+        <p class="note small">We'll confirm your order, then send MoMo payment details. Pickup point is shared after confirmation.</p>
+      </form>
+      <div class="wa"><div><small>OR MESSAGE US ON WHATSAPP</small><span id="num">+1 240 408 0158</span></div><button class="copy" id="copy" type="button">Copy number</button></div>
+      <a class="join" href="https://chat.whatsapp.com/BsuWk5uMUHa32gczMyat8a" target="_blank" rel="noopener">Join the club on WhatsApp ›</a>
+    </aside>
+  </div>
+  
+<div class="modal" id="passModal" hidden role="dialog" aria-modal="true" aria-labelledby="pmT">
+  <div class="mbox">
+    <button class="mx" id="pmClose" type="button" aria-label="Close">×</button>
+    <div class="mk">FULL SEASON PASS</div>
+    <h3 id="pmT">Unlock all 31 episodes</h3>
+    <p>Bought fonio from the ACRES Heritage Club? Enter the pass code we sent you.</p>
+    <form id="pmForm" novalidate>
+      <label for="pmCode" class="fl2">Your pass code</label>
+      <input id="pmCode" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Type your code">
+      <p class="perr" id="pmErr" hidden></p>
+      <button class="send" id="pmGo" type="submit">Unlock</button>
+    </form>
+    <p class="mnote">No code yet? Order your first 5kg DIM Fonio (₵330) below and we'll send one with your order confirmation.</p>
+  </div>
+</div>
+  <footer>ACRES Heritage TV · Our food. Our future<br><small>We count visits and plays to improve ACRES Heritage TV. No names are collected.</small></footer>
+</div>
+
+<script>
+const EPS=[[1, "Quick Whole-Grain Fonio Swallow", "One pot, a few minutes, and dinner is ready.", "16 OCT"], [2, "Smooth Blended Fonio Fufu", "Soft, smooth and perfect with okro soup.", "23 OCT"], [3, "Fonio & Cassava Dough Banku", "Yes, banku with fonio! Have some cassava dough ready.", "30 OCT"], [4, "Fonio Flour Fufu", "The quickest swallow yet. Just fonio flour, water and a pinch of salt.", "6 NOV"], [5, "Fonio Flour & Cassava Dough Swallow", "Fonio Flour & Cassava Dough Swallow, firm and filling.", "13 NOV"], [6, "Simple Whole-Grain Fonio Porridge", "Ready before the kids find their school shoes.", "20 NOV"], [7, "Toasted Fonio & Cinnamon Porridge", "Toast the grain first and your kitchen will smell amazing.", "27 NOV"], [8, "Fonio Tom Brown", "Yes, you can make your own Tom Brown mix with fonio. Roast, mill, store and enjoy all month.", "4 DEC"], [9, "Spiced Soaked Fonio Porridge", "Soak your fonio tonight and blend it with spices for the creamiest porridge yet.", "11 DEC"], [10, "Fonio Koko (Hausa Koko Style)", "Smooth, spicy koko made with fonio. Get your groundnuts and koose ready.", "18 DEC"], [11, "Fonio Date & Banana Cake", "A soft, moist cake with no wheat flour. Bake it for the family tomorrow.", "25 DEC"], [12, "Fonio Banana Pancakes", "Start 2027 with a healthy breakfast the whole family will love.", "1 JAN"], [13, "Fonio Banana Bread", "Soft, sliceable bread with no wheat flour. Perfect with tea.", "8 JAN"], [14, "Fonio Waakye", "Beans, waakye leaves and fonio. Ghana's favourite!", "15 JAN"], [15, "Fonio Angwamo (Oil Rice)", "Oil rice the old-school way, with salted beef, onions and fresh pepper. Made with fonio.", "22 JAN"], [16, "Fonio Minced Meat Fried Rice", "Spiced minced meat, vegetables and fonio in one pan.", "29 JAN"], [17, "Curried Vegetable Fonio", "Golden, colourful and ready in minutes. Great for lunch boxes.", "5 FEB"], [18, "Fonio Shrimp Jollof", "Yes, jollof made with fonio, with shrimp and vegetables. Ghana jollof just got healthier.", "12 FEB"], [19, "Fonio Garden Salad", "Light, fresh and filling, with boiled eggs.", "19 FEB"], [20, "Creamy Fonio Egg Salad", "Fonio, fresh vegetables and a creamy dressing on a bed of greens.", "26 FEB"], [21, "Fonio Pizza", "The kids will love this one.", "5 MAR"], [22, "Fonio Mini Pies", "Golden pastry cups with a savoury filling, made in the air fryer.", "12 MAR"], [23, "Fonio & Tiger Nut Chips", "Crunchy, homemade and better than anything from the shop.", "19 MAR"], [24, "Classic Fonio Milk", "Yes, you can make milk from fonio. No cooking needed for the first one.", "26 MAR"], [25, "Creamy Cooked Fonio Milk", "Cook the fonio first and the milk comes out extra smooth and creamy.", "2 APR"], [26, "Spiced Ginger Fonio Milk", "Fresh ginger and warm spices make this one special.", "9 APR"], [27, "Fonio & Soya Milk", "Two powerhouses in one glass, with a hint of pineapple.", "16 APR"], [28, "Fonio Moi Moi", "With a whole egg hidden inside.", "23 APR"], [29, "Seeded Fonio Leaf Cakes", "Wrapped in leaves the old way, with crunchy seeds inside.", "30 APR"], [30, "Fonio Tubaani", "Northern Ghana's steamed bean cake, now with fonio.", "7 MAY"], [31, "Suya-Spiced Fonio Moi Moi", "With ginger and whole eggs. The Season 1 finale!", "14 MAY"]];
+const VID=n=>`v2/ep${String(n).padStart(2,'0')}.bin`;
+// RELEASED: keys for this week's free episodes. One line is added each Fonio Friday.
+const RELEASED={1:"QkAJBz15rlDhTRzK72DcwttiNrecf3Vnya8CsbmApaM=",2:"DjXYQUqMK/Ne9N/ntg52BuEMqCtlNz/t4Ff7f2Q6WYQ=",3:"2wn5Jl6GFptXBrcV/9ZwVDSV/2JHcUrPOeR4I6wY/54="};
+const POSTER=n=>`media/p${String(n).padStart(2,'0')}.jpg`;
+const MON={JAN:0,FEB:1,MAR:2,APR:3,MAY:4,JUN:5,JUL:6,AUG:7,SEP:8,OCT:9,NOV:10,DEC:11};
+let PASSKEYS=null;            // filled after a valid Season Pass code
+const keyFor=n=>(PASSKEYS&&PASSKEYS[n])||RELEASED[n]||null;
+let avail=[],firstLater=null;
+function refreshAvail(){avail=EPS.filter(e=>keyFor(e[0])).map(e=>e[0]);firstLater=EPS.find(e=>!RELEASED[e[0]])||null;}
+refreshAvail();
+const tv=document.getElementById('tv');
+let cur=avail.length?avail[avail.length-1]:1;
+
+function fri(d){return 'Fri '+d.replace(/(\d+) (\w+)/,(m,a,b)=>a+' '+b.charAt(0)+b.slice(1).toLowerCase());}
+
+const GROUPS=[{id:'g1',label:'Episodes 1–15',from:1,to:15},{id:'g2',label:'Episodes 16–31',from:16,to:31}];
+let openGroup=null;
+function renderList(){
+  const L=document.getElementById('list');L.innerHTML='';
+  GROUPS.forEach(g=>{
+    const isOpen=openGroup===g.id,hasCur=cur>=g.from&&cur<=g.to;
+    const out=avail.filter(n=>n>=g.from&&n<=g.to).length,total=g.to-g.from+1;
+    const meta=hasCur?'Now playing · Episode '+cur:out===total?total+' recipes':out===0?'Unlock with Season Pass':out+' of '+total+' free now';
+    const head=document.createElement('button');head.type='button';head.className='grp'+(isOpen?' open':'');
+    head.setAttribute('aria-expanded',isOpen);head.setAttribute('aria-controls',g.id);
+    head.innerHTML=`<span><span class="gl">${g.label}</span><span class="gm">${meta}</span></span><span class="chev" aria-hidden="true">›</span>`;
+    head.addEventListener('click',()=>{openGroup=isOpen?null:g.id;renderList();});
+    L.appendChild(head);
+    const box=document.createElement('div');box.id=g.id;box.className='grp-body';box.hidden=!isOpen;
+    EPS.filter(e=>e[0]>=g.from&&e[0]<=g.to).forEach(([n,name,sub,date])=>{
+      const ready=avail.includes(n),playing=n===cur,isNext=firstLater&&n===firstLater[0];
+      const el=document.createElement('button');el.type='button';
+      el.className='ep '+(ready?'ready':'later')+(playing?' playing':'')+(isNext?' next':'');
+      el.addEventListener('click',()=>ready?play(n,true):openPass());
+      const tag=playing?'PLAYING':ready?'WATCH':'🔒 PASS';
+      el.innerHTML=`<img src="${POSTER(n)}" alt="" loading="lazy"><div style="min-width:0"><div class="t">${name}</div><div class="m">EPISODE ${n}${ready?'':' · FREE ON '+fri(date).toUpperCase()}</div></div><span class="tag">${tag}</span>`;
+      box.appendChild(el);
+    });
+    L.appendChild(box);
+  });
+}
+const b64d=t=>Uint8Array.from(atob(t),c=>c.charCodeAt(0));
+const cache=new Map();let loadId=0;
+// ===== Episode loading (v2): encrypted in small pieces so it can play while it loads =====
+const HDR=64, P=393216, AHEAD=40;   // keep about 40 seconds loaded ahead, no more (saves data)
+const MS=window.ManagedMediaSource||window.MediaSource;
+let live=null;                      // the episode currently streaming
+function stopLive(){if(!live)return;live.dead=true;try{live.ctrl.abort();}catch(_){}if(live.url){const u=live.url;setTimeout(()=>URL.revokeObjectURL(u),1000);}live=null;}
+async function epKey(n){return crypto.subtle.importKey('raw',b64d(keyFor(n)),'AES-GCM',false,['decrypt']);}
+function ivFor(pre,i){const iv=new Uint8Array(12);iv.set(pre,0);new DataView(iv.buffer).setUint32(8,i);return iv;}
+async function dec(key,pre,i,ct){return new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM',iv:ivFor(pre,i)},key,ct));}
+function parseHdr(b){if(String.fromCharCode(...b.slice(0,4))!=='ACV2')throw new Error('format');
+  const pre=b.slice(4,12),p=new DataView(b.buffer,b.byteOffset+12,4).getUint32(0);const codec=new TextDecoder().decode(b.slice(16,64)).replace(/\0+$/,'');return {pre,p,codec};}
+const ahead=()=>{const b=tv.buffered,t=tv.currentTime;for(let k=0;k<b.length;k++){if(b.start(k)<=t+0.3&&b.end(k)>t)return b.end(k)-t;}return 0;};
+const nap=ms=>new Promise(r=>setTimeout(r,ms));
+// Reads a fetch body as exact-size pieces
+function piecer(res){const rd=res.body.getReader();let q=[],have=0,done=false;
+  return async function take(n){while(have<n&&!done){const r=await rd.read();if(r.done){done=true;break;}q.push(r.value);have+=r.value.length;}
+    const want=Math.min(n,have);if(!want)return null;const out=new Uint8Array(want);let o=0;
+    while(o<want){const c=q[0],k=Math.min(c.length,want-o);out.set(c.subarray(0,k),o);o+=k;if(k===c.length)q.shift();else q[0]=c.subarray(k);}have-=want;return out;};}
+// Stream with MediaSource: plays after the first piece (about 4–8 seconds of video)
+async function streamEp(n,my,onFirst){
+  const key=await epKey(n);const ctrl=new AbortController();const me={ctrl,dead:false};live=me;
+  const gone=()=>me.dead||my!==loadId;
+  let res=await fetch(VID(n),{headers:{Range:'bytes=0-'+(HDR+P+16-1)},signal:ctrl.signal});if(!res.ok)throw new Error('missing');
+  let total=0,take=null,first;
+  if(res.status===206){total=+((res.headers.get('content-range')||'').split('/')[1])||0;first=new Uint8Array(await res.arrayBuffer());}
+  else{take=piecer(res);first=await take(HDR+P+16);}           // server sent the whole file: read it piece by piece
+  const h=parseHdr(first);const type=h.codec;
+  if(!MS||!MS.isTypeSupported(type))throw new Error('nomse');
+  const ms=new MS();if(window.ManagedMediaSource)tv.disableRemotePlayback=true;
+  const url=URL.createObjectURL(ms);me.url=url;tv.src=url;
+  await new Promise(r=>ms.addEventListener('sourceopen',r,{once:true}));
+  const sb=ms.addSourceBuffer(type);
+  const add=async d=>{sb.appendBuffer(d);await new Promise((r,j)=>{sb.addEventListener('updateend',r,{once:true});sb.addEventListener('error',j,{once:true});});};
+  await add(await dec(key,h.pre,0,first.slice(HDR)));onFirst();
+  const C=h.p+16,count=total?Math.ceil((total-HDR)/C):Infinity;
+  (async()=>{
+  for(let i=1;i<count;i++){
+    while(!gone()&&ahead()>AHEAD)await nap(700);               // enough loaded: wait, don't spend data yet
+    if(gone())return;
+    let ct;
+    if(take){ct=await take(C);if(!ct)break;}
+    else{const s0=HDR+i*C,e0=Math.min(total,s0+C)-1;const r=await fetch(VID(n),{headers:{Range:`bytes=${s0}-${e0}`},signal:ctrl.signal});
+      if(r.status!==206)throw new Error('range');ct=new Uint8Array(await r.arrayBuffer());}
+    if(gone())return;
+    await add(await dec(key,h.pre,i,ct));
+  }
+  if(!gone()&&ms.readyState==='open'){try{ms.endOfStream();}catch(_){}}
+  })().catch(x=>{if(!gone()){console.warn('stream stopped',x);document.getElementById('loading').hidden=false;document.getElementById('loading').querySelector('b').textContent='';document.getElementById('loading').querySelector('span').textContent='The connection dropped. Tap the episode to try again.';}});
+}
+// Backup for phones without streaming support: download everything, then play
+async function fullEp(n,onProg){
+  if(cache.has(n))return cache.get(n);
+  const key=await epKey(n);const res=await fetch(VID(n));if(!res.ok)throw new Error('missing');
+  const total=+res.headers.get('content-length')||0;const take=piecer(res);
+  const h=parseHdr(await take(HDR));const parts=[];let i=0,got=HDR;
+  for(;;){const ct=await take(h.p+16);if(!ct)break;got+=ct.length;if(total)onProg(got/total);parts.push(await dec(key,h.pre,i++,ct));}
+  const url=URL.createObjectURL(new Blob(parts,{type:h.codec.split(';')[0]}));cache.set(n,url);
+  if(cache.size>2){const [old,u]=cache.entries().next().value;if(old!==n){URL.revokeObjectURL(u);cache.delete(old);}}
+  return url;
+}
+async function play(n,auto,fromShuffle){
+  if(!keyFor(n)){openPass();return;}
+  if(!fromShuffle){bag=[];autoRun=0;}
+  document.getElementById('still').hidden=true;
+  const e=EPS.find(x=>x[0]===n);cur=n;const my=++loadId;
+  tv.pause();tv.removeAttribute('src');tv.load();tv.poster=POSTER(n);
+  document.getElementById('nowLab').textContent='NOW PLAYING · EPISODE '+n+' · SHUFFLE ON';
+  document.getElementById('nowTitle').textContent=e[1];
+  document.getElementById('nowSub').textContent=e[2];
+  const i=avail.indexOf(n);
+  document.getElementById('prev').disabled=i<=0;
+  document.getElementById('next').disabled=i>=avail.length-1;
+  renderList();
+  const ld=document.getElementById('loading');ld.hidden=false;ld.querySelector('b').textContent='0%';
+  stopLive();
+  try{
+    let streamed=false;
+    if(MS){try{await streamEp(n,my,()=>{streamed=true;if(my===loadId){ld.hidden=true;if(auto||tv.muted)tv.play().catch(()=>{});}});}
+      catch(x){if(my!==loadId||x.name==='AbortError')return;if(streamed)throw x;}}
+    if(!streamed){
+      const url=await fullEp(n,p=>{if(my===loadId)ld.querySelector('b').textContent=Math.round(p*100)+'%';});
+      if(my!==loadId)return;
+      tv.src=url;ld.hidden=true;}
+    if(my!==loadId)return;
+    track('episode_play',{episode_number:n,episode_name:e[1],play_source:fromShuffle?'shuffle':(auto?'chosen':'auto_start'),season_pass:!!PASSKEYS});
+    if(auto||tv.muted){tv.play().catch(()=>{});}
+  }catch(err){if(my===loadId){ld.querySelector('b').textContent='';ld.querySelector('span').textContent='This episode could not load. Check your connection and tap it again.';}}
+}
+document.getElementById('prev').onclick=()=>{const i=avail.indexOf(cur);if(i>0)play(avail[i-1],true);};
+document.getElementById('next').onclick=()=>{const i=avail.indexOf(cur);if(i<avail.length-1)play(avail[i+1],true);};
+// Shuffle: when an episode ends, a random released episode plays next (never the same one twice in a row).
+let bag=[];
+function nextShuffle(){if(avail.length<2)return avail[0];if(!bag.length)bag=avail.filter(n=>n!==cur).sort(()=>Math.random()-.5);let n=bag.shift();if(n===cur){n=bag.shift()||avail.find(x=>x!==cur);}return n;}
+// After 3 episodes in a row with no tap, pause and ask (saves viewers' data).
+let autoRun=0;
+tv.addEventListener('ended',()=>{track('episode_complete',{episode_number:cur});autoRun++;
+  if(autoRun>=3){document.getElementById('still').hidden=false;track('still_watching_prompt',{});return;}
+  play(nextShuffle(),true,true);});
+document.getElementById('stillGo').onclick=()=>{autoRun=0;document.getElementById('still').hidden=true;play(nextShuffle(),true,true);};
+
+// ticker: what is on now, what is next, the offer
+function renderTicker(){
+  const items=[];
+  const latest=avail[avail.length-1];
+  if(latest){const e=EPS.find(x=>x[0]===latest);items.push(`<b>NEW THIS WEEK</b> Ep ${latest} · ${e[1]}`);}
+  if(firstLater)items.push(`<b>NEXT</b> ${fri(firstLater[3])} · Ep ${firstLater[0]} · ${firstLater[1]}`);
+  if(avail.length>1)items.push(`<b>CATCH UP</b> ${avail.length} episodes ready to watch`);
+  items.push('<i>5kg DIM Fonio ₵330</i> · Order right here on this page');
+  if(!PASSKEYS)items.push('<b>SEASON PASS</b> Unlock all 31 episodes with your first 5kg order');
+  items.push('<b>EXPRESS DELIVERY</b> ₵20 anywhere in our Accra zones');
+  items.push('<b>FONIO FRIDAY</b> A new recipe premieres every Friday');
+  const html=items.map(t=>`<span>${t}</span>`).join('');
+  document.getElementById('tk').innerHTML=html+html;
+}
+renderTicker();
+
+document.getElementById('copy').addEventListener('click',async e=>{
+  const b=e.currentTarget;
+  try{await navigator.clipboard.writeText('+12404080158');b.textContent='Copied';}
+  catch(err){const r=document.createRange();r.selectNodeContents(document.getElementById('num'));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected';}
+  setTimeout(()=>b.textContent='Copy number',1800);
+});
+
+// ===== Full Season Pass =====
+const PASS_SALT='acres-heritage-tv-pass-v1',PASS_ITER=60000;
+const pm=document.getElementById('passModal');
+function openPass(){if(PASSKEYS)return;pm.hidden=false;document.getElementById('pmErr').hidden=true;setTimeout(()=>document.getElementById('pmCode').focus(),50);}
+function closePass(){pm.hidden=true;}
+document.getElementById('pmClose').onclick=closePass;
+pm.addEventListener('click',e=>{if(e.target===pm)closePass();});
+document.getElementById('passBtn').onclick=openPass;
+document.getElementById('passCta').onclick=openPass;
+const hex=b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
+async function tryCode(code){
+  code=code.trim().toUpperCase().replace(/\s+/g,'');
+  if(/^[A-Z0-9]{8}$/.test(code))code='ACRES-'+code.slice(0,4)+'-'+code.slice(4);
+  if(/^ACRES[A-Z0-9]{8}$/.test(code))code='ACRES-'+code.slice(5,9)+'-'+code.slice(9);
+  const base=await crypto.subtle.importKey('raw',new TextEncoder().encode(code),'PBKDF2',false,['deriveBits']);
+  const bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt:new TextEncoder().encode(PASS_SALT),iterations:PASS_ITER,hash:'SHA-256'},base,384);
+  const kid=hex(bits.slice(32));
+  const vault=await (await fetch('pass-vault.json')).json();
+  if(!vault[kid])return null;
+  const blob=b64d(vault[kid]);
+  const k=await crypto.subtle.importKey('raw',bits.slice(0,32),'AES-GCM',false,['decrypt']);
+  const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:blob.slice(0,12)},k,blob.slice(12));
+  return {code,keys:JSON.parse(new TextDecoder().decode(plain))};
+}
+function passOn(){
+  document.getElementById('passBtn').classList.add('on');document.getElementById('passLabel').textContent='Season Pass active';
+  const c=document.getElementById('passCta');c.classList.add('done');c.querySelector('b').textContent='✓ Season Pass active';c.querySelector('small').textContent='All 31 episodes unlocked on this phone';c.querySelector('em').textContent='';
+  refreshAvail();renderTicker();renderList();const i=avail.indexOf(cur);document.getElementById('next').disabled=i>=avail.length-1;document.getElementById('prev').disabled=i<=0;
+}
+document.getElementById('pmForm').addEventListener('submit',async e=>{
+  e.preventDefault();const btn=document.getElementById('pmGo'),err=document.getElementById('pmErr');
+  const v=document.getElementById('pmCode').value;if(!v.trim()){err.textContent='Please type your pass code.';err.hidden=false;return;}
+  btn.disabled=true;btn.textContent='Checking…';err.hidden=true;
+  try{const r=await tryCode(v);
+    if(!r){err.textContent='That code did not work. Check it and try again, or message us on WhatsApp.';err.hidden=false;}
+    else{PASSKEYS=r.keys;try{localStorage.setItem('acresPass',r.code);}catch(_){} closePass();passOn();track('season_pass_unlock',{method:'typed_code',code_type:r.code==='ACRES-DIMF-ONIO'?'shared':'personal'});}
+  }catch(_){err.textContent='Could not check the code. Check your connection and try again.';err.hidden=false;}
+  btn.disabled=false;btn.textContent='Unlock';
+});
+// One-tap unlock link: ...acres-heritage-tv/#pass=XXXXXXXX (the code never leaves the phone; it is removed from the address bar)
+async function linkUnlock(){
+  const m=location.hash.match(/pass=([A-Za-z0-9-]+)/);if(!m)return false;
+  try{history.replaceState(null,'',location.pathname+location.search);}catch(_){}
+  try{const r=await tryCode(m[1]);if(r){PASSKEYS=r.keys;try{localStorage.setItem('acresPass',r.code);}catch(_){} passOn();track('season_pass_unlock',{method:'link',code_type:r.code==='ACRES-DIMF-ONIO'?'shared':'personal'});return true;}
+    openPass();document.getElementById('pmErr').textContent='That unlock link did not work. Type your code below or message us on WhatsApp.';document.getElementById('pmErr').hidden=false;return true;}catch(_){return false;}
+}
+window.addEventListener('hashchange',linkUnlock);
+// QR / link straight to the order form: ...acres-heritage-tv/#order
+function goOrder(){if(location.hash!=='#order')return;const d=document.querySelector('.desk');if(!d)return;
+  setTimeout(()=>{d.scrollIntoView({behavior:'smooth',block:'start'});},400);track('order_link_open',{});}
+window.addEventListener('hashchange',goOrder);goOrder();
+(async()=>{let c=null;
+  if(await linkUnlock())return;
+  try{c=localStorage.getItem('acresPass');}catch(_){}
+  if(c){try{const r=await tryCode(c);if(r){PASSKEYS=r.keys;passOn();}}catch(_){}}})();
+play(cur,false);
+tv.muted=true;tv.play().catch(()=>{});
+const snd=document.getElementById('sound');
+function unmute(){tv.muted=false;snd.hidden=true;tv.play().catch(()=>{});}
+snd.addEventListener('click',unmute);
+tv.addEventListener('volumechange',()=>{if(!tv.muted)snd.hidden=true;});
+
+// order form -> prefilled WhatsApp message
+(function(){
+  const PRICE=330,DEL=20,NUM='12404080158';
+  let q=1;const qo=document.getElementById('qty'),tot=document.getElementById('tot');
+  const how=()=>document.querySelector('input[name=how]:checked').value;
+  function upd(){qo.textContent=q;const t=q*PRICE+(how()==='delivery'?DEL:0);tot.textContent='₵'+t;document.getElementById('addrWrap').hidden=how()!=='delivery';return t;}
+  document.getElementById('qm').onclick=()=>{if(q>1){q--;upd();}};
+  document.getElementById('qp').onclick=()=>{if(q<20){q++;upd();}};
+  document.querySelectorAll('input[name=how]').forEach(r=>r.addEventListener('change',upd));
+  document.getElementById('order').addEventListener('submit',e=>{
+    e.preventDefault();
+    const nm=document.getElementById('nm'),ph=document.getElementById('ph');
+    const miss=[nm,ph].filter(i=>!i.value.trim());[nm,ph].forEach(i=>i.classList.toggle('bad',!i.value.trim()));
+    document.getElementById('err').hidden=!miss.length;if(miss.length){miss[0].focus();return;}
+    const t=upd(),d=how()==='delivery',addr=document.getElementById('addr').value.trim();
+    const lines=['*NEW ORDER · ACRES Heritage TV*','','Name: '+nm.value.trim(),'Phone: '+ph.value.trim(),
+      '5kg DIM Fonio: '+q+' bag'+(q>1?'s':'')+' (₵'+(q*PRICE)+')',
+      'Receive: '+(d?'Express delivery (₵20)':'Easy pickup'),'Zone: '+document.getElementById('zone').value];
+    if(d)lines.push('Address/landmark: '+(addr||'(will share)'));
+    lines.push('*Total: ₵'+t+'*','','Watching: Episode '+cur);
+    track('order_whatsapp',{bags:q,value:t,currency:'GHS',delivery:d?'express':'pickup',watching_episode:cur});
+    const url='https://wa.me/'+NUM+'?text='+encodeURIComponent(lines.join('\n'));
+    const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove();
+  });
+  upd();
+})();
+</script>
+
+</body></html>
