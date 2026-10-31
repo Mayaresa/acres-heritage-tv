@@ -506,7 +506,7 @@ tv.addEventListener('volumechange',()=>{if(!tv.muted)snd.hidden=true;});
     if(d)lines.push('Address/landmark: '+(addr||'(will share)'));
     lines.push('*Total: ₵'+t+'*','','Watching: Episode '+cur);
     track('order_whatsapp',{bags:q,value:t,currency:'GHS',delivery:d?'express':'pickup',watching_episode:cur});
-    const url='https://wa.me/'+NUM+'?text='+encodeURIComponent(lines.join('\n'));
+    const url='https://api.whatsapp.com/send?phone='+NUM+'&text='+encodeURIComponent(lines.join('\n'));
     const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove();
   });
   upd();
