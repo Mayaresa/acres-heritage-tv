@@ -107,7 +107,7 @@ h2{font-family:var(--display);font-weight:800;font-size:24px;margin:0 0 4px}
 .offer-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px}
 .bag{flex:none;width:118px;height:auto;margin:-26px -6px -10px 0;filter:drop-shadow(0 10px 14px rgba(0,0,0,.35));transform:rotate(4deg)}
 @media (max-width:760px){.bag{width:140px}}
-.aidcard{background:#272727;color:#fff;border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:12px}.aidcard i{flex:0 0 auto;width:44px;height:44px;border-radius:50%;background:var(--lemon);color:#272727;font-style:normal;font-family:var(--display);font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center}.aidcard small{display:block;font-weight:900;font-size:11px;letter-spacing:2px;color:var(--lemon)}.aidcard b{display:block;font-family:var(--display);font-weight:800;font-size:20px;line-height:1.1}.aidcard span{font-size:13px;font-weight:600;opacity:.85}
+.aidcard{background:#272727;color:#fff;border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:12px}.aidcard i{flex:0 0 auto;width:44px;height:44px;border-radius:50%;background:var(--lemon);color:#272727;font-style:normal;font-family:var(--display);font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center}.aidcard small{display:block;font-weight:900;font-size:11px;letter-spacing:2px;color:var(--lemon)}.aidcard b{display:block;font-family:var(--display);font-weight:800;font-size:20px;line-height:1.1}.aidcard a{display:inline-block;margin-top:4px;color:#fff;font-weight:800;font-size:16px;text-decoration:none;background:rgba(255,255,255,.12);border-radius:999px;padding:4px 12px}.aidcard small{line-height:1.3;letter-spacing:1px}.aidcard em{display:block;font-style:normal;font-weight:800;font-size:14px;color:#80CD29;margin-top:1px}
 .wa{background:#272727;color:var(--fg);border-radius:14px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .wa small{display:block;font-weight:900;font-size:11px;letter-spacing:2px;color:var(--lemon)}
 .wa span{font-family:var(--display);font-weight:800;font-size:22px;user-select:all}
@@ -208,7 +208,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
         <p class="note">Club member price · Pickup or express delivery in Accra</p></div>
         <img class="bag" src="media/bag.png" alt="5kg bag of DIM Fonio">
       </div>
-      <div class="aidcard" id="aidCard" hidden><i id="aidInit">A</i><div><small>YOUR ACRES DISTRIBUTOR</small><b id="aidName"></b><span id="aidZone"></span></div></div>
+      <div class="aidcard" id="aidCard" hidden><i id="aidInit">A</i><div style="min-width:0;flex:1"><small id="aidLabel">YOUR LOCAL FONIO DISTRIBUTOR</small><em id="aidArea" hidden></em><b id="aidName"></b><a id="aidCall" href="#">📞 <span id="aidPhone"></span></a></div></div>
       <form class="order" id="order" novalidate>
         <div class="row qty"><span class="fl">Bags of 5kg</span>
           <div class="step"><button type="button" id="qm" aria-label="One bag fewer">−</button><output id="qty">1</output><button type="button" id="qp" aria-label="One bag more">+</button></div></div>
@@ -498,8 +498,12 @@ const HQ_NUM='12404080158';let AID=null;
   try{const list=await (await fetch('aids.json',{cache:'no-cache'})).json();const a=list[slug];
     if(!a||a.active===false)return;
     AID=Object.assign({slug},a);window.ACRES_AID=slug;
+    const d=String(a.wa).replace(/\D/g,''),intl='+'+d;
+    const local=d.startsWith('233')?('0'+d.slice(3)).replace(/^(\d{3})(\d{3})(\d{4})$/,'$1 $2 $3'):intl.replace(/^\+1(\d{3})(\d{3})(\d{4})$/,'+1 $1 $2 $3');
+    if(a.area){const ar=document.getElementById('aidArea');ar.textContent=a.area+' & Surroundings';ar.hidden=false;}
     document.getElementById('aidName').textContent=a.name;
-    document.getElementById('aidZone').textContent=(a.role||'ACRES AID')+(a.zone?' · '+a.zone:'');
+    document.getElementById('aidPhone').textContent=local;document.getElementById('aidCall').href='tel:'+intl;
+    document.getElementById('aidCall').addEventListener('click',()=>track('aid_call',{aid_name:a.name}));
     document.getElementById('aidInit').textContent=(a.name||'A').trim().charAt(0).toUpperCase();
     document.getElementById('aidCard').hidden=false;
     const n='+'+String(a.wa).replace(/\D/g,'');document.getElementById('num').textContent=n.replace(/^\+233(\d{2})(\d{3})(\d{4})$/,'+233 $1 $2 $3').replace(/^\+1(\d{3})(\d{3})(\d{4})$/,'+1 $1 $2 $3');
