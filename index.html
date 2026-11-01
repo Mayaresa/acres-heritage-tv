@@ -246,6 +246,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
             <option value="10 · Kpone – Prampram – Dawhenya">10 · Kpone – Prampram – Dawhenya</option>
             <option value="11 · Dodowa – Abokobi – Ayi Mensah">11 · Dodowa – Abokobi – Ayi Mensah</option>
             <option value="12 · Kokrobite – Bortianor – Amanfro">12 · Kokrobite – Bortianor – Amanfro</option>
+            <option value="Other region (outside Greater Accra)">Other region (outside Greater Accra)</option>
             <option value="Not sure / area not listed">Not sure / area not listed</option>
           </select></label>
         <label class="fld" id="addrWrap" hidden><span class="fl">Delivery address or landmark</span><input id="addr" type="text" autocomplete="street-address" placeholder="e.g. Near Labone Senior High, house no. 12"></label>
@@ -536,7 +537,10 @@ const HQ_NUM='12404080158';let AID=null;
     document.getElementById('aidCard').hidden=false;
     const n='+'+String(a.wa).replace(/\D/g,'');document.getElementById('num').textContent=n.replace(/^\+233(\d{2})(\d{3})(\d{4})$/,'+233 $1 $2 $3').replace(/^\+1(\d{3})(\d{3})(\d{4})$/,'+1 $1 $2 $3');
     document.querySelector('.wa small').textContent='OR MESSAGE '+a.name.split(' ')[0].toUpperCase()+' ON WHATSAPP';
-    if(a.zone){const zl=a.zone.toLowerCase();const z=[...document.getElementById('zone').options].find(o=>o.value.replace(/^\d+\s*·\s*/,'').split('–').some(part=>part.trim()&&zl.includes(part.trim().toLowerCase())));if(z)document.getElementById('zone').value=z.value;}
+    if(a.nationwide){document.getElementById('zone').value='Other region (outside Greater Accra)';
+      const dv=document.querySelector('input[name=how][value=delivery]');if(dv){dv.checked=true;dv.dispatchEvent(new Event('change',{bubbles:true}));}
+      const al=document.querySelector('#addrWrap .fl');if(al)al.textContent='Your town, region and landmark';document.getElementById('addr').placeholder='e.g. Kumasi, Ashanti Region, near Adum';}
+    else if(a.zone){const zl=a.zone.toLowerCase();const z=[...document.getElementById('zone').options].find(o=>o.value.replace(/^\d+\s*·\s*/,'').split('–').some(part=>part.trim()&&zl.includes(part.trim().toLowerCase())));if(z)document.getElementById('zone').value=z.value;}
     track('aid_channel_view',{aid_name:a.name});
   }catch(_){}
 })();

@@ -32,5 +32,15 @@
     "zone": "Amasaman – Satellite – Pokuase",
     "wa": "233241186893",
     "active": true
+  },
+  "bondy": {
+    "name": "Osiris Ettu Bondy",
+    "role": "AID",
+    "label": "Your FONIO Distributor",
+    "areaText": "At Large · Nationwide",
+    "zone": "Nationwide",
+    "wa": "233244244823",
+    "nationwide": true,
+    "active": true
   }
 }
