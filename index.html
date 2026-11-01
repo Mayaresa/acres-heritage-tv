@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BCE47V4Y57"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BCE47V4Y57',{anonymize_ip:true});
-function track(name,params){try{gtag('event',name,params||{});}catch(_){}}</script>
+function track(name,params){try{params=params||{};if(window.ACRES_AID)params.aid=window.ACRES_AID;gtag('event',name,params);}catch(_){}}</script>
 <meta property="og:title" content="ACRES HERITAGE TV"><meta property="og:description" content="Watch this week's fonio episode free. Unlock all 31 with your Season Pass."><meta property="og:image" content="https://mayaresa.github.io/acres-heritage-tv/media/share.jpg"><meta property="og:image:width" content="720"><meta property="og:image:height" content="900"><meta property="og:url" content="https://mayaresa.github.io/acres-heritage-tv/"><meta property="og:type" content="website">
 <style>html,body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
 <title>ACRES Heritage TV</title>
@@ -107,6 +107,7 @@ h2{font-family:var(--display);font-weight:800;font-size:24px;margin:0 0 4px}
 .offer-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px}
 .bag{flex:none;width:118px;height:auto;margin:-26px -6px -10px 0;filter:drop-shadow(0 10px 14px rgba(0,0,0,.35));transform:rotate(4deg)}
 @media (max-width:760px){.bag{width:140px}}
+.aidcard{background:#272727;color:#fff;border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:12px}.aidcard i{flex:0 0 auto;width:44px;height:44px;border-radius:50%;background:var(--lemon);color:#272727;font-style:normal;font-family:var(--display);font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center}.aidcard small{display:block;font-weight:900;font-size:11px;letter-spacing:2px;color:var(--lemon)}.aidcard b{display:block;font-family:var(--display);font-weight:800;font-size:20px;line-height:1.1}.aidcard span{font-size:13px;font-weight:600;opacity:.85}
 .wa{background:#272727;color:var(--fg);border-radius:14px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .wa small{display:block;font-weight:900;font-size:11px;letter-spacing:2px;color:var(--lemon)}
 .wa span{font-family:var(--display);font-weight:800;font-size:22px;user-select:all}
@@ -207,6 +208,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
         <p class="note">Club member price · Pickup or express delivery in Accra</p></div>
         <img class="bag" src="media/bag.png" alt="5kg bag of DIM Fonio">
       </div>
+      <div class="aidcard" id="aidCard" hidden><i id="aidInit">A</i><div><small>YOUR ACRES DISTRIBUTOR</small><b id="aidName"></b><span id="aidZone"></span></div></div>
       <form class="order" id="order" novalidate>
         <div class="row qty"><span class="fl">Bags of 5kg</span>
           <div class="step"><button type="button" id="qm" aria-label="One bag fewer">−</button><output id="qty">1</output><button type="button" id="qp" aria-label="One bag more">+</button></div></div>
@@ -418,7 +420,7 @@ renderTicker();
 
 document.getElementById('copy').addEventListener('click',async e=>{
   const b=e.currentTarget;
-  try{await navigator.clipboard.writeText('+12404080158');b.textContent='Copied';}
+  try{await navigator.clipboard.writeText('+'+orderNum());b.textContent='Copied';}
   catch(err){const r=document.createRange();r.selectNodeContents(document.getElementById('num'));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected';}
   setTimeout(()=>b.textContent='Copy number',1800);
 });
@@ -485,9 +487,31 @@ function unmute(){tv.muted=false;snd.hidden=true;tv.play().catch(()=>{});}
 snd.addEventListener('click',unmute);
 tv.addEventListener('volumechange',()=>{if(!tv.muted)snd.hidden=true;});
 
+// ===== AID channels: ...acres-heritage-tv/?aid=kwame sends orders to that distributor's WhatsApp =====
+// The AID list lives in aids.json. A customer stays with the AID whose link they first used (until another AID link is opened).
+const HQ_NUM='12404080158';let AID=null;
+(async()=>{
+  let slug=null;const q=new URLSearchParams(location.search).get('aid');
+  if(q){slug=q.trim().toLowerCase();try{if(slug==='hq')localStorage.removeItem('acresAid');else localStorage.setItem('acresAid',slug);}catch(_){}}
+  else{try{slug=localStorage.getItem('acresAid');}catch(_){}}
+  if(!slug||slug==='hq')return;
+  try{const list=await (await fetch('aids.json',{cache:'no-cache'})).json();const a=list[slug];
+    if(!a||a.active===false)return;
+    AID=Object.assign({slug},a);window.ACRES_AID=slug;
+    document.getElementById('aidName').textContent=a.name;
+    document.getElementById('aidZone').textContent=(a.role||'ACRES AID')+(a.zone?' · '+a.zone:'');
+    document.getElementById('aidInit').textContent=(a.name||'A').trim().charAt(0).toUpperCase();
+    document.getElementById('aidCard').hidden=false;
+    const n='+'+String(a.wa).replace(/\D/g,'');document.getElementById('num').textContent=n.replace(/^\+233(\d{2})(\d{3})(\d{4})$/,'+233 $1 $2 $3').replace(/^\+1(\d{3})(\d{3})(\d{4})$/,'+1 $1 $2 $3');
+    document.querySelector('.wa small').textContent='OR MESSAGE '+a.name.split(' ')[0].toUpperCase()+' ON WHATSAPP';
+    if(a.zone){const z=[...document.getElementById('zone').options].find(o=>o.value.toLowerCase().includes(a.zone.toLowerCase()));if(z)document.getElementById('zone').value=z.value;}
+    track('aid_channel_view',{aid_name:a.name});
+  }catch(_){}
+})();
+const orderNum=()=>AID?String(AID.wa).replace(/\D/g,''):HQ_NUM;
 // order form -> prefilled WhatsApp message
 (function(){
-  const PRICE=330,DEL=20,NUM='12404080158';
+  const PRICE=330,DEL=20;
   let q=1;const qo=document.getElementById('qty'),tot=document.getElementById('tot');
   const how=()=>document.querySelector('input[name=how]:checked').value;
   function upd(){qo.textContent=q;const t=q*PRICE+(how()==='delivery'?DEL:0);tot.textContent='₵'+t;document.getElementById('addrWrap').hidden=how()!=='delivery';return t;}
@@ -505,8 +529,9 @@ tv.addEventListener('volumechange',()=>{if(!tv.muted)snd.hidden=true;});
       'Receive: '+(d?'Express delivery (₵20)':'Easy pickup'),'Zone: '+document.getElementById('zone').value];
     if(d)lines.push('Address/landmark: '+(addr||'(will share)'));
     lines.push('*Total: ₵'+t+'*','','Watching: Episode '+cur);
+    if(AID)lines.push('Distributor: '+AID.name+' ('+AID.slug+')');
     track('order_whatsapp',{bags:q,value:t,currency:'GHS',delivery:d?'express':'pickup',watching_episode:cur});
-    const url='https://api.whatsapp.com/send?phone='+NUM+'&text='+encodeURIComponent(lines.join('\n'));
+    const url='https://api.whatsapp.com/send?phone='+orderNum()+'&text='+encodeURIComponent(lines.join('\n'));
     const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove();
   });
   upd();
