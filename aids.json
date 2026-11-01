@@ -1,3 +1,4 @@
 {
-  "demo": {"name": "Demo Distributor", "role": "HeriTASTE Chef", "area": "Madina", "zone": "Madina – Adenta", "wa": "12404080158", "active": true}
+  "demo": {"name": "Demo Distributor", "role": "HeriTASTE Chef", "area": "Madina", "zone": "Madina – Adenta", "wa": "12404080158", "active": true},
+  "central": {"name": "ACRES Central Office", "role": "ACRES Central Office", "area": "North Kaneshie", "zone": "North Kaneshie", "wa": "233542903000", "active": true}
 }
