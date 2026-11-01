@@ -11,6 +11,7 @@ Orders from that link go to the AID's WhatsApp; the order area shows a sea-blue 
 - `wa`: digits only, with country code (Ghana 233…, US 1…).
 - `area` shows as "<area> & Surroundings". `zone` should contain a zone word from the order form (e.g. Kaneshie, Madina) so it is pre-selected.
 - Diaspora AIDs: add `"label": "Your Diaspora FONIO Distributor", "areaText": "Send fonio to family in Ghana", "gift": true` (adds recipient name/phone to the order form).
+- Nationwide AID (outside Greater Accra): add `"label": "Your FONIO Distributor", "areaText": "At Large · Nationwide", "nationwide": true` (pre-selects 'Other region', delivery, and asks for town/region).
 - To switch an AID off: `"active": false`.
 2. Commit and push to `main` (GitHub Pages republishes in ~1 minute).
 3. Send the AID their link + welcome message (WhatsApp). No QR sign needed (decided Nov 2026).
