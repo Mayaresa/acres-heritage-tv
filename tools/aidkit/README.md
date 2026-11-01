@@ -13,5 +13,5 @@ Orders from that link go to the AID's WhatsApp; the order area shows a sea-blue 
 - Diaspora AIDs: add `"label": "Your Diaspora FONIO Distributor", "areaText": "Send fonio to family in Ghana", "gift": true` (adds recipient name/phone to the order form).
 - To switch an AID off: `"active": false`.
 2. Commit and push to `main` (GitHub Pages republishes in ~1 minute).
-3. Make the sign + QR codes: `python3 tools/aidkit/make_kit.py <slug>` → `out/<slug>/`.
-4. Send the AID: their link + welcome message, the sign PDF, and the two QR PNGs.
+3. Send the AID their link + welcome message (WhatsApp). No QR sign needed (decided Nov 2026).
+   Optional, only if asked: `python3 tools/aidkit/make_kit.py <slug>` makes a printable QR sign.
