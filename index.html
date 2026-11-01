@@ -109,6 +109,16 @@ h2{font-family:var(--display);font-weight:800;font-size:24px;margin:0 0 4px}
 @media (max-width:760px){.bag{width:140px}}
 .aidcard{background:#0A8FC2;color:#fff;box-shadow:0 0 0 3px #fff,0 6px 18px rgba(10,143,194,.45);border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:12px}.aidcard i{flex:0 0 auto;width:44px;height:44px;border-radius:50%;background:#fff;color:#0A8FC2;font-style:normal;font-family:var(--display);font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center}.aidcard small{display:block;font-weight:900;font-size:11px;letter-spacing:2px;color:#fff;opacity:.9}.aidcard b{display:block;font-family:var(--display);font-weight:800;font-size:20px;line-height:1.1}.aidcard a{display:inline-block;margin-top:4px;color:#fff;font-weight:800;font-size:16px;text-decoration:none;background:#fff;color:#0A6F97;border-radius:999px;padding:5px 14px}.aidcard small{line-height:1.3;letter-spacing:1px}.aidcard em{display:block;font-style:normal;font-weight:800;font-size:14px;color:#FFF200;margin-top:1px}
 #tot small{display:block;font-size:14px;font-weight:800;line-height:1.1;text-align:right;letter-spacing:0}
+.whatf{background:#1f1f1f;border:2px solid rgba(128,205,41,.45);border-radius:16px;margin:4px 0 12px;overflow:hidden}
+.whatf summary{list-style:none;display:flex;align-items:center;gap:12px;padding:10px 14px;cursor:pointer}.whatf summary::-webkit-details-marker{display:none}
+.whatf summary img{width:56px;height:56px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 3px var(--lemon);flex:0 0 auto}
+.whatf summary span{flex:1;min-width:0}.whatf summary b{display:block;font-family:var(--display);font-size:19px;color:#fff}.whatf summary small{display:block;font-size:13px;color:#cfd4c9;font-weight:600}
+.whatf summary i{font-style:normal;font-weight:900;color:var(--lemon);font-size:22px;transition:transform .2s}.whatf[open] summary i{transform:rotate(45deg)}
+.wf-body{padding:0 14px 14px}.wf-hero{width:100%;height:auto;border-radius:12px;display:block}
+.wf-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0}.wf-stats div{background:#2b2b2b;border-radius:10px;padding:8px;text-align:center}
+.wf-stats b{display:block;font-family:var(--display);font-size:20px;color:var(--lemon);white-space:nowrap}.wf-stats span{display:block;font-size:12px;color:#cfd4c9;font-weight:600;line-height:1.2}
+.whatf ul{margin:0;padding-left:18px;color:#e6e9e1;font-size:14px;line-height:1.45}.whatf li{margin:4px 0}.whatf li b{color:#fff}
+.wf-note{margin:8px 0 0;font-size:11px;color:#9aa094}
 .wa{background:#272727;color:var(--fg);border-radius:14px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .wa small{display:block;font-weight:900;font-size:11px;letter-spacing:2px;color:var(--lemon)}
 .wa span{font-family:var(--display);font-weight:800;font-size:22px;user-select:all}
@@ -199,6 +209,11 @@ footer{color:var(--muted);font-size:13px;text-align:center}
       <h2 id="gh">Season 1 programme guide</h2>
       <p class="sub">A new episode is free every Friday. Season Pass holders can watch all 31 now.</p>
       <button class="passcta" id="passCta" type="button"><span><b>🔑 Full Season Pass</b><small>All 31 episodes · free with your first 5kg fonio order</small></span><em>Enter code ›</em></button>
+      <details class="whatf" id="whatF"><summary><img src="media/fonio-grain.jpg" alt="Raw fonio grain" width="56" height="56"><span><b>What is fonio?</b><small>Africa's ancient grain · tap to learn</small></span><i aria-hidden="true">＋</i></summary>
+        <div class="wf-body"><img class="wf-hero" src="media/fonio-pour.jpg" alt="Fonio grain being poured" loading="lazy">
+          <div class="wf-stats"><div><b>~5 min</b><span>to cook</span></div><div><b>6–8 wks</b><span>to harvest</span></div><div><b>1000s</b><span>of years in West Africa</span></div></div>
+          <ul><li><b>Whole grain, naturally gluten-free</b></li><li><b>Contains iron, zinc, magnesium</b> and phosphorus, plus fibre and vitamin B1</li><li><b>Contains methionine and cystine</b>, amino acids many grains are low in</li><li><b>A hardy crop</b> that grows with little water</li><li><b>Cook it like rice, couscous or quinoa</b>: jollof, waakye, porridge, banku and more</li></ul>
+          <p class="wf-note">General information, not medical advice.</p></div></details>
       <div class="list" id="list"></div>
     </section>
     <aside class="desk" aria-label="Order fonio">
@@ -485,6 +500,7 @@ window.addEventListener('hashchange',linkUnlock);
 function goOrder(){if(location.hash!=='#order')return;const d=document.querySelector('.desk');if(!d)return;
   setTimeout(()=>{d.scrollIntoView({behavior:'smooth',block:'start'});},400);track('order_link_open',{});}
 window.addEventListener('hashchange',goOrder);goOrder();
+document.getElementById('whatF').addEventListener('toggle',e=>{if(e.target.open)track('what_is_fonio_open',{});});
 (async()=>{let c=null;
   if(await linkUnlock())return;
   try{c=localStorage.getItem('acresPass');}catch(_){}
