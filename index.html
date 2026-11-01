@@ -108,6 +108,7 @@ h2{font-family:var(--display);font-weight:800;font-size:24px;margin:0 0 4px}
 .bag{flex:none;width:118px;height:auto;margin:-26px -6px -10px 0;filter:drop-shadow(0 10px 14px rgba(0,0,0,.35));transform:rotate(4deg)}
 @media (max-width:760px){.bag{width:140px}}
 .aidcard{background:#0A8FC2;color:#fff;box-shadow:0 0 0 3px #fff,0 6px 18px rgba(10,143,194,.45);border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:12px}.aidcard i{flex:0 0 auto;width:44px;height:44px;border-radius:50%;background:#fff;color:#0A8FC2;font-style:normal;font-family:var(--display);font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center}.aidcard small{display:block;font-weight:900;font-size:11px;letter-spacing:2px;color:#fff;opacity:.9}.aidcard b{display:block;font-family:var(--display);font-weight:800;font-size:20px;line-height:1.1}.aidcard a{display:inline-block;margin-top:4px;color:#fff;font-weight:800;font-size:16px;text-decoration:none;background:#fff;color:#0A6F97;border-radius:999px;padding:5px 14px}.aidcard small{line-height:1.3;letter-spacing:1px}.aidcard em{display:block;font-style:normal;font-weight:800;font-size:14px;color:#FFF200;margin-top:1px}
+#tot small{display:block;font-size:14px;font-weight:800;line-height:1.1;text-align:right;letter-spacing:0}
 .wa{background:#272727;color:var(--fg);border-radius:14px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .wa small{display:block;font-weight:900;font-size:11px;letter-spacing:2px;color:var(--lemon)}
 .wa span{font-family:var(--display);font-weight:800;font-size:22px;user-select:all}
@@ -214,7 +215,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
           <div class="step"><button type="button" id="qm" aria-label="One bag fewer">−</button><output id="qty">1</output><button type="button" id="qp" aria-label="One bag more">+</button></div></div>
         <fieldset class="how"><legend class="fl">How do you want it?</legend>
           <label><input type="radio" name="how" value="pickup" checked> Easy pickup</label>
-          <label><input type="radio" name="how" value="delivery"> Express delivery +₵20</label>
+          <label><input type="radio" name="how" value="delivery"> Express delivery + delivery cost</label>
         </fieldset>
         <label class="fld"><span class="fl" id="zoneLbl">Your zone</span>
           <select id="zone">
@@ -238,6 +239,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
         <div id="giftWrap" hidden><label class="fld"><span class="fl">Recipient's name (in Ghana)</span><input id="rnm" type="text" autocomplete="off"></label>
         <label class="fld"><span class="fl">Recipient's phone (Ghana)</span><input id="rph" type="tel" inputmode="tel" placeholder="e.g. 024 123 4567"></label></div>
         <div class="total"><span>Total</span><b id="tot">₵330</b></div>
+        <p class="note small" id="delNote" hidden>Delivery cost depends on your location. We'll confirm it with you before you pay.</p>
         <p class="err" id="err" hidden>Please add your name and phone number.</p>
         <button class="send" type="submit">Send my order on WhatsApp</button>
         <p class="note small">We'll confirm your order, then send MoMo payment details. Pickup point is shared after confirmation.</p>
@@ -418,7 +420,7 @@ function renderTicker(){
   if(avail.length>1)items.push(`<b>CATCH UP</b> ${avail.length} episodes ready to watch`);
   items.push('<i>5kg DIM Fonio ₵330</i> · Order right here on this page');
   if(!PASSKEYS)items.push('<b>SEASON PASS</b> Unlock all 31 episodes with your first 5kg order');
-  items.push('<b>EXPRESS DELIVERY</b> ₵20 anywhere in our Accra zones');
+  items.push('<b>EXPRESS DELIVERY</b> Across Greater Accra · cost confirmed when you order');
   items.push('<b>FONIO FRIDAY</b> A new recipe premieres every Friday');
   const html=items.map(t=>`<span>${t}</span>`).join('');
   document.getElementById('tk').innerHTML=html+html;
@@ -525,10 +527,10 @@ const HQ_NUM='12404080158';let AID=null;
 const orderNum=()=>AID?String(AID.wa).replace(/\D/g,''):HQ_NUM;
 // order form -> prefilled WhatsApp message
 (function(){
-  const PRICE=330,DEL=20;
+  const PRICE=330;
   let q=1;const qo=document.getElementById('qty'),tot=document.getElementById('tot');
   const how=()=>document.querySelector('input[name=how]:checked').value;
-  function upd(){qo.textContent=q;const t=q*PRICE+(how()==='delivery'?DEL:0);tot.textContent='₵'+t;document.getElementById('addrWrap').hidden=how()!=='delivery';return t;}
+  function upd(){qo.textContent=q;const t=q*PRICE;tot.innerHTML='₵'+t+(how()==='delivery'?'<small>+ delivery cost</small>':'');document.getElementById('delNote').hidden=how()!=='delivery';document.getElementById('addrWrap').hidden=how()!=='delivery';return t;}
   document.getElementById('qm').onclick=()=>{if(q>1){q--;upd();}};
   document.getElementById('qp').onclick=()=>{if(q<20){q++;upd();}};
   document.querySelectorAll('input[name=how]').forEach(r=>r.addEventListener('change',upd));
@@ -542,10 +544,10 @@ const orderNum=()=>AID?String(AID.wa).replace(/\D/g,''):HQ_NUM;
     const t=upd(),d=how()==='delivery',addr=document.getElementById('addr').value.trim();
     const lines=['*NEW ORDER · ACRES Heritage TV*','','Name: '+nm.value.trim(),'Phone: '+ph.value.trim(),
       '5kg DIM Fonio: '+q+' bag'+(q>1?'s':'')+' (₵'+(q*PRICE)+')',
-      'Receive: '+(d?'Express delivery (₵20)':'Easy pickup'),'Zone: '+document.getElementById('zone').value];
+      'Receive: '+(d?'Express delivery (please confirm delivery cost)':'Easy pickup'),'Zone: '+document.getElementById('zone').value];
     if(gift){lines[0]='*NEW DIASPORA ORDER · ACRES Heritage TV*';lines.push('Send to: '+rnm.value.trim(),'Recipient phone: '+rph.value.trim());}
     if(d)lines.push('Address/landmark: '+(addr||'(will share)'));
-    lines.push('*Total: ₵'+t+'*','','Watching: Episode '+cur);
+    lines.push('*Total: ₵'+t+(d?' + delivery':'')+'*','','Watching: Episode '+cur);
     if(AID)lines.push('Distributor: '+AID.name+' ('+AID.slug+')');
     track('order_whatsapp',{bags:q,value:t,currency:'GHS',delivery:d?'express':'pickup',watching_episode:cur});
     const url='https://api.whatsapp.com/send?phone='+orderNum()+'&text='+encodeURIComponent(lines.join('\n'));
