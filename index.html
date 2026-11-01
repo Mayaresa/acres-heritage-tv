@@ -216,7 +216,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
           <label><input type="radio" name="how" value="pickup" checked> Easy pickup</label>
           <label><input type="radio" name="how" value="delivery"> Express delivery +₵20</label>
         </fieldset>
-        <label class="fld"><span class="fl">Your zone</span>
+        <label class="fld"><span class="fl" id="zoneLbl">Your zone</span>
           <select id="zone">
             <option value="1 · Kasoa – Weija">1 · Kasoa – Weija</option>
             <option value="2 · Dansoman – Mamprobi">2 · Dansoman – Mamprobi</option>
@@ -230,6 +230,8 @@ footer{color:var(--muted);font-size:13px;text-align:center}
         <label class="fld" id="addrWrap" hidden><span class="fl">Delivery address or landmark</span><input id="addr" type="text" autocomplete="street-address" placeholder="e.g. Near Labone Senior High, house no. 12"></label>
         <label class="fld"><span class="fl">Your name</span><input id="nm" type="text" autocomplete="name" required></label>
         <label class="fld"><span class="fl">Your phone (WhatsApp)</span><input id="ph" type="tel" autocomplete="tel" inputmode="tel" required placeholder="e.g. 024 123 4567"></label>
+        <div id="giftWrap" hidden><label class="fld"><span class="fl">Recipient's name (in Ghana)</span><input id="rnm" type="text" autocomplete="off"></label>
+        <label class="fld"><span class="fl">Recipient's phone (Ghana)</span><input id="rph" type="tel" inputmode="tel" placeholder="e.g. 024 123 4567"></label></div>
         <div class="total"><span>Total</span><b id="tot">₵330</b></div>
         <p class="err" id="err" hidden>Please add your name and phone number.</p>
         <button class="send" type="submit">Send my order on WhatsApp</button>
@@ -500,7 +502,10 @@ const HQ_NUM='12404080158';let AID=null;
     AID=Object.assign({slug},a);window.ACRES_AID=slug;
     const d=String(a.wa).replace(/\D/g,''),intl='+'+d;
     const local=d.startsWith('233')?('0'+d.slice(3)).replace(/^(\d{3})(\d{3})(\d{4})$/,'$1 $2 $3'):intl.replace(/^\+1(\d{3})(\d{3})(\d{4})$/,'+1 $1 $2 $3');
-    if(a.area){const ar=document.getElementById('aidArea');ar.textContent=a.area+' & Surroundings';ar.hidden=false;}
+    if(a.label)document.getElementById('aidLabel').textContent=a.label.toUpperCase();
+    if(a.areaText||a.area){const ar=document.getElementById('aidArea');ar.textContent=a.areaText||(a.area+' & Surroundings');ar.hidden=false;}
+    if(a.gift){document.getElementById('giftWrap').hidden=false;document.getElementById('zoneLbl').textContent="Recipient's zone in Accra";
+      document.getElementById('ph').placeholder='e.g. +1 513 000 0000';const dv=document.querySelector('input[name=how][value=delivery]');if(dv){dv.checked=true;dv.dispatchEvent(new Event('change',{bubbles:true}));}}
     document.getElementById('aidName').textContent=a.name;
     document.getElementById('aidPhone').textContent=local;document.getElementById('aidCall').href='tel:'+intl;
     document.getElementById('aidCall').addEventListener('click',()=>track('aid_call',{aid_name:a.name}));
@@ -525,12 +530,15 @@ const orderNum=()=>AID?String(AID.wa).replace(/\D/g,''):HQ_NUM;
   document.getElementById('order').addEventListener('submit',e=>{
     e.preventDefault();
     const nm=document.getElementById('nm'),ph=document.getElementById('ph');
-    const miss=[nm,ph].filter(i=>!i.value.trim());[nm,ph].forEach(i=>i.classList.toggle('bad',!i.value.trim()));
+    const gift=AID&&AID.gift,rnm=document.getElementById('rnm'),rph=document.getElementById('rph');const req=gift?[nm,ph,rnm,rph]:[nm,ph];
+    const miss=req.filter(i=>!i.value.trim());req.forEach(i=>i.classList.toggle('bad',!i.value.trim()));
+    document.getElementById('err').textContent=gift?'Please add your name and phone, and the recipient\'s name and phone.':'Please add your name and phone number.';
     document.getElementById('err').hidden=!miss.length;if(miss.length){miss[0].focus();return;}
     const t=upd(),d=how()==='delivery',addr=document.getElementById('addr').value.trim();
     const lines=['*NEW ORDER · ACRES Heritage TV*','','Name: '+nm.value.trim(),'Phone: '+ph.value.trim(),
       '5kg DIM Fonio: '+q+' bag'+(q>1?'s':'')+' (₵'+(q*PRICE)+')',
       'Receive: '+(d?'Express delivery (₵20)':'Easy pickup'),'Zone: '+document.getElementById('zone').value];
+    if(gift){lines[0]='*NEW DIASPORA ORDER · ACRES Heritage TV*';lines.push('Send to: '+rnm.value.trim(),'Recipient phone: '+rph.value.trim());}
     if(d)lines.push('Address/landmark: '+(addr||'(will share)'));
     lines.push('*Total: ₵'+t+'*','','Watching: Episode '+cur);
     if(AID)lines.push('Distributor: '+AID.name+' ('+AID.slug+')');
