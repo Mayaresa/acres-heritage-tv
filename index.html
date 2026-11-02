@@ -39,6 +39,24 @@ button{font:inherit;color:inherit}
 .ch.on{border-color:var(--green);background:rgba(128,205,41,.1)}
 .ch{cursor:pointer;color:inherit;font-family:inherit}.ch2i{width:28px;height:28px;border-radius:50%;background:var(--lemon);display:flex;align-items:center;justify-content:center;font-size:15px}
 .songs{display:flex;flex-direction:column;gap:8px}.song{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;color:inherit;background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:8px;cursor:pointer}.song img{width:64px;height:64px;object-fit:cover;border-radius:10px;flex:0 0 auto}.song b{display:block;font-family:var(--display);font-size:18px;line-height:1.1}.song small{color:var(--muted);font-weight:600}.song.playing{border-color:var(--lemon)}.song .tag{margin-left:auto;font-weight:900;font-size:11px;letter-spacing:2px;color:var(--lemon)}
+.stage{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;overflow:hidden;background:#141414}
+.st-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(30px) brightness(.45) saturate(1.2)}
+.st-cover{position:relative;width:62%;aspect-ratio:1;object-fit:cover;border-radius:18px;margin-top:16%;box-shadow:0 20px 50px rgba(0,0,0,.6);transition:width .4s}
+.stage.singing .st-cover{width:42%;margin-top:14%}
+.st-lyr{position:relative;flex:1;width:100%;overflow:hidden;margin-top:14px;-webkit-mask-image:linear-gradient(transparent,#000 22%,#000 70%,transparent);mask-image:linear-gradient(transparent,#000 22%,#000 70%,transparent)}
+.st-roll{position:absolute;left:0;right:0;top:0;padding:0 8%;transition:transform .6s ease;text-align:center}
+.st-roll p{margin:0;padding:6px 0;font-family:var(--display);font-weight:800;font-size:clamp(17px,4.6vw,24px);line-height:1.2;color:rgba(255,255,255,.38);transition:color .3s,transform .3s;cursor:pointer}
+.st-roll p small{display:block;font-family:var(--body,inherit);font-weight:900;font-size:11px;letter-spacing:3px;color:var(--green);margin-bottom:2px}
+.st-roll p.on{color:var(--lemon);transform:scale(1.06)}.st-roll p.done{color:rgba(255,255,255,.62)}
+.st-bar{position:relative;display:flex;align-items:center;gap:10px;width:100%;padding:10px 14px 14px}
+.st-bar button{flex:0 0 auto;width:44px;height:44px;border-radius:50%;border:0;background:var(--lemon);color:#272727;font-size:18px;font-weight:900;cursor:pointer}
+.st-prog{flex:1;height:6px;border-radius:3px;background:rgba(255,255,255,.2);cursor:pointer}.st-prog i{display:block;height:100%;width:0;border-radius:3px;background:var(--green)}
+.st-bar span{font-weight:800;font-size:13px;color:#d9ddd5;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:reduce){.st-roll{transition:none}}
+.screen .sound,.screen .bug,.screen .still{z-index:3}
+.screen.tall .sound{display:none}
+.st-bar button.mute{animation:nudge 1.4s ease-in-out infinite}@keyframes nudge{50%{box-shadow:0 0 0 10px rgba(255,242,0,.25)}}
+.st-bar button.mute::after{content:'🔊';position:absolute;margin:-30px 0 0 18px;font-size:14px}
 .screen.tall{aspect-ratio:9/16;width:min(100%,calc(68vh * 9 / 16));margin:0 auto}
 .ch.soon{color:var(--muted);padding-left:14px}
 .ch .n{font-family:var(--display);font-size:12px;color:var(--muted)}
@@ -192,7 +210,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
     <div class="brand"><div class="dot" aria-hidden="true"></div><div class="bname"><b>ACRES HERITAGE <span>TV</span></b><small>Showcasing Our Indigenous Crops</small></div></div>
     <nav class="channels" aria-label="Channels">
       <button class="ch on" id="ch1Btn" type="button"><img src="media/fonio-tv-icon.jpg" alt=""><span><span class="n">CH 1:</span> FONIO</span></button>
-      <button class="ch" id="ch2Btn" type="button"><span class="ch2i" aria-hidden="true">🎵</span><span><span class="n">CH 2:</span> HERITAGE SONGS</span></button>
+      <button class="ch" id="ch2Btn" type="button"><img src="songs/s01-cover.jpg" alt=""><span><span class="n">CH 2:</span> HERITAGE SONGS</span></button>
       <button class="ch pass" id="passBtn" type="button">🔑 <span id="passLabel">Season Pass</span></button>
     </nav>
   </header>
@@ -203,6 +221,12 @@ footer{color:var(--muted);font-size:13px;text-align:center}
       <button class="sound" id="sound" type="button">🔊 Tap for sound</button>
       <div class="loading" id="loading" hidden><i></i><span>Loading episode</span><b>0%</b></div>
       <div class="loading still" id="still" hidden><span>Still watching?</span><small>We paused to save your data.</small><button type="button" id="stillGo">▶ Keep watching</button></div>
+      <div class="stage" id="stage" hidden>
+        <div class="st-bg" id="stBg"></div>
+        <img class="st-cover" id="stCover" alt="">
+        <div class="st-lyr" id="stLyr" aria-live="off"><div class="st-roll" id="stRoll"></div></div>
+        <div class="st-bar"><button type="button" id="stPlay" aria-label="Play">▶</button><div class="st-prog" id="stProg"><i id="stFill"></i></div><span id="stTime">0:00</span></div>
+      </div>
       <div class="bug" id="bug"><img src="media/fonio-tv-icon.jpg" alt="" id="bugImg"><span id="bugTxt">CH 1: FONIO</span></div>
     </div>
     <div class="now">
@@ -453,19 +477,32 @@ document.getElementById('next').onclick=()=>{if(CH===2){playSong((songCur+1)%SON
 let bag=[];
 function nextShuffle(){if(avail.length<2)return avail[0];if(!bag.length)bag=avail.filter(n=>n!==cur).sort(()=>Math.random()-.5);let n=bag.shift();if(n===cur){n=bag.shift()||avail.find(x=>x!==cur);}return n;}
 // ===== CH 2: Heritage Songs (free for everyone) =====
-const SONGS=[{t:'The Truth About Our Food',s:'An ACRES anthem for clean, indigenous food in Ghana.',src:'songs/s01.mp4',poster:'songs/s01.jpg'}];
+const SONGS=[{t:'The Truth About Our Food',s:'An ACRES anthem for clean, indigenous food in Ghana.',src:'songs/s01.m4a',poster:'songs/s01-cover.jpg',lyrics:'songs/s01-lyrics.json'}];
+const lyrCache={};let LYR=[],lyrOn=-1;
 let CH=1,songCur=0;
 function renderSongs(){const L=document.getElementById('songList');L.textContent='';SONGS.forEach((x,i)=>{const b=document.createElement('button');b.type='button';b.className='song'+(CH===2&&i===songCur?' playing':'');
   b.innerHTML='<img alt="" loading="lazy"><span><b></b><small></small></span><span class="tag"></span>';b.querySelector('img').src=x.poster;b.querySelector('b').textContent=x.t;b.querySelector('small').textContent=x.s;b.querySelector('.tag').textContent=CH===2&&i===songCur?'PLAYING':'▶ PLAY';
   b.onclick=()=>playSong(i,true);L.appendChild(b);});}
+const $s=id=>document.getElementById(id);
+function fmtT(t){t=Math.max(0,Math.floor(t||0));return Math.floor(t/60)+':'+String(t%60).padStart(2,'0');}
+function buildLyrics(){const R=$s('stRoll');R.textContent='';lyrOn=-1;LYR.forEach(([t,txt,sec],k)=>{const p=document.createElement('p');if(sec){const sm=document.createElement('small');sm.textContent=sec.toUpperCase();p.appendChild(sm);}p.appendChild(document.createTextNode(txt));p.onclick=()=>{tv.currentTime=Math.max(0,t-.3);if(tv.paused)tv.play().catch(()=>{});};R.appendChild(p);});R.style.transform='translateY(0)';$s('stage').classList.remove('singing');}
+function syncLyrics(){if(CH!==2)return;const t=tv.currentTime+.4;let k=-1;for(let j=0;j<LYR.length;j++){if(LYR[j][0]<=t)k=j;else break;}
+  const d=tv.duration||0;$s('stFill').style.width=(d?tv.currentTime/d*100:0)+'%';$s('stTime').textContent=fmtT(tv.currentTime)+' / '+fmtT(d);$s('stPlay').textContent=(tv.paused||tv.muted)?'▶':'❚❚';$s('stPlay').classList.toggle('mute',!tv.paused&&tv.muted);
+  if(k===lyrOn)return;lyrOn=k;const R=$s('stRoll'),ps=R.children;[...ps].forEach((p,j)=>{p.classList.toggle('on',j===k);p.classList.toggle('done',j<k);});
+  $s('stage').classList.toggle('singing',k>=0);if(k>=0){const box=$s('stLyr');const p=ps[k];R.style.transform='translateY('+(box.clientHeight*.38-p.offsetTop-p.offsetHeight/2)+'px)';}}
+tv.addEventListener('timeupdate',syncLyrics);tv.addEventListener('play',syncLyrics);tv.addEventListener('pause',syncLyrics);
+$s('stPlay').onclick=()=>{if(tv.paused||tv.muted){tv.muted=false;document.getElementById('sound').hidden=true;tv.play().catch(()=>{});}else tv.pause();};
+$s('stProg').onclick=e=>{const r=e.currentTarget.getBoundingClientRect();if(tv.duration)tv.currentTime=(e.clientX-r.left)/r.width*tv.duration;};
+async function loadLyrics(x){if(!x.lyrics){LYR=[];buildLyrics();return;}if(!lyrCache[x.lyrics]){try{lyrCache[x.lyrics]=await (await fetch(x.lyrics)).json();}catch(_){lyrCache[x.lyrics]=[];}}LYR=lyrCache[x.lyrics];buildLyrics();}
 function playSong(i,auto){songCur=i;autoRun=auto?0:autoRun;document.getElementById('still').hidden=true;++loadId;stopLive();const x=SONGS[i];
-  document.getElementById('loading').hidden=true;tv.pause();tv.src=x.src;tv.poster=x.poster;
+  document.getElementById('loading').hidden=true;tv.pause();tv.src=x.src;tv.poster='';
+  $s('stCover').src=x.poster;$s('stBg').style.backgroundImage='url('+x.poster+')';loadLyrics(x);
   document.getElementById('nowLab').textContent='NOW PLAYING · SONG '+(i+1)+' OF '+SONGS.length;document.getElementById('nowTitle').textContent=x.t;document.getElementById('nowSub').textContent=x.s;
   document.getElementById('prev').disabled=SONGS.length<2;document.getElementById('next').disabled=SONGS.length<2;renderSongs();
   if(auto||tv.muted)tv.play().catch(()=>{});track('song_play',{song_name:x.t});}
 function setChannel(n){if(n===CH)return;CH=n;const two=n===2;
   document.getElementById('ch1Btn').classList.toggle('on',!two);document.getElementById('ch2Btn').classList.toggle('on',two);
-  document.getElementById('bugTxt').textContent=two?'CH 2: HERITAGE SONGS':'CH 1: FONIO';document.querySelector('.screen').classList.toggle('tall',two);document.getElementById('bugImg').hidden=two;document.getElementById('tkLab').textContent=two?'CH 2: SONGS':'CH 1: FONIO';
+  document.getElementById('bugTxt').textContent=two?'CH 2: HERITAGE SONGS':'CH 1: FONIO';document.querySelector('.screen').classList.toggle('tall',two);document.getElementById('stage').hidden=!two;tv.controls=!two;document.getElementById('bugImg').hidden=two;document.getElementById('tkLab').textContent=two?'CH 2: SONGS':'CH 1: FONIO';
   document.getElementById('gh').textContent=two?'Heritage food songs':'Season 1 programme guide';
   ['guideSub','passCta','list'].forEach(id=>{const e=document.getElementById(id);if(e)e.hidden=two;});document.getElementById('songList').hidden=!two;
   try{const u=new URL(location.href);if(two)u.searchParams.set('ch','2');else u.searchParams.delete('ch');history.replaceState(null,'',u.pathname+u.search+u.hash);}catch(_){}
