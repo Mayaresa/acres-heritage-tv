@@ -114,6 +114,11 @@ h2{font-family:var(--display);font-weight:800;font-size:24px;margin:0 0 4px}
 .whatf summary img{width:56px;height:56px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 3px var(--lemon);flex:0 0 auto}
 .whatf summary span{flex:1;min-width:0}.whatf summary b{display:block;font-family:var(--display);font-size:19px;color:#fff}.whatf summary small{display:block;font-size:13px;color:#cfd4c9;font-weight:600}
 .whatf summary i{font-style:normal;font-weight:900;color:var(--lemon);font-size:22px;transition:transform .2s}.whatf[open] summary i{transform:rotate(45deg)}
+.hist .hico{width:56px;height:56px;border-radius:50%;background:#2b2b2b;box-shadow:0 0 0 3px var(--lemon);display:flex;align-items:center;justify-content:center;font-size:26px;flex:0 0 auto}
+.tl{list-style:none;margin:4px 0 0;padding:0 0 0 18px;border-left:3px solid rgba(128,205,41,.5);display:flex;flex-direction:column;gap:14px}
+.tl li{position:relative}.tl li:before{content:'';position:absolute;left:-26px;top:4px;width:13px;height:13px;border-radius:50%;background:var(--lemon);box-shadow:0 0 0 3px #1f1f1f}
+.tl em{display:block;font-style:normal;font-weight:900;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--green)}
+.tl b{display:block;font-family:var(--display);font-size:18px;color:#fff;line-height:1.15;margin:1px 0 2px}.tl span{display:block;font-size:14px;color:#e6e9e1;line-height:1.45}
 .wf-vid{position:relative;aspect-ratio:16/9;max-width:100%;border-radius:12px;overflow:hidden;background:#000;margin-bottom:6px}
 .wf-vid button{all:unset;cursor:pointer;position:absolute;inset:0;display:block}.wf-vid img{width:100%;height:100%;object-fit:cover;display:block;opacity:.85}
 .wf-play{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:var(--lemon);color:#272727;font-size:26px;display:flex;align-items:center;justify-content:center;padding-left:4px;box-sizing:border-box}
@@ -223,6 +228,17 @@ footer{color:var(--muted);font-size:13px;text-align:center}
           <div class="wf-stats"><div><b>~5 min</b><span>to cook</span></div><div><b>6–8 wks</b><span>to harvest</span></div><div><b>1000s</b><span>of years in West Africa</span></div></div>
           <ul><li><b>Whole grain, naturally gluten-free</b></li><li><b>Contains iron, zinc, magnesium</b> and phosphorus, plus fibre and vitamin B1</li><li><b>Contains methionine and cystine</b>, amino acids many grains are low in</li><li><b>A hardy crop</b> that grows with little water</li><li><b>Cook it like rice, couscous or quinoa</b>: jollof, waakye, porridge, banku and more</li></ul>
           <p class="wf-note">General information, not medical advice.</p></div></details>
+      <details class="whatf hist" id="histF"><summary><span class="hico" aria-hidden="true">📜</span><span><b>Fonio through history</b><small>From ancient West Africa to your table · tap to read</small></span><i aria-hidden="true">＋</i></summary>
+        <div class="wf-body"><ol class="tl">
+          <li><em>Thousands of years ago</em><b>Born in West Africa</b><span>West Africans tamed fonio from wild grasses. Experts call it probably Africa's oldest cereal.</span></li>
+          <li><em>Two fonios</em><b>White and black</b><span>White fonio and black fonio were domesticated separately. Black fonio is still grown in northern Togo and Nigeria.</span></li>
+          <li><em>About 2,000 years ago</em><b>Farming spreads</b><span>Fonio farming expanded at the start of the Common Era. The oldest fonio remains found so far come from Nigeria.</span></li>
+          <li><em>Through the centuries</em><b>A food of honour</b><span>Served to chiefs and at special occasions, and part of some bride prices. The Dogon of Mali tell that the whole universe came from a fonio seed.</span></li>
+          <li><em>From the 1500s</em><b>A long decline</b><span>Maize and rice arrived, and the slave trade and colonial rule disrupted farming. Fonio faded from many tables. Europeans even called it "hungry rice", a name that misunderstood a grain people grew because they loved it.</span></li>
+          <li><em>Today</em><b>Still feeding millions</b><span>Over 920,000 hectares are grown in West Africa each year, about 700,000 tonnes. Guinea grows the most, followed by Nigeria and Mali.</span></li>
+          <li><em>Ghana now</em><b>The revival</b><span>In Northern Ghana, Amaati works with thousands of farmers, most of them women, to bring fonio back. That is the DIM Fonio in your bag.</span></li>
+        </ol>
+        <p class="wf-note">Sources: CIRAD (2025 study in Nature Communications); US National Academies, Lost Crops of Africa (1996); CIRAD fonio production data (2019); Amaati.</p></div></details>
       <div class="list" id="list"></div>
     </section>
     <aside class="desk" aria-label="Order fonio">
@@ -511,6 +527,7 @@ function goOrder(){if(location.hash!=='#order')return;const d=document.querySele
   setTimeout(()=>{d.scrollIntoView({behavior:'smooth',block:'start'});},400);track('order_link_open',{});}
 window.addEventListener('hashchange',goOrder);goOrder();
 document.getElementById('whatF').addEventListener('toggle',e=>{if(e.target.open)track('what_is_fonio_open',{});});
+document.getElementById('histF').addEventListener('toggle',e=>{if(e.target.open)track('fonio_history_open',{});});
 document.getElementById('storyBtn').addEventListener('click',()=>{tv.pause();const box=document.querySelector('.wf-vid');
   box.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/vL1Gub9QdJk?autoplay=1&rel=0&playsinline=1" title="The Amaati Story" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
   track('fonio_story_play',{});});
