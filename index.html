@@ -37,6 +37,9 @@ button{font:inherit;color:inherit}
 .ch{display:flex;align-items:center;gap:8px;border:2px solid var(--line);border-radius:999px;padding:5px 14px 5px 5px;font-weight:800;font-size:13px;letter-spacing:1px;background:transparent;cursor:default}
 .ch img{width:28px;height:28px;border-radius:50%}
 .ch.on{border-color:var(--green);background:rgba(128,205,41,.1)}
+.ch{cursor:pointer;color:inherit;font-family:inherit}.ch2i{width:28px;height:28px;border-radius:50%;background:var(--lemon);display:flex;align-items:center;justify-content:center;font-size:15px}
+.songs{display:flex;flex-direction:column;gap:8px}.song{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;color:inherit;background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:8px;cursor:pointer}.song img{width:64px;height:64px;object-fit:cover;border-radius:10px;flex:0 0 auto}.song b{display:block;font-family:var(--display);font-size:18px;line-height:1.1}.song small{color:var(--muted);font-weight:600}.song.playing{border-color:var(--lemon)}.song .tag{margin-left:auto;font-weight:900;font-size:11px;letter-spacing:2px;color:var(--lemon)}
+.screen.tall{aspect-ratio:9/16;width:min(100%,calc(68vh * 9 / 16));margin:0 auto}
 .ch.soon{color:var(--muted);padding-left:14px}
 .ch .n{font-family:var(--display);font-size:12px;color:var(--muted)}
 
@@ -188,7 +191,8 @@ footer{color:var(--muted);font-size:13px;text-align:center}
   <header class="station">
     <div class="brand"><div class="dot" aria-hidden="true"></div><div class="bname"><b>ACRES HERITAGE <span>TV</span></b><small>Showcasing Our Indigenous Crops</small></div></div>
     <nav class="channels" aria-label="Channels">
-      <span class="ch on"><img src="media/fonio-tv-icon.jpg" alt=""><span><span class="n">CH 1:</span> FONIO</span></span>
+      <button class="ch on" id="ch1Btn" type="button"><img src="media/fonio-tv-icon.jpg" alt=""><span><span class="n">CH 1:</span> FONIO</span></button>
+      <button class="ch" id="ch2Btn" type="button"><span class="ch2i" aria-hidden="true">🎵</span><span><span class="n">CH 2:</span> HERITAGE SONGS</span></button>
       <button class="ch pass" id="passBtn" type="button">🔑 <span id="passLabel">Season Pass</span></button>
     </nav>
   </header>
@@ -199,7 +203,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
       <button class="sound" id="sound" type="button">🔊 Tap for sound</button>
       <div class="loading" id="loading" hidden><i></i><span>Loading episode</span><b>0%</b></div>
       <div class="loading still" id="still" hidden><span>Still watching?</span><small>We paused to save your data.</small><button type="button" id="stillGo">▶ Keep watching</button></div>
-      <div class="bug"><img src="media/fonio-tv-icon.jpg" alt="">CH 1: FONIO</div>
+      <div class="bug" id="bug"><img src="media/fonio-tv-icon.jpg" alt="" id="bugImg"><span id="bugTxt">CH 1: FONIO</span></div>
     </div>
     <div class="now">
       <div style="min-width:0">
@@ -212,14 +216,15 @@ footer{color:var(--muted);font-size:13px;text-align:center}
   </section>
 
   <div class="ticker" aria-label="Programme schedule">
-    <div class="tk-lab">CH 1: FONIO</div>
+    <div class="tk-lab" id="tkLab">CH 1: FONIO</div>
     <div class="tk-view"><div class="tk-run" id="tk"></div></div>
   </div>
 
   <div class="grid">
     <section class="guide" aria-labelledby="gh">
       <h2 id="gh">Season 1 programme guide</h2>
-      <p class="sub">A new episode is free every Friday. Season Pass holders can watch all 31 now.</p>
+      <div class="songs" id="songList" hidden></div>
+      <p class="sub" id="guideSub">A new episode is free every Friday. Season Pass holders can watch all 31 now.</p>
       <button class="passcta" id="passCta" type="button"><span><b>🔑 Full Season Pass</b><small>All 31 episodes · free with your first 5kg fonio order</small></span><em>Enter code ›</em></button>
       <div class="list" id="list"></div>
       <div class="learn-h">LEARN ABOUT FONIO</div>
@@ -442,17 +447,38 @@ async function play(n,auto,fromShuffle){
     if(auto||tv.muted){tv.play().catch(()=>{});}
   }catch(err){if(my===loadId){ld.querySelector('b').textContent='';ld.querySelector('span').textContent='This episode could not load. Check your connection and tap it again.';}}
 }
-document.getElementById('prev').onclick=()=>{const i=avail.indexOf(cur);if(i>0)play(avail[i-1],true);};
-document.getElementById('next').onclick=()=>{const i=avail.indexOf(cur);if(i<avail.length-1)play(avail[i+1],true);};
+document.getElementById('prev').onclick=()=>{if(CH===2){playSong((songCur-1+SONGS.length)%SONGS.length,true);return;}const i=avail.indexOf(cur);if(i>0)play(avail[i-1],true);};
+document.getElementById('next').onclick=()=>{if(CH===2){playSong((songCur+1)%SONGS.length,true);return;}const i=avail.indexOf(cur);if(i<avail.length-1)play(avail[i+1],true);};
 // Shuffle: when an episode ends, a random released episode plays next (never the same one twice in a row).
 let bag=[];
 function nextShuffle(){if(avail.length<2)return avail[0];if(!bag.length)bag=avail.filter(n=>n!==cur).sort(()=>Math.random()-.5);let n=bag.shift();if(n===cur){n=bag.shift()||avail.find(x=>x!==cur);}return n;}
-// After 3 episodes in a row with no tap, pause and ask (saves viewers' data).
+// ===== CH 2: Heritage Songs (free for everyone) =====
+const SONGS=[{t:'The Truth About Our Food',s:'An ACRES anthem for clean, indigenous food in Ghana.',src:'songs/s01.mp4',poster:'songs/s01.jpg'}];
+let CH=1,songCur=0;
+function renderSongs(){const L=document.getElementById('songList');L.textContent='';SONGS.forEach((x,i)=>{const b=document.createElement('button');b.type='button';b.className='song'+(CH===2&&i===songCur?' playing':'');
+  b.innerHTML='<img alt="" loading="lazy"><span><b></b><small></small></span><span class="tag"></span>';b.querySelector('img').src=x.poster;b.querySelector('b').textContent=x.t;b.querySelector('small').textContent=x.s;b.querySelector('.tag').textContent=CH===2&&i===songCur?'PLAYING':'▶ PLAY';
+  b.onclick=()=>playSong(i,true);L.appendChild(b);});}
+function playSong(i,auto){songCur=i;autoRun=auto?0:autoRun;document.getElementById('still').hidden=true;++loadId;stopLive();const x=SONGS[i];
+  document.getElementById('loading').hidden=true;tv.pause();tv.src=x.src;tv.poster=x.poster;
+  document.getElementById('nowLab').textContent='NOW PLAYING · SONG '+(i+1)+' OF '+SONGS.length;document.getElementById('nowTitle').textContent=x.t;document.getElementById('nowSub').textContent=x.s;
+  document.getElementById('prev').disabled=SONGS.length<2;document.getElementById('next').disabled=SONGS.length<2;renderSongs();
+  if(auto||tv.muted)tv.play().catch(()=>{});track('song_play',{song_name:x.t});}
+function setChannel(n){if(n===CH)return;CH=n;const two=n===2;
+  document.getElementById('ch1Btn').classList.toggle('on',!two);document.getElementById('ch2Btn').classList.toggle('on',two);
+  document.getElementById('bugTxt').textContent=two?'CH 2: HERITAGE SONGS':'CH 1: FONIO';document.querySelector('.screen').classList.toggle('tall',two);document.getElementById('bugImg').hidden=two;document.getElementById('tkLab').textContent=two?'CH 2: SONGS':'CH 1: FONIO';
+  document.getElementById('gh').textContent=two?'Heritage food songs':'Season 1 programme guide';
+  ['guideSub','passCta','list'].forEach(id=>{const e=document.getElementById(id);if(e)e.hidden=two;});document.getElementById('songList').hidden=!two;
+  try{const u=new URL(location.href);if(two)u.searchParams.set('ch','2');else u.searchParams.delete('ch');history.replaceState(null,'',u.pathname+u.search+u.hash);}catch(_){}
+  track('channel_switch',{channel:n});
+  if(two)playSong(songCur,true);else play(cur,true);}
+document.getElementById('ch1Btn').onclick=()=>setChannel(1);document.getElementById('ch2Btn').onclick=()=>setChannel(2);
+// After 3 videos in a row with no tap, pause and ask (saves viewers' data).
 let autoRun=0;
-tv.addEventListener('ended',()=>{track('episode_complete',{episode_number:cur});autoRun++;
+function nextAuto(){if(CH===2)playSong((songCur+1)%SONGS.length,false);else play(nextShuffle(),true,true);}
+tv.addEventListener('ended',()=>{if(CH===1)track('episode_complete',{episode_number:cur});else track('song_complete',{song_name:SONGS[songCur].t});autoRun++;
   if(autoRun>=3){document.getElementById('still').hidden=false;track('still_watching_prompt',{});return;}
-  play(nextShuffle(),true,true);});
-document.getElementById('stillGo').onclick=()=>{autoRun=0;document.getElementById('still').hidden=true;play(nextShuffle(),true,true);};
+  nextAuto();});
+document.getElementById('stillGo').onclick=()=>{autoRun=0;document.getElementById('still').hidden=true;nextAuto();};
 
 // ticker: what is on now, what is next, the offer
 function renderTicker(){
@@ -537,7 +563,8 @@ document.getElementById('storyBtn').addEventListener('click',()=>{tv.pause();con
   if(await linkUnlock())return;
   try{c=localStorage.getItem('acresPass');}catch(_){}
   if(c){try{const r=await tryCode(c);if(r){PASSKEYS=r.keys;passOn();}}catch(_){}}})();
-play(cur,false);
+renderSongs();
+if(new URLSearchParams(location.search).get('ch')==='2'){CH=0;setChannel(2);CH=2;}else play(cur,false);
 tv.muted=true;tv.play().catch(()=>{});
 const snd=document.getElementById('sound');
 function unmute(){tv.muted=false;snd.hidden=true;tv.play().catch(()=>{});}
