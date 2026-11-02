@@ -57,6 +57,12 @@ button{font:inherit;color:inherit}
 .screen.tall .sound{display:none}
 .st-bar button.mute{animation:nudge 1.4s ease-in-out infinite}@keyframes nudge{50%{box-shadow:0 0 0 10px rgba(255,242,0,.25)}}
 .st-bar button.mute::after{content:'🔊';position:absolute;margin:-30px 0 0 18px;font-size:14px}
+.st-end{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:18% 8% 8%;background:rgba(20,20,20,.93);backdrop-filter:blur(6px);text-align:left}
+.se-k{font-weight:900;font-size:12px;letter-spacing:3px;color:var(--green)}
+.st-end h3{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(24px,7vw,32px);line-height:1.05;color:var(--lemon)}
+.se-steps{margin:2px 0 4px;padding-left:20px;color:#e6e9e1;font-size:14px;line-height:1.4;display:flex;flex-direction:column;gap:6px}.se-steps b{color:#fff}
+.se-go,.se-aid,.se-next{display:block;width:100%;text-align:center;font:inherit;font-weight:900;font-size:16px;border-radius:999px;padding:12px;cursor:pointer;text-decoration:none;min-height:46px;box-sizing:border-box}
+.se-go{background:var(--lemon);color:#272727;border:0}.se-aid{background:var(--green);color:#272727}.se-next{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.4)}
 .screen.tall{aspect-ratio:9/16;width:min(100%,calc(68vh * 9 / 16));margin:0 auto}
 .ch.soon{color:var(--muted);padding-left:14px}
 .ch .n{font-family:var(--display);font-size:12px;color:var(--muted)}
@@ -225,6 +231,18 @@ footer{color:var(--muted);font-size:13px;text-align:center}
         <div class="st-bg" id="stBg"></div>
         <img class="st-cover" id="stCover" alt="">
         <div class="st-lyr" id="stLyr" aria-live="off"><div class="st-roll" id="stRoll"></div></div>
+        <div class="st-end" id="stEnd" hidden>
+          <div class="se-k">THANKS FOR LISTENING 🎵</div>
+          <h3>Now taste the heritage.</h3>
+          <ol class="se-steps">
+            <li><b>Try it first.</b> Order your first 5kg of DIM Fonio below and cook it at home.</li>
+            <li><b>Love it? Share it.</b> Recommend it to family, friends and your church.</li>
+            <li><b>Earn with us.</b> Become an ACRES Independent Distributor (AID). Start with just 1 case.</li>
+          </ol>
+          <button type="button" class="se-go" id="seOrder">↓ Make my first order</button>
+          <a class="se-aid" id="seAid" href="https://api.whatsapp.com/send?phone=12404080158&amp;text=AID%20-%20I%27d%20like%20to%20become%20an%20ACRES%20Independent%20Distributor" target="_blank" rel="noopener">Become an AID · WhatsApp us</a>
+          <button type="button" class="se-next" id="seNext">▶ Next song</button>
+        </div>
         <div class="st-bar"><button type="button" id="stPlay" aria-label="Play">▶</button><div class="st-prog" id="stProg"><i id="stFill"></i></div><span id="stTime">0:00</span></div>
       </div>
       <div class="bug" id="bug"><img src="media/fonio-tv-icon.jpg" alt="" id="bugImg"><span id="bugTxt">CH 1: FONIO</span></div>
@@ -493,8 +511,12 @@ function syncLyrics(){if(CH!==2)return;const t=tv.currentTime+.4;let k=-1;for(le
 tv.addEventListener('timeupdate',syncLyrics);tv.addEventListener('play',syncLyrics);tv.addEventListener('pause',syncLyrics);
 $s('stPlay').onclick=()=>{if(tv.paused||tv.muted){tv.muted=false;document.getElementById('sound').hidden=true;tv.play().catch(()=>{});}else tv.pause();};
 $s('stProg').onclick=e=>{const r=e.currentTarget.getBoundingClientRect();if(tv.duration)tv.currentTime=(e.clientX-r.left)/r.width*tv.duration;};
+$s('seNext').onclick=()=>playSong((songCur+1)%SONGS.length,true);
+$s('seOrder').onclick=()=>{track('song_cta_order',{song_name:SONGS[songCur].t});const d=document.querySelector('.desk');d.scrollIntoView({behavior:'smooth',block:'start'});setTimeout(()=>{const n=document.getElementById('nm');if(n)n.focus({preventScroll:true});},700);};
+$s('seAid').onclick=()=>track('song_cta_aid',{song_name:SONGS[songCur].t});
 async function loadLyrics(x){if(!x.lyrics){LYR=[];buildLyrics();return;}if(!lyrCache[x.lyrics]){try{lyrCache[x.lyrics]=await (await fetch(x.lyrics)).json();}catch(_){lyrCache[x.lyrics]=[];}}LYR=lyrCache[x.lyrics];buildLyrics();}
-function playSong(i,auto){songCur=i;autoRun=auto?0:autoRun;document.getElementById('still').hidden=true;++loadId;stopLive();const x=SONGS[i];
+function showEnd(){$s('stEnd').hidden=false;$s('seNext').textContent=SONGS.length>1?'▶ Next song':'↻ Play again';track('song_end_card',{song_name:SONGS[songCur].t});}
+function playSong(i,auto){songCur=i;$s('stEnd').hidden=true;autoRun=auto?0:autoRun;document.getElementById('still').hidden=true;++loadId;stopLive();const x=SONGS[i];
   document.getElementById('loading').hidden=true;tv.pause();tv.src=x.src;tv.poster='';
   $s('stCover').src=x.poster;$s('stBg').style.backgroundImage='url('+x.poster+')';loadLyrics(x);
   document.getElementById('nowLab').textContent='NOW PLAYING · SONG '+(i+1)+' OF '+SONGS.length;document.getElementById('nowTitle').textContent=x.t;document.getElementById('nowSub').textContent=x.s;
@@ -502,7 +524,7 @@ function playSong(i,auto){songCur=i;autoRun=auto?0:autoRun;document.getElementBy
   if(auto||tv.muted)tv.play().catch(()=>{});track('song_play',{song_name:x.t});}
 function setChannel(n){if(n===CH)return;CH=n;const two=n===2;
   document.getElementById('ch1Btn').classList.toggle('on',!two);document.getElementById('ch2Btn').classList.toggle('on',two);
-  document.getElementById('bugTxt').textContent=two?'CH 2: HERITAGE SONGS':'CH 1: FONIO';document.querySelector('.screen').classList.toggle('tall',two);document.getElementById('stage').hidden=!two;tv.controls=!two;document.getElementById('bugImg').hidden=two;document.getElementById('tkLab').textContent=two?'CH 2: SONGS':'CH 1: FONIO';
+  document.getElementById('bugTxt').textContent=two?'CH 2: HERITAGE SONGS':'CH 1: FONIO';document.querySelector('.screen').classList.toggle('tall',two);document.getElementById('stage').hidden=!two;if(!two)$s('stEnd').hidden=true;tv.controls=!two;document.getElementById('bugImg').hidden=two;document.getElementById('tkLab').textContent=two?'CH 2: SONGS':'CH 1: FONIO';
   document.getElementById('gh').textContent=two?'Heritage food songs':'Season 1 programme guide';
   ['guideSub','passCta','list'].forEach(id=>{const e=document.getElementById(id);if(e)e.hidden=two;});document.getElementById('songList').hidden=!two;
   try{const u=new URL(location.href);if(two)u.searchParams.set('ch','2');else u.searchParams.delete('ch');history.replaceState(null,'',u.pathname+u.search+u.hash);}catch(_){}
@@ -512,7 +534,7 @@ document.getElementById('ch1Btn').onclick=()=>setChannel(1);document.getElementB
 // After 3 videos in a row with no tap, pause and ask (saves viewers' data).
 let autoRun=0;
 function nextAuto(){if(CH===2)playSong((songCur+1)%SONGS.length,false);else play(nextShuffle(),true,true);}
-tv.addEventListener('ended',()=>{if(CH===1)track('episode_complete',{episode_number:cur});else track('song_complete',{song_name:SONGS[songCur].t});autoRun++;
+tv.addEventListener('ended',()=>{if(CH===2){track('song_complete',{song_name:SONGS[songCur].t});showEnd();return;}track('episode_complete',{episode_number:cur});autoRun++;
   if(autoRun>=3){document.getElementById('still').hidden=false;track('still_watching_prompt',{});return;}
   nextAuto();});
 document.getElementById('stillGo').onclick=()=>{autoRun=0;document.getElementById('still').hidden=true;nextAuto();};
