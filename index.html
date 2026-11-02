@@ -495,7 +495,8 @@ document.getElementById('next').onclick=()=>{if(CH===2){playSong((songCur+1)%SON
 let bag=[];
 function nextShuffle(){if(avail.length<2)return avail[0];if(!bag.length)bag=avail.filter(n=>n!==cur).sort(()=>Math.random()-.5);let n=bag.shift();if(n===cur){n=bag.shift()||avail.find(x=>x!==cur);}return n;}
 // ===== CH 2: Heritage Songs (free for everyone) =====
-const SONGS=[{t:'The Truth About Our Food',s:'An ACRES anthem for clean, indigenous food in Ghana.',src:'songs/s01.m4a',poster:'songs/s01-cover.jpg',lyrics:'songs/s01-lyrics.json'}];
+const SONGS=[{t:'The Truth About Our Food',s:'An ACRES anthem for clean, indigenous food in Ghana.',src:'songs/s01.m4a',poster:'songs/s01-cover.jpg',lyrics:'songs/s01-lyrics.json'},
+  {t:'Demand Better',s:'Demand clean, healthy food: no more chemicals, bring our own foods back.',src:'songs/s02.m4a',poster:'songs/s02-cover.jpg',lyrics:'songs/s02-lyrics.json'}];
 const lyrCache={};let LYR=[],lyrOn=-1;
 let CH=1,songCur=0;
 function renderSongs(){const L=document.getElementById('songList');L.textContent='';SONGS.forEach((x,i)=>{const b=document.createElement('button');b.type='button';b.className='song'+(CH===2&&i===songCur?' playing':'');
