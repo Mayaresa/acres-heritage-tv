@@ -496,7 +496,8 @@ let bag=[];
 function nextShuffle(){if(avail.length<2)return avail[0];if(!bag.length)bag=avail.filter(n=>n!==cur).sort(()=>Math.random()-.5);let n=bag.shift();if(n===cur){n=bag.shift()||avail.find(x=>x!==cur);}return n;}
 // ===== CH 2: Heritage Songs (free for everyone) =====
 const SONGS=[{t:'The Truth About Our Food',s:'An ACRES anthem for clean, indigenous food in Ghana.',src:'songs/s01.m4a',poster:'songs/s01-cover.jpg',lyrics:'songs/s01-lyrics.json'},
-  {t:'Demand Better',s:'Demand clean, healthy food: no more chemicals, bring our own foods back.',src:'songs/s02.m4a',poster:'songs/s02-cover.jpg',lyrics:'songs/s02-lyrics.json'}];
+  {t:'Demand Better',s:'Demand clean, healthy food: no more chemicals, bring our own foods back.',src:'songs/s02.m4a',poster:'songs/s02-cover.jpg',lyrics:'songs/s02-lyrics.json'},
+  {t:'Demand Better (Version 2)',s:'Same message, a fresh new rhythm.',src:'songs/s03.m4a',poster:'songs/s03-cover.jpg',lyrics:'songs/s03-lyrics.json'}];
 const lyrCache={};let LYR=[],lyrOn=-1;
 let CH=1,songCur=0;
 function renderSongs(){const L=document.getElementById('songList');L.textContent='';SONGS.forEach((x,i)=>{const b=document.createElement('button');b.type='button';b.className='song'+(CH===2&&i===songCur?' playing':'');
@@ -513,11 +514,15 @@ tv.addEventListener('timeupdate',syncLyrics);tv.addEventListener('play',syncLyri
 $s('stPlay').onclick=()=>{if(tv.paused||tv.muted){tv.muted=false;document.getElementById('sound').hidden=true;tv.play().catch(()=>{});}else tv.pause();};
 $s('stProg').onclick=e=>{const r=e.currentTarget.getBoundingClientRect();if(tv.duration)tv.currentTime=(e.clientX-r.left)/r.width*tv.duration;};
 $s('seNext').onclick=()=>playSong((songCur+1)%SONGS.length,true);
-$s('seOrder').onclick=()=>{track('song_cta_order',{song_name:SONGS[songCur].t});const d=document.querySelector('.desk');d.scrollIntoView({behavior:'smooth',block:'start'});setTimeout(()=>{const n=document.getElementById('nm');if(n)n.focus({preventScroll:true});},700);};
-$s('seAid').onclick=()=>track('song_cta_aid',{song_name:SONGS[songCur].t});
+$s('seOrder').onclick=()=>{clearEnd();$s('seNext').textContent=SONGS.length>1?'▶ Next song':'↻ Play again';track('song_cta_order',{song_name:SONGS[songCur].t});const d=document.querySelector('.desk');d.scrollIntoView({behavior:'smooth',block:'start'});setTimeout(()=>{const n=document.getElementById('nm');if(n)n.focus({preventScroll:true});},700);};
+$s('seAid').onclick=()=>{clearEnd();$s('seNext').textContent=SONGS.length>1?'▶ Next song':'↻ Play again';}; $s('seAid').addEventListener('click',()=>track('song_cta_aid',{song_name:SONGS[songCur].t}));
 async function loadLyrics(x){if(!x.lyrics){LYR=[];buildLyrics();return;}if(!lyrCache[x.lyrics]){try{lyrCache[x.lyrics]=await (await fetch(x.lyrics)).json();}catch(_){lyrCache[x.lyrics]=[];}}LYR=lyrCache[x.lyrics];buildLyrics();}
-function showEnd(){$s('stEnd').hidden=false;$s('seNext').textContent=SONGS.length>1?'▶ Next song':'↻ Play again';track('song_end_card',{song_name:SONGS[songCur].t});}
-function playSong(i,auto){songCur=i;$s('stEnd').hidden=true;autoRun=auto?0:autoRun;document.getElementById('still').hidden=true;++loadId;stopLive();const x=SONGS[i];
+let endTimer=null;
+function clearEnd(){if(endTimer){clearInterval(endTimer);endTimer=null;}}
+function showEnd(){clearEnd();$s('stEnd').hidden=false;track('song_end_card',{song_name:SONGS[songCur].t});
+  let n=10;const lab=()=>$s('seNext').textContent=(SONGS.length>1?'▶ Next song':'↻ Play again')+' in '+n+'s';lab();
+  endTimer=setInterval(()=>{n--;if(n<=0){clearEnd();playSong((songCur+1)%SONGS.length,true);}else lab();},1000);}
+function playSong(i,auto){songCur=i;clearEnd();$s('stEnd').hidden=true;autoRun=auto?0:autoRun;document.getElementById('still').hidden=true;++loadId;stopLive();const x=SONGS[i];
   document.getElementById('loading').hidden=true;tv.pause();tv.src=x.src;tv.poster='';
   $s('stCover').src=x.poster;$s('stBg').style.backgroundImage='url('+x.poster+')';loadLyrics(x);
   document.getElementById('nowLab').textContent='NOW PLAYING · SONG '+(i+1)+' OF '+SONGS.length;document.getElementById('nowTitle').textContent=x.t;document.getElementById('nowSub').textContent=x.s;
@@ -525,7 +530,7 @@ function playSong(i,auto){songCur=i;$s('stEnd').hidden=true;autoRun=auto?0:autoR
   if(auto||tv.muted)tv.play().catch(()=>{});track('song_play',{song_name:x.t});}
 function setChannel(n){if(n===CH)return;CH=n;const two=n===2;
   document.getElementById('ch1Btn').classList.toggle('on',!two);document.getElementById('ch2Btn').classList.toggle('on',two);
-  document.getElementById('bugTxt').textContent=two?'CH 2: HERITAGE SONGS':'CH 1: FONIO';document.querySelector('.screen').classList.toggle('tall',two);document.getElementById('stage').hidden=!two;if(!two)$s('stEnd').hidden=true;tv.controls=!two;document.getElementById('bugImg').hidden=two;document.getElementById('tkLab').textContent=two?'CH 2: SONGS':'CH 1: FONIO';
+  document.getElementById('bugTxt').textContent=two?'CH 2: HERITAGE SONGS':'CH 1: FONIO';document.querySelector('.screen').classList.toggle('tall',two);document.getElementById('stage').hidden=!two;if(!two){$s('stEnd').hidden=true;clearEnd();}tv.controls=!two;document.getElementById('bugImg').hidden=two;document.getElementById('tkLab').textContent=two?'CH 2: SONGS':'CH 1: FONIO';
   document.getElementById('gh').textContent=two?'Heritage food songs':'Season 1 programme guide';
   ['guideSub','passCta','list'].forEach(id=>{const e=document.getElementById(id);if(e)e.hidden=two;});document.getElementById('songList').hidden=!two;
   try{const u=new URL(location.href);if(two)u.searchParams.set('ch','2');else u.searchParams.delete('ch');history.replaceState(null,'',u.pathname+u.search+u.hash);}catch(_){}
