@@ -38,6 +38,7 @@ button{font:inherit;color:inherit}
 .ch img{width:28px;height:28px;border-radius:50%}
 .ch.on{border-color:var(--green);background:rgba(128,205,41,.1)}
 .ch{cursor:pointer;color:inherit;font-family:inherit}.ch2i{width:28px;height:28px;border-radius:50%;background:var(--lemon);display:flex;align-items:center;justify-content:center;font-size:15px}
+.alb-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px}.alb{font:inherit;color:inherit;text-align:left;background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:12px 14px;cursor:pointer}.alb b{display:block;font-family:var(--display);font-size:20px}.alb small{color:var(--muted);font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase}.alb.on{border-color:var(--lemon);background:linear-gradient(135deg,rgba(255,242,0,.12),rgba(128,205,41,.1))}.alb.on b{color:var(--lemon)}.alb-play{font:inherit;font-weight:900;letter-spacing:1px;background:var(--lemon);color:#141414;border:0;border-radius:12px;padding:12px;cursor:pointer}.song .num{width:18px;text-align:center;font-weight:900;color:var(--muted);flex:0 0 auto}
 .songs{display:flex;flex-direction:column;gap:8px}.song{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;color:inherit;background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:8px;cursor:pointer}.song img{width:64px;height:64px;object-fit:cover;border-radius:10px;flex:0 0 auto}.song b{display:block;font-family:var(--display);font-size:18px;line-height:1.1}.song small{color:var(--muted);font-weight:600}.song.playing{border-color:var(--lemon)}.song .tag{margin-left:auto;font-weight:900;font-size:11px;letter-spacing:2px;color:var(--lemon)}
 .stage{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;overflow:hidden;background:#141414}
 .st-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(30px) brightness(.45) saturate(1.2)}
@@ -489,8 +490,8 @@ async function play(n,auto,fromShuffle){
     if(auto||tv.muted){tv.play().catch(()=>{});}
   }catch(err){if(my===loadId){ld.querySelector('b').textContent='';ld.querySelector('span').textContent='This episode could not load. Check your connection and tap it again.';}}
 }
-document.getElementById('prev').onclick=()=>{if(CH===2){playSong((songCur-1+SONGS.length)%SONGS.length,true);return;}const i=avail.indexOf(cur);if(i>0)play(avail[i-1],true);};
-document.getElementById('next').onclick=()=>{if(CH===2){playSong((songCur+1)%SONGS.length,true);return;}const i=avail.indexOf(cur);if(i<avail.length-1)play(avail[i+1],true);};
+document.getElementById('prev').onclick=()=>{if(CH===2){playSong(stepSong(-1),true);return;}const i=avail.indexOf(cur);if(i>0)play(avail[i-1],true);};
+document.getElementById('next').onclick=()=>{if(CH===2){playSong(stepSong(1),true);return;}const i=avail.indexOf(cur);if(i<avail.length-1)play(avail[i+1],true);};
 // Shuffle: when an episode ends, a random released episode plays next (never the same one twice in a row).
 let bag=[];
 function nextShuffle(){if(avail.length<2)return avail[0];if(!bag.length)bag=avail.filter(n=>n!==cur).sort(()=>Math.random()-.5);let n=bag.shift();if(n===cur){n=bag.shift()||avail.find(x=>x!==cur);}return n;}
@@ -513,8 +514,19 @@ const SONGS=[{t:'The Truth About Our Food',s:'An ACRES anthem for clean, indigen
   {t:'Cleanse the Soil (Version 2)',s:'The ACRES Nano soil anthem, in a second rhythm.',src:'songs/s16.m4a',poster:'songs/s16-cover.jpg',lyrics:'songs/s16-lyrics.json'}];
 const lyrCache={};let LYR=[],lyrOn=-1;
 let CH=1,songCur=0;
-function renderSongs(){const L=document.getElementById('songList');L.textContent='';SONGS.forEach((x,i)=>{const b=document.createElement('button');b.type='button';b.className='song'+(CH===2&&i===songCur?' playing':'');
-  b.innerHTML='<img alt="" loading="lazy"><span><b></b><small></small></span><span class="tag"></span>';b.querySelector('img').src=x.poster;b.querySelector('b').textContent=x.t;b.querySelector('small').textContent=x.s;b.querySelector('.tag').textContent=CH===2&&i===songCur?'PLAYING':'▶ PLAY';
+// Two albums. Version 1 and Version 2 of the same song never share an album.
+const ALBUMS=[[0,1,3,4,7,9,10,14],[2,6,5,8,12,11,13,15]];
+const PLAYSEQ=ALBUMS[0].concat(ALBUMS[1]);let viewAlb=0;
+function albumOf(i){return ALBUMS[1].includes(i)?1:0;}
+function stepSong(d){const k=PLAYSEQ.indexOf(songCur);return PLAYSEQ[(k+d+PLAYSEQ.length)%PLAYSEQ.length];}
+function renderSongs(){const L=document.getElementById('songList');L.textContent='';
+  const tabs=document.createElement('div');tabs.className='alb-tabs';
+  ALBUMS.forEach((a,k)=>{const t=document.createElement('button');t.type='button';t.className='alb'+(k===viewAlb?' on':'');t.innerHTML='<b></b><small></small>';t.querySelector('b').textContent='Album '+(k+1);t.querySelector('small').textContent=a.length+' songs · free';
+    t.onclick=()=>{viewAlb=k;renderSongs();track('album_open',{album:k+1});};tabs.appendChild(t);});
+  L.appendChild(tabs);
+  const pa=document.createElement('button');pa.type='button';pa.className='alb-play';pa.textContent='▶ Play Album '+(viewAlb+1);pa.onclick=()=>{track('album_play',{album:viewAlb+1});playSong(ALBUMS[viewAlb][0],true);};L.appendChild(pa);
+  ALBUMS[viewAlb].forEach((i,n)=>{const x=SONGS[i];const b=document.createElement('button');b.type='button';b.className='song'+(CH===2&&i===songCur?' playing':'');
+  b.innerHTML='<span class="num"></span><img alt="" loading="lazy"><span><b></b><small></small></span><span class="tag"></span>';b.querySelector('.num').textContent=n+1;b.querySelector('img').src=x.poster;b.querySelector('b').textContent=x.t;b.querySelector('small').textContent=x.s;b.querySelector('.tag').textContent=CH===2&&i===songCur?'PLAYING':'▶ PLAY';
   b.onclick=()=>playSong(i,true);L.appendChild(b);});}
 const $s=id=>document.getElementById(id);
 function fmtT(t){t=Math.max(0,Math.floor(t||0));return Math.floor(t/60)+':'+String(t%60).padStart(2,'0');}
@@ -526,7 +538,7 @@ function syncLyrics(){if(CH!==2)return;const t=tv.currentTime+.4;let k=-1;for(le
 tv.addEventListener('timeupdate',syncLyrics);tv.addEventListener('play',syncLyrics);tv.addEventListener('pause',syncLyrics);
 $s('stPlay').onclick=()=>{if(tv.paused||tv.muted){tv.muted=false;document.getElementById('sound').hidden=true;tv.play().catch(()=>{});}else tv.pause();};
 $s('stProg').onclick=e=>{const r=e.currentTarget.getBoundingClientRect();if(tv.duration)tv.currentTime=(e.clientX-r.left)/r.width*tv.duration;};
-$s('seNext').onclick=()=>playSong((songCur+1)%SONGS.length,true);
+$s('seNext').onclick=()=>playSong(stepSong(1),true);
 $s('seOrder').onclick=()=>{clearEnd();$s('seNext').textContent=SONGS.length>1?'▶ Next song':'↻ Play again';track('song_cta_order',{song_name:SONGS[songCur].t});const d=document.querySelector('.desk');d.scrollIntoView({behavior:'smooth',block:'start'});setTimeout(()=>{const n=document.getElementById('nm');if(n)n.focus({preventScroll:true});},700);};
 $s('seAid').onclick=()=>{clearEnd();$s('seNext').textContent=SONGS.length>1?'▶ Next song':'↻ Play again';}; $s('seAid').addEventListener('click',()=>track('song_cta_aid',{song_name:SONGS[songCur].t}));
 async function loadLyrics(x){if(!x.lyrics){LYR=[];buildLyrics();return;}if(!lyrCache[x.lyrics]){try{lyrCache[x.lyrics]=await (await fetch(x.lyrics)).json();}catch(_){lyrCache[x.lyrics]=[];}}LYR=lyrCache[x.lyrics];buildLyrics();}
@@ -534,11 +546,11 @@ let endTimer=null;
 function clearEnd(){if(endTimer){clearInterval(endTimer);endTimer=null;}}
 function showEnd(){clearEnd();$s('stEnd').hidden=false;track('song_end_card',{song_name:SONGS[songCur].t});
   let n=10;const lab=()=>$s('seNext').textContent=(SONGS.length>1?'▶ Next song':'↻ Play again')+' in '+n+'s';lab();
-  endTimer=setInterval(()=>{n--;if(n<=0){clearEnd();playSong((songCur+1)%SONGS.length,true);}else lab();},1000);}
+  endTimer=setInterval(()=>{n--;if(n<=0){clearEnd();playSong(stepSong(1),true);}else lab();},1000);}
 function playSong(i,auto){songCur=i;clearEnd();$s('stEnd').hidden=true;autoRun=auto?0:autoRun;document.getElementById('still').hidden=true;++loadId;stopLive();const x=SONGS[i];
   document.getElementById('loading').hidden=true;tv.pause();tv.src=x.src;tv.poster='';
   $s('stCover').src=x.poster;$s('stBg').style.backgroundImage='url('+x.poster+')';loadLyrics(x);
-  document.getElementById('nowLab').textContent='NOW PLAYING · SONG '+(i+1)+' OF '+SONGS.length;document.getElementById('nowTitle').textContent=x.t;document.getElementById('nowSub').textContent=x.s;
+  const al=albumOf(i);viewAlb=al;document.getElementById('nowLab').textContent='NOW PLAYING · ALBUM '+(al+1)+' · SONG '+(ALBUMS[al].indexOf(i)+1)+' OF '+ALBUMS[al].length;document.getElementById('nowTitle').textContent=x.t;document.getElementById('nowSub').textContent=x.s;
   document.getElementById('prev').disabled=SONGS.length<2;document.getElementById('next').disabled=SONGS.length<2;renderSongs();
   if(auto||tv.muted)tv.play().catch(()=>{});track('song_play',{song_name:x.t});}
 function setChannel(n){if(n===CH)return;CH=n;const two=n===2;
@@ -552,7 +564,7 @@ function setChannel(n){if(n===CH)return;CH=n;const two=n===2;
 document.getElementById('ch1Btn').onclick=()=>setChannel(1);document.getElementById('ch2Btn').onclick=()=>setChannel(2);
 // After 3 videos in a row with no tap, pause and ask (saves viewers' data).
 let autoRun=0;
-function nextAuto(){if(CH===2)playSong((songCur+1)%SONGS.length,false);else play(nextShuffle(),true,true);}
+function nextAuto(){if(CH===2)playSong(stepSong(1),false);else play(nextShuffle(),true,true);}
 tv.addEventListener('ended',()=>{if(CH===2){track('song_complete',{song_name:SONGS[songCur].t});showEnd();return;}track('episode_complete',{episode_number:cur});autoRun++;
   if(autoRun>=3){document.getElementById('still').hidden=false;track('still_watching_prompt',{});return;}
   nextAuto();});
@@ -642,7 +654,8 @@ document.getElementById('storyBtn').addEventListener('click',()=>{tv.pause();con
   try{c=localStorage.getItem('acresPass');}catch(_){}
   if(c){try{const r=await tryCode(c);if(r){PASSKEYS=r.keys;passOn();}}catch(_){}}})();
 renderSongs();
-if(new URLSearchParams(location.search).get('ch')==='2'){CH=0;setChannel(2);CH=2;}else play(cur,false);
+if(new URLSearchParams(location.search).get('album')==='2'){songCur=ALBUMS[1][0];viewAlb=1;}
+if(new URLSearchParams(location.search).get('ch')==='2'||new URLSearchParams(location.search).get('album')){CH=0;setChannel(2);CH=2;}else play(cur,false);
 tv.muted=true;tv.play().catch(()=>{});
 const snd=document.getElementById('sound');
 function unmute(){tv.muted=false;snd.hidden=true;tv.play().catch(()=>{});}
