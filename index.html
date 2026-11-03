@@ -693,7 +693,7 @@ const HQ_NUM='12404080158';let AID=null;
   if(q){slug=q.trim().toLowerCase();try{if(slug==='hq')localStorage.removeItem('acresAid');else localStorage.setItem('acresAid',slug);}catch(_){}}
   else{try{slug=localStorage.getItem('acresAid');}catch(_){}}
   if(!slug||slug==='hq')return;
-  try{const list=await (await fetch('aids.json',{cache:'no-cache'})).json();const a=list[slug];
+  try{const list=await (await fetch('aids.json?t='+Date.now(),{cache:'no-store'})).json();const a=list[slug];
     if(!a||a.active===false)return;
     AID=Object.assign({slug},a);window.ACRES_AID=slug;
     const d=String(a.wa).replace(/\D/g,''),intl='+'+d;
