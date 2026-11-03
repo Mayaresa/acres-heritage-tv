@@ -511,11 +511,12 @@ const SONGS=[{t:'The Truth About Our Food',s:'An ACRES anthem for clean, indigen
   {t:'Kersting\'s Groundnut',s:'A little seed growing secretly underground: protein-rich, almost forgotten, coming back.',src:'songs/s13.m4a',poster:'songs/s13-cover.jpg',lyrics:'songs/s13-lyrics.json'},
   {t:'Frafra Potato, Rise Again',s:'Salanga, the small tuber of the north: sweet, nourishing, and ready to rise again.',src:'songs/s14.m4a',poster:'songs/s14-cover.jpg',lyrics:'songs/s14-lyrics.json'},
   {t:'Cleanse the Soil',s:'Cleanse before you heal: cut chemicals in half and let ACRES Nano restore the land.',src:'songs/s15.m4a',poster:'songs/s15-cover.jpg',lyrics:'songs/s15-lyrics.json'},
-  {t:'Cleanse the Soil (Version 2)',s:'The ACRES Nano soil anthem, in a second rhythm.',src:'songs/s16.m4a',poster:'songs/s16-cover.jpg',lyrics:'songs/s16-lyrics.json'}];
+  {t:'Cleanse the Soil (Version 2)',s:'The ACRES Nano soil anthem, in a second rhythm.',src:'songs/s16.m4a',poster:'songs/s16-cover.jpg',lyrics:'songs/s16-lyrics.json'},
+  {t:'Madam Vice President',s:'A plea from the farmers, the women and the children: rise for the soil, restore the land.',src:'songs/s17.m4a',poster:'songs/s17-cover.jpg',lyrics:'songs/s17-lyrics.json'}];
 const lyrCache={};let LYR=[],lyrOn=-1;
 let CH=1,songCur=0;
 // Two albums. Version 1 and Version 2 of the same song never share an album.
-const ALBUMS=[[0,1,3,4,7,9,10,14],[2,6,5,8,12,11,13,15]];
+const ALBUMS=[[0,1,3,4,7,9,10,14,16],[2,6,5,8,12,11,13,15]];
 const PLAYSEQ=ALBUMS[0].concat(ALBUMS[1]);let viewAlb=0;
 function albumOf(i){return ALBUMS[1].includes(i)?1:0;}
 function stepSong(d){const k=PLAYSEQ.indexOf(songCur);return PLAYSEQ[(k+d+PLAYSEQ.length)%PLAYSEQ.length];}
