@@ -42,5 +42,15 @@
     "wa": "233244244823",
     "nationwide": true,
     "active": true
+  },
+  "denson": {
+    "name": "Dr. Mrs. Dorothy Dede Denson",
+    "role": "AID",
+    "label": "Your FONIO Distributor",
+    "areaText": "Central Region · Nationwide",
+    "zone": "Nationwide",
+    "wa": "233553489621",
+    "nationwide": true,
+    "active": true
   }
 }

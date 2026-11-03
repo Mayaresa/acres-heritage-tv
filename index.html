@@ -708,7 +708,7 @@ const HQ_NUM='12404080158';let AID=null;
     document.getElementById('aidInit').textContent=(a.name||'A').trim().charAt(0).toUpperCase();
     document.getElementById('aidCard').hidden=false;
     const n='+'+String(a.wa).replace(/\D/g,'');document.getElementById('num').textContent=n.replace(/^\+233(\d{2})(\d{3})(\d{4})$/,'+233 $1 $2 $3').replace(/^\+1(\d{3})(\d{3})(\d{4})$/,'+1 $1 $2 $3');
-    document.querySelector('.wa small').textContent='OR MESSAGE '+a.name.split(' ')[0].toUpperCase()+' ON WHATSAPP';
+    {const w=a.name.split(/\s+/),tt=/^(dr|mrs|mr|ms|rev|prof|pastor|apostle|bishop)\.?$/i;const short=tt.test(w[0])?w[0]+' '+w[w.length-1]:w[0];document.querySelector('.wa small').textContent='OR MESSAGE '+short.toUpperCase()+' ON WHATSAPP';}
     if(a.nationwide){document.getElementById('zone').value='Other region (outside Greater Accra)';
       const dv=document.querySelector('input[name=how][value=delivery]');if(dv){dv.checked=true;dv.dispatchEvent(new Event('change',{bubbles:true}));}
       const al=document.querySelector('#addrWrap .fl');if(al)al.textContent='Your town, region and landmark';document.getElementById('addr').placeholder='e.g. Kumasi, Ashanti Region, near Adum';}
