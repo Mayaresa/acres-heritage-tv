@@ -508,7 +508,8 @@ const SONGS=[{t:'The Truth About Our Food',s:'An ACRES anthem for clean, indigen
   {t:'African Rice',s:'Oryza glaberrima: Africa\'s own red rice, 3,000 years strong. Let it rise again!',src:'songs/s11.m4a',poster:'songs/s11-cover.jpg',lyrics:'songs/s11-lyrics.json'},
   {t:'African Rice (Version 2)',s:'Africa\'s own red rice anthem, in a second rhythm.',src:'songs/s12.m4a',poster:'songs/s12-cover.jpg',lyrics:'songs/s12-lyrics.json'},
   {t:'Kersting\'s Groundnut',s:'A little seed growing secretly underground: protein-rich, almost forgotten, coming back.',src:'songs/s13.m4a',poster:'songs/s13-cover.jpg',lyrics:'songs/s13-lyrics.json'},
-  {t:'Frafra Potato, Rise Again',s:'Salanga, the small tuber of the north: sweet, nourishing, and ready to rise again.',src:'songs/s14.m4a',poster:'songs/s14-cover.jpg',lyrics:'songs/s14-lyrics.json'}];
+  {t:'Frafra Potato, Rise Again',s:'Salanga, the small tuber of the north: sweet, nourishing, and ready to rise again.',src:'songs/s14.m4a',poster:'songs/s14-cover.jpg',lyrics:'songs/s14-lyrics.json'},
+  {t:'Cleanse the Soil',s:'Cleanse before you heal: cut chemicals in half and let ACRES Nano restore the land.',src:'songs/s15.m4a',poster:'songs/s15-cover.jpg',lyrics:'songs/s15-lyrics.json'}];
 const lyrCache={};let LYR=[],lyrOn=-1;
 let CH=1,songCur=0;
 function renderSongs(){const L=document.getElementById('songList');L.textContent='';SONGS.forEach((x,i)=>{const b=document.createElement('button');b.type='button';b.className='song'+(CH===2&&i===songCur?' playing':'');
