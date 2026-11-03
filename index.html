@@ -101,6 +101,7 @@ button{font:inherit;color:inherit}
 h2{font-family:var(--display);font-weight:800;font-size:24px;margin:0 0 4px}
 .sub{color:var(--muted);margin:0 0 14px;font-size:14px}
 .guide{background:var(--panel);border-radius:20px;padding:18px}
+.albums{background:var(--panel);border-radius:20px;padding:18px;margin-bottom:22px}.albums h2{margin:0 0 12px;font-size:22px}
 .list{display:flex;flex-direction:column;gap:10px}
 .grp{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;width:100%;text-align:left;background:var(--panel-2);border:2px solid var(--line);border-radius:14px;padding:14px 16px;cursor:pointer;min-height:56px}
 .grp:hover,.grp.open{border-color:var(--green)}
@@ -263,10 +264,14 @@ footer{color:var(--muted);font-size:13px;text-align:center}
     <div class="tk-view"><div class="tk-run" id="tk"></div></div>
   </div>
 
+  <section class="albums" id="albSec" aria-labelledby="ah" hidden>
+    <h2 id="ah">🎵 Heritage Songs</h2>
+    <div class="songs" id="songList"></div>
+  </section>
+
   <div class="grid">
     <section class="guide" aria-labelledby="gh">
       <h2 id="gh">Season 1 programme guide</h2>
-      <div class="songs" id="songList" hidden></div>
       <p class="sub" id="guideSub">A new episode is free every Friday. Season Pass holders can watch all 31 now.</p>
       <button class="passcta" id="passCta" type="button"><span><b>🔑 Full Season Pass</b><small>All 31 episodes · free with your first 5kg fonio order</small></span><em>Enter code ›</em></button>
       <div class="list" id="list"></div>
@@ -566,7 +571,7 @@ function playSong(i,auto){songCur=i;clearEnd();$s('stEnd').hidden=true;autoRun=a
 function setChannel(n){if(n===CH)return;CH=n;const two=n===2;
   document.getElementById('ch1Btn').classList.toggle('on',!two);document.getElementById('ch2Btn').classList.toggle('on',two);
   document.getElementById('bugTxt').textContent=two?'CH 2: HERITAGE SONGS':'CH 1: FONIO';document.querySelector('.screen').classList.toggle('tall',two);document.getElementById('stage').hidden=!two;if(!two){$s('stEnd').hidden=true;clearEnd();}tv.controls=!two;document.getElementById('bugImg').hidden=two;document.getElementById('tkLab').textContent=two?'CH 2: SONGS':'CH 1: FONIO';
-  document.getElementById('gh').textContent=two?'Heritage food songs':'Season 1 programme guide';
+  document.getElementById('gh').textContent='Season 1 programme guide';document.getElementById('gh').hidden=two;document.getElementById('albSec').hidden=!two;
   ['guideSub','passCta','list'].forEach(id=>{const e=document.getElementById(id);if(e)e.hidden=two;});document.getElementById('songList').hidden=!two;
   try{const u=new URL(location.href);if(two)u.searchParams.set('ch','2');else u.searchParams.delete('ch');history.replaceState(null,'',u.pathname+u.search+u.hash);}catch(_){}
   track('channel_switch',{channel:n});
