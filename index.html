@@ -505,7 +505,8 @@ const SONGS=[{t:'The Truth About Our Food',s:'An ACRES anthem for clean, indigen
   {t:'Bam-ba-ra!',s:'Bambara beans: protein-packed, grown right here, and back in the pot.',src:'songs/s08.m4a',poster:'songs/s08-cover.jpg',lyrics:'songs/s08-lyrics.json'},
   {t:'Bam-ba-ra! (Version 2)',s:'The Bambara bean anthem, in a second rhythm.',src:'songs/s09.m4a',poster:'songs/s09-cover.jpg',lyrics:'songs/s09-lyrics.json'},
   {t:'Fonio Friday',s:'Jollof, waakye, koko, all made with fonio. Make every Friday a Fonio Friday!',src:'songs/s10.m4a',poster:'songs/s10-cover.jpg',lyrics:'songs/s10-lyrics.json'},
-  {t:'African Rice',s:'Oryza glaberrima: Africa\'s own red rice, 3,000 years strong. Let it rise again!',src:'songs/s11.m4a',poster:'songs/s11-cover.jpg',lyrics:'songs/s11-lyrics.json'}];
+  {t:'African Rice',s:'Oryza glaberrima: Africa\'s own red rice, 3,000 years strong. Let it rise again!',src:'songs/s11.m4a',poster:'songs/s11-cover.jpg',lyrics:'songs/s11-lyrics.json'},
+  {t:'African Rice (Version 2)',s:'Africa\'s own red rice anthem, in a second rhythm.',src:'songs/s12.m4a',poster:'songs/s12-cover.jpg',lyrics:'songs/s12-lyrics.json'}];
 const lyrCache={};let LYR=[],lyrOn=-1;
 let CH=1,songCur=0;
 function renderSongs(){const L=document.getElementById('songList');L.textContent='';SONGS.forEach((x,i)=>{const b=document.createElement('button');b.type='button';b.className='song'+(CH===2&&i===songCur?' playing':'');
