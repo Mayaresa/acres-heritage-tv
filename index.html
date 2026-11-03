@@ -500,7 +500,8 @@ const SONGS=[{t:'The Truth About Our Food',s:'An ACRES anthem for clean, indigen
   {t:'Demand Better (Version 2)',s:'Same message, a fresh new rhythm.',src:'songs/s03.m4a',poster:'songs/s03-cover.jpg',lyrics:'songs/s03-lyrics.json'},
   {t:'Eat Fonio, Ghana',s:'The story of fonio: ancient, fast-growing, nourishing, and back on our tables.',src:'songs/s04.m4a',poster:'songs/s04-cover.jpg',lyrics:'songs/s04-lyrics.json'},
   {t:'The Stone the Builders Threw',s:'A new take on our anthem: what was thrown away is now the cornerstone.',src:'songs/s05.m4a',poster:'songs/s05-cover.jpg',lyrics:'songs/s05-lyrics.json'},
-  {t:'The Stone the Builders Threw (Version 2)',s:'The cornerstone anthem, in a second rhythm.',src:'songs/s06.m4a',poster:'songs/s06-cover.jpg',lyrics:'songs/s06-lyrics.json'}];
+  {t:'The Stone the Builders Threw (Version 2)',s:'The cornerstone anthem, in a second rhythm.',src:'songs/s06.m4a',poster:'songs/s06-cover.jpg',lyrics:'songs/s06-lyrics.json'},
+  {t:'Eat Fonio, Ghana (Version 2)',s:'The story of fonio, in a second rhythm.',src:'songs/s07.m4a',poster:'songs/s07-cover.jpg',lyrics:'songs/s07-lyrics.json'}];
 const lyrCache={};let LYR=[],lyrOn=-1;
 let CH=1,songCur=0;
 function renderSongs(){const L=document.getElementById('songList');L.textContent='';SONGS.forEach((x,i)=>{const b=document.createElement('button');b.type='button';b.className='song'+(CH===2&&i===songCur?' playing':'');
