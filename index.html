@@ -221,6 +221,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
 .yt-bar button{width:40px;height:40px}
 .yt-logo{position:absolute;top:10px;left:10px;z-index:3;pointer-events:none;line-height:0}.yt-logo img{width:clamp(40px,10.2vw,58px);height:auto;border-radius:50%;box-shadow:0 0 0 2px #c9a24a,0 3px 8px rgba(0,0,0,.5)}
 .yt-credit{position:absolute;top:12px;right:10px;z-index:3;background:rgba(20,20,20,.7);color:#e6e9e1;border-radius:999px;padding:3px 9px;font-size:10px;font-weight:800;letter-spacing:.5px;pointer-events:none}
+.ytbox.ad .yt-shield,.ytbox.ad .yt-pause,.ytbox.ad .yt-bar,.ytbox.ad .yt-logo{display:none}
 .sd-end{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:5% 7%;background:rgba(20,20,20,.94);text-align:left;overflow:auto}
 .sd-end h3{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(20px,5vw,30px);line-height:1.05;color:var(--lemon)}.sd-end p{margin:0;color:#e6e9e1;font-size:14px;line-height:1.35}
 .sd-row{display:flex;gap:8px;flex-wrap:wrap}.sd-row>*{flex:1 1 160px;min-height:42px;padding:10px;font-size:14px}
@@ -265,7 +266,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
       </div>
       <div class="ytbox" id="ytBox" hidden><div id="ytP"></div>
         <div class="yt-shield" id="ytShield"></div>
-        <div class="yt-logo"><img src="media/acres-badge.png" alt="ACRES: Our food. Our future"></div><div class="yt-credit">Video: Jibril Enterprise</div>
+        <div class="yt-logo"><img src="media/acres-badge.png" alt="ACRES: Our food. Our future"></div>
         <div class="yt-pause" id="ytPause"><span class="yp-btn">▶</span><b id="ypTitle"></b><small>CH 3 · HERITAGE SEEDS</small></div>
         <div class="st-bar yt-bar"><button type="button" id="ytPlay" aria-label="Play">▶</button><div class="st-prog" id="ytProg"><i id="ytFill"></i></div><span id="ytTime">0:00</span></div>
         <div class="sd-end" id="sdEnd" hidden>
@@ -636,6 +637,10 @@ function ytToggle(){if(!ytPlayer||!ytPlayer.playVideo)return;const st=ytState();
 $s('ytShield').onclick=ytToggle;$s('ytPause').onclick=ytToggle;$s('ytPlay').onclick=ytToggle;
 $s('ytProg').onclick=e=>{if(!ytPlayer||!ytPlayer.getDuration)return;const r=e.currentTarget.getBoundingClientRect();ytPlayer.seekTo((e.clientX-r.left)/r.width*ytPlayer.getDuration(),true);};
 setInterval(()=>{if(CH!==3||!ytPlayer||!ytPlayer.getCurrentTime)return;const t=ytPlayer.getCurrentTime()||0,d=ytPlayer.getDuration()||0;$s('ytFill').style.width=(d?t/d*100:0)+'%';$s('ytTime').textContent=fmtT(t)+' / '+fmtT(d);},500);
+// When YouTube plays a commercial, step our cover aside so viewers can see and tap "Skip".
+let ytLow=0;setInterval(()=>{if(CH!==3||!ytPlayer)return;const st=ytState();
+  if(st===-1||st===5){ytLow+=400;}else ytLow=0;
+  $s('ytBox').classList.toggle('ad',ytLow>=1600);},400);
 function ytStop(){sdClear();if(ytPlayer&&ytPlayer.pauseVideo)try{ytPlayer.pauseVideo();}catch(_){}}
 function renderSeeds(){const L=document.getElementById('seedList');L.textContent='';const live=CH===3?seedAt(seedCur).k:-1;
   if(openSeed<0){const g=document.createElement('div');g.className='alb-grid';
