@@ -266,10 +266,10 @@ footer{color:var(--muted);font-size:13px;text-align:center}
         <div class="yt-pause" id="ytPause"><span class="yp-btn">▶</span><b id="ypTitle"></b><small>CH 3 · HERITAGE SEEDS</small></div>
         <div class="st-bar yt-bar"><button type="button" id="ytPlay" aria-label="Play">▶</button><div class="st-prog" id="ytProg"><i id="ytFill"></i></div><span id="ytTime">0:00</span></div>
         <div class="sd-end" id="sdEnd" hidden>
-          <div class="se-k">🌱 GROW IT YOURSELF</div>
-          <h3>Plant the heritage at home.</h3>
-          <p><b>The ACRES Heritage Garden Pack is coming soon:</b> heritage seeds packed with ACRES Nano Organic Fertilizer, so you can grow, eat, save and share.</p>
-          <div class="sd-row"><a class="se-go" id="sdReserve" href="#" target="_blank" rel="noopener">🌱 Reserve a Garden Pack</a><a class="se-aid" id="sdClub" href="https://chat.whatsapp.com/BsuWk5uMUHa32gczMyat8a" target="_blank" rel="noopener">Join the Heritage Club</a></div>
+          <div class="se-k">🌱 HERITAGE SEEDS</div>
+          <h3>Join the ACRES Heritage Club</h3>
+          <p>Learn more about our indigenous seeds and foods with the club on WhatsApp.</p>
+          <div class="sd-row"><a class="se-aid" id="sdClub" href="https://chat.whatsapp.com/BsuWk5uMUHa32gczMyat8a" target="_blank" rel="noopener">Join the Heritage Club</a></div>
           <button type="button" class="se-next" id="sdNext">▶ Next video</button>
         </div>
       </div>
@@ -616,8 +616,7 @@ function seedAt(q){const [k,j]=SEEDSEQ[q];return {k,j,v:SEEDS[k].v[j]};}
 function loadYT(){if(ytReady)return ytReady;ytReady=new Promise(res=>{window.onYouTubeIframeAPIReady=res;const t=document.createElement('script');t.src='https://www.youtube.com/iframe_api';document.head.appendChild(t);});return ytReady;}
 function sdClear(){if(sdTimer){clearInterval(sdTimer);sdTimer=null;}}
 function sdShowEnd(){sdClear();$s('sdEnd').hidden=false;const x=seedAt(seedCur).v;
-  $s('sdReserve').href='https://api.whatsapp.com/send?phone='+orderNum()+'&text='+encodeURIComponent('SEEDS - Please let me know when the ACRES Heritage Garden Pack is ready. I just watched: '+x[1]);
-  track('seed_end_card',{video:x[1]});let n=12;const lab=()=>$s('sdNext').textContent='▶ Next video in '+n+'s';lab();
+  track('seed_end_card',{video:x[1]});let n=5;const lab=()=>$s('sdNext').textContent='▶ Next video in '+n+'s';lab();
   sdTimer=setInterval(()=>{n--;if(n<=0){sdClear();playSeed((seedCur+1)%SEEDSEQ.length,true);}else lab();},1000);}
 async function playSeed(q,auto){seedCur=q;sdClear();$s('sdEnd').hidden=true;const {k,j,v}=seedAt(q);$s('ytPause').style.backgroundImage='url(https://i.ytimg.com/vi/'+v[0]+'/hqdefault.jpg)';$s('ypTitle').textContent=v[1];ytPaint(-1);
   document.getElementById('nowLab').textContent='NOW SHOWING · '+SEEDS[k].n.toUpperCase()+' · '+(j+1)+' OF '+SEEDS[k].v.length;
@@ -653,7 +652,6 @@ function renderSeeds(){const L=document.getElementById('seedList');L.textContent
     b.innerHTML='<span class="num"></span><img alt="" loading="lazy"><span class="st"><b></b><small></small></span><span class="tag"></span>';b.querySelector('.num').textContent=j+1;b.querySelector('img').src=THUMB(v[0]);b.querySelector('b').textContent=v[1];b.querySelector('small').textContent=v[2];b.querySelector('.tag').textContent=on?'▶':'▷';
     b.onclick=()=>{playSeed(q,true);document.querySelector('.set').scrollIntoView({behavior:'smooth',block:'start'});};L.appendChild(b);});}
 $s('sdNext').onclick=()=>playSeed((seedCur+1)%SEEDSEQ.length,true);
-$s('sdReserve').addEventListener('click',()=>{sdClear();$s('sdNext').textContent='▶ Next video';track('seed_cta_reserve',{});});
 $s('sdClub').addEventListener('click',()=>{sdClear();$s('sdNext').textContent='▶ Next video';track('seed_cta_club',{});});
 function setChannel(n){if(n===CH)return;CH=n;const one=n===1,two=n===2,three=n===3;
   ['ch1Btn','ch2Btn','ch3Btn'].forEach((id,k)=>document.getElementById(id).classList.toggle('on',n===k+1));
