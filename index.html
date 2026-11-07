@@ -96,7 +96,8 @@ button{font:inherit;color:inherit}
 @media (prefers-reduced-motion:reduce){.tk-run{animation:none;flex-wrap:wrap;white-space:normal;gap:8px 24px;padding:10px 14px}}
 
 /* lower grid */
-.grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:22px;align-items:start}
+.grid{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;align-items:start;max-width:760px;margin:0 auto}
+.guide{margin-top:22px}
 @media (max-width:760px){.grid{grid-template-columns:minmax(0,1fr)}.desk{order:-1;position:static}}
 @media (max-width:520px){.ep{grid-template-columns:76px minmax(0,1fr)}.ep img{width:76px;height:43px}.ep .tag{grid-column:2;justify-self:start}.ep .t{font-size:16px}}
 h2{font-family:var(--display);font-weight:800;font-size:24px;margin:0 0 4px}
@@ -326,6 +327,33 @@ footer{color:var(--muted);font-size:13px;text-align:center}
     <div class="songs" id="seedList"></div>
   </section>
 
+  <section class="guide" aria-labelledby="gh">
+    <h2 id="gh">Season 1 programme guide</h2>
+    <p class="sub" id="guideSub">A new episode is free every Friday. Season Pass holders can watch all 31 now.</p>
+    <button class="passcta" id="passCta" type="button"><span><b>🔑 Full Season Pass</b><small>All 31 episodes · free with your first 5kg fonio order</small></span><em>Enter code ›</em></button>
+    <div class="list" id="list"></div>
+    <div class="learn-h">LEARN ABOUT FONIO</div>
+    <details class="whatf" id="whatF"><summary><img src="media/fonio-grain.jpg" alt="Raw fonio grain" width="56" height="56"><span><b>What is fonio?</b><small>Africa's ancient grain · tap to learn</small></span><i aria-hidden="true">＋</i></summary>
+      <div class="wf-body">
+        <div class="wf-vid"><button type="button" id="storyBtn" aria-label="Play The Amaati Story video"><img src="https://i.ytimg.com/vi/vL1Gub9QdJk/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'"><span class="wf-play">▶</span><span class="wf-cap"><b>Where our fonio comes from</b><small>The Amaati Story · DIM Fonio</small></span></button></div>
+        <p class="wf-src"><a href="https://www.youtube.com/watch?v=vL1Gub9QdJk" target="_blank" rel="noopener">Watch on YouTube</a></p>
+        <img class="wf-hero" src="media/fonio-pour.jpg" alt="Fonio grain being poured" loading="lazy">
+        <div class="wf-stats"><div><b>~5 min</b><span>to cook</span></div><div><b>6–8 wks</b><span>to harvest</span></div><div><b>1000s</b><span>of years in West Africa</span></div></div>
+        <ul><li><b>Whole grain, naturally gluten-free</b></li><li><b>Contains iron, zinc, magnesium</b> and phosphorus, plus fibre and vitamin B1</li><li><b>Contains methionine and cystine</b>, amino acids many grains are low in</li><li><b>A hardy crop</b> that grows with little water</li><li><b>Cook it like rice, couscous or quinoa</b>: jollof, waakye, porridge, banku and more</li></ul>
+        <p class="wf-note">General information, not medical advice.</p></div></details>
+    <details class="whatf hist" id="histF"><summary><span class="hico" aria-hidden="true">📜</span><span><b>Fonio through history</b><small>From ancient West Africa to your table · tap to read</small></span><i aria-hidden="true">＋</i></summary>
+      <div class="wf-body"><ol class="tl">
+        <li><em>Thousands of years ago</em><b>Born in West Africa</b><span>West Africans tamed fonio from wild grasses. Experts call it probably Africa's oldest cereal.</span></li>
+        <li><em>Two fonios</em><b>White and black</b><span>White fonio and black fonio were domesticated separately. Black fonio is still grown in northern Togo and Nigeria.</span></li>
+        <li><em>About 2,000 years ago</em><b>Farming spreads</b><span>Fonio farming expanded at the start of the Common Era. The oldest fonio remains found so far come from Nigeria.</span></li>
+        <li><em>Through the centuries</em><b>A food of honour</b><span>Served to chiefs and at special occasions, and part of some bride prices. The Dogon of Mali tell that the whole universe came from a fonio seed.</span></li>
+        <li><em>From the 1500s</em><b>A long decline</b><span>Maize and rice arrived, and the slave trade and colonial rule disrupted farming. Fonio faded from many tables. Europeans even called it "hungry rice", a name that misunderstood a grain people grew because they loved it.</span></li>
+        <li><em>Today</em><b>Still feeding millions</b><span>Over 920,000 hectares are grown in West Africa each year, about 700,000 tonnes. Guinea grows the most, followed by Nigeria and Mali.</span></li>
+        <li><em>Ghana now</em><b>The revival</b><span>In Northern Ghana, Amaati works with thousands of farmers, most of them women, to bring fonio back. That is the DIM Fonio in your bag.</span></li>
+      </ol>
+      <p class="wf-note">Sources: CIRAD (2025 study in Nature Communications); US National Academies, Lost Crops of Africa (1996); CIRAD fonio production data (2019); Amaati.</p></div></details>
+  </section>
+
   <section class="shop" aria-label="ACRES Heritage Market">
     <div class="awning"></div>
     <div class="shop-board">
@@ -342,32 +370,6 @@ footer{color:var(--muted);font-size:13px;text-align:center}
   </section>
 
   <div class="grid">
-    <section class="guide" aria-labelledby="gh">
-      <h2 id="gh">Season 1 programme guide</h2>
-      <p class="sub" id="guideSub">A new episode is free every Friday. Season Pass holders can watch all 31 now.</p>
-      <button class="passcta" id="passCta" type="button"><span><b>🔑 Full Season Pass</b><small>All 31 episodes · free with your first 5kg fonio order</small></span><em>Enter code ›</em></button>
-      <div class="list" id="list"></div>
-      <div class="learn-h">LEARN ABOUT FONIO</div>
-      <details class="whatf" id="whatF"><summary><img src="media/fonio-grain.jpg" alt="Raw fonio grain" width="56" height="56"><span><b>What is fonio?</b><small>Africa's ancient grain · tap to learn</small></span><i aria-hidden="true">＋</i></summary>
-        <div class="wf-body">
-          <div class="wf-vid"><button type="button" id="storyBtn" aria-label="Play The Amaati Story video"><img src="https://i.ytimg.com/vi/vL1Gub9QdJk/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'"><span class="wf-play">▶</span><span class="wf-cap"><b>Where our fonio comes from</b><small>The Amaati Story · DIM Fonio</small></span></button></div>
-          <p class="wf-src"><a href="https://www.youtube.com/watch?v=vL1Gub9QdJk" target="_blank" rel="noopener">Watch on YouTube</a></p>
-          <img class="wf-hero" src="media/fonio-pour.jpg" alt="Fonio grain being poured" loading="lazy">
-          <div class="wf-stats"><div><b>~5 min</b><span>to cook</span></div><div><b>6–8 wks</b><span>to harvest</span></div><div><b>1000s</b><span>of years in West Africa</span></div></div>
-          <ul><li><b>Whole grain, naturally gluten-free</b></li><li><b>Contains iron, zinc, magnesium</b> and phosphorus, plus fibre and vitamin B1</li><li><b>Contains methionine and cystine</b>, amino acids many grains are low in</li><li><b>A hardy crop</b> that grows with little water</li><li><b>Cook it like rice, couscous or quinoa</b>: jollof, waakye, porridge, banku and more</li></ul>
-          <p class="wf-note">General information, not medical advice.</p></div></details>
-      <details class="whatf hist" id="histF"><summary><span class="hico" aria-hidden="true">📜</span><span><b>Fonio through history</b><small>From ancient West Africa to your table · tap to read</small></span><i aria-hidden="true">＋</i></summary>
-        <div class="wf-body"><ol class="tl">
-          <li><em>Thousands of years ago</em><b>Born in West Africa</b><span>West Africans tamed fonio from wild grasses. Experts call it probably Africa's oldest cereal.</span></li>
-          <li><em>Two fonios</em><b>White and black</b><span>White fonio and black fonio were domesticated separately. Black fonio is still grown in northern Togo and Nigeria.</span></li>
-          <li><em>About 2,000 years ago</em><b>Farming spreads</b><span>Fonio farming expanded at the start of the Common Era. The oldest fonio remains found so far come from Nigeria.</span></li>
-          <li><em>Through the centuries</em><b>A food of honour</b><span>Served to chiefs and at special occasions, and part of some bride prices. The Dogon of Mali tell that the whole universe came from a fonio seed.</span></li>
-          <li><em>From the 1500s</em><b>A long decline</b><span>Maize and rice arrived, and the slave trade and colonial rule disrupted farming. Fonio faded from many tables. Europeans even called it "hungry rice", a name that misunderstood a grain people grew because they loved it.</span></li>
-          <li><em>Today</em><b>Still feeding millions</b><span>Over 920,000 hectares are grown in West Africa each year, about 700,000 tonnes. Guinea grows the most, followed by Nigeria and Mali.</span></li>
-          <li><em>Ghana now</em><b>The revival</b><span>In Northern Ghana, Amaati works with thousands of farmers, most of them women, to bring fonio back. That is the DIM Fonio in your bag.</span></li>
-        </ol>
-        <p class="wf-note">Sources: CIRAD (2025 study in Nature Communications); US National Academies, Lost Crops of Africa (1996); CIRAD fonio production data (2019); Amaati.</p></div></details>
-    </section>
     <aside class="desk" aria-label="Order fonio">
       <div class="k">COOK IT AT HOME</div>
       <h3>5kg DIM Fonio</h3>
