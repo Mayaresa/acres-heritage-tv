@@ -211,6 +211,19 @@ h2{font-family:var(--display);font-weight:800;font-size:24px;margin:0 0 4px}
 .mbox .send{width:100%;background:var(--lemon);color:#272727}
 .mnote{font-size:13px;margin-top:12px!important}
 footer{color:var(--muted);font-size:13px;text-align:center}
+.ytbox{position:absolute;inset:0;z-index:2;background:#000}.ytbox #ytP,.ytbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.yt-shield{position:absolute;inset:0;z-index:1;cursor:pointer}
+.yt-pause{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:#000 center/cover no-repeat;cursor:pointer;text-align:center;padding:0 8% 50px}
+.yt-pause::before{content:'';position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.75))}
+.yt-pause>*{position:relative}.yt-pause .yp-btn{width:72px;height:72px;border-radius:50%;background:var(--lemon);color:#272727;font-size:30px;font-weight:900;display:flex;align-items:center;justify-content:center;padding-left:5px;box-shadow:0 6px 24px rgba(0,0,0,.5)}
+.yt-pause b{font-family:var(--display);font-weight:800;font-size:clamp(16px,4vw,24px);color:#fff;text-shadow:0 2px 8px #000}.yt-pause small{color:var(--lemon);font-weight:800;font-size:12px;letter-spacing:2px}
+.yt-bar{position:absolute;left:0;right:0;bottom:0;z-index:2;background:linear-gradient(transparent,rgba(0,0,0,.8));padding:22px 14px 10px}
+.yt-bar button{width:40px;height:40px}
+.sd-end{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:5% 7%;background:rgba(20,20,20,.94);text-align:left;overflow:auto}
+.sd-end h3{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(20px,5vw,30px);line-height:1.05;color:var(--lemon)}.sd-end p{margin:0;color:#e6e9e1;font-size:14px;line-height:1.35}
+.sd-row{display:flex;gap:8px;flex-wrap:wrap}.sd-row>*{flex:1 1 160px;min-height:42px;padding:10px;font-size:14px}
+.seeds .sd-credit{margin:-4px 0 12px;color:var(--muted);font-size:13px}.seeds .sd-credit a{color:var(--green);font-weight:800}
+.alb-grid.five .folder .f-txt b{font-size:15px}
 </style>
 
 <div class="wrap">
@@ -219,6 +232,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
     <nav class="channels" aria-label="Channels">
       <button class="ch on" id="ch1Btn" type="button"><img src="media/fonio-tv-icon.jpg" alt=""><span><span class="n">CH 1:</span> FONIO</span></button>
       <button class="ch" id="ch2Btn" type="button"><img src="songs/s01-cover.jpg" alt=""><span><span class="n">CH 2:</span> HERITAGE SONGS</span></button>
+      <button class="ch" id="ch3Btn" type="button"><img src="https://i.ytimg.com/vi/1DGY9IpzS5Y/default.jpg" alt=""><span><span class="n">CH 3:</span> HERITAGE SEEDS</span></button>
       <button class="ch pass" id="passBtn" type="button">🔑 <span id="passLabel">Season Pass</span></button>
     </nav>
   </header>
@@ -247,6 +261,18 @@ footer{color:var(--muted);font-size:13px;text-align:center}
         </div>
         <div class="st-bar"><button type="button" id="stPlay" aria-label="Play">▶</button><div class="st-prog" id="stProg"><i id="stFill"></i></div><span id="stTime">0:00</span></div>
       </div>
+      <div class="ytbox" id="ytBox" hidden><div id="ytP"></div>
+        <div class="yt-shield" id="ytShield"></div>
+        <div class="yt-pause" id="ytPause"><span class="yp-btn">▶</span><b id="ypTitle"></b><small>CH 3 · HERITAGE SEEDS</small></div>
+        <div class="st-bar yt-bar"><button type="button" id="ytPlay" aria-label="Play">▶</button><div class="st-prog" id="ytProg"><i id="ytFill"></i></div><span id="ytTime">0:00</span></div>
+        <div class="sd-end" id="sdEnd" hidden>
+          <div class="se-k">🌱 GROW IT YOURSELF</div>
+          <h3>Plant the heritage at home.</h3>
+          <p><b>The ACRES Heritage Garden Pack is coming soon:</b> heritage seeds packed with ACRES Nano Organic Fertilizer, so you can grow, eat, save and share.</p>
+          <div class="sd-row"><a class="se-go" id="sdReserve" href="#" target="_blank" rel="noopener">🌱 Reserve a Garden Pack</a><a class="se-aid" id="sdClub" href="https://chat.whatsapp.com/BsuWk5uMUHa32gczMyat8a" target="_blank" rel="noopener">Join the Heritage Club</a></div>
+          <button type="button" class="se-next" id="sdNext">▶ Next video</button>
+        </div>
+      </div>
       <div class="bug" id="bug"><img src="media/fonio-tv-icon.jpg" alt="" id="bugImg"><span id="bugTxt">CH 1: FONIO</span></div>
     </div>
     <div class="now">
@@ -267,6 +293,12 @@ footer{color:var(--muted);font-size:13px;text-align:center}
   <section class="albums" id="albSec" aria-labelledby="ah" hidden>
     <div class="alb-top"><h2 id="ah">🎵 Heritage Songs</h2><button type="button" class="shuf" id="shufBtn" aria-pressed="false">🔀 <span>Shuffle off</span></button></div>
     <div class="songs" id="songList"></div>
+  </section>
+
+  <section class="albums seeds" id="seedSec" aria-labelledby="sh" hidden>
+    <div class="alb-top"><h2 id="sh">🌱 Heritage Seeds</h2></div>
+    <p class="sd-credit">Seed videos courtesy of <a href="https://www.youtube.com/@Jibrilenterprise" target="_blank" rel="noopener">Jibril Enterprise</a>, our ACRES Alliance seeds partner.</p>
+    <div class="songs" id="seedList"></div>
   </section>
 
   <div class="grid">
@@ -495,8 +527,8 @@ async function play(n,auto,fromShuffle){
     if(auto||tv.muted){tv.play().catch(()=>{});}
   }catch(err){if(my===loadId){ld.querySelector('b').textContent='';ld.querySelector('span').textContent='This episode could not load. Check your connection and tap it again.';}}
 }
-document.getElementById('prev').onclick=()=>{if(CH===2){playSong(stepSong(-1),true);return;}const i=avail.indexOf(cur);if(i>0)play(avail[i-1],true);};
-document.getElementById('next').onclick=()=>{if(CH===2){playSong(stepSong(1),true);return;}const i=avail.indexOf(cur);if(i<avail.length-1)play(avail[i+1],true);};
+document.getElementById('prev').onclick=()=>{if(CH===3){playSeed((seedCur-1+SEEDSEQ.length)%SEEDSEQ.length,true);return;}if(CH===2){playSong(stepSong(-1),true);return;}const i=avail.indexOf(cur);if(i>0)play(avail[i-1],true);};
+document.getElementById('next').onclick=()=>{if(CH===3){playSeed((seedCur+1)%SEEDSEQ.length,true);return;}if(CH===2){playSong(stepSong(1),true);return;}const i=avail.indexOf(cur);if(i<avail.length-1)play(avail[i+1],true);};
 // Shuffle: when an episode ends, a random released episode plays next (never the same one twice in a row).
 let bag=[];
 function nextShuffle(){if(avail.length<2)return avail[0];if(!bag.length)bag=avail.filter(n=>n!==cur).sort(()=>Math.random()-.5);let n=bag.shift();if(n===cur){n=bag.shift()||avail.find(x=>x!==cur);}return n;}
@@ -575,16 +607,65 @@ function playSong(i,auto){songCur=i;clearEnd();$s('stEnd').hidden=true;autoRun=a
   const al=albumOf(i);document.getElementById('nowLab').textContent='NOW PLAYING · ALBUM '+(al+1)+' · SONG '+(ALBUMS[al].indexOf(i)+1)+' OF '+ALBUMS[al].length;document.getElementById('nowTitle').textContent=x.t;document.getElementById('nowSub').textContent=x.s;
   document.getElementById('prev').disabled=SONGS.length<2;document.getElementById('next').disabled=SONGS.length<2;renderSongs();
   if(auto||tv.muted)tv.play().catch(()=>{});track('song_play',{song_name:x.t});}
-function setChannel(n){if(n===CH)return;CH=n;const two=n===2;
-  document.getElementById('ch1Btn').classList.toggle('on',!two);document.getElementById('ch2Btn').classList.toggle('on',two);
-  document.getElementById('bugTxt').textContent=two?'CH 2: HERITAGE SONGS':'CH 1: FONIO';document.querySelector('.screen').classList.toggle('tall',two);document.getElementById('stage').hidden=!two;if(!two){$s('stEnd').hidden=true;clearEnd();}tv.controls=!two;document.getElementById('bugImg').hidden=two;document.getElementById('tkLab').textContent=two?'CH 2: SONGS':'CH 1: FONIO';
-  document.getElementById('gh').textContent='Season 1 programme guide';document.getElementById('gh').hidden=two;document.getElementById('albSec').hidden=!two;
-  ['guideSub','passCta','list'].forEach(id=>{const e=document.getElementById(id);if(e)e.hidden=two;});document.getElementById('songList').hidden=!two;
-  try{const u=new URL(location.href);if(two)u.searchParams.set('ch','2');else u.searchParams.delete('ch');history.replaceState(null,'',u.pathname+u.search+u.hash);}catch(_){}
+// ===== CH 3: Heritage Seeds (free; videos play from our seeds partner's YouTube channel) =====
+const SEEDS=[{"n":"Meet Our Seeds Partner","i":"🤝","v":[["patOg78mcKM","Meet Jibril Enterprise","Our ACRES Alliance seeds partner, in 30 seconds."],["pgJYiC4c2Gs","Growing Nature, Growing You","What Jibril Enterprise stands for, in under a minute."],["3hVvW4o8W9g","Home of Rare African Plants & Seeds","A tour of the Jibril Enterprise seed and plant collection."],["ahwl_XwVjQM","Exploring Rare West African Plants","The start of the exploration series."]]},{"n":"Grains & Tubers","i":"🌾","v":[["NAL2xGcJ-so","How to Grow Fonio","Digitaria exilis, Africa's ancient grain, from seed to harvest."],["H0DoOH5bh9k","Frafra Potato (Hausa Potato)","Growing the native potato of the north: Solenostemon rotundifolius."],["Z1xJn9rk0uE","Lesser Yam: How to Grow It","Dioscorea esculenta, a small yam with big potential."],["gpdd4h7XEWE","Lesser Yam in a Minute","Uses and cultivation, the short version."],["Mw8HBtQbtzs","African Bitter Yellow Sorghum","Farming tips and uses."],["hAelFT1eQQc","Sweet Sorghum","Nutrition, farming and uses."],["-8NDnrO6ftc","How to Grow Tiger Nuts","Cyperus esculentus, for a better yield."],["rNNZzA3qr20","Soaking Dried Tiger Nuts","Turn dried tiger nuts back into fresh nuts."]]},{"n":"Beans & Legumes","i":"🫘","v":[["1DGY9IpzS5Y","Kersting's Groundnut","Macrotyloma geocarpum, the almost-forgotten groundnut."],["SAA5fKqT0T8","African Yam Beans","Sphenostylis stenocarpa: beans above the ground, tubers below."],["uhUWU6OtmkQ","Growing Cowpea in West Africa","Vigna unguiculata, from planting to harvest."],["_GKhzjqu8cc","Winged Beans","Psophocarpus tetragonolobus: pods, leaves, flowers and seeds."],["YcZj6Ti1gxI","Jack Bean: Uses & Cultivation","Canavalia ensiformis, a hardy bean that also feeds the soil."],["RZB12xqezfE","Cooking with Jack Beans","How to prepare jack beans for the pot."],["0VhfoQfP0cw","Hyacinth Beans (Lablab)","The multi-purpose bean."],["EYdnB9OX1hg","Mung Bean Farming","Tips for fast growth and a bigger yield."],["NEiQZEry2XU","Velvet Beans (Black Mucuna)","Farming the velvet bean."]]},{"n":"Vegetables & Peppers","i":"🌶️","v":[["Gf2aVkuLa0A","8 Varieties of West African Okro","Abelmoschus caillei and Abelmoschus esculentus."],["DUs1YQes4OQ","20 Varieties of West African Eggplant","Garden eggs in every shape and colour."],["9ThmDkCqMHE","6 Rare West African Peppers","Heritage pepper varieties."],["qJrwwzdxGMg","African Habanero Pepper Seeds","For farms and home gardens."],["hCCLZ1ZzJ9w","Wild Bird's Eye Pepper","Capsicum frutescens."],["3pfikmIzG9A","How to Grow Celosia","A fast-growing leafy green (Nigerian spinach)."],["Q8oj0CfU4vk","How to Grow Bitter Leaf from Seed","Grow your own bitter leaf at home."],["fhRYPB1ullw","Fluted Pumpkin: Full Germination","Growing ugu for its leaves and pods."],["PsvSV1X06Pw","Fluted Pumpkin (Ugu)","Telfairia occidentalis up close."],["xFcla8fbM9o","A Powerful African Leafy Green","A one-minute look."],["BuVWMrfciJw","Grow Uziza 10× Faster","Piper guineense, the West African pepper vine."],["2oE8LignTzw","Utazi from Stem Cuttings","Gongronema latifolium, step by step."],["tz1wta1t3tw","Oha Tree from Stem Cuttings","Pterocarpus mildbraedii, step by step."],["j7VDNKhc3hQ","Black Pepper Propagation Trick","Multiply your black pepper plants."],["-2CjgGcSiRI","The #1 Soil Mistake for Black Pepper","Get the soil right first."]]},{"n":"Wild Fruits & Trees","i":"🌳","v":[["x-7bZp_gQQQ","Katemfe: Sweeter Than Sugar","Thaumatococcus daniellii, Africa's natural sweetener."],["afBkUc-LwQE","How to Cultivate Katemfe","Growing it, and earning from it."],["Me7vMKzZlvY","Katemfe's Sweetness in Water","Extracting the natural sweetness."],["VnJnJICX8EU","Christ Thorn Jujube: Seed to Harvest","Ziziphus spina-christi, a hardy African tree."],["enw6qUp2hjw","Germinating Jujube Seeds Faster","The step most people miss."],["HL2D2V57XNA","Jujube: Survives Drought & Poor Soil","A tree for dry lands."],["Emxi__SaemU","Deinbollia: Fruit in 1 Year","A rare African fruit tree."],["OWD5HrATxuA","Saba Fruit","Saba senegalensis."],["cEtAcN-YtBA","African Wild Custard Apple","Annona senegalensis."],["TIo8yqCe55E","Dwarf Custard Apple","Annona stenophylla."],["LYcR5N9LhfE","African Bush Mango Varieties","Irvingia gabonensis."],["uj8pY6JQMmc","Bush Banana","Uvaria chamae."],["YS7XJtpI1Lk","Monkey Orange","Strychnos spinosa."],["XpkAL4B7LPg","Desert Dates","Balanites aegyptiaca."],["AWpzo4Nm6lc","African Black Plum","Vitex doniana."],["txCuRndbYf4","Wild African Yellow Plum","A wild fruit worth knowing."],["qGx6_IKM3C4","African Fan Palm","Borassus aethiopum."],["Q6w8fm277n8","Monkey Kola","Cola millenii."],["zhJopOeTSk8","Serendipity Berry","Dioscoreophyllum cumminsii: germination and growing."],["5x6xlU0Jnoo","A Rare Fruit Worth More Than You Think","From the Jibril collection."]]}];
+const SEEDSEQ=[];SEEDS.forEach((f,k)=>f.v.forEach((v,j)=>SEEDSEQ.push([k,j])));
+let seedCur=0,openSeed=-1,ytPlayer=null,ytReady=null,sdTimer=null;
+const THUMB=id=>'https://i.ytimg.com/vi/'+id+'/mqdefault.jpg';
+function seedAt(q){const [k,j]=SEEDSEQ[q];return {k,j,v:SEEDS[k].v[j]};}
+function loadYT(){if(ytReady)return ytReady;ytReady=new Promise(res=>{window.onYouTubeIframeAPIReady=res;const t=document.createElement('script');t.src='https://www.youtube.com/iframe_api';document.head.appendChild(t);});return ytReady;}
+function sdClear(){if(sdTimer){clearInterval(sdTimer);sdTimer=null;}}
+function sdShowEnd(){sdClear();$s('sdEnd').hidden=false;const x=seedAt(seedCur).v;
+  $s('sdReserve').href='https://api.whatsapp.com/send?phone='+orderNum()+'&text='+encodeURIComponent('SEEDS - Please let me know when the ACRES Heritage Garden Pack is ready. I just watched: '+x[1]);
+  track('seed_end_card',{video:x[1]});let n=12;const lab=()=>$s('sdNext').textContent='▶ Next video in '+n+'s';lab();
+  sdTimer=setInterval(()=>{n--;if(n<=0){sdClear();playSeed((seedCur+1)%SEEDSEQ.length,true);}else lab();},1000);}
+async function playSeed(q,auto){seedCur=q;sdClear();$s('sdEnd').hidden=true;const {k,j,v}=seedAt(q);$s('ytPause').style.backgroundImage='url(https://i.ytimg.com/vi/'+v[0]+'/hqdefault.jpg)';$s('ypTitle').textContent=v[1];ytPaint(-1);
+  document.getElementById('nowLab').textContent='NOW SHOWING · '+SEEDS[k].n.toUpperCase()+' · '+(j+1)+' OF '+SEEDS[k].v.length;
+  document.getElementById('nowTitle').textContent=v[1];document.getElementById('nowSub').textContent=v[2]+' · Video: Jibril Enterprise';
+  document.getElementById('prev').disabled=false;document.getElementById('next').disabled=false;renderSeeds();track('seed_play',{video:v[1]});
+  await loadYT();if(CH!==3||seedCur!==q)return;
+  if(!ytPlayer){ytPlayer=new YT.Player('ytP',{videoId:v[0],host:'https://www.youtube-nocookie.com',playerVars:{playsinline:1,rel:0,modestbranding:1,autoplay:1,controls:0,disablekb:1,fs:0,iv_load_policy:3,cc_load_policy:0},
+    events:{onReady:e=>{if(CH===3)e.target.playVideo();},onStateChange:e=>{ytPaint(e.data);if(e.data===0&&CH===3){track('seed_complete',{video:seedAt(seedCur).v[1]});sdShowEnd();}}}});}
+  else{ytPlayer.loadVideoById(v[0]);}}
+// Our own controls: YouTube's buttons, links and suggestions stay covered, so viewers never leave the station.
+function ytState(){try{return ytPlayer&&ytPlayer.getPlayerState?ytPlayer.getPlayerState():-1;}catch(_){return -1;}}
+function ytPaint(st){const playing=st===1||st===3;$s('ytPause').hidden=playing||st===0;$s('ytPlay').textContent=playing?'❚❚':'▶';}
+function ytToggle(){if(!ytPlayer||!ytPlayer.playVideo)return;const st=ytState();if(st===1||st===3)ytPlayer.pauseVideo();else{if(ytPlayer.unMute)ytPlayer.unMute();ytPlayer.playVideo();}}
+$s('ytShield').onclick=ytToggle;$s('ytPause').onclick=ytToggle;$s('ytPlay').onclick=ytToggle;
+$s('ytProg').onclick=e=>{if(!ytPlayer||!ytPlayer.getDuration)return;const r=e.currentTarget.getBoundingClientRect();ytPlayer.seekTo((e.clientX-r.left)/r.width*ytPlayer.getDuration(),true);};
+setInterval(()=>{if(CH!==3||!ytPlayer||!ytPlayer.getCurrentTime)return;const t=ytPlayer.getCurrentTime()||0,d=ytPlayer.getDuration()||0;$s('ytFill').style.width=(d?t/d*100:0)+'%';$s('ytTime').textContent=fmtT(t)+' / '+fmtT(d);},500);
+function ytStop(){sdClear();if(ytPlayer&&ytPlayer.pauseVideo)try{ytPlayer.pauseVideo();}catch(_){}}
+function renderSeeds(){const L=document.getElementById('seedList');L.textContent='';const live=CH===3?seedAt(seedCur).k:-1;
+  if(openSeed<0){const g=document.createElement('div');g.className='alb-grid five';
+    SEEDS.forEach((F,k)=>{const f=document.createElement('div');f.className='folder'+(k===live?' live':'');f.tabIndex=0;f.setAttribute('role','button');
+      const m=document.createElement('div');m.className='mosaic';F.v.slice(0,4).forEach(v=>{const im=document.createElement('img');im.alt='';im.loading='lazy';im.src=THUMB(v[0]);m.appendChild(im);});
+      f.appendChild(m);const t=document.createElement('div');t.className='f-txt';t.innerHTML='<b></b><small></small><em></em>';t.querySelector('b').textContent=F.i+' '+F.n;t.querySelector('small').textContent=F.v.length+' videos · free';
+      t.querySelector('em').textContent=k===live?'▶ Now showing':'Tap to open';f.appendChild(t);
+      const pl=document.createElement('button');pl.type='button';pl.className='f-play';pl.textContent='▶ Play';pl.onclick=e=>{e.stopPropagation();track('seed_folder_play',{folder:F.n});playSeed(SEEDSEQ.findIndex(x=>x[0]===k),true);};f.appendChild(pl);
+      const open=()=>{openSeed=k;renderSeeds();track('seed_folder_open',{folder:F.n});};f.onclick=open;f.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}};g.appendChild(f);});
+    L.appendChild(g);return;}
+  const F=SEEDS[openSeed];const h=document.createElement('div');h.className='alb-head';
+  const bk=document.createElement('button');bk.type='button';bk.className='alb-back';bk.textContent='◀ Folders';bk.onclick=()=>{openSeed=-1;renderSeeds();};
+  const ti=document.createElement('b');ti.textContent=F.i+' '+F.n;
+  const pa=document.createElement('button');pa.type='button';pa.className='alb-play';pa.textContent='▶ Play all';pa.onclick=()=>playSeed(SEEDSEQ.findIndex(x=>x[0]===openSeed),true);
+  h.append(bk,ti,pa);L.appendChild(h);
+  F.v.forEach((v,j)=>{const q=SEEDSEQ.findIndex(x=>x[0]===openSeed&&x[1]===j);const on=CH===3&&q===seedCur;const b=document.createElement('button');b.type='button';b.className='song mini'+(on?' playing':'');
+    b.innerHTML='<span class="num"></span><img alt="" loading="lazy"><span class="st"><b></b><small></small></span><span class="tag"></span>';b.querySelector('.num').textContent=j+1;b.querySelector('img').src=THUMB(v[0]);b.querySelector('b').textContent=v[1];b.querySelector('small').textContent=v[2];b.querySelector('.tag').textContent=on?'▶':'▷';
+    b.onclick=()=>{playSeed(q,true);document.querySelector('.set').scrollIntoView({behavior:'smooth',block:'start'});};L.appendChild(b);});}
+$s('sdNext').onclick=()=>playSeed((seedCur+1)%SEEDSEQ.length,true);
+$s('sdReserve').addEventListener('click',()=>{sdClear();$s('sdNext').textContent='▶ Next video';track('seed_cta_reserve',{});});
+$s('sdClub').addEventListener('click',()=>{sdClear();$s('sdNext').textContent='▶ Next video';track('seed_cta_club',{});});
+function setChannel(n){if(n===CH)return;CH=n;const one=n===1,two=n===2,three=n===3;
+  ['ch1Btn','ch2Btn','ch3Btn'].forEach((id,k)=>document.getElementById(id).classList.toggle('on',n===k+1));
+  document.getElementById('bugTxt').textContent=['','CH 1: FONIO','CH 2: HERITAGE SONGS','CH 3: HERITAGE SEEDS'][n];document.querySelector('.screen').classList.toggle('tall',two);document.getElementById('stage').hidden=!two;if(!two){$s('stEnd').hidden=true;clearEnd();}tv.controls=one;document.getElementById('bugImg').hidden=!one;document.getElementById('tkLab').textContent=['','CH 1: FONIO','CH 2: SONGS','CH 3: SEEDS'][n];
+  document.getElementById('gh').textContent='Season 1 programme guide';document.getElementById('gh').hidden=!one;document.getElementById('albSec').hidden=!two;document.getElementById('seedSec').hidden=!three;
+  ['guideSub','passCta','list'].forEach(id=>{const e=document.getElementById(id);if(e)e.hidden=!one;});document.getElementById('songList').hidden=!two;
+  $s('ytBox').hidden=!three;document.getElementById('bug').hidden=three;if(three){++loadId;stopLive();tv.pause();document.getElementById('loading').hidden=true;document.getElementById('still').hidden=true;document.getElementById('sound').hidden=true;}else ytStop();
+  try{const u=new URL(location.href);if(one)u.searchParams.delete('ch');else u.searchParams.set('ch',String(n));history.replaceState(null,'',u.pathname+u.search+u.hash);}catch(_){}
   track('channel_switch',{channel:n});
-  if(two)playSong(songCur,true);else play(cur,true);}
+  if(two)playSong(songCur,true);else if(three)playSeed(seedCur,true);else play(cur,true);}
 document.getElementById('shufBtn').onclick=toggleShuf;paintShuf();
-document.getElementById('ch1Btn').onclick=()=>setChannel(1);document.getElementById('ch2Btn').onclick=()=>setChannel(2);
+document.getElementById('ch1Btn').onclick=()=>setChannel(1);document.getElementById('ch2Btn').onclick=()=>setChannel(2);document.getElementById('ch3Btn').onclick=()=>setChannel(3);
 // After 3 videos in a row with no tap, pause and ask (saves viewers' data).
 let autoRun=0;
 function nextAuto(){if(CH===2)playSong(stepSong(1),false);else play(nextShuffle(),true,true);}
@@ -678,7 +759,7 @@ document.getElementById('storyBtn').addEventListener('click',()=>{tv.pause();con
   if(c){try{const r=await tryCode(c);if(r){PASSKEYS=r.keys;passOn();}}catch(_){}}})();
 renderSongs();
 if(new URLSearchParams(location.search).get('album')==='2'){songCur=ALBUMS[1][0];openAlb=1;}
-if(new URLSearchParams(location.search).get('ch')==='2'||new URLSearchParams(location.search).get('album')){CH=0;setChannel(2);CH=2;}else play(cur,false);
+if(new URLSearchParams(location.search).get('ch')==='3'){CH=0;setChannel(3);renderSeeds();}else if(new URLSearchParams(location.search).get('ch')==='2'||new URLSearchParams(location.search).get('album')){CH=0;setChannel(2);CH=2;}else play(cur,false);
 tv.muted=true;tv.play().catch(()=>{});
 const snd=document.getElementById('sound');
 function unmute(){tv.muted=false;snd.hidden=true;tv.play().catch(()=>{});}
