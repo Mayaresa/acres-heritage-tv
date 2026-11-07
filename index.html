@@ -140,6 +140,7 @@ h2{font-family:var(--display);font-weight:800;font-size:24px;margin:0 0 4px}
 @media (max-width:760px){.bag{width:140px}}
 .aidcard{background:#0A8FC2;color:#fff;box-shadow:0 0 0 3px #fff,0 6px 18px rgba(10,143,194,.45);border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:12px}.aidcard i{flex:0 0 auto;width:44px;height:44px;border-radius:50%;background:#fff;color:#0A8FC2;font-style:normal;font-family:var(--display);font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center}.aidcard small{display:block;font-weight:900;font-size:11px;letter-spacing:2px;color:#fff;opacity:.9}.aidcard b{display:block;font-family:var(--display);font-weight:800;font-size:20px;line-height:1.1}.aidcard a{display:inline-block;margin-top:4px;color:#fff;font-weight:800;font-size:16px;text-decoration:none;background:#fff;color:#0A6F97;border-radius:999px;padding:5px 14px}.aidcard small{line-height:1.3;letter-spacing:1px}.aidcard em{display:block;font-style:normal;font-weight:800;font-size:14px;color:#FFF200;margin-top:1px}
 #tot small{display:block;font-size:14px;font-weight:800;line-height:1.1;text-align:right;letter-spacing:0}
+.learn .learn-h{margin-top:0}
 .learn-h{margin:22px 0 10px;font-weight:900;font-size:13px;letter-spacing:3px;color:var(--lemon)}
 .whatf{background:#1f1f1f;border:2px solid rgba(128,205,41,.45);border-radius:16px;margin:0 0 12px;overflow:hidden}
 .whatf summary{list-style:none;display:flex;align-items:center;gap:12px;padding:10px 14px;cursor:pointer}.whatf summary::-webkit-details-marker{display:none}
@@ -332,32 +333,12 @@ footer{color:var(--muted);font-size:13px;text-align:center}
     <div class="songs" id="seedList"></div>
   </section>
 
-  <section class="guide" aria-labelledby="gh">
+  <section class="guide" id="guideSec" aria-labelledby="gh">
     <h2 id="gh">Season 1 programme guide</h2>
     <p class="sub" id="guideSub">A new episode is free every Friday. Season Pass holders can watch all 31 now.</p>
     <button class="passcta" id="passCta" type="button"><span><b>🔑 Full Season Pass</b><small>All 31 episodes · free with your first 5kg fonio order</small></span><em>Enter code ›</em></button>
     <div class="list" id="list"></div>
-    <div class="learn-h">LEARN ABOUT FONIO</div>
-    <details class="whatf" id="whatF"><summary><img src="media/fonio-grain.jpg" alt="Raw fonio grain" width="56" height="56"><span><b>What is fonio?</b><small>Africa's ancient grain · tap to learn</small></span><i aria-hidden="true">＋</i></summary>
-      <div class="wf-body">
-        <div class="wf-vid"><button type="button" id="storyBtn" aria-label="Play The Amaati Story video"><img src="https://i.ytimg.com/vi/vL1Gub9QdJk/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'"><span class="wf-play">▶</span><span class="wf-cap"><b>Where our fonio comes from</b><small>The Amaati Story · DIM Fonio</small></span></button></div>
-        <p class="wf-src"><a href="https://www.youtube.com/watch?v=vL1Gub9QdJk" target="_blank" rel="noopener">Watch on YouTube</a></p>
-        <img class="wf-hero" src="media/fonio-pour.jpg" alt="Fonio grain being poured" loading="lazy">
-        <div class="wf-stats"><div><b>~5 min</b><span>to cook</span></div><div><b>6–8 wks</b><span>to harvest</span></div><div><b>1000s</b><span>of years in West Africa</span></div></div>
-        <ul><li><b>Whole grain, naturally gluten-free</b></li><li><b>Contains iron, zinc, magnesium</b> and phosphorus, plus fibre and vitamin B1</li><li><b>Contains methionine and cystine</b>, amino acids many grains are low in</li><li><b>A hardy crop</b> that grows with little water</li><li><b>Cook it like rice, couscous or quinoa</b>: jollof, waakye, porridge, banku and more</li></ul>
-        <p class="wf-note">General information, not medical advice.</p></div></details>
-    <details class="whatf hist" id="histF"><summary><span class="hico" aria-hidden="true">📜</span><span><b>Fonio through history</b><small>From ancient West Africa to your table · tap to read</small></span><i aria-hidden="true">＋</i></summary>
-      <div class="wf-body"><ol class="tl">
-        <li><em>Thousands of years ago</em><b>Born in West Africa</b><span>West Africans tamed fonio from wild grasses. Experts call it probably Africa's oldest cereal.</span></li>
-        <li><em>Two fonios</em><b>White and black</b><span>White fonio and black fonio were domesticated separately. Black fonio is still grown in northern Togo and Nigeria.</span></li>
-        <li><em>About 2,000 years ago</em><b>Farming spreads</b><span>Fonio farming expanded at the start of the Common Era. The oldest fonio remains found so far come from Nigeria.</span></li>
-        <li><em>Through the centuries</em><b>A food of honour</b><span>Served to chiefs and at special occasions, and part of some bride prices. The Dogon of Mali tell that the whole universe came from a fonio seed.</span></li>
-        <li><em>From the 1500s</em><b>A long decline</b><span>Maize and rice arrived, and the slave trade and colonial rule disrupted farming. Fonio faded from many tables. Europeans even called it "hungry rice", a name that misunderstood a grain people grew because they loved it.</span></li>
-        <li><em>Today</em><b>Still feeding millions</b><span>Over 920,000 hectares are grown in West Africa each year, about 700,000 tonnes. Guinea grows the most, followed by Nigeria and Mali.</span></li>
-        <li><em>Ghana now</em><b>The revival</b><span>In Northern Ghana, Amaati works with thousands of farmers, most of them women, to bring fonio back. That is the DIM Fonio in your bag.</span></li>
-      </ol>
-      <p class="wf-note">Sources: CIRAD (2025 study in Nature Communications); US National Academies, Lost Crops of Africa (1996); CIRAD fonio production data (2019); Amaati.</p></div></details>
-  </section>
+    </section>
 
   <section class="shop" aria-label="ACRES Heritage Market">
     <div class="awning"></div>
@@ -424,6 +405,29 @@ footer{color:var(--muted);font-size:13px;text-align:center}
       <a class="join" href="https://chat.whatsapp.com/BsuWk5uMUHa32gczMyat8a" target="_blank" rel="noopener">Join the club on WhatsApp ›</a>
     </aside>
   </div>
+
+  <section class="guide learn" aria-label="Learn about fonio">
+    <div class="learn-h">LEARN ABOUT FONIO</div>
+    <details class="whatf" id="whatF"><summary><img src="media/fonio-grain.jpg" alt="Raw fonio grain" width="56" height="56"><span><b>What is fonio?</b><small>Africa's ancient grain · tap to learn</small></span><i aria-hidden="true">＋</i></summary>
+      <div class="wf-body">
+        <div class="wf-vid"><button type="button" id="storyBtn" aria-label="Play The Amaati Story video"><img src="https://i.ytimg.com/vi/vL1Gub9QdJk/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'"><span class="wf-play">▶</span><span class="wf-cap"><b>Where our fonio comes from</b><small>The Amaati Story · DIM Fonio</small></span></button></div>
+        <p class="wf-src"><a href="https://www.youtube.com/watch?v=vL1Gub9QdJk" target="_blank" rel="noopener">Watch on YouTube</a></p>
+        <img class="wf-hero" src="media/fonio-pour.jpg" alt="Fonio grain being poured" loading="lazy">
+        <div class="wf-stats"><div><b>~5 min</b><span>to cook</span></div><div><b>6–8 wks</b><span>to harvest</span></div><div><b>1000s</b><span>of years in West Africa</span></div></div>
+        <ul><li><b>Whole grain, naturally gluten-free</b></li><li><b>Contains iron, zinc, magnesium</b> and phosphorus, plus fibre and vitamin B1</li><li><b>Contains methionine and cystine</b>, amino acids many grains are low in</li><li><b>A hardy crop</b> that grows with little water</li><li><b>Cook it like rice, couscous or quinoa</b>: jollof, waakye, porridge, banku and more</li></ul>
+        <p class="wf-note">General information, not medical advice.</p></div></details>
+    <details class="whatf hist" id="histF"><summary><span class="hico" aria-hidden="true">📜</span><span><b>Fonio through history</b><small>From ancient West Africa to your table · tap to read</small></span><i aria-hidden="true">＋</i></summary>
+      <div class="wf-body"><ol class="tl">
+        <li><em>Thousands of years ago</em><b>Born in West Africa</b><span>West Africans tamed fonio from wild grasses. Experts call it probably Africa's oldest cereal.</span></li>
+        <li><em>Two fonios</em><b>White and black</b><span>White fonio and black fonio were domesticated separately. Black fonio is still grown in northern Togo and Nigeria.</span></li>
+        <li><em>About 2,000 years ago</em><b>Farming spreads</b><span>Fonio farming expanded at the start of the Common Era. The oldest fonio remains found so far come from Nigeria.</span></li>
+        <li><em>Through the centuries</em><b>A food of honour</b><span>Served to chiefs and at special occasions, and part of some bride prices. The Dogon of Mali tell that the whole universe came from a fonio seed.</span></li>
+        <li><em>From the 1500s</em><b>A long decline</b><span>Maize and rice arrived, and the slave trade and colonial rule disrupted farming. Fonio faded from many tables. Europeans even called it "hungry rice", a name that misunderstood a grain people grew because they loved it.</span></li>
+        <li><em>Today</em><b>Still feeding millions</b><span>Over 920,000 hectares are grown in West Africa each year, about 700,000 tonnes. Guinea grows the most, followed by Nigeria and Mali.</span></li>
+        <li><em>Ghana now</em><b>The revival</b><span>In Northern Ghana, Amaati works with thousands of farmers, most of them women, to bring fonio back. That is the DIM Fonio in your bag.</span></li>
+      </ol>
+      <p class="wf-note">Sources: CIRAD (2025 study in Nature Communications); US National Academies, Lost Crops of Africa (1996); CIRAD fonio production data (2019); Amaati.</p></div></details>
+  </section>
   
 <div class="modal" id="passModal" hidden role="dialog" aria-modal="true" aria-labelledby="pmT">
   <div class="mbox">
@@ -708,7 +712,7 @@ $s('sdClub').addEventListener('click',()=>{sdClear();$s('sdNext').textContent='�
 function setChannel(n){if(n===CH)return;CH=n;const one=n===1,two=n===2,three=n===3;
   ['ch1Btn','ch2Btn','ch3Btn'].forEach((id,k)=>document.getElementById(id).classList.toggle('on',n===k+1));
   document.getElementById('bugTxt').textContent=['','CH 1: FONIO','CH 2: HERITAGE SONGS','CH 3: HERITAGE SEEDS'][n];document.querySelector('.screen').classList.toggle('tall',two);document.getElementById('stage').hidden=!two;if(!two){$s('stEnd').hidden=true;clearEnd();}tv.controls=one;document.getElementById('bugImg').hidden=!one;document.getElementById('tkLab').textContent=['','CH 1: FONIO','CH 2: SONGS','CH 3: SEEDS'][n];
-  document.getElementById('gh').textContent='Season 1 programme guide';document.getElementById('gh').hidden=!one;document.getElementById('albSec').hidden=!two;document.getElementById('seedSec').hidden=!three;
+  document.getElementById('gh').textContent='Season 1 programme guide';document.getElementById('gh').hidden=!one;document.getElementById('albSec').hidden=!two;document.getElementById('seedSec').hidden=!three;document.getElementById('guideSec').hidden=!one;
   ['guideSub','passCta','list'].forEach(id=>{const e=document.getElementById(id);if(e)e.hidden=!one;});document.getElementById('songList').hidden=!two;
   $s('ytBox').hidden=!three;document.getElementById('bug').hidden=three;if(three){++loadId;stopLive();tv.pause();document.getElementById('loading').hidden=true;document.getElementById('still').hidden=true;document.getElementById('sound').hidden=true;}else ytStop();
   try{const u=new URL(location.href);if(one)u.searchParams.delete('ch');else u.searchParams.set('ch',String(n));history.replaceState(null,'',u.pathname+u.search+u.hash);}catch(_){}
