@@ -68,5 +68,15 @@
     "zone": "Madina – Adenta",
     "wa": "233244094565",
     "active": true
+  },
+  "amaike": {
+    "name": "Thelma Amaike",
+    "role": "AID",
+    "label": "Your FONIO Distributor",
+    "areaText": "Suhum · Eastern Region",
+    "zone": "Nationwide",
+    "wa": "233256691826",
+    "nationwide": true,
+    "active": true
   }
 }
