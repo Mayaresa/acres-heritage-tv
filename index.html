@@ -238,7 +238,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
 .shop-badge{flex:none;width:clamp(58px,15vw,84px);height:auto;border-radius:50%;box-shadow:0 0 0 3px #c9a24a,0 6px 16px rgba(0,0,0,.45)}
 .shop-txt{min-width:0}.shop-k{padding-right:clamp(90px,26vw,140px)}.shop-t{white-space:nowrap;overflow:hidden}
 .shop-tw{display:flex;flex-direction:column;align-items:flex-end;width:fit-content;max-width:100%;margin-bottom:10px}.shop-t{max-width:100%}
-.shop-w{margin:5px 15% 0 0;font-style:italic;font-weight:800;color:#1d2a0c;background:var(--lemon);font-size:clamp(11px,2.7vw,14px);letter-spacing:.3px;padding:0 6px;border-radius:4px;line-height:1.15;box-shadow:0 0 0 1.5px #1d2a0c,0 0 0 3px var(--lemon),0 6px 14px rgba(0,0,0,.4)}
+.shop-w{margin:5px 0 0 0;font-style:italic;font-weight:800;color:#1d2a0c;background:var(--lemon);font-size:clamp(11px,2.7vw,14px);letter-spacing:.3px;padding:0 6px;border-radius:4px;line-height:1.15;box-shadow:0 0 0 1.5px #1d2a0c,0 0 0 3px var(--lemon),0 6px 14px rgba(0,0,0,.4)}
 .shop-k{color:var(--green);font-weight:800;font-size:12px;letter-spacing:3px}
 .shop-t{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(28px,7.6vw,50px);line-height:.95;color:#fff;letter-spacing:.5px;text-shadow:0 3px 0 rgba(0,0,0,.35)}
 .shop-t span{color:var(--lemon)}
@@ -721,7 +721,10 @@ function setChannel(n){if(n===CH)return;CH=n;const one=n===1,two=n===2,three=n==
 document.getElementById('shufBtn').onclick=toggleShuf;paintShuf();
 document.getElementById('ch1Btn').onclick=()=>setChannel(1);document.getElementById('ch2Btn').onclick=()=>setChannel(2);document.getElementById('ch3Btn').onclick=()=>setChannel(3);
 // Keep ACRES HERITAGE MARKET on one line: shrink the type until it fits the banner.
-function fitShop(){const el=document.getElementById('shopT');if(!el)return;el.style.fontSize='';let fs=parseFloat(getComputedStyle(el).fontSize);while(el.scrollWidth>el.clientWidth+1&&fs>14){fs-=1;el.style.fontSize=fs+'px';}}
+function fitShop(){const el=document.getElementById('shopT');if(!el)return;el.style.fontSize='';let fs=parseFloat(getComputedStyle(el).fontSize);while(el.scrollWidth>el.clientWidth+1&&fs>14){fs-=1;el.style.fontSize=fs+'px';}
+  // line the Wholesale box's right edge up with the stem of the last T in MARKET
+  try{const w=document.querySelector('.shop-w');const tn=[...el.childNodes].pop();const r=document.createRange();r.setStart(tn,tn.length-1);r.setEnd(tn,tn.length);const t=r.getBoundingClientRect();const tw=el.parentNode.getBoundingClientRect();
+    const stemRight=t.left+t.width/2+fs*0.09;w.style.marginRight=Math.max(0,Math.round(tw.right-stemRight))+'px';}catch(_){}}
 fitShop();window.addEventListener('resize',fitShop);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitShop);
 // CH 3 is in private preview: only phones that opened a ?seeds=preview link see it (?seeds=off hides it again).
 const SEEDPREV=(()=>{const q=new URLSearchParams(location.search);try{if(q.get('seeds')==='preview')localStorage.setItem('acresSeedsPrev','1');if(q.get('seeds')==='off')localStorage.removeItem('acresSeedsPrev');return localStorage.getItem('acresSeedsPrev')==='1';}catch(_){return q.get('seeds')==='preview';}})();
