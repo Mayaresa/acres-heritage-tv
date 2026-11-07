@@ -246,12 +246,14 @@ footer{color:var(--muted);font-size:13px;text-align:center}
 .opensign{position:absolute;top:30px;right:clamp(14px,4vw,30px);width:clamp(78px,20vw,108px);transform-origin:50% 0;animation:swing 3.2s ease-in-out infinite}
 .opensign .nail{position:absolute;left:50%;top:-6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f5d78a,#a77b25);box-shadow:0 1px 3px rgba(0,0,0,.6);z-index:1}
 .opensign svg{display:block;width:100%;height:auto;overflow:visible}
-.opensign .plate{margin-top:-2px;background:#fff8e6;border:3px solid #c9a24a;border-radius:10px;text-align:center;padding:6px 4px 5px;box-shadow:0 8px 14px rgba(0,0,0,.45)}
-.opensign .plate b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(20px,5.6vw,30px);line-height:1;color:#d62828;letter-spacing:1px}
-.opensign .plate small{display:block;font-size:9px;font-weight:800;letter-spacing:1.5px;color:#3b4a1f}
+.opensign .plate{margin-top:-2px;background:radial-gradient(120% 120% at 50% 40%,#2a0a12 0,#0d0306 70%);border:2px solid #3a1a20;border-radius:12px;text-align:center;padding:7px 4px 6px;box-shadow:0 0 0 2px #ff2d55,0 0 10px 2px rgba(255,45,85,.75),0 0 26px 6px rgba(255,45,85,.35),inset 0 0 12px rgba(255,45,85,.35),0 10px 16px rgba(0,0,0,.55);animation:neonBox 4s infinite}
+.opensign .plate b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(20px,5.6vw,30px);line-height:1;letter-spacing:2px;color:#fff1f4;text-shadow:0 0 2px #fff,0 0 6px #ff2d55,0 0 12px #ff2d55,0 0 22px #ff2d55,0 0 38px #ff0040;animation:neon 4s infinite}
+.opensign .plate small{display:block;margin-top:3px;font-size:9px;font-weight:800;letter-spacing:2px;color:#f6ffe0;text-shadow:0 0 3px var(--green),0 0 8px var(--green),0 0 14px var(--green)}
+@keyframes neon{0%,18%,22%,24%,55%,100%{opacity:1;text-shadow:0 0 2px #fff,0 0 6px #ff2d55,0 0 12px #ff2d55,0 0 22px #ff2d55,0 0 38px #ff0040}20%,23%{opacity:.35;text-shadow:none}60%,80%{text-shadow:0 0 2px #fff,0 0 8px #ff2d55,0 0 16px #ff2d55,0 0 30px #ff2d55,0 0 52px #ff0040}}
+@keyframes neonBox{0%,18%,24%,100%{box-shadow:0 0 0 2px #ff2d55,0 0 10px 2px rgba(255,45,85,.75),0 0 26px 6px rgba(255,45,85,.35),inset 0 0 12px rgba(255,45,85,.35),0 10px 16px rgba(0,0,0,.55)}20%,23%{box-shadow:0 0 0 2px #7a1a2c,0 10px 16px rgba(0,0,0,.55)}}
 @keyframes swing{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
-@media (prefers-reduced-motion:reduce){.opensign{animation:none}}
-@media (max-width:600px){.opensign{top:6px;width:62px}.opensign .plate small{font-size:7px}.opensign .plate b{font-size:17px}}
+@media (prefers-reduced-motion:reduce){.opensign,.opensign .plate,.opensign .plate b{animation:none}}
+@media (max-width:600px){.opensign{top:6px;width:62px}.opensign .plate small{font-size:7px}.opensign .plate b{font-size:16px;letter-spacing:1px}}
 </style>
 
 <div class="wrap">
