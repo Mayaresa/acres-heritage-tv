@@ -284,7 +284,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
     <nav class="channels" aria-label="Channels">
       <button class="ch on" id="ch1Btn" type="button"><img src="media/fonio-tv-icon.jpg" alt=""><span><span class="n">CH 1</span> HERITAGE FOODS</span></button>
       <button class="ch" id="ch2Btn" type="button"><img src="songs/s01-cover.jpg" alt=""><span><span class="n">CH 2</span> HERITAGE SONGS</span></button>
-      <button class="ch" id="ch3Btn" type="button" hidden><img src="https://i.ytimg.com/vi/1DGY9IpzS5Y/default.jpg" alt=""><span><span class="n">CH 3</span> HERITAGE SEEDS</span></button>
+      <button class="ch" id="ch3Btn" type="button"><img src="https://i.ytimg.com/vi/1DGY9IpzS5Y/default.jpg" alt=""><span><span class="n">CH 3</span> HERITAGE SEEDS</span></button>
       <button class="ch pass" id="passBtn" type="button"><i class="pk">🔑</i><span><span class="n">MEMBERS</span> <span id="passLabel">Season Pass</span></span></button>
     </nav>
   </header>
@@ -754,7 +754,8 @@ function fitShop(){const el=document.getElementById('shopT');if(!el)return;el.st
 fitShop();window.addEventListener('resize',fitShop);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitShop);
 // CH 3 is in private preview: only phones that opened a ?seeds=preview link see it (?seeds=off hides it again).
 const SEEDPREV=(()=>{const q=new URLSearchParams(location.search);try{if(q.get('seeds')==='preview')localStorage.setItem('acresSeedsPrev','1');if(q.get('seeds')==='off')localStorage.removeItem('acresSeedsPrev');return localStorage.getItem('acresSeedsPrev')==='1';}catch(_){return q.get('seeds')==='preview';}})();
-document.getElementById('ch3Btn').hidden=!SEEDPREV;
+const SEEDS_LIVE=true; // CH 3 is public; set to false to hide it again (?seeds=preview still shows it)
+document.getElementById('ch3Btn').hidden=!(SEEDS_LIVE||SEEDPREV);
 // After 3 videos in a row with no tap, pause and ask (saves viewers' data).
 let autoRun=0;
 function nextAuto(){if(CH===2)playSong(stepSong(1),false);else play(nextShuffle(),true,true);}
@@ -848,7 +849,7 @@ document.getElementById('storyBtn').addEventListener('click',()=>{tv.pause();con
   if(c){try{const r=await tryCode(c);if(r){PASSKEYS=r.keys;passOn();}}catch(_){}}})();
 renderSongs();
 if(new URLSearchParams(location.search).get('album')==='2'){songCur=ALBUMS[1][0];openAlb=1;}
-if(SEEDPREV&&new URLSearchParams(location.search).get('ch')==='3'){CH=0;setChannel(3);renderSeeds();}else if(new URLSearchParams(location.search).get('ch')==='2'||new URLSearchParams(location.search).get('album')){CH=0;setChannel(2);CH=2;}else play(cur,false);
+if((SEEDS_LIVE||SEEDPREV)&&new URLSearchParams(location.search).get('ch')==='3'){CH=0;setChannel(3);renderSeeds();}else if(new URLSearchParams(location.search).get('ch')==='2'||new URLSearchParams(location.search).get('album')){CH=0;setChannel(2);CH=2;}else play(cur,false);
 tv.muted=true;tv.play().catch(()=>{});
 const snd=document.getElementById('sound');
 function unmute(){tv.muted=false;snd.hidden=true;tv.play().catch(()=>{});}
