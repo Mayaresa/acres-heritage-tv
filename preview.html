@@ -410,7 +410,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
     <aside class="desk" aria-label="Order fonio">
       <div class="k">NOW SELLING</div>
       <h3>DIM Fonio</h3>
-      <p class="note" id="priceNote">Club member pre-order price · Pick up at an ACRES Heritage Market stand</p>
+      <p class="note" id="priceNote">Club member price · Pick up at a market stand, or delivery (+ delivery cost)</p>
       <div class="prods">
         <div class="prod"><img src="media/bag.png" alt="5kg bag of DIM Fonio">
           <div class="pt"><b>5kg Family Bag</b><small>5 × 1kg packs in one bag</small></div><span class="pp"><i id="pBag">₵330</i><s id="wBag">₵375</s></span>
@@ -945,12 +945,14 @@ const HQ_NUM='12404080158';let AID=null;
 const orderNum=()=>AID?String(AID.wa).replace(/\D/g,''):HQ_NUM;
 // order form -> prefilled WhatsApp message (two products; prices depend on who the buyer came through)
 // Direct club members (no AID) get club prices; customers of an AID see the AID's retail prices.
-const PRICES={club:{bag:330,bagWas:350,case:670,caseWas:750,note:'Club member pre-order price · Pick up at an ACRES Heritage Market stand'},
+const PRICES={club:{bag:330,bagWas:350,case:670,caseWas:750,note:'Club member price · Pick up at a market stand, or delivery (+ delivery cost)'},
   aid:{bag:350,bagWas:0,case:75,caseWas:0,note:'Prices from your local distributor · Pickup or express delivery'}};
 // Club members buy wholesale (the case of 10); AID customers buy single 1kg packs.
 const TWO={club:{name:'1kg Case of 10',sub:'10 × 1kg packs · share or store',img:'media/case10.jpg',alt:'Case of ten 1kg packs of DIM Fonio',unit:'case'},aid:{name:'1kg Pack',sub:'A single 1kg pack · try it first',img:'media/pack1kg.png',alt:'1kg pack of DIM Fonio',unit:'pack'}};
 const Q={bag:1,case:0};
-const PR=()=>AID?PRICES.aid:PRICES.club;
+// An AID may set their own retail price in aids.json: price5 (₵330–₵350, default ₵350) and price1 (up to ₵75, default ₵75).
+const clamp=(v,lo,hi,d)=>{v=+v;return isFinite(v)&&v>0?Math.min(hi,Math.max(lo,v)):d;};
+const PR=()=>AID?Object.assign({},PRICES.aid,{bag:clamp(AID.price5,330,350,350),case:clamp(AID.price1,50,75,75)}):PRICES.club;
 function paintPrices(){const p=PR();document.getElementById('pBag').textContent='₵'+p.bag;document.getElementById('wBag').textContent=p.bagWas?'₵'+p.bagWas:'';
   document.getElementById('pCase').textContent='₵'+p.case;document.getElementById('wCase').textContent=p.caseWas?'₵'+p.caseWas:'';document.getElementById('priceNote').textContent=p.note;const t=AID?TWO.aid:TWO.club,im=document.getElementById('imgTwo');document.getElementById('nmTwo').textContent=t.name;document.getElementById('subTwo').textContent=t.sub;if(!im.src.endsWith(t.img)){im.src=t.img;im.alt=t.alt;im.classList.toggle('sq',!AID);}}
 (function(){
@@ -985,7 +987,7 @@ function paintPrices(){const p=PR();document.getElementById('pBag').textContent=
   upd();setTimeout(upd,1500);setTimeout(upd,4000);
 })();
 // AID Wholesale Corner: prices are encrypted; only the AID code opens them.
-const AIDBLOB={"s": "w994YJ8dCBWsW4ppBOXYZw==", "i": "n7lWSCYpokMkn5QJ", "c": "1Bo3UkUta1Bq0DC1Tg/7lEQpziC3v4mllUNWjdcWhrw02BJxLCXO/Bp8M96VHQk01yu2WuyVfNvDC1jxb0ivpQSpr0nEF1PlWc1wr8D0qc8h7rugHMkJC3TPR5PJ6JeAxFsU4bkJ077nUVVOnFSGr/WMGveRFlf7dnfzxogbuTomLty1gn+IyK+wL+OOHu5nBYoht2bx97Q353NHI2+KAduUR7e4MNIacqTfOhhz4UVlIwx7qCD8FMrztoffn4Z0/5U9FTFRfdyzYufoEypusy76bGCLD3m0f5USxxveSGDSQ+pAeHutv3He/mtATXvM5wCVcaxmOAmeRLvWv/flUbmMwLhxbslX7RVw5ioSbN+M9ZcQc4iGSrYj8ORw5Roe2kfA25+/Vi596djIX1juenq9nzoZZt1IfSuoM2tRjgtZoRq4dV+wUqmMpByTleIOKnfWHmqZh5ZbIuLYOOt9twRrNhKKK1pQYBtyyfN8WT4KwNQs2fnQ65ZZaFJpa567/KsNFPla1AIduUGZyExPlokA6f162Fkf71kdumdGx+d95S9ayf94mJSmlnb1Z86s4bG4C6bqnkL2zV2AZefuCc7fhMFJ02q+SUpX"};
+const AIDBLOB={"s": "80XRIXjUuEahW3dEQ4nWnw==", "i": "5+J7ANpr0Hvmbj9X", "c": "VWFFYvVv1v5Stu2MoI6y3bH1E9+OESdhIbf4qWfIRwvuEO7X3j8SAY17bLUcxKGePBRUFrnjpSRw2foZGs6dpRI2QXfOA0oYnN7EmdQjJZ0KS6F/VMYifg3KCfGsJfPpnlJhpK63mZO9BpD6+drPUF+trJncjIJJMJJQgUEmDt+YwJH1tfnmjrDr6EF8zAE85pMEU1QqsrhBInGyzab3guMjAS5d+pCvFxZZ4KEmtS2AwizNxlcw5gjUEqtaPNC3nez4abcodkAGFGb4CZE+B2B+QCbiQwQOsXNStrj8xVrSp+fDwlaP+HDmzDLoTWiHrLEV4Ul3Oc4UJ82mwZ/excf7B50s8dS+jzDJqoKAUTNoHzYBTu9b8+WW3MxboxuLua9nH1jvzbAJgVCJYnej03sSK2KbsVLNJ/qeiRhovf+3WAdqd0rDzl0Uej12yOEomusl6v4LwGa1ovTK0bd5FY6K+g3M8U1kmloKfuHqFRGI6b+4T99NfbYuaBy+o+FSLJ4iNSEsAzj6wvstEWK0A3N8BucUFQMc/YmDRm2xvsVTV8Um+XlbDXb0MW2QEi95y3aPFWlS/cabMogD2/ee"};
 (function(){
   const M=document.getElementById('aidModal');let items=null,AQ={};
   const b64=x=>Uint8Array.from(atob(x),c=>c.charCodeAt(0));
