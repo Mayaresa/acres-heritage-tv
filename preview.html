@@ -413,9 +413,9 @@ footer{color:var(--muted);font-size:13px;text-align:center}
         <div class="prod"><img src="media/bag.png" alt="5kg bag of DIM Fonio">
           <div class="pt"><b>5kg Family Bag</b><small>5 × 1kg packs in one bag</small></div><span class="pp"><i id="pBag">₵330</i><s id="wBag">₵375</s></span>
           <div class="step"><button type="button" data-it="bag" data-d="-1" aria-label="One bag fewer">−</button><output id="qBag">1</output><button type="button" data-it="bag" data-d="1" aria-label="One bag more">+</button></div></div>
-        <div class="prod"><img src="media/case10.jpg" alt="Case of ten 1kg packs of DIM Fonio" class="sq">
-          <div class="pt"><b>1kg Case of 10</b><small>10 × 1kg packs · share or store</small></div><span class="pp"><i id="pCase">₵670</i><s id="wCase">₵750</s></span>
-          <div class="step"><button type="button" data-it="case" data-d="-1" aria-label="One case fewer">−</button><output id="qCase">0</output><button type="button" data-it="case" data-d="1" aria-label="One case more">+</button></div></div>
+        <div class="prod"><img id="imgTwo" src="media/case10.jpg" alt="Case of ten 1kg packs of DIM Fonio" class="sq">
+          <div class="pt"><b id="nmTwo">1kg Case of 10</b><small id="subTwo">10 × 1kg packs · share or store</small></div><span class="pp"><i id="pCase">₵670</i><s id="wCase">₵750</s></span>
+          <div class="step"><button type="button" data-it="case" data-d="-1" aria-label="One fewer">−</button><output id="qCase">0</output><button type="button" data-it="case" data-d="1" aria-label="One more">+</button></div></div>
       </div>
       <form class="order" id="order" novalidate>
         <fieldset class="how"><legend class="fl">How do you want it?</legend>
@@ -461,7 +461,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
       <h3 id="standsH">ACRES Heritage Market Stands</h3>
       <p class="st-lead">Look out for our kente-topped market stands in communities and markets across Accra.</p>
       <div class="st-feats">
-        <div class="sf"><span>🌾</span><b>Fonio all year round</b><small>DIM Fonio on display every day, in 5kg family bags and 1kg cases.</small></div>
+        <div class="sf"><span>🌾</span><b>Fonio all year round</b><small>DIM Fonio on display every day, in 5kg family bags and 1kg packs.</small></div>
         <div class="sf"><span>🥣</span><b>Free fonio tasting</b><small>Taste before you buy. Fonio tasting every Friday at our stands.</small></div>
         <div class="sf"><span>🗓️</span><b>Seasonal heritage foods</b><small>Pre-order seasonal foods and pick them up at your market stand.</small></div>
       </div>
@@ -945,18 +945,20 @@ const orderNum=()=>AID?String(AID.wa).replace(/\D/g,''):HQ_NUM;
 // order form -> prefilled WhatsApp message (two products; prices depend on who the buyer came through)
 // Direct club members (no AID) get club prices; customers of an AID see the AID's retail prices.
 const PRICES={club:{bag:330,bagWas:375,case:670,caseWas:750,note:'Club member prices · Pickup or express delivery'},
-  aid:{bag:350,bagWas:375,case:750,caseWas:0,note:'Prices from your local distributor · Pickup or express delivery'}};
+  aid:{bag:350,bagWas:375,case:75,caseWas:0,note:'Prices from your local distributor · Pickup or express delivery'}};
+// Club members buy wholesale (the case of 10); AID customers buy single 1kg packs.
+const TWO={club:{name:'1kg Case of 10',sub:'10 × 1kg packs · share or store',img:'media/case10.jpg',alt:'Case of ten 1kg packs of DIM Fonio',unit:'case'},aid:{name:'1kg Pack',sub:'A single 1kg pack · try it first',img:'media/pack1kg.jpg',alt:'1kg pack of DIM Fonio',unit:'pack'}};
 const Q={bag:1,case:0};
 const PR=()=>AID?PRICES.aid:PRICES.club;
 function paintPrices(){const p=PR();document.getElementById('pBag').textContent='₵'+p.bag;document.getElementById('wBag').textContent=p.bagWas?'₵'+p.bagWas:'';
-  document.getElementById('pCase').textContent='₵'+p.case;document.getElementById('wCase').textContent=p.caseWas?'₵'+p.caseWas:'';document.getElementById('priceNote').textContent=p.note;}
+  document.getElementById('pCase').textContent='₵'+p.case;document.getElementById('wCase').textContent=p.caseWas?'₵'+p.caseWas:'';document.getElementById('priceNote').textContent=p.note;const t=AID?TWO.aid:TWO.club,im=document.getElementById('imgTwo');document.getElementById('nmTwo').textContent=t.name;document.getElementById('subTwo').textContent=t.sub;if(!im.src.endsWith(t.img)){im.src=t.img;im.alt=t.alt;}}
 (function(){
   const tot=document.getElementById('tot');
   const how=()=>document.querySelector('input[name=how]:checked').value;
   function upd(){paintPrices();const p=PR();document.getElementById('qBag').textContent=Q.bag;document.getElementById('qCase').textContent=Q.case;
     const t=Q.bag*p.bag+Q.case*p.case;tot.innerHTML='₵'+t+(how()==='delivery'?'<small>+ delivery cost</small>':'');document.getElementById('delNote').hidden=how()!=='delivery';document.getElementById('addrWrap').hidden=how()!=='delivery';return t;}
   window.updOrder=upd;
-  document.querySelectorAll('.prod .step button').forEach(b=>b.onclick=()=>{const it=b.dataset.it,d=+b.dataset.d;Q[it]=Math.max(0,Math.min(20,Q[it]+d));upd();});
+  document.querySelectorAll('.prod .step button').forEach(b=>b.onclick=()=>{const it=b.dataset.it,d=+b.dataset.d;Q[it]=Math.max(0,Math.min(it==='case'&&AID?50:20,Q[it]+d));upd();});
   document.querySelectorAll('input[name=how]').forEach(r=>r.addEventListener('change',upd));
   document.getElementById('order').addEventListener('submit',e=>{
     e.preventDefault();
@@ -969,7 +971,7 @@ function paintPrices(){const p=PR();document.getElementById('pBag').textContent=
     const t=upd(),p=PR(),d=how()==='delivery',addr=document.getElementById('addr').value.trim();
     const lines=['*NEW ORDER · ACRES Heritage TV*','','Name: '+nm.value.trim(),'Phone: '+ph.value.trim()];
     if(Q.bag)lines.push('5kg Family Bag: '+Q.bag+' × ₵'+p.bag+' = ₵'+(Q.bag*p.bag));
-    if(Q.case)lines.push('1kg Case of 10: '+Q.case+' × ₵'+p.case+' = ₵'+(Q.case*p.case));
+    if(Q.case)lines.push((AID?TWO.aid:TWO.club).name+': '+Q.case+' × ₵'+p.case+' = ₵'+(Q.case*p.case));
     lines.push('Receive: '+(d?'Express delivery (please confirm delivery cost)':'Easy pickup'),'Zone: '+document.getElementById('zone').value);
     if(gift){lines[0]='*NEW DIASPORA ORDER · ACRES Heritage TV*';lines.push('Send to: '+rnm.value.trim(),'Recipient phone: '+rph.value.trim());}
     if(d)lines.push('Address/landmark: '+(addr||'(will share)'));
