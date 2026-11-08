@@ -279,6 +279,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
 .channels .ch.pass{padding:8px 6px 9px;font-size:12px;letter-spacing:.5px}
 .channels .ch.pass .n{color:inherit;opacity:.75}
 .wf-vid{position:relative}.wf-shield{position:absolute;inset:0;z-index:2;cursor:pointer;display:flex;align-items:center;justify-content:center}.wf-shield span{display:none;width:64px;height:64px;border-radius:50%;background:var(--lemon);color:#272727;font-size:28px;font-weight:900;align-items:center;justify-content:center;padding-left:4px}.wf-shield.paused{background:rgba(0,0,0,.45)}.wf-shield.paused span{display:flex}
+.yt-nano{position:absolute;right:10px;bottom:58px;z-index:3;display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;filter:drop-shadow(0 4px 8px rgba(0,0,0,.6));transition:transform .2s}.yt-nano:hover{transform:scale(1.06)}.yt-nano img{width:clamp(38px,9vw,64px);height:auto}.yt-nano span{background:#80CD29;color:#17200f;font-weight:900;font-size:10px;border-radius:999px;padding:2px 7px;white-space:nowrap}.ytbox.ad .yt-nano{display:none}
 </style>
 
 <div class="wrap">
@@ -317,7 +318,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
         <div class="st-bar"><button type="button" id="stPlay" aria-label="Play">▶</button><div class="st-prog" id="stProg"><i id="stFill"></i></div><span id="stTime">0:00</span></div>
       </div>
       <div class="ytbox" id="ytBox" hidden><div id="ytP"></div>
-        <div class="yt-shield" id="ytShield"></div>
+        <div class="yt-shield" id="ytShield"></div><a class="yt-nano" id="ytNano" href="https://www.acresagriculture.com" target="_blank" rel="noopener" aria-label="ACRES Nano Organic Fertilizer: learn more at acresagriculture.com"><img src="media/nano-acre.png" alt=""><span>ACRES Nano ›</span></a>
         <div class="yt-logo"><img src="media/acres-badge.png" alt="ACRES: Our food. Our future"></div>
         <div class="yt-pause" id="ytPause"><span class="yp-btn">▶</span><b id="ypTitle"></b><small>CH 3 · HERITAGE SEEDS</small></div>
         <div class="st-bar yt-bar"><button type="button" id="ytPlay" aria-label="Play">▶</button><div class="st-prog" id="ytProg"><i id="ytFill"></i></div><span id="ytTime">0:00</span></div>
@@ -710,6 +711,7 @@ async function playSeed(q,auto){seedCur=q;sdClear();$s('sdEnd').hidden=true;cons
 function ytState(){try{return ytPlayer&&ytPlayer.getPlayerState?ytPlayer.getPlayerState():-1;}catch(_){return -1;}}
 function ytPaint(st){const playing=st===1||st===3;$s('ytPause').hidden=playing||st===0;$s('ytPlay').textContent=playing?'❚❚':'▶';}
 function ytToggle(){if(!ytPlayer||!ytPlayer.playVideo)return;const st=ytState();if(st===1||st===3)ytPlayer.pauseVideo();else{if(ytPlayer.unMute)ytPlayer.unMute();ytPlayer.playVideo();}}
+document.getElementById('ytNano').addEventListener('click',()=>track('nano_tv_badge_click',{}));
 $s('ytShield').onclick=ytToggle;$s('ytPause').onclick=ytToggle;$s('ytPlay').onclick=ytToggle;
 $s('ytProg').onclick=e=>{if(!ytPlayer||!ytPlayer.getDuration)return;const r=e.currentTarget.getBoundingClientRect();ytPlayer.seekTo((e.clientX-r.left)/r.width*ytPlayer.getDuration(),true);};
 setInterval(()=>{if(CH!==3||!ytPlayer||!ytPlayer.getCurrentTime)return;const t=ytPlayer.getCurrentTime()||0,d=ytPlayer.getDuration()||0;$s('ytFill').style.width=(d?t/d*100:0)+'%';$s('ytTime').textContent=fmtT(t)+' / '+fmtT(d);},500);
