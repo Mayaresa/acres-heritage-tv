@@ -301,6 +301,11 @@ footer{color:var(--muted);font-size:13px;text-align:center}
 .st-feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
 .sf{background:rgba(255,255,255,.06);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:3px}
 .sf span{font-size:24px}.sf b{color:var(--lemon);font-size:15px}.sf small{color:#dfe5d6;font-size:13px;line-height:1.35}
+
+.nano .nano-why{margin:0;font-size:15px;line-height:1.4}.badges{display:flex;flex-wrap:wrap;gap:6px}.badges span{background:#17200f;color:#c8ff7a;font-weight:800;font-size:12px;border-radius:999px;padding:5px 10px}
+.rst{display:block;background:#17200f;color:#fff;border-radius:14px;padding:12px 14px;text-decoration:none}.rst.hot{box-shadow:0 0 0 3px var(--lemon)}.rst b{display:block;color:var(--lemon);font-size:16px}.rst span{font-size:13px;color:#dfe5d6}
+.np-note{background:rgba(255,255,255,.6);border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.35}
+.am-rw{margin-top:12px;border-top:2px solid #e5e5e5;padding-top:10px}.am-rw p{margin:4px 0;font-size:14px}
 </style>
 
 <div class="wrap">
@@ -394,7 +399,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
         <div class="shop-k">WELCOME TO</div>
         <div class="shop-tw"><h2 class="shop-t" id="shopT">ACRES <span>HERITAGE</span> MARKET</h2>
         <div class="shop-w">Wholesale Club</div></div>
-        <p>Heritage foods from our indigenous seeds. <b>Order below</b> from your local distributor.</p>
+        <p id="shopLine">Heritage foods from our indigenous seeds. <b>Order below</b> from your local distributor.</p>
       </div>
     </div>
     <div class="awning thin"></div>
@@ -457,7 +462,37 @@ footer{color:var(--muted);font-size:13px;text-align:center}
     </aside>
   </div>
 
-    <section class="stands" aria-labelledby="standsH">
+
+    <aside class="desk nano" id="nanoDesk" aria-label="Order ACRES Nano" hidden>
+      <div class="k">NOW SELLING · FOR FARMERS &amp; GARDENERS</div>
+      <h3>ACRES Nano Organic Fertilizer</h3>
+      <p class="nano-why">To make sure our foods grow in clean, living soil, our Heritage Garden Packs come with ACRES Nano Organic Fertilizer. <b>Start your soil today.</b></p>
+      <div class="badges"><span>✔ University of Ghana tested</span><span>✔ PPRSD approved (MoFA)</span><span>✔ OMRI-listed organic</span></div>
+      <div class="prods">
+        <div class="prod"><img src="media/nano-acre.png" alt="ACRES Nano 1 Acre Farm Pack">
+          <div class="pt"><b>1 Acre Farm Pack</b><small>10 capsules · treats 1 acre</small></div><span class="pp"><i>₵600</i></span>
+          <div class="step"><button type="button" data-n="acre" data-d="-1" aria-label="One fewer">−</button><output id="nqAcre">1</output><button type="button" data-n="acre" data-d="1" aria-label="One more">+</button></div></div>
+        <div class="prod"><img src="media/nano-garden.png" alt="ACRES Nano Garden Pack">
+          <div class="pt"><b>Heritage Garden Pack</b><small>3 capsules + 2 heritage seed varieties of your choice</small></div><span class="pp"><i>₵295</i></span>
+          <div class="step"><button type="button" data-n="garden" data-d="-1" aria-label="One fewer">−</button><output id="nqGarden">0</output><button type="button" data-n="garden" data-d="1" aria-label="One more">+</button></div></div>
+        <div class="prod"><img src="media/nano-garden.png" alt="ACRES Nano Garden Fertilizer Pack">
+          <div class="pt"><b>Garden Fertilizer Pack</b><small>3 capsules · fertilizer only</small></div><span class="pp"><i>₵195</i></span>
+          <div class="step"><button type="button" data-n="gfert" data-d="-1" aria-label="One fewer">−</button><output id="nqGfert">0</output><button type="button" data-n="gfert" data-d="1" aria-label="One more">+</button></div></div>
+      </div>
+      <a class="rst" id="rstBtn" href="https://api.whatsapp.com/send?phone=233208168917&amp;text=Hello%20RST%2C%20I%27d%20like%20ACRES%20Nano%20Organic%20Fertilizer%20for%2010%2B%20acres." target="_blank" rel="noopener"><b>Farming 10 acres or more?</b><span>Bulk orders are handled by RST, our national distributor · WhatsApp RST ›</span></a>
+      <form class="order" id="nanoOrder" novalidate>
+        <div class="np-note">🚚 <b>Pre-order · Pre-pay · Delivery only.</b> We confirm your order and delivery cost, you pay by MoMo, then we deliver.</div>
+        <label class="fld" id="seedWrap" hidden><span class="fl">Your 2 seed choices (Garden Pack)</span><input id="nSeeds" type="text" placeholder="e.g. Frafra potato, dwarf okro"></label>
+        <label class="fld"><span class="fl">Delivery town, region and landmark</span><input id="nAddr" type="text" placeholder="e.g. Tamale, Northern Region, near the main market"></label>
+        <label class="fld"><span class="fl">Your name</span><input id="nNm" type="text" autocomplete="name"></label>
+        <label class="fld"><span class="fl">Your phone (WhatsApp)</span><input id="nPh" type="tel" inputmode="tel" placeholder="e.g. 024 123 4567"></label>
+        <div class="total"><span>Total</span><b id="nTot">₵600</b></div>
+        <p class="err" id="nErr" hidden></p>
+        <button class="send" type="submit">Send my pre-order on WhatsApp</button>
+        <p class="note small">Plus delivery cost, confirmed with you before you pay.</p>
+      </form>
+    </aside>
+    <section class="stands" id="standsSec" aria-labelledby="standsH">
       <div class="st-k">COMING TO YOUR COMMUNITY</div>
       <h3 id="standsH">ACRES Heritage Market Stands</h3>
       <p class="st-lead">Look out for our kente-topped market stands in communities and markets across Ghana, starting in Accra.</p>
@@ -469,7 +504,32 @@ footer{color:var(--muted);font-size:13px;text-align:center}
     </section>
   </div>
 
-  <section class="guide learn" aria-label="Learn about fonio">
+
+  <section class="guide learn" id="learnAcres" aria-label="Learn about ACRES Nano" hidden>
+    <div class="learn-h">LEARN ABOUT ACRES NANO</div>
+    <details class="whatf" open><summary><img src="media/nano-acre.png" alt="" width="56" height="56" style="object-fit:contain;background:#fff"><span><b>What is ACRES Nano?</b><small>Organic fertilizer for living soil · tap to read</small></span><i aria-hidden="true">＋</i></summary>
+      <div class="wf-body">
+        <img class="wf-hero" src="media/nano-farm.jpg" alt="Mixing ACRES Nano into a knapsack sprayer on a vegetable farm in Ghana" loading="lazy">
+        <p>ACRES Nano Organic Fertilizer brings life back into the soil. It feeds and multiplies the soil's own beneficial microorganisms, which break down plant residues, build organic matter and turn nutrients into a form plants can take up.</p>
+        <div class="wf-stats"><div><b>10</b><span>capsules treat 1 acre</span></div><div><b>48 hrs</b><span>to activate in water</span></div><div><b>1-0.1-5.5</b><span>NPK (organic)</span></div></div>
+        <ul><li><b>Less to carry, more to grow:</b> a small pack replaces heavy bags</li><li><b>Stronger roots</b> and better water holding in the soil</li><li><b>Works with what you already use:</b> sprayer, drip, hose or watering can</li><li><b>Soil improves season after season</b></li></ul></div></details>
+    <details class="whatf hist"><summary><span class="hico" aria-hidden="true">🎓</span><span><b>Proven in Ghana</b><small>University of Ghana field trial · tap to read</small></span><i aria-hidden="true">＋</i></summary>
+      <div class="wf-body">
+        <p>The Department of Crop Science, University of Ghana, Legon, tested ACRES Nano on lettuce in 2023. At the recommended rate it performed <b>as well as NPK 15:15:15 chemical fertilizer</b>, with no significant difference in leaves, chlorophyll or plant weight.</p>
+        <div class="wf-stats"><div><b>+50%</b><span>more leaves than no fertilizer</span></div><div><b>+37%</b><span>heavier plants than no fertilizer</span></div><div><b>= NPK</b><span>same growth as 15:15:15</span></div></div>
+        <p>After this trial, ACRES Nano was approved for distribution in Ghana by PPRSD, Ministry of Food and Agriculture. It is also OMRI-listed for organic production in the USA.</p>
+        <p class="wf-note">Source: University of Ghana, Dept. of Crop Science, field evaluation on lettuce, May–July 2023.</p></div></details>
+    <details class="whatf hist"><summary><span class="hico" aria-hidden="true">💧</span><span><b>How to use it</b><small>Activate · Dilute · Apply</small></span><i aria-hidden="true">＋</i></summary>
+      <div class="wf-body"><ol class="tl">
+        <li><em>Step 1</em><b>Activate</b><span>Put each capsule in about 60 ml of non-chlorinated water (rain, borehole or bottled water) in a bottle. Shake to dissolve, loosen the cap and leave for 48 hours in a cool place out of the sun.</span></li>
+        <li><em>Step 2</em><b>Dilute</b><span>Mix the activated liquid with more water. For a garden or small plot, add about 60 ml of activated ACRES to 8 litres of water in a knapsack sprayer.</span></li>
+        <li><em>Step 3</em><b>Apply</b><span>Spray or water it onto the soil before planting, on seeds and seedlings, and on the leaves as plants grow. Use within 10 days of activating.</span></li></ol>
+        <p class="wf-note">Store capsules in a cool, dry place out of direct sunlight. Not for human consumption. Keep out of reach of children. For your crop and land size, ask your ACRES representative.</p></div></details>
+    <details class="whatf hist"><summary><span class="hico" aria-hidden="true">🌿</span><span><b>What's inside, and is it safe?</b><small>Natural ingredients · tap to read</small></span><i aria-hidden="true">＋</i></summary>
+      <div class="wf-body"><ul><li><b>Sea kelp</b>, the source of its natural potash</li><li><b>Humic and fulvic acids</b></li><li><b>Enzymes and beneficial soil microbes</b></li><li><b>Guaranteed analysis:</b> Nitrogen 1.0%, Phosphate 0.1%, Soluble Potash 5.5%</li></ul>
+        <p>Tested as not toxic, not corrosive and not an irritant. Safe to handle and store, with no special disposal needed.</p></div></details>
+  </section>
+  <section class="guide learn" id="learnFonio" aria-label="Learn about fonio">
     <div class="learn-h">LEARN ABOUT FONIO</div>
     <details class="whatf" id="whatF"><summary><img src="media/fonio-grain.jpg" alt="Raw fonio grain" width="56" height="56"><span><b>What is fonio?</b><small>Africa's ancient grain · tap to learn</small></span><i aria-hidden="true">＋</i></summary>
       <div class="wf-body">
@@ -507,6 +567,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
       <p class="err" id="amMin" hidden></p>
       <button class="send" type="button" id="amSend">Send stock order to ACRES HQ</button>
       <p class="note small" id="amNote"></p>
+      <div class="am-rw" id="amRewards" hidden></div>
     </div>
   </div>
 </div>
@@ -987,7 +1048,7 @@ function paintPrices(){const p=PR();document.getElementById('pBag').textContent=
   upd();setTimeout(upd,1500);setTimeout(upd,4000);
 })();
 // AID Wholesale Corner: prices are encrypted; only the AID code opens them.
-const AIDBLOB={"s": "80XRIXjUuEahW3dEQ4nWnw==", "i": "5+J7ANpr0Hvmbj9X", "c": "VWFFYvVv1v5Stu2MoI6y3bH1E9+OESdhIbf4qWfIRwvuEO7X3j8SAY17bLUcxKGePBRUFrnjpSRw2foZGs6dpRI2QXfOA0oYnN7EmdQjJZ0KS6F/VMYifg3KCfGsJfPpnlJhpK63mZO9BpD6+drPUF+trJncjIJJMJJQgUEmDt+YwJH1tfnmjrDr6EF8zAE85pMEU1QqsrhBInGyzab3guMjAS5d+pCvFxZZ4KEmtS2AwizNxlcw5gjUEqtaPNC3nez4abcodkAGFGb4CZE+B2B+QCbiQwQOsXNStrj8xVrSp+fDwlaP+HDmzDLoTWiHrLEV4Ul3Oc4UJ82mwZ/excf7B50s8dS+jzDJqoKAUTNoHzYBTu9b8+WW3MxboxuLua9nH1jvzbAJgVCJYnej03sSK2KbsVLNJ/qeiRhovf+3WAdqd0rDzl0Uej12yOEomusl6v4LwGa1ovTK0bd5FY6K+g3M8U1kmloKfuHqFRGI6b+4T99NfbYuaBy+o+FSLJ4iNSEsAzj6wvstEWK0A3N8BucUFQMc/YmDRm2xvsVTV8Um+XlbDXb0MW2QEi95y3aPFWlS/cabMogD2/ee"};
+const AIDBLOB={"s": "NV+aSimVQd23pbpE8g42BA==", "i": "4Atff0rsrHermfPD", "c": "XuYUhmDdWThwTTzp475gkFNXSYn8pT7Af59kwRjip3WXiMPNVLSwVeKAl001jrXWDlTTVZhNvbDhwQGqFKkwqZOnJFGMEdete/ufy2aFXLzJnFs5CNig0spFM4czSLFYIItR1njrmS1EjgPEogFuJIrC0NOdKo52U8Ndp6YOGurleWTw9ZwRIDQ05lEc2k1a4GOKB9ZwswE/HZZ8s3u9QwCxigl5LbTWnDJjAphhn8RnI/QrYzlHI1+7ZHcG/mAQg+R50LwyogNAgQDMKVCtHbfUsHeV/NeA2bVQkVigzne/G84xNMs4fNwl32Zv9IJbUhyBJAWru1wHUN42fsjVyqTgZhf59obYL9vFooKYPTI4Oepcfc0sorqiN/ZH1fN4B4uxpXcSc37ODR1oCsCmLO+xnqTW/eLqmrz42h67fIPJ2YrTYjo2VHWvw1sTdv0uAp0xpPnBG7kyPq18p3zZYuuskgHLAQ1fc+fOa6PuM7dlh/BWPSiLBucVujPWxWJbxRRnmJ2SwgnRsIRxOINHjP5I/SGiCeBalP5ln4suKi5LKVDN/6Agoub2+53EE9HEKNL5F+FDoJL+hFcfmVdc7LZduvA+wE3zS3KRE3HcVmqXR1hzv+kw4LBDHK3wykr+47wMYC4euXKhWaCcxt2xvQJaYizZZYLwtsummDMZ/f7gXPYjYs+IFZWc9mHDiADrBT1gruuqNobS3AKf57rk1qzQ6r2FXfPpYUJHqvd0d51xmmaAaJGYIys+E0OTEm0Y0uD+8KL9CXWMJXNBCLBVx29bHkN0+Ut2M9S6SJT81zwzxU5GsqAKws+24Xx8G/jeUSpqTzqvjHG77WnIiS2xaaNP98EtEBh08FKtFCww9g+KWsg2wB3gBFeuyOaKm3kG7r0zgyZgEQvi4boGbMo="};
 (function(){
   const M=document.getElementById('aidModal');let items=null,AQ={};
   const b64=x=>Uint8Array.from(atob(x),c=>c.charCodeAt(0));
@@ -1001,7 +1062,7 @@ const AIDBLOB={"s": "80XRIXjUuEahW3dEQ4nWnw==", "i": "5+J7ANpr0Hvmbj9X", "c": "V
       r.innerHTML='<div class="pt"><b></b><small></small><span class="pp"><i></i></span><em></em></div><div class="step"><button type="button" data-d="-1">−</button><output id="aq_'+it.id+'"></output><button type="button" data-d="1">+</button></div>';
       r.querySelector('b').textContent=it.name;r.querySelector('small').textContent=it.sub+' · minimum '+it.min+' '+it.unit+(it.min>1?'s':'');r.querySelector('i').textContent='₵'+it.price+' a '+it.unit;r.querySelector('em').textContent=it.retail;
       r.querySelectorAll('button').forEach(bt=>bt.onclick=()=>{AQ[it.id]=Math.max(0,Math.min(200,(AQ[it.id]||0)+ +bt.dataset.d));tot();});box.appendChild(r);});
-    document.getElementById('amNote').textContent=d.note;if(AID)document.getElementById('amName').value=AID.name;
+    document.getElementById('amNote').textContent=d.note;if(d.rewards){const rw=document.getElementById('amRewards');rw.innerHTML='<div class="fl">REFERRAL REWARDS · ACRES NANO</div>';d.rewards.forEach(t=>{const li=document.createElement('p');li.textContent='• '+t;rw.appendChild(li);});rw.hidden=false;}if(AID)document.getElementById('amName').value=AID.name;
     document.getElementById('amLock').hidden=true;document.getElementById('amOpen').hidden=false;tot();}
   document.getElementById('aidCornerBtn').onclick=()=>{M.hidden=false;track('aid_corner_open',{});};
   document.getElementById('amClose').onclick=()=>M.hidden=true;M.addEventListener('click',e=>{if(e.target===M)M.hidden=true;});
@@ -1014,6 +1075,31 @@ const AIDBLOB={"s": "80XRIXjUuEahW3dEQ4nWnw==", "i": "5+J7ANpr0Hvmbj9X", "c": "V
     lines.push('*Total: ₵'+r.t+'*');track('aid_stock_order',{value:r.t,currency:'GHS'});
     const a=document.createElement('a');a.href='https://api.whatsapp.com/send?phone='+HQ_NUM+'&text='+encodeURIComponent(lines.join('\n'));a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove();};
 })();
+
+// ===== CH 3 swaps the market: ACRES Nano for farmers & gardeners; fonio stays on CH 1 & 2 =====
+const NANO={acre:{n:'1 Acre Farm Pack (10 capsules)',p:600,q:1},garden:{n:'Heritage Garden Pack (3 capsules + 2 seeds)',p:295,q:0},gfert:{n:'Garden Fertilizer Pack (3 capsules)',p:195,q:0}};
+function nanoUpd(){let t=0;for(const k in NANO){t+=NANO[k].q*NANO[k].p;document.getElementById('nq'+k.charAt(0).toUpperCase()+k.slice(1)).textContent=NANO[k].q;}
+  document.getElementById('nTot').innerHTML='₵'+t+'<small>+ delivery cost</small>';document.getElementById('seedWrap').hidden=!NANO.garden.q;
+  const big=NANO.acre.q>=10;document.getElementById('rstBtn').classList.toggle('hot',big);return t;}
+document.querySelectorAll('#nanoDesk .step button').forEach(b=>b.onclick=()=>{const k=b.dataset.n;NANO[k].q=Math.max(0,Math.min(k==='acre'?9:20,NANO[k].q+ +b.dataset.d));
+  if(k==='acre'&&+b.dataset.d>0&&NANO.acre.q===9){document.getElementById('nErr').textContent='For 10 acres or more, please contact RST (button above) for bulk supply.';document.getElementById('nErr').hidden=false;}nanoUpd();});
+document.getElementById('nanoOrder').addEventListener('submit',e=>{e.preventDefault();const err=document.getElementById('nErr');
+  const f=['nNm','nPh','nAddr'].map(id=>document.getElementById(id));const miss=f.filter(i=>!i.value.trim());f.forEach(i=>i.classList.toggle('bad',!i.value.trim()));
+  const none=!(NANO.acre.q+NANO.garden.q+NANO.gfert.q);err.textContent=none?'Please choose at least one pack.':'Please add your name, phone and delivery location.';err.hidden=!(none||miss.length);if(none||miss.length)return;
+  const t=nanoUpd();const L=['*ACRES NANO PRE-ORDER · ACRES Heritage TV (CH 3)*','','Name: '+f[0].value.trim(),'Phone: '+f[1].value.trim()];
+  for(const k in NANO)if(NANO[k].q)L.push(NANO[k].n+': '+NANO[k].q+' × ₵'+NANO[k].p+' = ₵'+(NANO[k].q*NANO[k].p));
+  if(NANO.garden.q)L.push('Seed choices: '+(document.getElementById('nSeeds').value.trim()||'(will choose)'));
+  L.push('Deliver to: '+f[2].value.trim(),'*Total: ₵'+t+' + delivery (please confirm)*','Payment: pre-pay by MoMo before delivery');
+  L.push(AID?'Referred by AID: '+AID.name+' ('+AID.slug+')':'Referred by: none (direct)');
+  track('nano_preorder',{value:t,currency:'GHS',acres:NANO.acre.q,garden:NANO.garden.q,gfert:NANO.gfert.q});
+  const a=document.createElement('a');a.href='https://api.whatsapp.com/send?phone='+HQ_NUM+'&text='+encodeURIComponent(L.join('\n'));a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove();});
+const SHOPLINE=document.getElementById('shopLine').innerHTML;
+function applyCh3(n){const three=n===3;
+  document.querySelector('.desk:not(.nano)').hidden=three;document.getElementById('nanoDesk').hidden=!three;
+  document.getElementById('standsSec').hidden=three;document.getElementById('learnFonio').hidden=three;document.getElementById('learnAcres').hidden=!three;
+  document.getElementById('shopLine').innerHTML=three?'Clean, living soil for your farm and garden. <b>Pre-order below</b> for delivery.':SHOPLINE;}
+const _setCh=setChannel;setChannel=function(n){_setCh(n);applyCh3(n);};
+nanoUpd();applyCh3(CH);
 </script>
 
 </body></html>
