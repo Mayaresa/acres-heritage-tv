@@ -1,0 +1,1014 @@
+<!doctype html>
+<html lang="en"><head>
+<meta name="robots" content="noindex,nofollow"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BCE47V4Y57"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BCE47V4Y57',{anonymize_ip:true});
+function track(name,params){try{params=params||{};if(window.ACRES_AID)params.aid=window.ACRES_AID;gtag('event',name,params);}catch(_){}}</script>
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="media/apple-touch-icon.png"><link rel="icon" type="image/png" href="media/icon-192.png"><meta name="apple-mobile-web-app-title" content="ACRES TV"><meta name="theme-color" content="#272727"><meta property="og:title" content="ACRES HERITAGE TV"><meta property="og:description" content="Watch this week's fonio episode free. Unlock all 31 with your Season Pass."><meta property="og:image" content="https://mayaresa.github.io/acres-heritage-tv/media/share.jpg"><meta property="og:image:width" content="720"><meta property="og:image:height" content="900"><meta property="og:url" content="https://mayaresa.github.io/acres-heritage-tv/"><meta property="og:type" content="website">
+<style>html,body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>ACRES Heritage TV</title>
+
+</head><body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Outfit:wght@400;600;800;900&display=swap">
+<style>
+/* Layout: a TV set (green bezel) on a charcoal studio wall, a news ticker under the screen, then the programme guide and the order desk */
+:root{
+  --wall:#1f1f1f; --panel:#272727; --panel-2:#303030; --line:#3d3f3a;
+  --fg:#f4f6f1; --muted:#a9afa3; --green:#80CD29; --green-ink:#1d2a0c; --lemon:#FFF200;
+  --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif; --body:"Outfit","Segoe UI",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{background:var(--wall);color:var(--fg)}
+body{font-family:var(--body);font-size:16px;line-height:1.45;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 40px}
+.wrap{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--lemon);outline-offset:2px}
+
+/* station bar */
+.station{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.brand{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+@media (max-width:760px){.brand{width:100%}}
+.brand b{font-family:var(--display);font-weight:800;font-size:28px;line-height:1;letter-spacing:.5px}
+.brand b span{color:var(--green)}
+.bname{display:inline-flex;flex-direction:column;align-items:center;text-align:center}
+.brand small{display:block;font-weight:600;font-size:14px;letter-spacing:.2px;color:var(--muted);margin-top:3px}
+.blogo{flex:none;width:clamp(50px,13vw,60px);height:auto;border-radius:50%;box-shadow:0 0 0 2px #c9a24a}
+.dot{width:12px;height:12px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(128,205,41,.2)}
+.channels{display:flex;gap:8px;flex-wrap:wrap}
+.ch{display:flex;align-items:center;gap:8px;border:2px solid var(--line);border-radius:999px;padding:5px 14px 5px 5px;font-weight:800;font-size:13px;letter-spacing:1px;background:transparent;cursor:default}
+.ch img{width:28px;height:28px;border-radius:50%}
+.ch.on{border-color:var(--green);background:rgba(128,205,41,.1)}
+.ch{cursor:pointer;color:inherit;font-family:inherit}.ch2i{width:28px;height:28px;border-radius:50%;background:var(--lemon);display:flex;align-items:center;justify-content:center;font-size:15px}
+.alb-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.folder{position:relative;background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:10px;cursor:pointer;display:flex;flex-direction:column;gap:8px}.folder.live{border-color:var(--lemon)}.mosaic{display:grid;grid-template-columns:1fr 1fr;gap:3px;border-radius:10px;overflow:hidden;aspect-ratio:1}.mosaic img{width:100%;height:100%;object-fit:cover;display:block}.f-txt b{display:block;font-family:var(--display);font-size:18px}.f-txt small{display:block;color:var(--muted);font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase}.f-txt em{display:block;font-style:normal;font-size:12px;font-weight:800;color:var(--green);margin-top:2px}.folder.live .f-txt em{color:var(--lemon)}.f-play{font:inherit;font-weight:900;background:var(--lemon);color:#141414;border:0;border-radius:10px;padding:9px;cursor:pointer}.alb-head{display:flex;align-items:center;gap:8px}.alb-head b{flex:1;font-family:var(--display);font-size:16px;text-align:center}.alb-back,.alb-play{font:inherit;font-weight:900;border:0;border-radius:10px;padding:9px 12px;cursor:pointer;white-space:nowrap}.alb-back{background:var(--panel-2);color:var(--fg)}.alb-play{background:var(--lemon);color:#141414}.song.mini{padding:6px 8px;gap:10px;border-radius:12px}.song.mini img{width:44px;height:44px;border-radius:8px}.song.mini .st{min-width:0;flex:1}.song.mini b{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.song.mini small{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.song.mini .tag{font-size:16px;letter-spacing:0}.song .num{width:18px;text-align:center;font-weight:900;color:var(--muted);flex:0 0 auto}
+.songs{display:flex;flex-direction:column;gap:8px}.song{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;color:inherit;background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:8px;cursor:pointer}.song img{width:64px;height:64px;object-fit:cover;border-radius:10px;flex:0 0 auto}.song b{display:block;font-family:var(--display);font-size:18px;line-height:1.1}.song small{color:var(--muted);font-weight:600}.song.playing{border-color:var(--lemon)}.song .tag{margin-left:auto;font-weight:900;font-size:11px;letter-spacing:2px;color:var(--lemon)}
+.stage{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;overflow:hidden;background:#141414}
+.st-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(30px) brightness(.45) saturate(1.2)}
+.st-cover{position:relative;width:62%;aspect-ratio:1;object-fit:cover;border-radius:18px;margin-top:16%;box-shadow:0 20px 50px rgba(0,0,0,.6);transition:width .4s}
+.stage.singing .st-cover{width:42%;margin-top:14%}
+.st-lyr{position:relative;flex:1;width:100%;overflow:hidden;margin-top:14px;-webkit-mask-image:linear-gradient(transparent,#000 22%,#000 70%,transparent);mask-image:linear-gradient(transparent,#000 22%,#000 70%,transparent)}
+.st-roll{position:absolute;left:0;right:0;top:0;padding:0 8%;transition:transform .6s ease;text-align:center}
+.st-roll p{margin:0;padding:6px 0;font-family:var(--display);font-weight:800;font-size:clamp(17px,4.6vw,24px);line-height:1.2;color:rgba(255,255,255,.38);transition:color .3s,transform .3s;cursor:pointer}
+.st-roll p small{display:block;font-family:var(--body,inherit);font-weight:900;font-size:11px;letter-spacing:3px;color:var(--green);margin-bottom:2px}
+.st-roll p.on{color:var(--lemon);transform:scale(1.06)}.st-roll p.done{color:rgba(255,255,255,.62)}
+.st-bar{position:relative;display:flex;align-items:center;gap:10px;width:100%;padding:10px 14px 14px}
+.st-bar button{flex:0 0 auto;width:44px;height:44px;border-radius:50%;border:0;background:var(--lemon);color:#272727;font-size:18px;font-weight:900;cursor:pointer}
+.st-prog{flex:1;height:6px;border-radius:3px;background:rgba(255,255,255,.2);cursor:pointer}.st-prog i{display:block;height:100%;width:0;border-radius:3px;background:var(--green)}
+.st-bar span{font-weight:800;font-size:13px;color:#d9ddd5;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:reduce){.st-roll{transition:none}}
+.screen .sound,.screen .bug,.screen .still{z-index:3}
+.screen.tall .sound{display:none}
+.st-bar button.mute{animation:nudge 1.4s ease-in-out infinite}@keyframes nudge{50%{box-shadow:0 0 0 10px rgba(255,242,0,.25)}}
+.st-bar button.mute::after{content:'🔊';position:absolute;margin:-30px 0 0 18px;font-size:14px}
+.st-end{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:18% 8% 8%;background:rgba(20,20,20,.93);backdrop-filter:blur(6px);text-align:left}
+.se-k{font-weight:900;font-size:12px;letter-spacing:3px;color:var(--green)}
+.st-end h3{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(24px,7vw,32px);line-height:1.05;color:var(--lemon)}
+.se-steps{margin:2px 0 4px;padding-left:20px;color:#e6e9e1;font-size:14px;line-height:1.4;display:flex;flex-direction:column;gap:6px}.se-steps b{color:#fff}
+.se-go,.se-aid,.se-next{display:block;width:100%;text-align:center;font:inherit;font-weight:900;font-size:16px;border-radius:999px;padding:12px;cursor:pointer;text-decoration:none;min-height:46px;box-sizing:border-box}
+.se-go{background:var(--lemon);color:#272727;border:0}.se-aid{background:var(--green);color:#272727}.se-next{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.4)}
+.screen.tall{aspect-ratio:9/16;width:min(100%,calc(68vh * 9 / 16));margin:0 auto}
+.ch.soon{color:var(--muted);padding-left:14px}
+.ch .n{font-family:var(--display);font-size:12px;color:var(--muted)}
+
+/* the set */
+.set{background:var(--panel);border:10px solid var(--green);border-radius:30px;padding:10px;box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.screen{position:relative;border-radius:18px;overflow:hidden;background:#000;aspect-ratio:16/9;max-width:100%}
+.screen video{width:100%;height:100%;display:block;background:#000}
+.sound{position:absolute;left:50%;bottom:64px;transform:translateX(-50%);z-index:3;background:var(--lemon);color:#272727;border:0;border-radius:999px;padding:12px 22px;font:inherit;font-weight:900;font-size:16px;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.45)}
+.bug{position:absolute;top:12px;right:12px;display:flex;align-items:center;gap:8px;background:rgba(20,20,20,.72);border-radius:999px;padding:4px 12px 4px 4px;font-weight:900;font-size:12px;letter-spacing:2px;pointer-events:none}
+.bug img{width:26px;height:26px;border-radius:50%}
+.now{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 8px 4px}
+.now .lab{font-weight:900;font-size:12px;letter-spacing:3px;color:var(--green)}
+.now h1{font-family:var(--display);font-weight:800;font-size:clamp(24px,4.4vw,36px);line-height:1.05;margin:2px 0 4px;text-wrap:balance}
+.now p{margin:0;color:var(--muted)}
+.ctrls{display:flex;gap:8px}
+.btn{border:2px solid var(--line);background:var(--panel-2);border-radius:12px;padding:9px 14px;font-weight:800;font-size:14px;cursor:pointer}
+.btn:hover{border-color:var(--green)}
+.btn:disabled{opacity:.4;cursor:default}
+
+/* ticker */
+.ticker{display:flex;align-items:stretch;border-radius:14px;overflow:hidden;background:var(--panel);border:2px solid var(--line)}
+.tk-lab{flex:none;background:var(--lemon);color:#272727;font-weight:900;font-size:13px;letter-spacing:2px;padding:10px 14px;display:flex;align-items:center}
+.tk-view{overflow:hidden;flex:1;min-width:0;display:flex;align-items:center}
+.tk-run{display:flex;gap:40px;white-space:nowrap;padding-left:20px;animation:run 70s linear infinite;font-weight:600}
+.tk-run b{color:var(--green);font-weight:900}
+.tk-run i{font-style:normal;color:var(--lemon);font-weight:800}
+@keyframes run{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.tk-run{animation:none;flex-wrap:wrap;white-space:normal;gap:8px 24px;padding:10px 14px}}
+
+/* lower grid */
+.grid{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;align-items:start;max-width:760px;margin:0 auto}
+.guide{margin-top:22px}
+@media (max-width:760px){.grid{grid-template-columns:minmax(0,1fr)}.desk{order:-1;position:static}}
+@media (max-width:520px){.ep{grid-template-columns:76px minmax(0,1fr)}.ep img{width:76px;height:43px}.ep .tag{grid-column:2;justify-self:start}.ep .t{font-size:16px}}
+h2{font-family:var(--display);font-weight:800;font-size:24px;margin:0 0 4px}
+.sub{color:var(--muted);margin:0 0 14px;font-size:14px}
+.guide{background:var(--panel);border-radius:20px;padding:18px}
+.albums{background:var(--panel);border-radius:20px;padding:18px;margin-bottom:22px}.albums h2{margin:0;font-size:19px;white-space:nowrap}.alb-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 12px}.shuf{font:inherit;font-weight:900;font-size:13px;color:var(--fg);background:var(--panel-2);border:2px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;white-space:nowrap}.shuf.on{background:var(--lemon);border-color:var(--lemon);color:#141414}
+.list{display:flex;flex-direction:column;gap:10px}
+.grp{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;width:100%;text-align:left;background:var(--panel-2);border:2px solid var(--line);border-radius:14px;padding:14px 16px;cursor:pointer;min-height:56px}
+.grp:hover,.grp.open{border-color:var(--green)}
+.grp .gl{display:block;font-family:var(--display);font-weight:800;font-size:20px;line-height:1.1}
+.grp .gm{display:block;margin-top:3px;font-size:12px;font-weight:800;letter-spacing:1px;color:var(--muted);text-transform:uppercase}
+.grp .chev{font-size:26px;line-height:1;color:var(--green);transition:transform .2s}
+.grp.open .chev{transform:rotate(90deg)}
+.grp-body[hidden]{display:none}
+.grp-body{display:flex;flex-direction:column;gap:8px;max-height:430px;overflow:auto;padding:2px 4px 2px 0}
+@media (prefers-reduced-motion:reduce){.grp .chev{transition:none}}
+.ep{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:12px;align-items:center;padding:8px;border-radius:14px;border:2px solid transparent;background:var(--panel-2);text-align:left;width:100%}
+.ep img{width:96px;height:54px;object-fit:cover;border-radius:8px;display:block}
+.ep .t{font-family:var(--display);font-weight:700;font-size:17px;line-height:1.15}
+.ep .m{font-size:12px;font-weight:800;letter-spacing:1.5px;color:var(--muted);margin-top:2px}
+.ep .tag{font-size:11px;font-weight:900;letter-spacing:1.5px;border-radius:999px;padding:5px 10px;white-space:nowrap}
+.ep.ready{cursor:pointer}
+.ep.ready .tag{background:var(--green);color:var(--green-ink)}
+.ep.ready:hover{border-color:var(--line)}
+.ep.playing{border-color:var(--green)}
+.ep.playing .tag{background:var(--lemon);color:#272727}
+.ep.later .tag{border:2px solid var(--line);color:var(--muted)}
+.ep.later img{filter:grayscale(.7) brightness(.7)}
+.ep.next .tag{border-color:var(--lemon);color:var(--lemon)}
+
+.desk{background:var(--green);color:#272727;border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:12px}
+.desk .k{font-weight:900;font-size:12px;letter-spacing:3px}
+.desk h3{font-family:var(--display);font-weight:800;font-size:28px;line-height:1.05;margin:0}
+.price{font-family:var(--display);font-weight:800;font-size:58px;line-height:1;font-variant-numeric:tabular-nums}
+.price s{font-size:24px;opacity:.55;margin-left:6px}
+.desk .note{font-weight:600;font-size:14px;margin:0}
+.offer{display:flex;align-items:center;gap:10px}
+.offer-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px}
+.bag{flex:none;width:118px;height:auto;margin:-26px -6px -10px 0;filter:drop-shadow(0 10px 14px rgba(0,0,0,.35));transform:rotate(4deg)}
+@media (max-width:760px){.bag{width:140px}}
+.aidwrap{width:100%;max-width:760px;margin:0 auto 18px;box-sizing:border-box;padding:0 3px}.aidwrap:has(.aidcard[hidden]){display:none}
+.aidcard{background:#0A8FC2;color:#fff;box-shadow:0 0 0 3px #fff,0 6px 18px rgba(10,143,194,.45);border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:12px}.aidcard i{flex:0 0 auto;width:44px;height:44px;border-radius:50%;background:#fff;color:#0A8FC2;font-style:normal;font-family:var(--display);font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center}.aidcard small{display:block;font-weight:900;font-size:11px;letter-spacing:2px;color:#fff;opacity:.9}.aidcard b{display:block;font-family:var(--display);font-weight:800;font-size:20px;line-height:1.1}.aidcard a{display:inline-block;margin-top:4px;color:#fff;font-weight:800;font-size:16px;text-decoration:none;background:#fff;color:#0A6F97;border-radius:999px;padding:5px 14px}.aidcard small{line-height:1.3;letter-spacing:1px}.aidcard em{display:block;font-style:normal;font-weight:800;font-size:14px;color:#FFF200;margin-top:1px}
+#tot small{display:block;font-size:14px;font-weight:800;line-height:1.1;text-align:right;letter-spacing:0}
+.learn .learn-h{margin-top:0}
+.learn-h{margin:22px 0 10px;font-weight:900;font-size:13px;letter-spacing:3px;color:var(--lemon)}
+.whatf{background:#1f1f1f;border:2px solid rgba(128,205,41,.45);border-radius:16px;margin:0 0 12px;overflow:hidden}
+.whatf summary{list-style:none;display:flex;align-items:center;gap:12px;padding:10px 14px;cursor:pointer}.whatf summary::-webkit-details-marker{display:none}
+.whatf summary img{width:56px;height:56px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 3px var(--lemon);flex:0 0 auto}
+.whatf summary span{flex:1;min-width:0}.whatf summary b{display:block;font-family:var(--display);font-size:19px;color:#fff}.whatf summary small{display:block;font-size:13px;color:#cfd4c9;font-weight:600}
+.whatf summary i{font-style:normal;font-weight:900;color:var(--lemon);font-size:22px;transition:transform .2s}.whatf[open] summary i{transform:rotate(45deg)}
+.hist .hico{width:56px;height:56px;border-radius:50%;background:#2b2b2b;box-shadow:0 0 0 3px var(--lemon);display:flex;align-items:center;justify-content:center;font-size:26px;flex:0 0 auto}
+.tl{list-style:none;margin:4px 0 0;padding:0 0 0 18px;border-left:3px solid rgba(128,205,41,.5);display:flex;flex-direction:column;gap:14px}
+.tl li{position:relative}.tl li:before{content:'';position:absolute;left:-26px;top:4px;width:13px;height:13px;border-radius:50%;background:var(--lemon);box-shadow:0 0 0 3px #1f1f1f}
+.tl em{display:block;font-style:normal;font-weight:900;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--green)}
+.tl b{display:block;font-family:var(--display);font-size:18px;color:#fff;line-height:1.15;margin:1px 0 2px}.tl span{display:block;font-size:14px;color:#e6e9e1;line-height:1.45}
+.wf-vid{position:relative;aspect-ratio:16/9;max-width:100%;border-radius:12px;overflow:hidden;background:#000;margin-bottom:6px}
+.wf-vid button{all:unset;cursor:pointer;position:absolute;inset:0;display:block}.wf-vid img{width:100%;height:100%;object-fit:cover;display:block;opacity:.85}
+.wf-play{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:var(--lemon);color:#272727;font-size:26px;display:flex;align-items:center;justify-content:center;padding-left:4px;box-sizing:border-box}
+.wf-cap{position:absolute;left:0;right:0;bottom:0;padding:10px 12px;background:linear-gradient(transparent,rgba(0,0,0,.85))}.wf-cap b{display:block;color:#fff;font-size:15px}.wf-cap small{color:#d9ddd5;font-size:12px}
+.wf-vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.wf-src{margin:0 0 10px;font-size:12px}.wf-src a{color:var(--lemon)}
+.wf-body{padding:0 14px 14px}.wf-hero{width:100%;height:auto;border-radius:12px;display:block}
+.wf-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0}.wf-stats div{background:#2b2b2b;border-radius:10px;padding:8px;text-align:center}
+.wf-stats b{display:block;font-family:var(--display);font-size:20px;color:var(--lemon);white-space:nowrap}.wf-stats span{display:block;font-size:12px;color:#cfd4c9;font-weight:600;line-height:1.2}
+.whatf ul{margin:0;padding-left:18px;color:#e6e9e1;font-size:14px;line-height:1.45}.whatf li{margin:4px 0}.whatf li b{color:#fff}
+.wf-note{margin:8px 0 0;font-size:11px;color:#9aa094}
+.wa{background:#272727;color:var(--fg);border-radius:14px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.wa small{display:block;font-weight:900;font-size:11px;letter-spacing:2px;color:var(--lemon)}
+.wa span{font-family:var(--display);font-weight:800;font-size:22px;user-select:all}
+.copy{background:var(--lemon);color:#272727;border:0;border-radius:10px;padding:8px 12px;font-weight:900;font-size:13px;cursor:pointer}
+.join{display:block;text-align:center;background:#272727;color:var(--green);text-decoration:none;font-weight:900;letter-spacing:1px;border-radius:14px;padding:12px}
+.join:hover{color:var(--lemon)}
+.order{color-scheme:light;display:flex;flex-direction:column;gap:12px;background:rgba(255,255,255,.35);border-radius:16px;padding:14px}
+.fl{display:block;font-weight:900;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.row.qty{display:flex;align-items:center;justify-content:space-between;gap:10px}.row.qty .fl{margin:0}
+.step{display:flex;align-items:center;background:#272727;border-radius:12px;overflow:hidden}
+.step button{width:44px;height:44px;border:0;background:transparent;color:var(--lemon);font-size:24px;font-weight:900;cursor:pointer}
+.step output{min-width:36px;text-align:center;color:var(--fg);font-family:var(--display);font-weight:800;font-size:22px}
+.how{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.how label{display:flex;align-items:center;gap:10px;background:#fff;border-radius:12px;padding:10px 12px;font-weight:700;cursor:pointer;border:2px solid transparent}
+.how label:has(input:checked){border-color:#272727}
+.how input{accent-color:#272727;width:18px;height:18px;margin:0}
+.fld{display:flex;flex-direction:column}
+.fld input,.fld select{font:inherit;font-weight:600;background:#fff;color:#272727;border:2px solid transparent;border-radius:12px;padding:11px 12px;min-height:44px;width:100%}
+.fld input:focus,.fld select:focus{border-color:#272727;outline:none}
+.fld input.bad{border-color:#b3261e}
+.total{display:flex;justify-content:space-between;align-items:baseline;border-top:2px solid rgba(39,39,39,.25);padding-top:10px;font-weight:900;letter-spacing:1px}
+.total b{font-family:var(--display);font-size:32px;font-variant-numeric:tabular-nums}
+.err{margin:0;color:#7a120c;font-weight:800;font-size:14px}
+.send{border:0;border-radius:14px;background:#272727;color:var(--lemon);font-family:var(--display);font-weight:800;font-size:20px;padding:14px;cursor:pointer;min-height:48px}
+.send:hover{color:#fff}
+.note.small{font-size:13px}
+.ch.pass{cursor:pointer;color:var(--lemon);border-color:var(--lemon);padding-left:14px;background:transparent;font:inherit;font-weight:800;font-size:13px;letter-spacing:1px}
+.ch.pass.on{background:var(--lemon);color:#272727}
+.still i{display:none}.still span{font-family:var(--display,inherit);font-size:24px}.still small{font-weight:600;opacity:.85}.still button{margin-top:6px;font:inherit;font-weight:900;font-size:17px;background:#80CD29;color:#272727;border:0;border-radius:999px;padding:12px 26px;cursor:pointer}
+.loading{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:rgba(20,20,20,.72);font-weight:800;text-align:center;padding:0 20px}
+.loading i{width:38px;height:38px;border-radius:50%;border:4px solid rgba(255,255,255,.2);border-top-color:var(--green);animation:spin 1s linear infinite}
+.loading b{font-family:var(--display);font-size:24px;color:var(--lemon)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.passcta{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;margin:0 0 14px;padding:14px 16px;border:2px dashed var(--lemon);border-radius:14px;background:rgba(255,242,0,.07);color:var(--fg);text-align:left;cursor:pointer;font:inherit}
+.passcta b{display:block;font-family:var(--display);font-size:19px;color:var(--lemon)}
+.passcta small{display:block;color:var(--muted);font-weight:600;font-size:13px}
+.passcta em{font-style:normal;font-weight:900;color:var(--lemon);white-space:nowrap}
+.passcta.done{border-style:solid;border-color:var(--green);background:rgba(128,205,41,.1)}.passcta.done b,.passcta.done em{color:var(--green)}
+.modal{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.mbox{position:relative;width:100%;max-width:440px;background:var(--panel);border:3px solid var(--lemon);border-radius:22px;padding:24px}
+.mx{position:absolute;right:10px;top:8px;width:44px;height:44px;border:0;background:transparent;color:var(--muted);font-size:30px;cursor:pointer}
+.mk{font-weight:900;font-size:12px;letter-spacing:3px;color:var(--lemon)}
+.mbox h3{font-family:var(--display);font-weight:800;font-size:28px;margin:4px 0 6px}
+.mbox p{margin:0 0 12px;color:var(--muted)}
+.fl2{display:block;font-weight:900;font-size:11px;letter-spacing:2px;margin-bottom:6px}
+#pmCode{width:100%;font:inherit;font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:2px;text-transform:uppercase;background:#fff;color:#272727;border:2px solid transparent;border-radius:12px;padding:12px;min-height:48px;margin-bottom:10px}
+#pmCode:focus{border-color:var(--lemon);outline:none}
+.perr{color:#ff8a80!important;font-weight:800}
+.mbox .send{width:100%;background:var(--lemon);color:#272727}
+.mnote{font-size:13px;margin-top:12px!important}
+footer{color:var(--muted);font-size:13px;text-align:center}
+.ytbox{position:absolute;inset:0;z-index:2;background:#000}.ytbox #ytP,.ytbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.yt-shield{position:absolute;inset:0;z-index:1;cursor:pointer}
+.yt-pause{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:#000 center/cover no-repeat;cursor:pointer;text-align:center;padding:0 8% 50px}
+.yt-pause::before{content:'';position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.75))}
+.yt-pause>*{position:relative}.yt-pause .yp-btn{width:72px;height:72px;border-radius:50%;background:var(--lemon);color:#272727;font-size:30px;font-weight:900;display:flex;align-items:center;justify-content:center;padding-left:5px;box-shadow:0 6px 24px rgba(0,0,0,.5)}
+.yt-pause b{font-family:var(--display);font-weight:800;font-size:clamp(16px,4vw,24px);color:#fff;text-shadow:0 2px 8px #000}.yt-pause small{color:var(--lemon);font-weight:800;font-size:12px;letter-spacing:2px}
+.yt-bar{position:absolute;left:0;right:0;bottom:0;z-index:2;background:linear-gradient(transparent,rgba(0,0,0,.8));padding:22px 14px 10px}
+.yt-bar button{width:40px;height:40px}
+.yt-logo{position:absolute;top:10px;left:10px;z-index:3;pointer-events:none;line-height:0}.yt-logo img{width:clamp(40px,10.2vw,58px);height:auto;border-radius:50%;box-shadow:0 0 0 2px #c9a24a,0 3px 8px rgba(0,0,0,.5)}
+.yt-credit{position:absolute;top:12px;right:10px;z-index:3;background:rgba(20,20,20,.7);color:#e6e9e1;border-radius:999px;padding:3px 9px;font-size:10px;font-weight:800;letter-spacing:.5px;pointer-events:none}
+.ytbox.ad .yt-shield,.ytbox.ad .yt-pause,.ytbox.ad .yt-bar,.ytbox.ad .yt-logo{display:none}
+.sd-end{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:5% 7%;background:rgba(20,20,20,.94);text-align:left;overflow:auto}
+.sd-end h3{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(20px,5vw,30px);line-height:1.05;color:var(--lemon)}.sd-end p{margin:0;color:#e6e9e1;font-size:14px;line-height:1.35}
+.sd-row{display:flex;gap:8px;flex-wrap:wrap}.sd-row>*{flex:1 1 160px;min-height:42px;padding:10px;font-size:14px}
+.seeds .sd-credit{margin:-4px 0 12px;color:var(--muted);font-size:13px}.seeds .sd-credit a{color:var(--green);font-weight:800}
+.alb-grid.five .folder .f-txt b{font-size:15px}
+/* neon frame around the whole market (banner, distributor, order box) */
+.market{position:relative;margin:30px 0 26px;padding:clamp(10px,2.5vw,18px);border-radius:24px;border:3px solid #c8ff7a;
+  box-shadow:0 0 0 1px #fff inset,0 0 6px 1px #9dff3a,0 0 18px 4px rgba(157,255,58,.75),0 0 44px 10px rgba(128,205,41,.45),inset 0 0 14px rgba(157,255,58,.45),inset 0 0 40px rgba(128,205,41,.18);
+  animation:mkGlow 3.5s ease-in-out infinite}
+.market .shop{margin-top:0}.market .grid{margin-bottom:0}
+@keyframes mkGlow{0%,100%{box-shadow:0 0 0 1px #fff inset,0 0 6px 1px #9dff3a,0 0 18px 4px rgba(157,255,58,.75),0 0 44px 10px rgba(128,205,41,.45),inset 0 0 14px rgba(157,255,58,.45),inset 0 0 40px rgba(128,205,41,.18)}
+  50%{box-shadow:0 0 0 1px #fff inset,0 0 8px 2px #b6ff5c,0 0 26px 7px rgba(157,255,58,.9),0 0 64px 16px rgba(128,205,41,.55),inset 0 0 18px rgba(157,255,58,.55),inset 0 0 50px rgba(128,205,41,.25)}}
+@media (prefers-reduced-motion:reduce){.market{animation:none}}
+/* ACRES HERITAGE MARKET banner */
+.shop{position:relative;margin:26px 0 22px;border-radius:18px;overflow:hidden;background:#17200f;border:3px solid var(--green);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.awning{height:30px;background:linear-gradient(90deg,#d4a017 0 14%,#1a1a1a 14% 17%,#0f7a3a 17% 31%,#c8102e 31% 34%,#d4a017 34% 48%,#1a1a1a 48% 51%,#0f7a3a 51% 65%,#c8102e 65% 68%,#d4a017 68% 82%,#1a1a1a 82% 85%,#0f7a3a 85% 100%) 0 0/180px 100%,#d4a017;position:relative}
+.awning.thin{height:10px}
+.awning::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 5px,rgba(0,0,0,.25) 5px 6px)}
+.shop-board{display:flex;align-items:center;gap:16px;padding:30px 22px 22px;background:radial-gradient(120% 140% at 0 0,#2a3a17 0,#17200f 60%)}
+.shop-badge{flex:none;width:clamp(58px,15vw,84px);height:auto;border-radius:50%;box-shadow:0 0 0 3px #c9a24a,0 6px 16px rgba(0,0,0,.45)}
+.shop-txt{min-width:0}.shop-k{padding-right:clamp(90px,26vw,140px)}.shop-t{white-space:nowrap;overflow:hidden}
+@media (min-width:601px){.shop-w{--wgap:-3px}}
+.shop-tw{display:flex;flex-direction:column;align-items:flex-end;width:fit-content;max-width:100%;margin-bottom:10px}.shop-t{max-width:100%}
+.shop-w{margin:var(--wgap,1px) 0 0 0;font-style:italic;font-weight:800;color:#1d2a0c;background:var(--lemon);font-size:clamp(11px,2.7vw,14px);letter-spacing:.3px;padding:0 6px;border-radius:4px;line-height:1.15;box-shadow:0 4px 10px rgba(0,0,0,.35)}
+.shop-k{color:var(--green);font-weight:800;font-size:12px;letter-spacing:3px}
+.shop-t{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(28px,7.6vw,50px);line-height:.95;color:#fff;letter-spacing:.5px;text-shadow:0 3px 0 rgba(0,0,0,.35)}
+.shop-t span{color:var(--lemon)}
+.shop-txt p{margin:8px 0 0;color:#dfe5d6;font-size:clamp(16px,4.3vw,20px);line-height:1.35;max-width:900px}
+.shop-txt p b{color:var(--lemon)}
+.opensign{position:absolute;top:30px;right:clamp(14px,4vw,30px);width:clamp(78px,20vw,108px);transform-origin:50% 0;animation:swing 3.2s ease-in-out infinite}
+.opensign .nail{position:absolute;left:50%;top:-6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f5d78a,#a77b25);box-shadow:0 1px 3px rgba(0,0,0,.6);z-index:1}
+.opensign svg{display:block;width:100%;height:auto;overflow:visible}
+.opensign .plate{margin-top:-2px;background:radial-gradient(120% 120% at 50% 40%,#16300a 0,#060d03 75%);border-radius:12px;text-align:center;padding:7px 4px 6px;box-shadow:0 0 0 1px #fff,0 0 0 3px #9dff3a,0 0 8px 3px #9dff3a,0 0 22px 8px rgba(128,205,41,.85),0 0 48px 16px rgba(128,205,41,.45),inset 0 0 14px rgba(157,255,58,.6),0 10px 16px rgba(0,0,0,.5);animation:neonBox 4s infinite}
+.opensign .plate b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(20px,5.6vw,30px);line-height:1;letter-spacing:2px;color:#c8ff7a;text-shadow:0 0 1px #efffd6,0 0 4px #9dff3a,0 0 8px #9dff3a,0 0 16px #9dff3a,0 0 28px #80CD29,0 0 48px #80CD29;animation:neon 4s infinite}
+.opensign .plate small{display:block;margin-top:3px;font-size:9px;font-weight:800;letter-spacing:2px;color:#fff;text-shadow:0 0 2px #fff,0 0 6px #FFF200,0 0 12px #FFF200,0 0 20px #e6d800}
+@keyframes neon{0%,18%,22%,24%,55%,100%{opacity:1;text-shadow:0 0 1px #efffd6,0 0 4px #9dff3a,0 0 8px #9dff3a,0 0 16px #9dff3a,0 0 28px #80CD29,0 0 48px #80CD29}20%,23%{opacity:.4;text-shadow:none}60%,80%{text-shadow:0 0 1px #f4ffe3,0 0 5px #b6ff5c,0 0 10px #b6ff5c,0 0 22px #b6ff5c,0 0 40px #80CD29,0 0 70px #80CD29}}
+@keyframes neonBox{0%,18%,24%,55%,100%{box-shadow:0 0 0 1px #fff,0 0 0 3px #9dff3a,0 0 8px 3px #9dff3a,0 0 22px 8px rgba(128,205,41,.85),0 0 48px 16px rgba(128,205,41,.45),inset 0 0 14px rgba(157,255,58,.6),0 10px 16px rgba(0,0,0,.5)}20%,23%{box-shadow:0 0 0 3px #2f4a12,0 10px 16px rgba(0,0,0,.5)}60%,80%{box-shadow:0 0 0 1px #fff,0 0 0 3px #b6ff5c,0 0 10px 4px #b6ff5c,0 0 28px 10px rgba(128,205,41,.95),0 0 64px 22px rgba(128,205,41,.55),inset 0 0 18px rgba(157,255,58,.7),0 10px 16px rgba(0,0,0,.5)}}
+@keyframes swing{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+@media (prefers-reduced-motion:reduce){.opensign,.opensign .plate,.opensign .plate b{animation:none}}
+@media (max-width:600px){.opensign{top:6px;width:62px}.opensign .plate small{font-size:7px}.opensign .plate b{font-size:16px;letter-spacing:1px}}
+
+/* uniform channel tiles */
+.channels{display:flex;gap:8px;flex-wrap:nowrap}
+.channels .ch{flex:1 1 0;min-width:0;flex-direction:column;justify-content:flex-start;gap:5px;border-radius:14px;padding:8px 6px 9px;text-align:center;font-size:12px;letter-spacing:.5px;line-height:1.15}
+.channels .ch img,.channels .ch .pk{width:30px;height:30px;border-radius:50%;flex:none}
+.channels .ch .pk{font-style:normal;font-size:20px;line-height:30px}
+.channels .ch .n{display:block;font-size:11px;letter-spacing:1px;margin-bottom:1px}
+.channels .ch.pass{padding:8px 6px 9px;font-size:12px;letter-spacing:.5px}
+.channels .ch.pass .n{color:inherit;opacity:.75}
+
+/* products + AID corner + stands (preview) */
+.prods{display:flex;flex-direction:column;gap:10px}
+.prod{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.55);border-radius:14px;padding:8px 10px}
+.prod img{flex:none;width:64px;height:64px;object-fit:contain;filter:drop-shadow(0 4px 6px rgba(0,0,0,.25))}
+.prod img.sq{object-fit:cover;border-radius:8px;filter:none;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.pt{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.2}
+.pt b{font-family:var(--display);font-weight:800;font-size:18px}.pt small{font-size:12px;opacity:.8}
+.pp{margin-top:3px}.pp i{font-style:normal;font-family:var(--display);font-weight:800;font-size:24px}.pp s{font-size:14px;opacity:.55;margin-left:5px}
+.prod{display:grid;grid-template-columns:64px 1fr auto;grid-template-areas:'img txt txt' 'img price step';column-gap:10px;row-gap:2px}.prod img{grid-area:img;align-self:center}.pt{grid-area:txt}.prod .pp{grid-area:price;align-self:center;margin:0}.prod .step{grid-area:step;flex:none}.prod .step button{width:38px;height:38px;font-size:20px}.prod .step output{min-width:28px;font-size:19px}
+.aidcorner{margin-top:4px;background:transparent;border:1.5px dashed rgba(0,0,0,.35);color:#272727;border-radius:12px;padding:9px;font-weight:800;font-size:13px;letter-spacing:.5px;cursor:pointer}
+.aidbox .am-row{display:flex;gap:8px;margin:8px 0}.aidbox .am-row input{flex:1;min-width:0;padding:12px;border-radius:10px;border:2px solid #ccc;font-size:16px;text-transform:uppercase}
+.aidbox .am-row button{padding:0 18px;border-radius:10px;border:0;background:var(--green);font-weight:800;color:#272727}
+.am-it{display:flex;align-items:center;gap:10px;border:2px solid #e5e5e5;border-radius:12px;padding:10px;margin:8px 0}
+.am-it .pt b{font-size:16px}.am-it .pt em{font-style:normal;font-size:12px;color:#4f8a12;font-weight:700}
+.stands{margin-top:18px;border-radius:18px;padding:18px 20px 20px;background:#17200f;border:2px solid rgba(200,255,122,.35);color:#fff}
+.st-k{color:var(--green);font-weight:800;font-size:12px;letter-spacing:3px}
+.stands h3{margin:2px 0 4px;font-family:var(--display);font-weight:800;font-size:clamp(22px,5.5vw,30px);line-height:1.05}
+.st-lead{margin:0 0 12px;color:#dfe5d6;font-size:15px}
+.st-feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.sf{background:rgba(255,255,255,.06);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:3px}
+.sf span{font-size:24px}.sf b{color:var(--lemon);font-size:15px}.sf small{color:#dfe5d6;font-size:13px;line-height:1.35}
+</style>
+
+<div class="wrap">
+  <header class="station">
+    <div class="brand"><img class="blogo" src="media/acres-badge.png" alt="ACRES: Our food. Our future"><div class="bname"><b>ACRES HERITAGE <span>TV</span></b><small>Showcasing Our Indigenous Crops</small></div></div>
+    <nav class="channels" aria-label="Channels">
+      <button class="ch on" id="ch1Btn" type="button"><img src="media/fonio-tv-icon.jpg" alt=""><span><span class="n">CH 1</span> HERITAGE FOODS</span></button>
+      <button class="ch" id="ch2Btn" type="button"><img src="songs/s01-cover.jpg" alt=""><span><span class="n">CH 2</span> HERITAGE SONGS</span></button>
+      <button class="ch" id="ch3Btn" type="button"><img src="https://i.ytimg.com/vi/1DGY9IpzS5Y/default.jpg" alt=""><span><span class="n">CH 3</span> HERITAGE SEEDS</span></button>
+      <button class="ch pass" id="passBtn" type="button"><i class="pk">🔑</i><span><span class="n">MEMBERS</span> <span id="passLabel">Season Pass</span></span></button>
+    </nav>
+  </header>
+
+  <section class="set" aria-label="Now playing">
+    <div class="screen">
+      <video id="tv" controls playsinline muted autoplay preload="auto" poster="media/p01.jpg"></video>
+      <button class="sound" id="sound" type="button">🔊 Tap for sound</button>
+      <div class="loading" id="loading" hidden><i></i><span>Loading episode</span><b>0%</b></div>
+      <div class="loading still" id="still" hidden><span>Still watching?</span><small>We paused to save your data.</small><button type="button" id="stillGo">▶ Keep watching</button></div>
+      <div class="stage" id="stage" hidden>
+        <div class="st-bg" id="stBg"></div>
+        <img class="st-cover" id="stCover" alt="">
+        <div class="st-lyr" id="stLyr" aria-live="off"><div class="st-roll" id="stRoll"></div></div>
+        <div class="st-end" id="stEnd" hidden>
+          <div class="se-k">THANKS FOR LISTENING 🎵</div>
+          <h3>Now taste the heritage.</h3>
+          <ol class="se-steps">
+            <li><b>Try it first.</b> Order your first 5kg of DIM Fonio below and cook it at home.</li>
+            <li><b>Love it? Share it.</b> Recommend it to family, friends and your church.</li>
+            <li><b>Earn with us.</b> Become an ACRES Independent Distributor (AID). Start with just 1 case.</li>
+          </ol>
+          <button type="button" class="se-go" id="seOrder">↓ Make my first order</button>
+          <a class="se-aid" id="seAid" href="https://api.whatsapp.com/send?phone=12404080158&amp;text=AID%20-%20I%27d%20like%20to%20become%20an%20ACRES%20Independent%20Distributor" target="_blank" rel="noopener">Become an AID · WhatsApp us</a>
+          <button type="button" class="se-next" id="seNext">▶ Next song</button>
+        </div>
+        <div class="st-bar"><button type="button" id="stPlay" aria-label="Play">▶</button><div class="st-prog" id="stProg"><i id="stFill"></i></div><span id="stTime">0:00</span></div>
+      </div>
+      <div class="ytbox" id="ytBox" hidden><div id="ytP"></div>
+        <div class="yt-shield" id="ytShield"></div>
+        <div class="yt-logo"><img src="media/acres-badge.png" alt="ACRES: Our food. Our future"></div>
+        <div class="yt-pause" id="ytPause"><span class="yp-btn">▶</span><b id="ypTitle"></b><small>CH 3 · HERITAGE SEEDS</small></div>
+        <div class="st-bar yt-bar"><button type="button" id="ytPlay" aria-label="Play">▶</button><div class="st-prog" id="ytProg"><i id="ytFill"></i></div><span id="ytTime">0:00</span></div>
+        <div class="sd-end" id="sdEnd" hidden>
+          <div class="se-k">🌱 HERITAGE SEEDS</div>
+          <h3>Join the ACRES Heritage Club</h3>
+          <p>Learn more about our indigenous seeds and foods with the club on WhatsApp.</p>
+          <div class="sd-row"><a class="se-aid" id="sdClub" href="https://chat.whatsapp.com/BsuWk5uMUHa32gczMyat8a" target="_blank" rel="noopener">Join the Heritage Club</a></div>
+          <button type="button" class="se-next" id="sdNext">▶ Next video</button>
+        </div>
+      </div>
+      <div class="bug" id="bug"><img src="media/fonio-tv-icon.jpg" alt="" id="bugImg"><span id="bugTxt">CH 1: HERITAGE FOODS</span></div>
+    </div>
+    <div class="now">
+      <div style="min-width:0">
+        <div class="lab" id="nowLab">NOW PLAYING · EPISODE 1</div>
+        <h1 id="nowTitle">Quick Whole-Grain Fonio Swallow</h1>
+        <p id="nowSub">One pot, a few minutes, and dinner is ready.</p>
+      </div>
+      <div class="ctrls"><button class="btn" id="prev" type="button">‹ Previous</button><button class="btn" id="next" type="button">Next ›</button></div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-label="Programme schedule">
+    <div class="tk-lab" id="tkLab">CH 1: FOODS</div>
+    <div class="tk-view"><div class="tk-run" id="tk"></div></div>
+  </div>
+
+  <section class="albums" id="albSec" aria-labelledby="ah" hidden>
+    <div class="alb-top"><h2 id="ah">🎵 Heritage Songs</h2><button type="button" class="shuf" id="shufBtn" aria-pressed="false">🔀 <span>Shuffle off</span></button></div>
+    <div class="songs" id="songList"></div>
+  </section>
+
+  <section class="albums seeds" id="seedSec" aria-labelledby="sh" hidden>
+    <div class="alb-top"><h2 id="sh">🌱 Heritage Seeds</h2></div>
+    <p class="sd-credit">Seed videos courtesy of <a href="https://www.youtube.com/@Jibrilenterprise" target="_blank" rel="noopener">Jibril Enterprise</a>, our ACRES Alliance seeds partner.</p>
+    <div class="songs" id="seedList"></div>
+  </section>
+
+  <section class="guide" id="guideSec" aria-labelledby="gh">
+    <h2 id="gh">Season 1 programme guide</h2>
+    <p class="sub" id="guideSub">A new episode is free every Friday. Season Pass holders can watch all 31 now.</p>
+    <button class="passcta" id="passCta" type="button"><span><b>🔑 Full Season Pass</b><small>All 31 episodes · free with your first 5kg fonio order</small></span><em>Enter code ›</em></button>
+    <div class="list" id="list"></div>
+    </section>
+
+  <div class="market" aria-label="ACRES Heritage Market">
+  <section class="shop" aria-label="ACRES Heritage Market">
+    <div class="awning"></div>
+    <div class="shop-board">
+      <div class="shop-txt">
+        <div class="shop-k">WELCOME TO</div>
+        <div class="shop-tw"><h2 class="shop-t" id="shopT">ACRES <span>HERITAGE</span> MARKET</h2>
+        <div class="shop-w">Wholesale Club</div></div>
+        <p>Heritage foods from our indigenous seeds. <b>Order below</b> from your local distributor.</p>
+      </div>
+    </div>
+    <div class="awning thin"></div>
+    <div class="opensign" aria-hidden="true"><span class="nail"></span>
+      <svg viewBox="0 0 100 26"><path d="M50 2 L12 26 M50 2 L88 26" stroke="#c9a24a" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>
+      <div class="plate"><b>OPEN</b><small>COME IN</small></div>
+    </div>
+  </section>
+
+  <div class="aidwrap"><div class="aidcard" id="aidCard" hidden><i id="aidInit">A</i><div style="min-width:0;flex:1"><small id="aidLabel">YOUR LOCAL HERITAGE FOOD DISTRIBUTOR</small><em id="aidArea" hidden></em><b id="aidName"></b><a id="aidCall" href="#">📞 <span id="aidPhone"></span></a></div></div></div>
+
+  <div class="grid">
+    <aside class="desk" aria-label="Order fonio">
+      <div class="k">NOW SELLING</div>
+      <h3>DIM Fonio</h3>
+      <p class="note" id="priceNote">Club member prices · Pickup or express delivery</p>
+      <div class="prods">
+        <div class="prod"><img src="media/bag.png" alt="5kg bag of DIM Fonio">
+          <div class="pt"><b>5kg Family Bag</b><small>5 × 1kg packs in one bag</small></div><span class="pp"><i id="pBag">₵330</i><s id="wBag">₵375</s></span>
+          <div class="step"><button type="button" data-it="bag" data-d="-1" aria-label="One bag fewer">−</button><output id="qBag">1</output><button type="button" data-it="bag" data-d="1" aria-label="One bag more">+</button></div></div>
+        <div class="prod"><img src="media/case10.jpg" alt="Case of ten 1kg packs of DIM Fonio" class="sq">
+          <div class="pt"><b>1kg Case of 10</b><small>10 × 1kg packs · share or store</small></div><span class="pp"><i id="pCase">₵670</i><s id="wCase">₵750</s></span>
+          <div class="step"><button type="button" data-it="case" data-d="-1" aria-label="One case fewer">−</button><output id="qCase">0</output><button type="button" data-it="case" data-d="1" aria-label="One case more">+</button></div></div>
+      </div>
+      <form class="order" id="order" novalidate>
+        <fieldset class="how"><legend class="fl">How do you want it?</legend>
+          <label><input type="radio" name="how" value="pickup" checked> Easy pickup</label>
+          <label><input type="radio" name="how" value="delivery"> Express delivery + delivery cost</label>
+        </fieldset>
+        <label class="fld"><span class="fl" id="zoneLbl">Your zone</span>
+          <select id="zone">
+            <option value="1 · Kasoa – Weija">1 · Kasoa – Weija</option>
+            <option value="2 · Dansoman – Mamprobi">2 · Dansoman – Mamprobi</option>
+            <option value="3 · Kaneshie – Circle">3 · Kaneshie – Circle</option>
+            <option value="4 · Achimota – Dome – Taifa">4 · Achimota – Dome – Taifa</option>
+            <option value="5 · Madina – Adenta">5 · Madina – Adenta</option>
+            <option value="6 · East Legon – Airport – Labone">6 · East Legon – Airport – Labone</option>
+            <option value="7 · Spintex – Teshie – Nungua">7 · Spintex – Teshie – Nungua</option>
+            <option value="8 · Amasaman – Satellite – Pokuase">8 · Amasaman – Satellite – Pokuase</option>
+            <option value="9 · Tema – Ashaiman">9 · Tema – Ashaiman</option>
+            <option value="10 · Kpone – Prampram – Dawhenya">10 · Kpone – Prampram – Dawhenya</option>
+            <option value="11 · Dodowa – Abokobi – Ayi Mensah">11 · Dodowa – Abokobi – Ayi Mensah</option>
+            <option value="12 · Kokrobite – Bortianor – Amanfro">12 · Kokrobite – Bortianor – Amanfro</option>
+            <option value="Other region (outside Greater Accra)">Other region (outside Greater Accra)</option>
+            <option value="Not sure / area not listed">Not sure / area not listed</option>
+          </select></label>
+        <label class="fld" id="addrWrap" hidden><span class="fl">Delivery address or landmark</span><input id="addr" type="text" autocomplete="street-address" placeholder="e.g. Near Labone Senior High, house no. 12"></label>
+        <label class="fld"><span class="fl">Your name</span><input id="nm" type="text" autocomplete="name" required></label>
+        <label class="fld"><span class="fl">Your phone (WhatsApp)</span><input id="ph" type="tel" autocomplete="tel" inputmode="tel" required placeholder="e.g. 024 123 4567"></label>
+        <div id="giftWrap" hidden><label class="fld"><span class="fl">Recipient's name (in Ghana)</span><input id="rnm" type="text" autocomplete="off"></label>
+        <label class="fld"><span class="fl">Recipient's phone (Ghana)</span><input id="rph" type="tel" inputmode="tel" placeholder="e.g. 024 123 4567"></label></div>
+        <div class="total"><span>Total</span><b id="tot">₵330</b></div>
+        <p class="note small" id="delNote" hidden>Delivery cost depends on your location. We'll confirm it with you before you pay.</p>
+        <p class="err" id="err" hidden>Please add your name and phone number.</p>
+        <button class="send" type="submit">Send my order on WhatsApp</button>
+        <p class="note small">We'll confirm your order, then send MoMo payment details. Pickup point is shared after confirmation.</p>
+      </form>
+      <div class="wa"><div><small>OR MESSAGE US ON WHATSAPP</small><span id="num">+1 240 408 0158</span></div><button class="copy" id="copy" type="button">Copy number</button></div>
+      <a class="join" href="https://chat.whatsapp.com/BsuWk5uMUHa32gczMyat8a" target="_blank" rel="noopener">Join the club on WhatsApp ›</a>
+      <button type="button" class="aidcorner" id="aidCornerBtn">🔒 AID Wholesale Corner</button>
+    </aside>
+  </div>
+
+    <section class="stands" aria-labelledby="standsH">
+      <div class="st-k">COMING TO YOUR COMMUNITY</div>
+      <h3 id="standsH">ACRES Heritage Market Stands</h3>
+      <p class="st-lead">Look out for our kente-topped market stands in communities and markets across Accra.</p>
+      <div class="st-feats">
+        <div class="sf"><span>🌾</span><b>Fonio all year round</b><small>DIM Fonio on display every day, in 5kg family bags and 1kg cases.</small></div>
+        <div class="sf"><span>🥣</span><b>Free fonio tasting</b><small>Taste before you buy. Fonio tasting every Friday at our stands.</small></div>
+        <div class="sf"><span>🗓️</span><b>Seasonal heritage foods</b><small>Pre-order seasonal foods and pick them up at your market stand.</small></div>
+      </div>
+    </section>
+  </div>
+
+  <section class="guide learn" aria-label="Learn about fonio">
+    <div class="learn-h">LEARN ABOUT FONIO</div>
+    <details class="whatf" id="whatF"><summary><img src="media/fonio-grain.jpg" alt="Raw fonio grain" width="56" height="56"><span><b>What is fonio?</b><small>Africa's ancient grain · tap to learn</small></span><i aria-hidden="true">＋</i></summary>
+      <div class="wf-body">
+        <div class="wf-vid"><button type="button" id="storyBtn" aria-label="Play The Amaati Story video"><img src="https://i.ytimg.com/vi/vL1Gub9QdJk/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'"><span class="wf-play">▶</span><span class="wf-cap"><b>Where our fonio comes from</b><small>The Amaati Story · DIM Fonio</small></span></button></div>
+        <p class="wf-src"><a href="https://www.youtube.com/watch?v=vL1Gub9QdJk" target="_blank" rel="noopener">Watch on YouTube</a></p>
+        <img class="wf-hero" src="media/fonio-pour.jpg" alt="Fonio grain being poured" loading="lazy">
+        <div class="wf-stats"><div><b>~5 min</b><span>to cook</span></div><div><b>6–8 wks</b><span>to harvest</span></div><div><b>1000s</b><span>of years in West Africa</span></div></div>
+        <ul><li><b>Whole grain, naturally gluten-free</b></li><li><b>Contains iron, zinc, magnesium</b> and phosphorus, plus fibre and vitamin B1</li><li><b>Contains methionine and cystine</b>, amino acids many grains are low in</li><li><b>A hardy crop</b> that grows with little water</li><li><b>Cook it like rice, couscous or quinoa</b>: jollof, waakye, porridge, banku and more</li></ul>
+        <p class="wf-note">General information, not medical advice.</p></div></details>
+    <details class="whatf hist" id="histF"><summary><span class="hico" aria-hidden="true">📜</span><span><b>Fonio through history</b><small>From ancient West Africa to your table · tap to read</small></span><i aria-hidden="true">＋</i></summary>
+      <div class="wf-body"><ol class="tl">
+        <li><em>Thousands of years ago</em><b>Born in West Africa</b><span>West Africans tamed fonio from wild grasses. Experts call it probably Africa's oldest cereal.</span></li>
+        <li><em>Two fonios</em><b>White and black</b><span>White fonio and black fonio were domesticated separately. Black fonio is still grown in northern Togo and Nigeria.</span></li>
+        <li><em>About 2,000 years ago</em><b>Farming spreads</b><span>Fonio farming expanded at the start of the Common Era. The oldest fonio remains found so far come from Nigeria.</span></li>
+        <li><em>Through the centuries</em><b>A food of honour</b><span>Served to chiefs and at special occasions, and part of some bride prices. The Dogon of Mali tell that the whole universe came from a fonio seed.</span></li>
+        <li><em>From the 1500s</em><b>A long decline</b><span>Maize and rice arrived, and the slave trade and colonial rule disrupted farming. Fonio faded from many tables. Europeans even called it "hungry rice", a name that misunderstood a grain people grew because they loved it.</span></li>
+        <li><em>Today</em><b>Still feeding millions</b><span>Over 920,000 hectares are grown in West Africa each year, about 700,000 tonnes. Guinea grows the most, followed by Nigeria and Mali.</span></li>
+        <li><em>Ghana now</em><b>The revival</b><span>In Northern Ghana, Amaati works with thousands of farmers, most of them women, to bring fonio back. That is the DIM Fonio in your bag.</span></li>
+      </ol>
+      <p class="wf-note">Sources: CIRAD (2025 study in Nature Communications); US National Academies, Lost Crops of Africa (1996); CIRAD fonio production data (2019); Amaati.</p></div></details>
+  </section>
+  
+<div class="modal" id="aidModal" hidden role="dialog" aria-modal="true" aria-labelledby="amT">
+  <div class="mbox aidbox">
+    <button class="mx" id="amClose" type="button" aria-label="Close">×</button>
+    <div class="k">FOR ACRES INDEPENDENT DISTRIBUTORS</div>
+    <h3 id="amT">AID Wholesale Corner</h3>
+    <div id="amLock"><p class="mnote">Enter your AID code to see wholesale prices and order stock.</p>
+      <div class="am-row"><input id="amCode" type="text" autocomplete="off" autocapitalize="characters" placeholder="AID code"><button type="button" id="amGo">Open</button></div>
+      <p class="err" id="amErr" hidden>That code didn't work. Check with ACRES HQ.</p></div>
+    <div id="amOpen" hidden>
+      <div id="amItems"></div>
+      <label class="fld"><span class="fl">Your name (AID)</span><input id="amName" type="text"></label>
+      <div class="total"><span>Stock total</span><b id="amTot">₵0</b></div>
+      <p class="err" id="amMin" hidden></p>
+      <button class="send" type="button" id="amSend">Send stock order to ACRES HQ</button>
+      <p class="note small" id="amNote"></p>
+    </div>
+  </div>
+</div>
+<div class="modal" id="passModal" hidden role="dialog" aria-modal="true" aria-labelledby="pmT">
+  <div class="mbox">
+    <button class="mx" id="pmClose" type="button" aria-label="Close">×</button>
+    <div class="mk">FULL SEASON PASS</div>
+    <h3 id="pmT">Unlock all 31 episodes</h3>
+    <p>Bought fonio from the ACRES Heritage Club? Enter the pass code we sent you.</p>
+    <form id="pmForm" novalidate>
+      <label for="pmCode" class="fl2">Your pass code</label>
+      <input id="pmCode" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Type your code">
+      <p class="perr" id="pmErr" hidden></p>
+      <button class="send" id="pmGo" type="submit">Unlock</button>
+    </form>
+    <p class="mnote">No code yet? Order your first DIM Fonio below and we'll send one with your order confirmation.</p>
+  </div>
+</div>
+  <footer>ACRES Heritage TV · Our food. Our future<br><small>We count visits and plays to improve ACRES Heritage TV. No names are collected.</small></footer>
+</div>
+
+<script>
+const EPS=[[1, "Quick Whole-Grain Fonio Swallow", "One pot, a few minutes, and dinner is ready.", "16 OCT"], [2, "Smooth Blended Fonio Fufu", "Soft, smooth and perfect with okro soup.", "23 OCT"], [3, "Fonio & Cassava Dough Banku", "Yes, banku with fonio! Have some cassava dough ready.", "30 OCT"], [4, "Fonio Flour Fufu", "The quickest swallow yet. Just fonio flour, water and a pinch of salt.", "6 NOV"], [5, "Fonio Flour & Cassava Dough Swallow", "Fonio Flour & Cassava Dough Swallow, firm and filling.", "13 NOV"], [6, "Simple Whole-Grain Fonio Porridge", "Ready before the kids find their school shoes.", "20 NOV"], [7, "Toasted Fonio & Cinnamon Porridge", "Toast the grain first and your kitchen will smell amazing.", "27 NOV"], [8, "Fonio Tom Brown", "Yes, you can make your own Tom Brown mix with fonio. Roast, mill, store and enjoy all month.", "4 DEC"], [9, "Spiced Soaked Fonio Porridge", "Soak your fonio tonight and blend it with spices for the creamiest porridge yet.", "11 DEC"], [10, "Fonio Koko (Hausa Koko Style)", "Smooth, spicy koko made with fonio. Get your groundnuts and koose ready.", "18 DEC"], [11, "Fonio Date & Banana Cake", "A soft, moist cake with no wheat flour. Bake it for the family tomorrow.", "25 DEC"], [12, "Fonio Banana Pancakes", "Start 2027 with a healthy breakfast the whole family will love.", "1 JAN"], [13, "Fonio Banana Bread", "Soft, sliceable bread with no wheat flour. Perfect with tea.", "8 JAN"], [14, "Fonio Waakye", "Beans, waakye leaves and fonio. Ghana's favourite!", "15 JAN"], [15, "Fonio Angwamo (Oil Rice)", "Oil rice the old-school way, with salted beef, onions and fresh pepper. Made with fonio.", "22 JAN"], [16, "Fonio Minced Meat Fried Rice", "Spiced minced meat, vegetables and fonio in one pan.", "29 JAN"], [17, "Curried Vegetable Fonio", "Golden, colourful and ready in minutes. Great for lunch boxes.", "5 FEB"], [18, "Fonio Shrimp Jollof", "Yes, jollof made with fonio, with shrimp and vegetables. Ghana jollof just got healthier.", "12 FEB"], [19, "Fonio Garden Salad", "Light, fresh and filling, with boiled eggs.", "19 FEB"], [20, "Creamy Fonio Egg Salad", "Fonio, fresh vegetables and a creamy dressing on a bed of greens.", "26 FEB"], [21, "Fonio Pizza", "The kids will love this one.", "5 MAR"], [22, "Fonio Mini Pies", "Golden pastry cups with a savoury filling, made in the air fryer.", "12 MAR"], [23, "Fonio & Tiger Nut Chips", "Crunchy, homemade and better than anything from the shop.", "19 MAR"], [24, "Classic Fonio Milk", "Yes, you can make milk from fonio. No cooking needed for the first one.", "26 MAR"], [25, "Creamy Cooked Fonio Milk", "Cook the fonio first and the milk comes out extra smooth and creamy.", "2 APR"], [26, "Spiced Ginger Fonio Milk", "Fresh ginger and warm spices make this one special.", "9 APR"], [27, "Fonio & Soya Milk", "Two powerhouses in one glass, with a hint of pineapple.", "16 APR"], [28, "Fonio Moi Moi", "With a whole egg hidden inside.", "23 APR"], [29, "Seeded Fonio Leaf Cakes", "Wrapped in leaves the old way, with crunchy seeds inside.", "30 APR"], [30, "Fonio Tubaani", "Northern Ghana's steamed bean cake, now with fonio.", "7 MAY"], [31, "Suya-Spiced Fonio Moi Moi", "With ginger and whole eggs. The Season 1 finale!", "14 MAY"]];
+const VID=n=>`v2/ep${String(n).padStart(2,'0')}.bin`;
+// RELEASED: keys for this week's free episodes. One line is added each Fonio Friday.
+const RELEASED={1:"QkAJBz15rlDhTRzK72DcwttiNrecf3Vnya8CsbmApaM=",2:"DjXYQUqMK/Ne9N/ntg52BuEMqCtlNz/t4Ff7f2Q6WYQ=",3:"2wn5Jl6GFptXBrcV/9ZwVDSV/2JHcUrPOeR4I6wY/54=",4:"hQibHmv64h170cl1w0Z0mWPCOKTp5U5+xv4thJ8ipV0="};
+const POSTER=n=>`media/p${String(n).padStart(2,'0')}.jpg`;
+const MON={JAN:0,FEB:1,MAR:2,APR:3,MAY:4,JUN:5,JUL:6,AUG:7,SEP:8,OCT:9,NOV:10,DEC:11};
+let PASSKEYS=null;            // filled after a valid Season Pass code
+const keyFor=n=>(PASSKEYS&&PASSKEYS[n])||RELEASED[n]||null;
+let avail=[],firstLater=null;
+function refreshAvail(){avail=EPS.filter(e=>keyFor(e[0])).map(e=>e[0]);firstLater=EPS.find(e=>!RELEASED[e[0]])||null;}
+refreshAvail();
+const tv=document.getElementById('tv');
+let cur=avail.length?avail[avail.length-1]:1;
+
+function fri(d){return 'Fri '+d.replace(/(\d+) (\w+)/,(m,a,b)=>a+' '+b.charAt(0)+b.slice(1).toLowerCase());}
+
+const GROUPS=[{id:'g1',label:'Episodes 1–15',from:1,to:15},{id:'g2',label:'Episodes 16–31',from:16,to:31}];
+let openGroup=null;
+function renderList(){
+  const L=document.getElementById('list');L.innerHTML='';
+  GROUPS.forEach(g=>{
+    const isOpen=openGroup===g.id,hasCur=cur>=g.from&&cur<=g.to;
+    const out=avail.filter(n=>n>=g.from&&n<=g.to).length,total=g.to-g.from+1;
+    const meta=hasCur?'Now playing · Episode '+cur:out===total?total+' recipes':out===0?'Unlock with Season Pass':out+' of '+total+' free now';
+    const head=document.createElement('button');head.type='button';head.className='grp'+(isOpen?' open':'');
+    head.setAttribute('aria-expanded',isOpen);head.setAttribute('aria-controls',g.id);
+    head.innerHTML=`<span><span class="gl">${g.label}</span><span class="gm">${meta}</span></span><span class="chev" aria-hidden="true">›</span>`;
+    head.addEventListener('click',()=>{openGroup=isOpen?null:g.id;renderList();});
+    L.appendChild(head);
+    const box=document.createElement('div');box.id=g.id;box.className='grp-body';box.hidden=!isOpen;
+    EPS.filter(e=>e[0]>=g.from&&e[0]<=g.to).forEach(([n,name,sub,date])=>{
+      const ready=avail.includes(n),playing=n===cur,isNext=firstLater&&n===firstLater[0];
+      const el=document.createElement('button');el.type='button';
+      el.className='ep '+(ready?'ready':'later')+(playing?' playing':'')+(isNext?' next':'');
+      el.addEventListener('click',()=>ready?play(n,true):openPass());
+      const tag=playing?'PLAYING':ready?'WATCH':'🔒 PASS';
+      el.innerHTML=`<img src="${POSTER(n)}" alt="" loading="lazy"><div style="min-width:0"><div class="t">${name}</div><div class="m">EPISODE ${n}${ready?'':' · FREE ON '+fri(date).toUpperCase()}</div></div><span class="tag">${tag}</span>`;
+      box.appendChild(el);
+    });
+    L.appendChild(box);
+  });
+}
+const b64d=t=>Uint8Array.from(atob(t),c=>c.charCodeAt(0));
+const cache=new Map();let loadId=0;
+// ===== Episode loading (v2): encrypted in small pieces so it can play while it loads =====
+const HDR=64, P=393216, AHEAD=40;   // keep about 40 seconds loaded ahead, no more (saves data)
+const MS=window.ManagedMediaSource||window.MediaSource;
+let live=null;                      // the episode currently streaming
+function stopLive(){if(!live)return;live.dead=true;try{live.ctrl.abort();}catch(_){}if(live.url){const u=live.url;setTimeout(()=>URL.revokeObjectURL(u),1000);}live=null;}
+async function epKey(n){return crypto.subtle.importKey('raw',b64d(keyFor(n)),'AES-GCM',false,['decrypt']);}
+function ivFor(pre,i){const iv=new Uint8Array(12);iv.set(pre,0);new DataView(iv.buffer).setUint32(8,i);return iv;}
+async function dec(key,pre,i,ct){return new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM',iv:ivFor(pre,i)},key,ct));}
+function parseHdr(b){if(String.fromCharCode(...b.slice(0,4))!=='ACV2')throw new Error('format');
+  const pre=b.slice(4,12),p=new DataView(b.buffer,b.byteOffset+12,4).getUint32(0);const codec=new TextDecoder().decode(b.slice(16,64)).replace(/\0+$/,'');return {pre,p,codec};}
+const ahead=()=>{const b=tv.buffered,t=tv.currentTime;for(let k=0;k<b.length;k++){if(b.start(k)<=t+0.3&&b.end(k)>t)return b.end(k)-t;}return 0;};
+const nap=ms=>new Promise(r=>setTimeout(r,ms));
+// Reads a fetch body as exact-size pieces
+function piecer(res){const rd=res.body.getReader();let q=[],have=0,done=false;
+  return async function take(n){while(have<n&&!done){const r=await rd.read();if(r.done){done=true;break;}q.push(r.value);have+=r.value.length;}
+    const want=Math.min(n,have);if(!want)return null;const out=new Uint8Array(want);let o=0;
+    while(o<want){const c=q[0],k=Math.min(c.length,want-o);out.set(c.subarray(0,k),o);o+=k;if(k===c.length)q.shift();else q[0]=c.subarray(k);}have-=want;return out;};}
+// Stream with MediaSource: plays after the first piece (about 4–8 seconds of video)
+async function streamEp(n,my,onFirst){
+  const key=await epKey(n);const ctrl=new AbortController();const me={ctrl,dead:false};live=me;
+  const gone=()=>me.dead||my!==loadId;
+  let res=await fetch(VID(n),{headers:{Range:'bytes=0-'+(HDR+P+16-1)},signal:ctrl.signal});if(!res.ok)throw new Error('missing');
+  let total=0,take=null,first;
+  if(res.status===206){total=+((res.headers.get('content-range')||'').split('/')[1])||0;first=new Uint8Array(await res.arrayBuffer());}
+  else{take=piecer(res);first=await take(HDR+P+16);}           // server sent the whole file: read it piece by piece
+  const h=parseHdr(first);const type=h.codec;
+  if(!MS||!MS.isTypeSupported(type))throw new Error('nomse');
+  const ms=new MS();if(window.ManagedMediaSource)tv.disableRemotePlayback=true;
+  const url=URL.createObjectURL(ms);me.url=url;tv.src=url;
+  await new Promise(r=>ms.addEventListener('sourceopen',r,{once:true}));
+  const sb=ms.addSourceBuffer(type);
+  const add=async d=>{sb.appendBuffer(d);await new Promise((r,j)=>{sb.addEventListener('updateend',r,{once:true});sb.addEventListener('error',j,{once:true});});};
+  await add(await dec(key,h.pre,0,first.slice(HDR)));onFirst();
+  const C=h.p+16,count=total?Math.ceil((total-HDR)/C):Infinity;
+  (async()=>{
+  for(let i=1;i<count;i++){
+    while(!gone()&&ahead()>AHEAD)await nap(700);               // enough loaded: wait, don't spend data yet
+    if(gone())return;
+    let ct;
+    if(take){ct=await take(C);if(!ct)break;}
+    else{const s0=HDR+i*C,e0=Math.min(total,s0+C)-1;const r=await fetch(VID(n),{headers:{Range:`bytes=${s0}-${e0}`},signal:ctrl.signal});
+      if(r.status!==206)throw new Error('range');ct=new Uint8Array(await r.arrayBuffer());}
+    if(gone())return;
+    await add(await dec(key,h.pre,i,ct));
+  }
+  if(!gone()&&ms.readyState==='open'){try{ms.endOfStream();}catch(_){}}
+  })().catch(x=>{if(!gone()){console.warn('stream stopped',x);document.getElementById('loading').hidden=false;document.getElementById('loading').querySelector('b').textContent='';document.getElementById('loading').querySelector('span').textContent='The connection dropped. Tap the episode to try again.';}});
+}
+// Backup for phones without streaming support: download everything, then play
+async function fullEp(n,onProg){
+  if(cache.has(n))return cache.get(n);
+  const key=await epKey(n);const res=await fetch(VID(n));if(!res.ok)throw new Error('missing');
+  const total=+res.headers.get('content-length')||0;const take=piecer(res);
+  const h=parseHdr(await take(HDR));const parts=[];let i=0,got=HDR;
+  for(;;){const ct=await take(h.p+16);if(!ct)break;got+=ct.length;if(total)onProg(got/total);parts.push(await dec(key,h.pre,i++,ct));}
+  const url=URL.createObjectURL(new Blob(parts,{type:h.codec.split(';')[0]}));cache.set(n,url);
+  if(cache.size>2){const [old,u]=cache.entries().next().value;if(old!==n){URL.revokeObjectURL(u);cache.delete(old);}}
+  return url;
+}
+async function play(n,auto,fromShuffle){
+  if(!keyFor(n)){openPass();return;}
+  if(!fromShuffle){bag=[];autoRun=0;}
+  document.getElementById('still').hidden=true;
+  const e=EPS.find(x=>x[0]===n);cur=n;const my=++loadId;
+  tv.pause();tv.removeAttribute('src');tv.load();tv.poster=POSTER(n);
+  document.getElementById('nowLab').textContent='NOW PLAYING · EPISODE '+n+' · SHUFFLE ON';
+  document.getElementById('nowTitle').textContent=e[1];
+  document.getElementById('nowSub').textContent=e[2];
+  const i=avail.indexOf(n);
+  document.getElementById('prev').disabled=i<=0;
+  document.getElementById('next').disabled=i>=avail.length-1;
+  renderList();
+  const ld=document.getElementById('loading');ld.hidden=false;ld.querySelector('b').textContent='0%';
+  stopLive();
+  try{
+    let streamed=false;
+    if(MS){try{await streamEp(n,my,()=>{streamed=true;if(my===loadId){ld.hidden=true;if(auto||tv.muted)tv.play().catch(()=>{});}});}
+      catch(x){if(my!==loadId||x.name==='AbortError')return;if(streamed)throw x;}}
+    if(!streamed){
+      const url=await fullEp(n,p=>{if(my===loadId)ld.querySelector('b').textContent=Math.round(p*100)+'%';});
+      if(my!==loadId)return;
+      tv.src=url;ld.hidden=true;}
+    if(my!==loadId)return;
+    track('episode_play',{episode_number:n,episode_name:e[1],play_source:fromShuffle?'shuffle':(auto?'chosen':'auto_start'),season_pass:!!PASSKEYS});
+    if(auto||tv.muted){tv.play().catch(()=>{});}
+  }catch(err){if(my===loadId){ld.querySelector('b').textContent='';ld.querySelector('span').textContent='This episode could not load. Check your connection and tap it again.';}}
+}
+document.getElementById('prev').onclick=()=>{if(CH===3){playSeed((seedCur-1+SEEDSEQ.length)%SEEDSEQ.length,true);return;}if(CH===2){playSong(stepSong(-1),true);return;}const i=avail.indexOf(cur);if(i>0)play(avail[i-1],true);};
+document.getElementById('next').onclick=()=>{if(CH===3){playSeed((seedCur+1)%SEEDSEQ.length,true);return;}if(CH===2){playSong(stepSong(1),true);return;}const i=avail.indexOf(cur);if(i<avail.length-1)play(avail[i+1],true);};
+// Shuffle: when an episode ends, a random released episode plays next (never the same one twice in a row).
+let bag=[];
+function nextShuffle(){if(avail.length<2)return avail[0];if(!bag.length)bag=avail.filter(n=>n!==cur).sort(()=>Math.random()-.5);let n=bag.shift();if(n===cur){n=bag.shift()||avail.find(x=>x!==cur);}return n;}
+// ===== CH 2: Heritage Songs (free for everyone) =====
+const SONGS=[{t:'The Truth About Our Food',s:'An ACRES anthem for clean, indigenous food in Ghana.',src:'songs/s01.m4a',poster:'songs/s01-cover.jpg',lyrics:'songs/s01-lyrics.json'},
+  {t:'Demand Better',s:'Demand clean, healthy food: no more chemicals, bring our own foods back.',src:'songs/s02.m4a',poster:'songs/s02-cover.jpg',lyrics:'songs/s02-lyrics.json'},
+  {t:'Demand Better (Version 2)',s:'Same message, a fresh new rhythm.',src:'songs/s03.m4a',poster:'songs/s03-cover.jpg',lyrics:'songs/s03-lyrics.json'},
+  {t:'Eat Fonio, Ghana',s:'The story of fonio: ancient, fast-growing, nourishing, and back on our tables.',src:'songs/s04.m4a',poster:'songs/s04-cover.jpg',lyrics:'songs/s04-lyrics.json'},
+  {t:'The Stone the Builders Threw',s:'A new take on our anthem: what was thrown away is now the cornerstone.',src:'songs/s05.m4a',poster:'songs/s05-cover.jpg',lyrics:'songs/s05-lyrics.json'},
+  {t:'The Stone the Builders Threw (Version 2)',s:'The cornerstone anthem, in a second rhythm.',src:'songs/s06.m4a',poster:'songs/s06-cover.jpg',lyrics:'songs/s06-lyrics.json'},
+  {t:'Eat Fonio, Ghana (Version 2)',s:'The story of fonio, in a second rhythm.',src:'songs/s07.m4a',poster:'songs/s07-cover.jpg',lyrics:'songs/s07-lyrics.json'},
+  {t:'Bam-ba-ra!',s:'Bambara beans: protein-packed, grown right here, and back in the pot.',src:'songs/s08.m4a',poster:'songs/s08-cover.jpg',lyrics:'songs/s08-lyrics.json'},
+  {t:'Bam-ba-ra! (Version 2)',s:'The Bambara bean anthem, in a second rhythm.',src:'songs/s09.m4a',poster:'songs/s09-cover.jpg',lyrics:'songs/s09-lyrics.json'},
+  {t:'Fonio Friday',s:'Jollof, waakye, koko, all made with fonio. Make every Friday a Fonio Friday!',src:'songs/s10.m4a',poster:'songs/s10-cover.jpg',lyrics:'songs/s10-lyrics.json'},
+  {t:'African Rice',s:'Oryza glaberrima: Africa\'s own red rice, 3,000 years strong. Let it rise again!',src:'songs/s11.m4a',poster:'songs/s11-cover.jpg',lyrics:'songs/s11-lyrics.json'},
+  {t:'African Rice (Version 2)',s:'Africa\'s own red rice anthem, in a second rhythm.',src:'songs/s12.m4a',poster:'songs/s12-cover.jpg',lyrics:'songs/s12-lyrics.json'},
+  {t:'Kersting\'s Groundnut',s:'A little seed growing secretly underground: protein-rich, almost forgotten, coming back.',src:'songs/s13.m4a',poster:'songs/s13-cover.jpg',lyrics:'songs/s13-lyrics.json'},
+  {t:'Frafra Potato, Rise Again',s:'Salanga, the small tuber of the north: sweet, nourishing, and ready to rise again.',src:'songs/s14.m4a',poster:'songs/s14-cover.jpg',lyrics:'songs/s14-lyrics.json'},
+  {t:'Cleanse the Soil',s:'Cleanse before you heal: cut chemicals in half and let ACRES Nano restore the land.',src:'songs/s15.m4a',poster:'songs/s15-cover.jpg',lyrics:'songs/s15-lyrics.json'},
+  {t:'Cleanse the Soil (Version 2)',s:'The ACRES Nano soil anthem, in a second rhythm.',src:'songs/s16.m4a',poster:'songs/s16-cover.jpg',lyrics:'songs/s16-lyrics.json'},
+  {t:'Madam Vice President',s:'A plea from the farmers, the women and the children: rise for the soil, restore the land.',src:'songs/s17.m4a',poster:'songs/s17-cover.jpg',lyrics:'songs/s17-lyrics.json'}];
+const lyrCache={};let LYR=[],lyrOn=-1;
+let CH=1,songCur=0;
+// Two albums. Version 1 and Version 2 of the same song never share an album.
+const ALBUMS=[[0,1,3,4,7,9,10,14,16],[2,6,5,8,12,11,13,15]];
+const PLAYSEQ=ALBUMS[0].concat(ALBUMS[1]);let viewAlb=0;
+function albumOf(i){return ALBUMS[1].includes(i)?1:0;}
+let SHUF=false;try{SHUF=localStorage.getItem('acresShuffle')==='1';}catch(_){}
+let shufBag=[],shufHist=[];
+function stepSong(d){
+  if(SHUF){if(d<0&&shufHist.length){return shufHist.pop();}
+    if(d>0){if(!shufBag.length)shufBag=PLAYSEQ.filter(i=>i!==songCur).sort(()=>Math.random()-.5);shufHist.push(songCur);if(shufHist.length>50)shufHist.shift();return shufBag.shift();}}
+  const k=PLAYSEQ.indexOf(songCur);return PLAYSEQ[(k+d+PLAYSEQ.length)%PLAYSEQ.length];}
+function paintShuf(){const b=document.getElementById('shufBtn');if(!b)return;b.classList.toggle('on',SHUF);b.setAttribute('aria-pressed',SHUF?'true':'false');b.querySelector('span').textContent=SHUF?'Shuffle on':'Shuffle off';}
+function toggleShuf(){SHUF=!SHUF;shufBag=[];shufHist=[];try{localStorage.setItem('acresShuffle',SHUF?'1':'0');}catch(_){}paintShuf();track('shuffle_toggle',{on:SHUF});}
+let openAlb=-1;
+function renderSongs(){const L=document.getElementById('songList');L.textContent='';
+  if(openAlb<0){const g=document.createElement('div');g.className='alb-grid';
+    ALBUMS.forEach((a,k)=>{const f=document.createElement('div');f.className='folder'+(CH===2&&a.includes(songCur)?' live':'');f.tabIndex=0;f.setAttribute('role','button');
+      const m=document.createElement('div');m.className='mosaic';a.slice(0,4).forEach(i=>{const im=document.createElement('img');im.alt='';im.loading='lazy';im.src=SONGS[i].poster;m.appendChild(im);});
+      f.appendChild(m);const t=document.createElement('div');t.className='f-txt';t.innerHTML='<b></b><small></small><em></em>';t.querySelector('b').textContent='📁 Album '+(k+1);t.querySelector('small').textContent=a.length+' songs · free';
+      t.querySelector('em').textContent=CH===2&&a.includes(songCur)?'♪ Now playing':'Tap to open';f.appendChild(t);
+      const pl=document.createElement('button');pl.type='button';pl.className='f-play';pl.textContent='▶ Play';pl.onclick=e=>{e.stopPropagation();track('album_play',{album:k+1});playSong(a[0],true);};f.appendChild(pl);
+      const open=()=>{openAlb=k;renderSongs();track('album_open',{album:k+1});};f.onclick=open;f.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}};g.appendChild(f);});
+    L.appendChild(g);return;}
+  const a=ALBUMS[openAlb];const h=document.createElement('div');h.className='alb-head';
+  const bk=document.createElement('button');bk.type='button';bk.className='alb-back';bk.textContent='◀ Albums';bk.onclick=()=>{openAlb=-1;renderSongs();};
+  const ti=document.createElement('b');ti.textContent='Album '+(openAlb+1);
+  const pa=document.createElement('button');pa.type='button';pa.className='alb-play';pa.textContent='▶ Play all';pa.onclick=()=>{track('album_play',{album:openAlb+1});playSong(a[0],true);};
+  h.append(bk,ti,pa);L.appendChild(h);
+  a.forEach((i,n)=>{const x=SONGS[i];const b=document.createElement('button');b.type='button';b.className='song mini'+(CH===2&&i===songCur?' playing':'');
+  b.innerHTML='<span class="num"></span><img alt="" loading="lazy"><span class="st"><b></b><small></small></span><span class="tag"></span>';b.querySelector('.num').textContent=n+1;b.querySelector('img').src=x.poster;b.querySelector('b').textContent=x.t;b.querySelector('small').textContent=x.s;b.querySelector('.tag').textContent=CH===2&&i===songCur?'♪':'▶';
+  b.onclick=()=>playSong(i,true);L.appendChild(b);});}
+const $s=id=>document.getElementById(id);
+function fmtT(t){t=Math.max(0,Math.floor(t||0));return Math.floor(t/60)+':'+String(t%60).padStart(2,'0');}
+function buildLyrics(){const R=$s('stRoll');R.textContent='';lyrOn=-1;LYR.forEach(([t,txt,sec],k)=>{const p=document.createElement('p');if(sec){const sm=document.createElement('small');sm.textContent=sec.toUpperCase();p.appendChild(sm);}p.appendChild(document.createTextNode(txt));p.onclick=()=>{tv.currentTime=Math.max(0,t-.3);if(tv.paused)tv.play().catch(()=>{});};R.appendChild(p);});R.style.transform='translateY(0)';$s('stage').classList.remove('singing');}
+function syncLyrics(){if(CH!==2)return;const t=tv.currentTime+.4;let k=-1;for(let j=0;j<LYR.length;j++){if(LYR[j][0]<=t)k=j;else break;}
+  const d=tv.duration||0;$s('stFill').style.width=(d?tv.currentTime/d*100:0)+'%';$s('stTime').textContent=fmtT(tv.currentTime)+' / '+fmtT(d);$s('stPlay').textContent=(tv.paused||tv.muted)?'▶':'❚❚';$s('stPlay').classList.toggle('mute',!tv.paused&&tv.muted);
+  if(k===lyrOn)return;lyrOn=k;const R=$s('stRoll'),ps=R.children;[...ps].forEach((p,j)=>{p.classList.toggle('on',j===k);p.classList.toggle('done',j<k);});
+  $s('stage').classList.toggle('singing',k>=0);if(k>=0){const box=$s('stLyr');const p=ps[k];R.style.transform='translateY('+(box.clientHeight*.38-p.offsetTop-p.offsetHeight/2)+'px)';}}
+tv.addEventListener('timeupdate',syncLyrics);tv.addEventListener('play',syncLyrics);tv.addEventListener('pause',syncLyrics);
+$s('stPlay').onclick=()=>{if(tv.paused||tv.muted){tv.muted=false;document.getElementById('sound').hidden=true;tv.play().catch(()=>{});}else tv.pause();};
+$s('stProg').onclick=e=>{const r=e.currentTarget.getBoundingClientRect();if(tv.duration)tv.currentTime=(e.clientX-r.left)/r.width*tv.duration;};
+$s('seNext').onclick=()=>playSong(stepSong(1),true);
+$s('seOrder').onclick=()=>{clearEnd();$s('seNext').textContent=SONGS.length>1?'▶ Next song':'↻ Play again';track('song_cta_order',{song_name:SONGS[songCur].t});const d=document.querySelector('.desk');d.scrollIntoView({behavior:'smooth',block:'start'});setTimeout(()=>{const n=document.getElementById('nm');if(n)n.focus({preventScroll:true});},700);};
+$s('seAid').onclick=()=>{clearEnd();$s('seNext').textContent=SONGS.length>1?'▶ Next song':'↻ Play again';}; $s('seAid').addEventListener('click',()=>track('song_cta_aid',{song_name:SONGS[songCur].t}));
+async function loadLyrics(x){if(!x.lyrics){LYR=[];buildLyrics();return;}if(!lyrCache[x.lyrics]){try{lyrCache[x.lyrics]=await (await fetch(x.lyrics)).json();}catch(_){lyrCache[x.lyrics]=[];}}LYR=lyrCache[x.lyrics];buildLyrics();}
+let endTimer=null;
+function clearEnd(){if(endTimer){clearInterval(endTimer);endTimer=null;}}
+function showEnd(){clearEnd();$s('stEnd').hidden=false;track('song_end_card',{song_name:SONGS[songCur].t});
+  let n=10;const lab=()=>$s('seNext').textContent=(SONGS.length>1?'▶ Next song':'↻ Play again')+' in '+n+'s';lab();
+  endTimer=setInterval(()=>{n--;if(n<=0){clearEnd();playSong(stepSong(1),true);}else lab();},1000);}
+function playSong(i,auto){songCur=i;clearEnd();$s('stEnd').hidden=true;autoRun=auto?0:autoRun;document.getElementById('still').hidden=true;++loadId;stopLive();const x=SONGS[i];
+  document.getElementById('loading').hidden=true;tv.pause();tv.src=x.src;tv.poster='';
+  $s('stCover').src=x.poster;$s('stBg').style.backgroundImage='url('+x.poster+')';loadLyrics(x);
+  const al=albumOf(i);document.getElementById('nowLab').textContent='NOW PLAYING · ALBUM '+(al+1)+' · SONG '+(ALBUMS[al].indexOf(i)+1)+' OF '+ALBUMS[al].length;document.getElementById('nowTitle').textContent=x.t;document.getElementById('nowSub').textContent=x.s;
+  document.getElementById('prev').disabled=SONGS.length<2;document.getElementById('next').disabled=SONGS.length<2;renderSongs();
+  if(auto||tv.muted)tv.play().catch(()=>{});track('song_play',{song_name:x.t});}
+// ===== CH 3: Heritage Seeds (free; videos play from our seeds partner's YouTube channel) =====
+const SEEDS=[{"n":"Grains & Tubers","i":"🌾","v":[["NAL2xGcJ-so","How to Grow Fonio","Digitaria exilis, Africa's ancient grain, from seed to harvest."],["H0DoOH5bh9k","Frafra Potato (Hausa Potato)","Growing the native potato of the north: Solenostemon rotundifolius."],["Z1xJn9rk0uE","Lesser Yam: How to Grow It","Dioscorea esculenta, a small yam with big potential."],["gpdd4h7XEWE","Lesser Yam in a Minute","Uses and cultivation, the short version."],["-8NDnrO6ftc","How to Grow Tiger Nuts","Cyperus esculentus, for a better yield."],["rNNZzA3qr20","Soaking Dried Tiger Nuts","Turn dried tiger nuts back into fresh nuts."]]},{"n":"Beans & Legumes","i":"🫘","v":[["1DGY9IpzS5Y","Kersting's Groundnut","Macrotyloma geocarpum, the almost-forgotten groundnut."],["SAA5fKqT0T8","African Yam Beans","Sphenostylis stenocarpa: beans above the ground, tubers below."],["uhUWU6OtmkQ","Growing Cowpea in West Africa","Vigna unguiculata, from planting to harvest."]]},{"n":"Vegetables & Peppers","i":"🌶️","v":[["Gf2aVkuLa0A","8 Varieties of West African Okro","Abelmoschus caillei and Abelmoschus esculentus."],["DUs1YQes4OQ","20 Varieties of West African Eggplant","Garden eggs in every shape and colour."],["9ThmDkCqMHE","6 Rare West African Peppers","Heritage pepper varieties."],["qJrwwzdxGMg","African Habanero Pepper Seeds","For farms and home gardens."],["hCCLZ1ZzJ9w","Wild Bird's Eye Pepper","Capsicum frutescens."]]}];
+const SEEDSEQ=[];SEEDS.forEach((f,k)=>f.v.forEach((v,j)=>SEEDSEQ.push([k,j])));
+let seedCur=0,openSeed=-1,ytPlayer=null,ytReady=null,sdTimer=null;
+const THUMB=id=>'https://i.ytimg.com/vi/'+id+'/mqdefault.jpg';
+function seedAt(q){const [k,j]=SEEDSEQ[q];return {k,j,v:SEEDS[k].v[j]};}
+function loadYT(){if(ytReady)return ytReady;ytReady=new Promise(res=>{window.onYouTubeIframeAPIReady=res;const t=document.createElement('script');t.src='https://www.youtube.com/iframe_api';document.head.appendChild(t);});return ytReady;}
+function sdClear(){if(sdTimer){clearInterval(sdTimer);sdTimer=null;}}
+function sdShowEnd(){sdClear();$s('sdEnd').hidden=false;const x=seedAt(seedCur).v;
+  track('seed_end_card',{video:x[1]});let n=5;const lab=()=>$s('sdNext').textContent='▶ Next video in '+n+'s';lab();
+  sdTimer=setInterval(()=>{n--;if(n<=0){sdClear();playSeed((seedCur+1)%SEEDSEQ.length,true);}else lab();},1000);}
+async function playSeed(q,auto){seedCur=q;sdClear();$s('sdEnd').hidden=true;const {k,j,v}=seedAt(q);$s('ytPause').style.backgroundImage='url(https://i.ytimg.com/vi/'+v[0]+'/hqdefault.jpg)';$s('ypTitle').textContent=v[1];ytPaint(-1);
+  document.getElementById('nowLab').textContent='NOW SHOWING · '+SEEDS[k].n.toUpperCase()+' · '+(j+1)+' OF '+SEEDS[k].v.length;
+  document.getElementById('nowTitle').textContent=v[1];document.getElementById('nowSub').textContent=v[2]+' · Video: Jibril Enterprise';
+  document.getElementById('prev').disabled=false;document.getElementById('next').disabled=false;renderSeeds();track('seed_play',{video:v[1]});
+  await loadYT();if(CH!==3||seedCur!==q)return;
+  if(!ytPlayer){ytPlayer=new YT.Player('ytP',{videoId:v[0],host:'https://www.youtube-nocookie.com',playerVars:{playsinline:1,rel:0,modestbranding:1,autoplay:1,controls:0,disablekb:1,fs:0,iv_load_policy:3,cc_load_policy:0},
+    events:{onReady:e=>{if(CH===3)e.target.playVideo();},onStateChange:e=>{ytPaint(e.data);if(e.data===0&&CH===3){track('seed_complete',{video:seedAt(seedCur).v[1]});sdShowEnd();}}}});}
+  else{ytPlayer.loadVideoById(v[0]);}}
+// Our own controls: YouTube's buttons, links and suggestions stay covered, so viewers never leave the station.
+function ytState(){try{return ytPlayer&&ytPlayer.getPlayerState?ytPlayer.getPlayerState():-1;}catch(_){return -1;}}
+function ytPaint(st){const playing=st===1||st===3;$s('ytPause').hidden=playing||st===0;$s('ytPlay').textContent=playing?'❚❚':'▶';}
+function ytToggle(){if(!ytPlayer||!ytPlayer.playVideo)return;const st=ytState();if(st===1||st===3)ytPlayer.pauseVideo();else{if(ytPlayer.unMute)ytPlayer.unMute();ytPlayer.playVideo();}}
+$s('ytShield').onclick=ytToggle;$s('ytPause').onclick=ytToggle;$s('ytPlay').onclick=ytToggle;
+$s('ytProg').onclick=e=>{if(!ytPlayer||!ytPlayer.getDuration)return;const r=e.currentTarget.getBoundingClientRect();ytPlayer.seekTo((e.clientX-r.left)/r.width*ytPlayer.getDuration(),true);};
+setInterval(()=>{if(CH!==3||!ytPlayer||!ytPlayer.getCurrentTime)return;const t=ytPlayer.getCurrentTime()||0,d=ytPlayer.getDuration()||0;$s('ytFill').style.width=(d?t/d*100:0)+'%';$s('ytTime').textContent=fmtT(t)+' / '+fmtT(d);},500);
+// When YouTube plays a commercial, step our cover aside so viewers can see and tap "Skip".
+let ytLow=0;setInterval(()=>{if(CH!==3||!ytPlayer)return;const st=ytState();
+  if(st===-1||st===5){ytLow+=400;}else ytLow=0;
+  $s('ytBox').classList.toggle('ad',ytLow>=1600);},400);
+function ytStop(){sdClear();if(ytPlayer&&ytPlayer.pauseVideo)try{ytPlayer.pauseVideo();}catch(_){}}
+function renderSeeds(){const L=document.getElementById('seedList');L.textContent='';const live=CH===3?seedAt(seedCur).k:-1;
+  if(openSeed<0){const g=document.createElement('div');g.className='alb-grid';
+    SEEDS.forEach((F,k)=>{const f=document.createElement('div');f.className='folder'+(k===live?' live':'');f.tabIndex=0;f.setAttribute('role','button');
+      const m=document.createElement('div');m.className='mosaic';F.v.slice(0,4).forEach(v=>{const im=document.createElement('img');im.alt='';im.loading='lazy';im.src=THUMB(v[0]);m.appendChild(im);});
+      f.appendChild(m);const t=document.createElement('div');t.className='f-txt';t.innerHTML='<b></b><small></small><em></em>';t.querySelector('b').textContent=F.i+' '+F.n;t.querySelector('small').textContent=F.v.length+' videos · free';
+      t.querySelector('em').textContent=k===live?'▶ Now showing':'Tap to open';f.appendChild(t);
+      const pl=document.createElement('button');pl.type='button';pl.className='f-play';pl.textContent='▶ Play';pl.onclick=e=>{e.stopPropagation();track('seed_folder_play',{folder:F.n});playSeed(SEEDSEQ.findIndex(x=>x[0]===k),true);};f.appendChild(pl);
+      const open=()=>{openSeed=k;renderSeeds();track('seed_folder_open',{folder:F.n});};f.onclick=open;f.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}};g.appendChild(f);});
+    L.appendChild(g);return;}
+  const F=SEEDS[openSeed];const h=document.createElement('div');h.className='alb-head';
+  const bk=document.createElement('button');bk.type='button';bk.className='alb-back';bk.textContent='◀ Folders';bk.onclick=()=>{openSeed=-1;renderSeeds();};
+  const ti=document.createElement('b');ti.textContent=F.i+' '+F.n;
+  const pa=document.createElement('button');pa.type='button';pa.className='alb-play';pa.textContent='▶ Play all';pa.onclick=()=>playSeed(SEEDSEQ.findIndex(x=>x[0]===openSeed),true);
+  h.append(bk,ti,pa);L.appendChild(h);
+  F.v.forEach((v,j)=>{const q=SEEDSEQ.findIndex(x=>x[0]===openSeed&&x[1]===j);const on=CH===3&&q===seedCur;const b=document.createElement('button');b.type='button';b.className='song mini'+(on?' playing':'');
+    b.innerHTML='<span class="num"></span><img alt="" loading="lazy"><span class="st"><b></b><small></small></span><span class="tag"></span>';b.querySelector('.num').textContent=j+1;b.querySelector('img').src=THUMB(v[0]);b.querySelector('b').textContent=v[1];b.querySelector('small').textContent=v[2];b.querySelector('.tag').textContent=on?'▶':'▷';
+    b.onclick=()=>{playSeed(q,true);document.querySelector('.set').scrollIntoView({behavior:'smooth',block:'start'});};L.appendChild(b);});}
+$s('sdNext').onclick=()=>playSeed((seedCur+1)%SEEDSEQ.length,true);
+$s('sdClub').addEventListener('click',()=>{sdClear();$s('sdNext').textContent='▶ Next video';track('seed_cta_club',{});});
+function setChannel(n){if(n===CH)return;CH=n;const one=n===1,two=n===2,three=n===3;
+  ['ch1Btn','ch2Btn','ch3Btn'].forEach((id,k)=>document.getElementById(id).classList.toggle('on',n===k+1));
+  document.getElementById('bugTxt').textContent=['','CH 1: HERITAGE FOODS','CH 2: HERITAGE SONGS','CH 3: HERITAGE SEEDS'][n];document.querySelector('.screen').classList.toggle('tall',two);document.getElementById('stage').hidden=!two;if(!two){$s('stEnd').hidden=true;clearEnd();}tv.controls=one;document.getElementById('bugImg').hidden=!one;document.getElementById('tkLab').textContent=['','CH 1: FOODS','CH 2: SONGS','CH 3: SEEDS'][n];
+  document.getElementById('gh').textContent='Season 1 programme guide';document.getElementById('gh').hidden=!one;document.getElementById('albSec').hidden=!two;document.getElementById('seedSec').hidden=!three;document.getElementById('guideSec').hidden=!one;
+  ['guideSub','passCta','list'].forEach(id=>{const e=document.getElementById(id);if(e)e.hidden=!one;});document.getElementById('songList').hidden=!two;
+  $s('ytBox').hidden=!three;document.getElementById('bug').hidden=three;if(three){++loadId;stopLive();tv.pause();document.getElementById('loading').hidden=true;document.getElementById('still').hidden=true;document.getElementById('sound').hidden=true;}else ytStop();
+  try{const u=new URL(location.href);if(one)u.searchParams.delete('ch');else u.searchParams.set('ch',String(n));history.replaceState(null,'',u.pathname+u.search+u.hash);}catch(_){}
+  track('channel_switch',{channel:n});
+  if(two)playSong(songCur,true);else if(three)playSeed(seedCur,true);else play(cur,true);}
+document.getElementById('shufBtn').onclick=toggleShuf;paintShuf();
+document.getElementById('ch1Btn').onclick=()=>setChannel(1);document.getElementById('ch2Btn').onclick=()=>setChannel(2);document.getElementById('ch3Btn').onclick=()=>setChannel(3);
+// Keep ACRES HERITAGE MARKET on one line: shrink the type until it fits the banner.
+function fitShop(){const el=document.getElementById('shopT');if(!el)return;el.style.fontSize='';let fs=parseFloat(getComputedStyle(el).fontSize);while(el.scrollWidth>el.clientWidth+1&&fs>14){fs-=1;el.style.fontSize=fs+'px';}
+  // line the Wholesale box's right edge up with the stem of the last T in MARKET
+  try{const w=document.querySelector('.shop-w');const tn=[...el.childNodes].pop();const r=document.createRange();r.setStart(tn,tn.length-1);r.setEnd(tn,tn.length);const t=r.getBoundingClientRect();const tw=el.parentNode.getBoundingClientRect();
+    const stemRight=t.left+t.width/2+fs*0.09;w.style.marginRight=Math.max(0,Math.round(tw.right-stemRight))+'px';}catch(_){}}
+fitShop();window.addEventListener('resize',fitShop);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitShop);
+// CH 3 is in private preview: only phones that opened a ?seeds=preview link see it (?seeds=off hides it again).
+const SEEDPREV=(()=>{const q=new URLSearchParams(location.search);try{if(q.get('seeds')==='preview')localStorage.setItem('acresSeedsPrev','1');if(q.get('seeds')==='off')localStorage.removeItem('acresSeedsPrev');return localStorage.getItem('acresSeedsPrev')==='1';}catch(_){return q.get('seeds')==='preview';}})();
+const SEEDS_LIVE=true; // CH 3 is public; set to false to hide it again (?seeds=preview still shows it)
+document.getElementById('ch3Btn').hidden=!(SEEDS_LIVE||SEEDPREV);
+// After 3 videos in a row with no tap, pause and ask (saves viewers' data).
+let autoRun=0;
+function nextAuto(){if(CH===2)playSong(stepSong(1),false);else play(nextShuffle(),true,true);}
+tv.addEventListener('ended',()=>{if(CH===2){track('song_complete',{song_name:SONGS[songCur].t});showEnd();return;}track('episode_complete',{episode_number:cur});autoRun++;
+  if(autoRun>=3){document.getElementById('still').hidden=false;track('still_watching_prompt',{});return;}
+  nextAuto();});
+document.getElementById('stillGo').onclick=()=>{autoRun=0;document.getElementById('still').hidden=true;nextAuto();};
+
+// ticker: what is on now, what is next, the offer
+function renderTicker(){
+  const items=[];
+  const latest=avail[avail.length-1];
+  if(latest){const e=EPS.find(x=>x[0]===latest);items.push(`<b>NEW THIS WEEK</b> Ep ${latest} · ${e[1]}`);}
+  if(firstLater)items.push(`<b>NEXT</b> ${fri(firstLater[3])} · Ep ${firstLater[0]} · ${firstLater[1]}`);
+  if(avail.length>1)items.push(`<b>CATCH UP</b> ${avail.length} episodes ready to watch`);
+  items.push('<i>DIM Fonio · 5kg bags & 1kg cases</i> · Order right here on this page');
+  if(!PASSKEYS)items.push('<b>SEASON PASS</b> Unlock all 31 episodes with your first 5kg order');
+  items.push('<b>EXPRESS DELIVERY</b> Across Greater Accra · cost confirmed when you order');
+  items.push('<b>FONIO FRIDAY</b> A new recipe premieres every Friday');
+  const html=items.map(t=>`<span>${t}</span>`).join('');
+  document.getElementById('tk').innerHTML=html+html;
+}
+renderTicker();
+
+document.getElementById('copy').addEventListener('click',async e=>{
+  const b=e.currentTarget;
+  try{await navigator.clipboard.writeText('+'+orderNum());b.textContent='Copied';}
+  catch(err){const r=document.createRange();r.selectNodeContents(document.getElementById('num'));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected';}
+  setTimeout(()=>b.textContent='Copy number',1800);
+});
+
+// ===== Full Season Pass =====
+const PASS_SALT='acres-heritage-tv-pass-v1',PASS_ITER=60000;
+const pm=document.getElementById('passModal');
+function openPass(){if(PASSKEYS)return;pm.hidden=false;document.getElementById('pmErr').hidden=true;setTimeout(()=>document.getElementById('pmCode').focus(),50);}
+function closePass(){pm.hidden=true;}
+document.getElementById('pmClose').onclick=closePass;
+pm.addEventListener('click',e=>{if(e.target===pm)closePass();});
+document.getElementById('passBtn').onclick=openPass;
+document.getElementById('passCta').onclick=openPass;
+const hex=b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
+async function tryCode(code){
+  code=code.trim().toUpperCase().replace(/\s+/g,'');
+  if(/^[A-Z0-9]{8}$/.test(code))code='ACRES-'+code.slice(0,4)+'-'+code.slice(4);
+  if(/^ACRES[A-Z0-9]{8}$/.test(code))code='ACRES-'+code.slice(5,9)+'-'+code.slice(9);
+  const base=await crypto.subtle.importKey('raw',new TextEncoder().encode(code),'PBKDF2',false,['deriveBits']);
+  const bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt:new TextEncoder().encode(PASS_SALT),iterations:PASS_ITER,hash:'SHA-256'},base,384);
+  const kid=hex(bits.slice(32));
+  const vault=await (await fetch('pass-vault.json')).json();
+  if(!vault[kid])return null;
+  const blob=b64d(vault[kid]);
+  const k=await crypto.subtle.importKey('raw',bits.slice(0,32),'AES-GCM',false,['decrypt']);
+  const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:blob.slice(0,12)},k,blob.slice(12));
+  return {code,keys:JSON.parse(new TextDecoder().decode(plain))};
+}
+function passOn(){
+  document.getElementById('passBtn').classList.add('on');document.getElementById('passLabel').textContent='Season Pass active';
+  const c=document.getElementById('passCta');c.classList.add('done');c.querySelector('b').textContent='✓ Season Pass active';c.querySelector('small').textContent='All 31 episodes unlocked on this phone';c.querySelector('em').textContent='';
+  refreshAvail();renderTicker();renderList();const i=avail.indexOf(cur);document.getElementById('next').disabled=i>=avail.length-1;document.getElementById('prev').disabled=i<=0;
+}
+document.getElementById('pmForm').addEventListener('submit',async e=>{
+  e.preventDefault();const btn=document.getElementById('pmGo'),err=document.getElementById('pmErr');
+  const v=document.getElementById('pmCode').value;if(!v.trim()){err.textContent='Please type your pass code.';err.hidden=false;return;}
+  btn.disabled=true;btn.textContent='Checking…';err.hidden=true;
+  try{const r=await tryCode(v);
+    if(!r){err.textContent='That code did not work. Check it and try again, or message us on WhatsApp.';err.hidden=false;}
+    else{PASSKEYS=r.keys;try{localStorage.setItem('acresPass',r.code);}catch(_){} closePass();passOn();track('season_pass_unlock',{method:'typed_code',code_type:r.code==='ACRES-DIMF-ONIO'?'shared':'personal'});}
+  }catch(_){err.textContent='Could not check the code. Check your connection and try again.';err.hidden=false;}
+  btn.disabled=false;btn.textContent='Unlock';
+});
+// One-tap unlock link: ...acres-heritage-tv/#pass=XXXXXXXX (the code never leaves the phone; it is removed from the address bar)
+async function linkUnlock(){
+  const m=location.hash.match(/pass=([A-Za-z0-9-]+)/);if(!m)return false;
+  try{history.replaceState(null,'',location.pathname+location.search);}catch(_){}
+  try{const r=await tryCode(m[1]);if(r){PASSKEYS=r.keys;try{localStorage.setItem('acresPass',r.code);}catch(_){} passOn();track('season_pass_unlock',{method:'link',code_type:r.code==='ACRES-DIMF-ONIO'?'shared':'personal'});return true;}
+    openPass();document.getElementById('pmErr').textContent='That unlock link did not work. Type your code below or message us on WhatsApp.';document.getElementById('pmErr').hidden=false;return true;}catch(_){return false;}
+}
+window.addEventListener('hashchange',linkUnlock);
+// QR / link straight to the order form: ...acres-heritage-tv/#order
+function goOrder(){if(location.hash!=='#order')return;const d=document.querySelector('.desk');if(!d)return;
+  setTimeout(()=>{d.scrollIntoView({behavior:'smooth',block:'start'});},400);track('order_link_open',{});}
+window.addEventListener('hashchange',goOrder);goOrder();
+document.getElementById('whatF').addEventListener('toggle',e=>{if(e.target.open)track('what_is_fonio_open',{});});
+document.getElementById('histF').addEventListener('toggle',e=>{if(e.target.open)track('fonio_history_open',{});});
+document.getElementById('storyBtn').addEventListener('click',()=>{tv.pause();const box=document.querySelector('.wf-vid');
+  box.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/vL1Gub9QdJk?autoplay=1&rel=0&playsinline=1" title="The Amaati Story" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+  track('fonio_story_play',{});});
+(async()=>{let c=null;
+  if(await linkUnlock())return;
+  try{c=localStorage.getItem('acresPass');}catch(_){}
+  if(c){try{const r=await tryCode(c);if(r){PASSKEYS=r.keys;passOn();}}catch(_){}}})();
+renderSongs();
+if(new URLSearchParams(location.search).get('album')==='2'){songCur=ALBUMS[1][0];openAlb=1;}
+if((SEEDS_LIVE||SEEDPREV)&&new URLSearchParams(location.search).get('ch')==='3'){CH=0;setChannel(3);renderSeeds();}else if(new URLSearchParams(location.search).get('ch')==='2'||new URLSearchParams(location.search).get('album')){CH=0;setChannel(2);CH=2;}else play(cur,false);
+tv.muted=true;tv.play().catch(()=>{});
+const snd=document.getElementById('sound');
+function unmute(){tv.muted=false;snd.hidden=true;tv.play().catch(()=>{});}
+snd.addEventListener('click',unmute);
+tv.addEventListener('volumechange',()=>{if(!tv.muted)snd.hidden=true;});
+
+// ===== AID channels: ...acres-heritage-tv/?aid=kwame sends orders to that distributor's WhatsApp =====
+// The AID list lives in aids.json. A customer stays with the AID whose link they first used (until another AID link is opened).
+const HQ_NUM='12404080158';let AID=null;
+(async()=>{
+  let slug=null;const q=new URLSearchParams(location.search).get('aid');
+  if(q){slug=q.trim().toLowerCase();try{if(slug==='hq')localStorage.removeItem('acresAid');else localStorage.setItem('acresAid',slug);}catch(_){}}
+  else{try{slug=localStorage.getItem('acresAid');}catch(_){}}
+  if(!slug||slug==='hq')return;
+  try{const list=await (await fetch('aids.json?t='+Date.now(),{cache:'no-store'})).json();const a=list[slug];
+    if(!a||a.active===false)return;
+    AID=Object.assign({slug},a);window.ACRES_AID=slug;
+    const d=String(a.wa).replace(/\D/g,''),intl='+'+d;
+    const local=d.startsWith('233')?('0'+d.slice(3)).replace(/^(\d{3})(\d{3})(\d{4})$/,'$1 $2 $3'):intl.replace(/^\+1(\d{3})(\d{3})(\d{4})$/,'+1 $1 $2 $3');
+    if(a.label)document.getElementById('aidLabel').textContent=a.label.toUpperCase();
+    if(a.areaText||a.area){const ar=document.getElementById('aidArea');ar.textContent=a.areaText||(a.area+' & Surroundings');ar.hidden=false;}
+    if(a.gift){document.getElementById('giftWrap').hidden=false;document.getElementById('zoneLbl').textContent="Recipient's zone in Accra";
+      document.getElementById('ph').placeholder='e.g. +1 513 000 0000';const dv=document.querySelector('input[name=how][value=delivery]');if(dv){dv.checked=true;dv.dispatchEvent(new Event('change',{bubbles:true}));}}
+    document.getElementById('aidName').textContent=a.name;
+    document.getElementById('aidPhone').textContent=local;document.getElementById('aidCall').href='tel:'+intl;
+    document.getElementById('aidCall').addEventListener('click',()=>track('aid_call',{aid_name:a.name}));
+    document.getElementById('aidInit').textContent=(a.name||'A').trim().charAt(0).toUpperCase();
+    document.getElementById('aidCard').hidden=false;
+    const n='+'+String(a.wa).replace(/\D/g,'');document.getElementById('num').textContent=n.replace(/^\+233(\d{2})(\d{3})(\d{4})$/,'+233 $1 $2 $3').replace(/^\+1(\d{3})(\d{3})(\d{4})$/,'+1 $1 $2 $3');
+    {const w=a.name.split(/\s+/),tt=/^(dr|mrs|mr|ms|rev|prof|pastor|apostle|bishop)\.?$/i;const short=tt.test(w[0])?w[0]+' '+w[w.length-1]:w[0];document.querySelector('.wa small').textContent='OR MESSAGE '+short.toUpperCase()+' ON WHATSAPP';}
+    if(a.nationwide){document.getElementById('zone').value='Other region (outside Greater Accra)';
+      const dv=document.querySelector('input[name=how][value=delivery]');if(dv){dv.checked=true;dv.dispatchEvent(new Event('change',{bubbles:true}));}
+      const al=document.querySelector('#addrWrap .fl');if(al)al.textContent='Your town, region and landmark';document.getElementById('addr').placeholder='e.g. Kumasi, Ashanti Region, near Adum';}
+    else if(a.zone){const zl=a.zone.toLowerCase();const z=[...document.getElementById('zone').options].find(o=>o.value.replace(/^\d+\s*·\s*/,'').split('–').some(part=>part.trim()&&zl.includes(part.trim().toLowerCase())));if(z)document.getElementById('zone').value=z.value;}
+    track('aid_channel_view',{aid_name:a.name});
+  }catch(_){}
+})();
+const orderNum=()=>AID?String(AID.wa).replace(/\D/g,''):HQ_NUM;
+// order form -> prefilled WhatsApp message (two products; prices depend on who the buyer came through)
+// Direct club members (no AID) get club prices; customers of an AID see the AID's retail prices.
+const PRICES={club:{bag:330,bagWas:375,case:670,caseWas:750,note:'Club member prices · Pickup or express delivery'},
+  aid:{bag:350,bagWas:375,case:750,caseWas:0,note:'Prices from your local distributor · Pickup or express delivery'}};
+const Q={bag:1,case:0};
+const PR=()=>AID?PRICES.aid:PRICES.club;
+function paintPrices(){const p=PR();document.getElementById('pBag').textContent='₵'+p.bag;document.getElementById('wBag').textContent=p.bagWas?'₵'+p.bagWas:'';
+  document.getElementById('pCase').textContent='₵'+p.case;document.getElementById('wCase').textContent=p.caseWas?'₵'+p.caseWas:'';document.getElementById('priceNote').textContent=p.note;}
+(function(){
+  const tot=document.getElementById('tot');
+  const how=()=>document.querySelector('input[name=how]:checked').value;
+  function upd(){paintPrices();const p=PR();document.getElementById('qBag').textContent=Q.bag;document.getElementById('qCase').textContent=Q.case;
+    const t=Q.bag*p.bag+Q.case*p.case;tot.innerHTML='₵'+t+(how()==='delivery'?'<small>+ delivery cost</small>':'');document.getElementById('delNote').hidden=how()!=='delivery';document.getElementById('addrWrap').hidden=how()!=='delivery';return t;}
+  window.updOrder=upd;
+  document.querySelectorAll('.prod .step button').forEach(b=>b.onclick=()=>{const it=b.dataset.it,d=+b.dataset.d;Q[it]=Math.max(0,Math.min(20,Q[it]+d));upd();});
+  document.querySelectorAll('input[name=how]').forEach(r=>r.addEventListener('change',upd));
+  document.getElementById('order').addEventListener('submit',e=>{
+    e.preventDefault();
+    const nm=document.getElementById('nm'),ph=document.getElementById('ph');
+    const gift=AID&&AID.gift,rnm=document.getElementById('rnm'),rph=document.getElementById('rph');const req=gift?[nm,ph,rnm,rph]:[nm,ph];
+    const miss=req.filter(i=>!i.value.trim());req.forEach(i=>i.classList.toggle('bad',!i.value.trim()));
+    const none=Q.bag+Q.case===0;
+    document.getElementById('err').textContent=none?'Please choose at least one bag or case.':(gift?'Please add your name and phone, and the recipient\'s name and phone.':'Please add your name and phone number.');
+    document.getElementById('err').hidden=!(miss.length||none);if(none)return;if(miss.length){miss[0].focus();return;}
+    const t=upd(),p=PR(),d=how()==='delivery',addr=document.getElementById('addr').value.trim();
+    const lines=['*NEW ORDER · ACRES Heritage TV*','','Name: '+nm.value.trim(),'Phone: '+ph.value.trim()];
+    if(Q.bag)lines.push('5kg Family Bag: '+Q.bag+' × ₵'+p.bag+' = ₵'+(Q.bag*p.bag));
+    if(Q.case)lines.push('1kg Case of 10: '+Q.case+' × ₵'+p.case+' = ₵'+(Q.case*p.case));
+    lines.push('Receive: '+(d?'Express delivery (please confirm delivery cost)':'Easy pickup'),'Zone: '+document.getElementById('zone').value);
+    if(gift){lines[0]='*NEW DIASPORA ORDER · ACRES Heritage TV*';lines.push('Send to: '+rnm.value.trim(),'Recipient phone: '+rph.value.trim());}
+    if(d)lines.push('Address/landmark: '+(addr||'(will share)'));
+    lines.push('*Total: ₵'+t+(d?' + delivery':'')+'*','','Watching: Episode '+cur);
+    lines.push(AID?'Distributor: '+AID.name+' ('+AID.slug+')':'Buyer type: Direct club member');
+    track('order_whatsapp',{bags:Q.bag,cases:Q.case,value:t,currency:'GHS',delivery:d?'express':'pickup',watching_episode:cur});
+    const url='https://api.whatsapp.com/send?phone='+orderNum()+'&text='+encodeURIComponent(lines.join('\n'));
+    const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove();
+  });
+  upd();setTimeout(upd,1500);setTimeout(upd,4000);
+})();
+// AID Wholesale Corner: prices are encrypted; only the AID code opens them.
+const AIDBLOB={"s": "w994YJ8dCBWsW4ppBOXYZw==", "i": "n7lWSCYpokMkn5QJ", "c": "1Bo3UkUta1Bq0DC1Tg/7lEQpziC3v4mllUNWjdcWhrw02BJxLCXO/Bp8M96VHQk01yu2WuyVfNvDC1jxb0ivpQSpr0nEF1PlWc1wr8D0qc8h7rugHMkJC3TPR5PJ6JeAxFsU4bkJ077nUVVOnFSGr/WMGveRFlf7dnfzxogbuTomLty1gn+IyK+wL+OOHu5nBYoht2bx97Q353NHI2+KAduUR7e4MNIacqTfOhhz4UVlIwx7qCD8FMrztoffn4Z0/5U9FTFRfdyzYufoEypusy76bGCLD3m0f5USxxveSGDSQ+pAeHutv3He/mtATXvM5wCVcaxmOAmeRLvWv/flUbmMwLhxbslX7RVw5ioSbN+M9ZcQc4iGSrYj8ORw5Roe2kfA25+/Vi596djIX1juenq9nzoZZt1IfSuoM2tRjgtZoRq4dV+wUqmMpByTleIOKnfWHmqZh5ZbIuLYOOt9twRrNhKKK1pQYBtyyfN8WT4KwNQs2fnQ65ZZaFJpa567/KsNFPla1AIduUGZyExPlokA6f162Fkf71kdumdGx+d95S9ayf94mJSmlnb1Z86s4bG4C6bqnkL2zV2AZefuCc7fhMFJ02q+SUpX"};
+(function(){
+  const M=document.getElementById('aidModal');let items=null,AQ={};
+  const b64=x=>Uint8Array.from(atob(x),c=>c.charCodeAt(0));
+  async function open(code){const k0=await crypto.subtle.importKey('raw',new TextEncoder().encode(code),'PBKDF2',false,['deriveKey']);
+    const k=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b64(AIDBLOB.s),iterations:150000,hash:'SHA-256'},k0,{name:'AES-GCM',length:256},false,['decrypt']);
+    return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(AIDBLOB.i)},k,b64(AIDBLOB.c))));}
+  function tot(){let t=0,bad=[];items.forEach(it=>{const q=AQ[it.id]||0;t+=q*it.price;if(q&&q<it.min)bad.push('Minimum order for '+it.name+' is '+it.min+' '+it.unit+(it.min>1?'s':'')+'.');document.getElementById('aq_'+it.id).textContent=q;});
+    document.getElementById('amTot').textContent='₵'+t;const n=Object.values(AQ).reduce((a,b)=>a+b,0);const m=document.getElementById('amMin');m.textContent=bad.join(' ')||(n?'':'Add at least one item.');m.hidden=!(bad.length||!n);return {t,ok:!bad.length&&n>0};}
+  function show(d){items=d.items;const box=document.getElementById('amItems');box.innerHTML='';
+    items.forEach(it=>{AQ[it.id]=it.min;const r=document.createElement('div');r.className='am-it';
+      r.innerHTML='<div class="pt"><b></b><small></small><span class="pp"><i></i></span><em></em></div><div class="step"><button type="button" data-d="-1">−</button><output id="aq_'+it.id+'"></output><button type="button" data-d="1">+</button></div>';
+      r.querySelector('b').textContent=it.name;r.querySelector('small').textContent=it.sub+' · minimum '+it.min+' '+it.unit+(it.min>1?'s':'');r.querySelector('i').textContent='₵'+it.price+' a '+it.unit;r.querySelector('em').textContent=it.retail;
+      r.querySelectorAll('button').forEach(bt=>bt.onclick=()=>{AQ[it.id]=Math.max(0,Math.min(200,(AQ[it.id]||0)+ +bt.dataset.d));tot();});box.appendChild(r);});
+    document.getElementById('amNote').textContent=d.note;if(AID)document.getElementById('amName').value=AID.name;
+    document.getElementById('amLock').hidden=true;document.getElementById('amOpen').hidden=false;tot();}
+  document.getElementById('aidCornerBtn').onclick=()=>{M.hidden=false;track('aid_corner_open',{});};
+  document.getElementById('amClose').onclick=()=>M.hidden=true;M.addEventListener('click',e=>{if(e.target===M)M.hidden=true;});
+  const go=async()=>{const c=document.getElementById('amCode').value.trim().toUpperCase();try{show(await open(c));try{sessionStorage.setItem('acresAidCode',c);}catch(_){}}catch(_){document.getElementById('amErr').hidden=false;}};
+  document.getElementById('amGo').onclick=go;document.getElementById('amCode').addEventListener('keydown',e=>{if(e.key==='Enter')go();});
+  try{const c=sessionStorage.getItem('acresAidCode');if(c)open(c).then(show).catch(()=>{});}catch(_){}
+  document.getElementById('amSend').onclick=()=>{const r=tot();if(!r.ok)return;const nm=document.getElementById('amName').value.trim();
+    const lines=['*AID STOCK ORDER · ACRES*','','AID: '+(nm||'(name)')+(AID?' ('+AID.slug+')':'')];
+    items.forEach(it=>{const q=AQ[it.id]||0;if(q)lines.push(it.name+': '+q+' × ₵'+it.price+' = ₵'+(q*it.price));});
+    lines.push('*Total: ₵'+r.t+'*');track('aid_stock_order',{value:r.t,currency:'GHS'});
+    const a=document.createElement('a');a.href='https://api.whatsapp.com/send?phone='+HQ_NUM+'&text='+encodeURIComponent(lines.join('\n'));a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove();};
+})();
+</script>
+
+</body></html>
