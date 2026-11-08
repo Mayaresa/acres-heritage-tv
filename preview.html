@@ -82,7 +82,8 @@ button{font:inherit;color:inherit}
 .now .lab{font-weight:900;font-size:12px;letter-spacing:3px;color:var(--green)}
 .now h1{font-family:var(--display);font-weight:800;font-size:clamp(24px,4.4vw,36px);line-height:1.05;margin:2px 0 4px;text-wrap:balance}
 .now p{margin:0;color:var(--muted)}
-.ctrls{display:flex;gap:8px}
+.ctrls{display:flex;gap:8px;align-items:center;flex:1 1 auto;min-width:0}
+.yt-nano{margin-left:auto;display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--fg);background:var(--panel-2);border:2px solid var(--green);border-radius:14px;padding:4px 10px 4px 4px}.yt-nano[hidden]{display:none}.yt-nano img{width:34px;height:auto;filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))}.yt-nano span{font-weight:900;font-size:12px;line-height:1.15;color:var(--green)}.yt-nano:hover{border-color:var(--lemon)}
 .btn{border:2px solid var(--line);background:var(--panel-2);border-radius:12px;padding:9px 14px;font-weight:800;font-size:14px;cursor:pointer}
 .btn:hover{border-color:var(--green)}
 .btn:disabled{opacity:.4;cursor:default}
@@ -280,8 +281,6 @@ footer{color:var(--muted);font-size:13px;text-align:center}
 .channels .ch.pass{padding:8px 6px 9px;font-size:12px;letter-spacing:.5px}
 .channels .ch.pass .n{color:inherit;opacity:.75}
 .wf-vid{position:relative}.wf-shield{position:absolute;inset:0;z-index:2;cursor:pointer;display:flex;align-items:center;justify-content:center}.wf-shield span{display:none;width:64px;height:64px;border-radius:50%;background:var(--lemon);color:#272727;font-size:28px;font-weight:900;align-items:center;justify-content:center;padding-left:4px}.wf-shield.paused{background:rgba(0,0,0,.45)}.wf-shield.paused span{display:flex}
-.ytbox:not(.ad) .yt-bar{padding-right:clamp(66px,13vw,84px)}
-.yt-nano{position:absolute;right:8px;bottom:6px;z-index:3;display:flex;flex-direction:column;align-items:center;gap:1px;text-decoration:none;filter:drop-shadow(0 4px 8px rgba(0,0,0,.6));transition:transform .2s}.yt-nano:hover{transform:scale(1.06)}.yt-nano img{width:clamp(34px,7vw,50px);height:auto}.yt-nano span{background:#80CD29;color:#17200f;font-weight:900;font-size:9px;border-radius:999px;padding:1px 6px;white-space:nowrap}.ytbox.ad .yt-nano{display:none}
 
 /* products + AID corner + stands (preview) */
 .prods{display:flex;flex-direction:column;gap:10px}
@@ -360,7 +359,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
         <div class="st-bar"><button type="button" id="stPlay" aria-label="Play">▶</button><div class="st-prog" id="stProg"><i id="stFill"></i></div><span id="stTime">0:00</span></div>
       </div>
       <div class="ytbox" id="ytBox" hidden><div id="ytP"></div><video id="locV" playsinline preload="metadata" hidden></video>
-        <div class="yt-shield" id="ytShield"></div><div class="part-card" id="partCard" hidden></div><div class="rst-card" id="rstCard" hidden><img src="media/rst-card.jpg" alt="Order ACRES Nano from RST Company Limited, 020 816 8917, 024 475 5947, 020 637 5069"><button type="button" id="rstSkip">Continue ›</button></div><a class="yt-nano" id="ytNano" href="https://www.acresagriculture.com" target="_blank" rel="noopener" aria-label="ACRES Nano Organic Fertilizer: learn more at acresagriculture.com"><img src="media/nano-acre.png" alt=""><span>ACRES Nano ›</span></a>
+        <div class="yt-shield" id="ytShield"></div><div class="part-card" id="partCard" hidden></div><div class="rst-card" id="rstCard" hidden><img src="media/rst-card.jpg" alt="Order ACRES Nano from RST Company Limited, 020 816 8917, 024 475 5947, 020 637 5069"><button type="button" id="rstSkip">Continue ›</button></div>
         <div class="yt-logo"><img src="media/acres-badge.png" alt="ACRES: Our food. Our future"></div>
         <div class="yt-pause" id="ytPause"><span class="yp-btn">▶</span><b id="ypTitle"></b><small>CH 3 · HERITAGE SEEDS</small></div>
         <div class="st-bar yt-bar"><button type="button" id="ytPlay" aria-label="Play">▶</button><div class="st-prog" id="ytProg"><i id="ytFill"></i></div><span id="ytTime">0:00</span></div>
@@ -380,7 +379,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
         <h1 id="nowTitle">Quick Whole-Grain Fonio Swallow</h1>
         <p id="nowSub">One pot, a few minutes, and dinner is ready.</p>
       </div>
-      <div class="ctrls"><button class="btn" id="prev" type="button">‹ Previous</button><button class="btn" id="next" type="button">Next ›</button></div>
+      <div class="ctrls"><button class="btn" id="prev" type="button">‹ Previous</button><button class="btn" id="next" type="button">Next ›</button><a class="yt-nano" hidden id="ytNano" href="https://www.acresagriculture.com" target="_blank" rel="noopener" aria-label="ACRES Nano Organic Fertilizer: learn more at acresagriculture.com"><img src="media/nano-acre.png" alt=""><span>ACRES<br>Nano ›</span></a></div>
     </div>
   </section>
 
@@ -890,7 +889,7 @@ function setChannel(n){if(n===CH)return;CH=n;const one=n===1,two=n===2,three=n==
   document.getElementById('bugTxt').textContent=['','CH 1: HERITAGE FOODS','CH 2: HERITAGE SONGS','CH 3: HERITAGE SEEDS'][n];document.querySelector('.screen').classList.toggle('tall',two);document.getElementById('stage').hidden=!two;if(!two){$s('stEnd').hidden=true;clearEnd();}tv.controls=one;document.getElementById('bugImg').hidden=!one;document.getElementById('tkLab').textContent=['','CH 1: FOODS','CH 2: SONGS','CH 3: SEEDS'][n];
   document.getElementById('gh').textContent='Season 1 programme guide';document.getElementById('gh').hidden=!one;document.getElementById('albSec').hidden=!two;document.getElementById('seedSec').hidden=!three;document.getElementById('guideSec').hidden=!one;
   ['guideSub','passCta','list'].forEach(id=>{const e=document.getElementById(id);if(e)e.hidden=!one;});document.getElementById('songList').hidden=!two;
-  $s('ytBox').hidden=!three;document.getElementById('bug').hidden=three;if(three){++loadId;stopLive();tv.pause();document.getElementById('loading').hidden=true;document.getElementById('still').hidden=true;document.getElementById('sound').hidden=true;}else ytStop();
+  $s('ytBox').hidden=!three;document.getElementById('ytNano').hidden=!three;document.getElementById('bug').hidden=three;if(three){++loadId;stopLive();tv.pause();document.getElementById('loading').hidden=true;document.getElementById('still').hidden=true;document.getElementById('sound').hidden=true;}else ytStop();
   try{const u=new URL(location.href);if(one)u.searchParams.delete('ch');else u.searchParams.set('ch',String(n));history.replaceState(null,'',u.pathname+u.search+u.hash);}catch(_){}
   track('channel_switch',{channel:n});
   if(two)playSong(songCur,true);else if(three)playSeed(seedCur,true);else play(cur,true);}

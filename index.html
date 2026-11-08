@@ -81,7 +81,8 @@ button{font:inherit;color:inherit}
 .now .lab{font-weight:900;font-size:12px;letter-spacing:3px;color:var(--green)}
 .now h1{font-family:var(--display);font-weight:800;font-size:clamp(24px,4.4vw,36px);line-height:1.05;margin:2px 0 4px;text-wrap:balance}
 .now p{margin:0;color:var(--muted)}
-.ctrls{display:flex;gap:8px}
+.ctrls{display:flex;gap:8px;align-items:center;flex:1 1 auto;min-width:0}
+.yt-nano{margin-left:auto;display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--fg);background:var(--panel-2);border:2px solid var(--green);border-radius:14px;padding:4px 10px 4px 4px}.yt-nano[hidden]{display:none}.yt-nano img{width:34px;height:auto;filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))}.yt-nano span{font-weight:900;font-size:12px;line-height:1.15;color:var(--green)}.yt-nano:hover{border-color:var(--lemon)}
 .btn{border:2px solid var(--line);background:var(--panel-2);border-radius:12px;padding:9px 14px;font-weight:800;font-size:14px;cursor:pointer}
 .btn:hover{border-color:var(--green)}
 .btn:disabled{opacity:.4;cursor:default}
@@ -216,7 +217,7 @@ h2{font-family:var(--display);font-weight:800;font-size:24px;margin:0 0 4px}
 .mbox .send{width:100%;background:var(--lemon);color:#272727}
 .mnote{font-size:13px;margin-top:12px!important}
 footer{color:var(--muted);font-size:13px;text-align:center}
-.ytbox{position:absolute;inset:0;z-index:2;background:#000}.ytbox #ytP,.ytbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.ytbox{position:absolute;inset:0;z-index:2;background:#000}.ytbox #locV{position:absolute;inset:0;width:100%;height:100%;background:#000;object-fit:contain}.ytbox #ytP,.ytbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .yt-shield{position:absolute;inset:0;z-index:1;cursor:pointer}
 .yt-pause{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:#000 center/cover no-repeat;cursor:pointer;text-align:center;padding:0 8% 50px}
 .yt-pause::before{content:'';position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.75))}
@@ -279,8 +280,32 @@ footer{color:var(--muted);font-size:13px;text-align:center}
 .channels .ch.pass{padding:8px 6px 9px;font-size:12px;letter-spacing:.5px}
 .channels .ch.pass .n{color:inherit;opacity:.75}
 .wf-vid{position:relative}.wf-shield{position:absolute;inset:0;z-index:2;cursor:pointer;display:flex;align-items:center;justify-content:center}.wf-shield span{display:none;width:64px;height:64px;border-radius:50%;background:var(--lemon);color:#272727;font-size:28px;font-weight:900;align-items:center;justify-content:center;padding-left:4px}.wf-shield.paused{background:rgba(0,0,0,.45)}.wf-shield.paused span{display:flex}
-.ytbox:not(.ad) .yt-bar{padding-right:clamp(66px,13vw,84px)}
-.yt-nano{position:absolute;right:8px;bottom:6px;z-index:3;display:flex;flex-direction:column;align-items:center;gap:1px;text-decoration:none;filter:drop-shadow(0 4px 8px rgba(0,0,0,.6));transition:transform .2s}.yt-nano:hover{transform:scale(1.06)}.yt-nano img{width:clamp(34px,7vw,50px);height:auto}.yt-nano span{background:#80CD29;color:#17200f;font-weight:900;font-size:9px;border-radius:999px;padding:1px 6px;white-space:nowrap}.ytbox.ad .yt-nano{display:none}
+.prods{display:flex;flex-direction:column;gap:10px}
+.prod{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.55);border-radius:14px;padding:8px 10px}
+.prod img{flex:none;width:64px;height:64px;object-fit:contain;filter:drop-shadow(0 4px 6px rgba(0,0,0,.25))}
+.prod img.sq{object-fit:cover;border-radius:8px;filter:none;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.pt{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.2}
+.pt b{font-family:var(--display);font-weight:800;font-size:18px}.pt small{font-size:12px;opacity:.8}
+.pp{margin-top:3px}.pp i{font-style:normal;font-family:var(--display);font-weight:800;font-size:24px}.pp s{font-size:14px;opacity:.55;margin-left:5px}
+.prod{display:grid;grid-template-columns:64px 1fr auto;grid-template-areas:'img txt txt' 'img price step';column-gap:10px;row-gap:2px}.prod img{grid-area:img;align-self:center}.pt{grid-area:txt}.prod .pp{grid-area:price;align-self:center;margin:0}.prod .step{grid-area:step;flex:none}.prod .step button{width:38px;height:38px;font-size:20px}.prod .step output{min-width:28px;font-size:19px}
+
+.nano .nano-why{margin:0;font-size:15px;line-height:1.4}.badges{display:flex;flex-wrap:wrap;gap:6px}.badges span{background:#17200f;color:#c8ff7a;font-weight:800;font-size:12px;border-radius:999px;padding:5px 10px}
+.rst{display:block;background:#17200f;color:#fff;border-radius:14px;padding:12px 14px;text-decoration:none}.rst.hot{box-shadow:0 0 0 3px var(--lemon)}.rst b{display:block;color:var(--lemon);font-size:16px}.rst span{font-size:13px;color:#dfe5d6}
+.np-note{background:rgba(255,255,255,.6);border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.35}
+.am-rw{margin-top:12px;border-top:2px solid #e5e5e5;padding-top:10px}.am-rw p{margin:4px 0;font-size:14px}
+
+.lv{display:flex;align-items:center;gap:12px;width:100%;margin:0 0 10px;background:rgba(255,255,255,.06);border:2px solid rgba(200,255,122,.35);border-radius:14px;padding:8px;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.lv img{flex:none;width:112px;height:63px;object-fit:cover;border-radius:8px;background:#111}.lv b{display:block;font-size:15px;line-height:1.25}.lv small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.gal-h{margin:14px 0 8px;font-weight:900;font-size:12px;letter-spacing:3px;color:var(--lemon)}
+.gal{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+.gal img{flex:none;height:220px;width:auto;border-radius:12px;scroll-snap-align:start}
+.gal-c{margin:6px 0 0;font-size:13px;color:#dfe5d6;line-height:1.4}.gal-c span{color:var(--green);font-weight:800}
+
+.part-card{position:absolute;inset:0;z-index:4;display:flex;align-items:center;justify-content:center;background:rgba(10,20,6,.82);color:#fff;font-family:var(--display);font-weight:800;font-size:clamp(22px,6vw,40px);pointer-events:none;animation:pcf 4s forwards}
+@keyframes pcf{0%,75%{opacity:1}100%{opacity:0}}
+.rst-card{position:absolute;inset:0;z-index:5;background:#fff;display:flex;align-items:center;justify-content:center}.rst-card img{width:100%;height:100%;object-fit:contain}
+.rst-card button{position:absolute;right:8px;top:8px;border:0;border-radius:999px;background:rgba(0,150,58,.9);color:#fff;font-weight:800;font-size:12px;padding:5px 10px;cursor:pointer}
+.ytbox.portrait #locV{object-fit:contain}
 </style>
 
 <div class="wrap">
@@ -318,8 +343,8 @@ footer{color:var(--muted);font-size:13px;text-align:center}
         </div>
         <div class="st-bar"><button type="button" id="stPlay" aria-label="Play">▶</button><div class="st-prog" id="stProg"><i id="stFill"></i></div><span id="stTime">0:00</span></div>
       </div>
-      <div class="ytbox" id="ytBox" hidden><div id="ytP"></div>
-        <div class="yt-shield" id="ytShield"></div><a class="yt-nano" id="ytNano" href="https://www.acresagriculture.com" target="_blank" rel="noopener" aria-label="ACRES Nano Organic Fertilizer: learn more at acresagriculture.com"><img src="media/nano-acre.png" alt=""><span>ACRES Nano ›</span></a>
+      <div class="ytbox" id="ytBox" hidden><div id="ytP"></div><video id="locV" playsinline preload="metadata" hidden></video>
+        <div class="yt-shield" id="ytShield"></div><div class="part-card" id="partCard" hidden></div><div class="rst-card" id="rstCard" hidden><img src="media/rst-card.jpg" alt="Order ACRES Nano from RST Company Limited, 020 816 8917, 024 475 5947, 020 637 5069"><button type="button" id="rstSkip">Continue ›</button></div>
         <div class="yt-logo"><img src="media/acres-badge.png" alt="ACRES: Our food. Our future"></div>
         <div class="yt-pause" id="ytPause"><span class="yp-btn">▶</span><b id="ypTitle"></b><small>CH 3 · HERITAGE SEEDS</small></div>
         <div class="st-bar yt-bar"><button type="button" id="ytPlay" aria-label="Play">▶</button><div class="st-prog" id="ytProg"><i id="ytFill"></i></div><span id="ytTime">0:00</span></div>
@@ -339,7 +364,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
         <h1 id="nowTitle">Quick Whole-Grain Fonio Swallow</h1>
         <p id="nowSub">One pot, a few minutes, and dinner is ready.</p>
       </div>
-      <div class="ctrls"><button class="btn" id="prev" type="button">‹ Previous</button><button class="btn" id="next" type="button">Next ›</button></div>
+      <div class="ctrls"><button class="btn" id="prev" type="button">‹ Previous</button><button class="btn" id="next" type="button">Next ›</button><a class="yt-nano" hidden id="ytNano" href="https://www.acresagriculture.com" target="_blank" rel="noopener" aria-label="ACRES Nano Organic Fertilizer: learn more at acresagriculture.com"><img src="media/nano-acre.png" alt=""><span>ACRES<br>Nano ›</span></a></div>
     </div>
   </section>
 
@@ -374,7 +399,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
         <div class="shop-k">WELCOME TO</div>
         <div class="shop-tw"><h2 class="shop-t" id="shopT">ACRES <span>HERITAGE</span> MARKET</h2>
         <div class="shop-w">Wholesale Club</div></div>
-        <p>Heritage foods from our indigenous seeds. <b>Order below</b> from your local distributor.</p>
+        <p id="shopLine">Heritage foods from our indigenous seeds. <b>Order below</b> from your local distributor.</p>
       </div>
     </div>
     <div class="awning thin"></div>
@@ -433,11 +458,83 @@ footer{color:var(--muted);font-size:13px;text-align:center}
       <div class="wa"><div><small>OR MESSAGE US ON WHATSAPP</small><span id="num">+1 240 408 0158</span></div><button class="copy" id="copy" type="button">Copy number</button></div>
       <a class="join" href="https://chat.whatsapp.com/BsuWk5uMUHa32gczMyat8a" target="_blank" rel="noopener">Join the club on WhatsApp ›</a>
     </aside>
+    <aside class="desk nano" id="nanoDesk" aria-label="Order ACRES Nano" hidden>
+      <div class="k">NOW SELLING · FOR FARMERS &amp; GARDENERS</div>
+      <h3>ACRES Nano Organic Fertilizer</h3>
+      <p class="nano-why">To make sure our foods grow in clean, living soil, our Heritage Garden Packs come with ACRES Nano Organic Fertilizer. <b>Start your soil today.</b></p>
+      <div class="badges"><span>✔ University of Ghana tested</span><span>✔ PPRSD approved (MoFA)</span><span>✔ OMRI-listed organic</span></div>
+      <div class="prods">
+        <div class="prod"><img src="media/nano-acre.png" alt="ACRES Nano 1 Acre Farm Pack">
+          <div class="pt"><b>1 Acre Farm Pack</b><small>10 capsules · treats 1 acre</small></div><span class="pp"><i>₵600</i></span>
+          <div class="step"><button type="button" data-n="acre" data-d="-1" aria-label="One fewer">−</button><output id="nqAcre">1</output><button type="button" data-n="acre" data-d="1" aria-label="One more">+</button></div></div>
+        <div class="prod"><img src="media/garden-pack.png" alt="Heritage Garden Pack: two heritage seed packets with ACRES Nano">
+          <div class="pt"><b>Heritage Garden Pack</b><small>3 capsules + 2 heritage seed varieties of your choice</small></div><span class="pp"><i>₵295</i></span>
+          <div class="step"><button type="button" data-n="garden" data-d="-1" aria-label="One fewer">−</button><output id="nqGarden">0</output><button type="button" data-n="garden" data-d="1" aria-label="One more">+</button></div></div>
+        <div class="prod"><img src="media/nano-garden.png" alt="ACRES Nano Garden Fertilizer Pack">
+          <div class="pt"><b>Garden Fertilizer Pack</b><small>3 capsules · fertilizer only</small></div><span class="pp"><i>₵225</i></span>
+          <div class="step"><button type="button" data-n="gfert" data-d="-1" aria-label="One fewer">−</button><output id="nqGfert">0</output><button type="button" data-n="gfert" data-d="1" aria-label="One more">+</button></div></div>
+      </div>
+      <a class="rst" id="rstBtn" href="https://api.whatsapp.com/send?phone=233208168917&amp;text=Hello%20RST%2C%20I%27d%20like%20ACRES%20Nano%20Organic%20Fertilizer%20for%2010%2B%20acres." target="_blank" rel="noopener"><b>Farming 10 acres or more?</b><span>Bulk orders are handled by RST, our national distributor · WhatsApp RST ›</span></a>
+      <form class="order" id="nanoOrder" novalidate>
+        <div class="np-note">🚚 <b>Pre-order · Pre-pay · Delivery only.</b> We confirm your order and delivery cost, you pay by MoMo, then we deliver.</div>
+        <label class="fld" id="seedWrap" hidden><span class="fl">Your 2 seed choices (Garden Pack)</span><input id="nSeeds" type="text" placeholder="e.g. Frafra potato, dwarf okro"></label>
+        <label class="fld"><span class="fl">Delivery town, region and landmark</span><input id="nAddr" type="text" placeholder="e.g. Tamale, Northern Region, near the main market"></label>
+        <label class="fld"><span class="fl">Your name</span><input id="nNm" type="text" autocomplete="name"></label>
+        <label class="fld"><span class="fl">Your phone (WhatsApp)</span><input id="nPh" type="tel" inputmode="tel" placeholder="e.g. 024 123 4567"></label>
+        <div class="total"><span>Total</span><b id="nTot">₵600</b></div>
+        <p class="err" id="nErr" hidden></p>
+        <button class="send" type="submit">Send my pre-order on WhatsApp</button>
+        <p class="note small">Plus delivery cost, confirmed with you before you pay.</p>
+      </form>
+    </aside>
   </div>
 
   </div>
 
-  <section class="guide learn" aria-label="Learn about fonio">
+
+  <section class="guide learn" id="learnAcres" aria-label="Learn about ACRES Nano" hidden>
+    <div class="learn-h">LEARN ABOUT ACRES NANO</div>
+    <details class="whatf" open><summary><img src="media/nano-acre.png" alt="" width="56" height="56" style="object-fit:contain;background:#fff"><span><b>What is ACRES Nano?</b><small>Organic fertilizer for living soil · tap to read</small></span><i aria-hidden="true">＋</i></summary>
+      <div class="wf-body">
+        <img class="wf-hero" src="media/nano-farm.jpg" alt="Mixing ACRES Nano into a knapsack sprayer on a vegetable farm in Ghana" loading="lazy">
+        <p>ACRES Nano Organic Fertilizer brings life back into the soil. It feeds and multiplies the soil's own beneficial microorganisms, which break down plant residues, build organic matter and turn nutrients into a form plants can take up.</p>
+        <div class="wf-stats"><div><b>10</b><span>capsules treat 1 acre</span></div><div><b>48 hrs</b><span>to activate in water</span></div><div><b>1-0.1-5.5</b><span>NPK (organic)</span></div></div>
+        <ul><li><b>Less to carry, more to grow:</b> a small pack replaces heavy bags</li><li><b>Stronger roots</b> and better water holding in the soil</li><li><b>Works with what you already use:</b> sprayer, drip, hose or watering can</li><li><b>Soil improves season after season</b></li></ul></div></details>
+    <details class="whatf hist"><summary><span class="hico" aria-hidden="true">🎓</span><span><b>Proven in Ghana</b><small>University of Ghana field trial · tap to read</small></span><i aria-hidden="true">＋</i></summary>
+      <div class="wf-body">
+        <p>The Department of Crop Science, University of Ghana, Legon, tested ACRES Nano on lettuce in 2023. At the recommended rate it performed <b>as well as NPK 15:15:15 chemical fertilizer</b>, with no significant difference in leaves, chlorophyll or plant weight.</p>
+        <div class="wf-stats"><div><b>+50%</b><span>more leaves than no fertilizer</span></div><div><b>+37%</b><span>heavier plants than no fertilizer</span></div><div><b>= NPK</b><span>same growth as 15:15:15</span></div></div>
+        <p>After this trial, ACRES Nano was approved for distribution in Ghana by PPRSD, Ministry of Food and Agriculture. It is also OMRI-listed for organic production in the USA.</p>
+        <p class="wf-note">Source: University of Ghana, Dept. of Crop Science, field evaluation on lettuce, May–July 2023.</p></div></details>
+    <details class="whatf hist"><summary><span class="hico" aria-hidden="true">💧</span><span><b>How to use it</b><small>Activate · Dilute · Apply</small></span><i aria-hidden="true">＋</i></summary>
+      <div class="wf-body"><button type="button" class="lv" data-v="media/nano-explainer.mp4" data-src="ACRES-RST" data-t="How to Use ACRES Nano" data-s="10 capsules per acre: activate, dilute, apply."><img src="media/nano-explainer.jpg" alt=""><span><b>▶ Watch: How to use ACRES Nano</b><small>5 min explainer</small></span></button><ol class="tl">
+        <li><em>Step 1</em><b>Activate</b><span>Put each capsule in about 60 ml of non-chlorinated water (rain, borehole or bottled water) in a bottle. Shake to dissolve, loosen the cap and leave for 48 hours in a cool place out of the sun.</span></li>
+        <li><em>Step 2</em><b>Dilute</b><span>Mix the activated liquid with more water. For a garden or small plot, add about 60 ml of activated ACRES to 8 litres of water in a knapsack sprayer.</span></li>
+        <li><em>Step 3</em><b>Apply</b><span>Spray or water it onto the soil before planting, on seeds and seedlings, and on the leaves as plants grow. Use within 10 days of activating.</span></li></ol>
+        <p class="wf-note">Store capsules in a cool, dry place out of direct sunlight. Not for human consumption. Keep out of reach of children. For your crop and land size, ask your ACRES representative.</p></div></details>
+    <details class="whatf hist"><summary><span class="hico" aria-hidden="true">🌿</span><span><b>What's inside, and is it safe?</b><small>Natural ingredients · tap to read</small></span><i aria-hidden="true">＋</i></summary>
+      <div class="wf-body"><ul><li><b>Sea kelp</b>, the source of its natural potash</li><li><b>Humic and fulvic acids</b></li><li><b>Enzymes and beneficial soil microbes</b></li><li><b>Guaranteed analysis:</b> Nitrogen 1.0%, Phosphate 0.1%, Soluble Potash 5.5%</li></ul>
+        <p>Tested as not toxic, not corrosive and not an irritant. Safe to handle and store, with no special disposal needed.</p></div></details>
+    <details class="whatf hist"><summary><span class="hico" aria-hidden="true">🎬</span><span><b>Watch the ACRES story</b><small>The Problem · The Solution · The Science</small></span><i aria-hidden="true">＋</i></summary>
+      <div class="wf-body">
+        <button type="button" class="lv" data-v="dy3wzy2EZ6k" data-en="641" data-p="Part 1 · The Problem" data-t="ACRES Agriculture: The Problem" data-s="Why our soils and food need change."><img src="https://i.ytimg.com/vi/dy3wzy2EZ6k/mqdefault.jpg" alt=""><span><b>▶ 1 · The Problem</b><small>11 min</small></span></button>
+        <button type="button" class="lv" data-v="6bJUGN7mHaU" data-st="22" data-en="350" data-p="Part 2 · The Solution" data-t="ACRES Agriculture: The Solution" data-s="How ACRES Nano restores living soil."><img src="https://i.ytimg.com/vi/6bJUGN7mHaU/mqdefault.jpg" alt=""><span><b>▶ 2 · The Solution</b><small>6 min</small></span></button>
+        <button type="button" class="lv" data-v="tngKiDJoXMc" data-st="24" data-en="693" data-p="Part 3 · The Science" data-t="ACRES Agriculture: The Science" data-s="The science behind ACRES Nano."><img src="https://i.ytimg.com/vi/tngKiDJoXMc/mqdefault.jpg" alt=""><span><b>▶ 3 · The Science</b><small>12 min</small></span></button>
+      </div></details>
+    <details class="whatf hist"><summary><span class="hico" aria-hidden="true">🌍</span><span><b>ACRES across Africa</b><small>Ghana · Tanzania · Burkina Faso</small></span><i aria-hidden="true">＋</i></summary>
+      <div class="wf-body">
+        <div class="gal-h">GHANA</div>
+        <button type="button" class="lv" data-v="media/nano-deputy.mp4" data-t="Deputy Minister visits the ACRES stand" data-s="British Council, Accra."><img src="media/nano-deputy.jpg" alt=""><span><b>▶ The Deputy Minister of Food and Agriculture visits the ACRES stand</b><small>British Council, Accra</small></span></button>
+        <button type="button" class="lv" data-v="media/nano-chiefs.mp4" data-t="ACRES with the Chiefs and people" data-s="Presenting ACRES Nano to a community in Ghana."><img src="media/nano-chiefs.jpg" alt=""><span><b>▶ Presenting ACRES Nano to the Chiefs and people of a community</b><small>Ghana</small></span></button>
+        <div class="gal-h">TANZANIA</div>
+        <div class="gal"><img src="media/gallery/tz1.jpg" alt="Presenting ACRES Nano at the AfDB stand" loading="lazy"><img src="media/gallery/tz2.jpg" alt="" loading="lazy"><img src="media/gallery/tz3.jpg" alt="" loading="lazy"></div>
+        <p class="gal-c">ACRES Nano Organic Fertilizer presented at the African Development Bank's Africa Fertilizer Financing Mechanism stand, Tanzania. <span>Swipe ›</span></p>
+        <div class="gal-h">BURKINA FASO</div>
+        <div class="gal"><img src="media/gallery/bf1.jpg" alt="ACRES team with farmers in a maize field" loading="lazy"><img src="media/gallery/bf2.jpg" alt="" loading="lazy"><img src="media/gallery/bf3.jpg" alt="" loading="lazy"><img src="media/gallery/bf4.jpg" alt="" loading="lazy"></div>
+        <p class="gal-c">PhD students from the University of Ouagadougou took ACRES Nano to farmers in all 13 regions, teaching in French under trees, in homes, offices and villages. <span>Swipe ›</span></p>
+      </div></details>
+  </section>
+  <section class="guide learn" id="learnFonio" aria-label="Learn about fonio">
     <div class="learn-h">LEARN ABOUT FONIO</div>
     <details class="whatf" id="whatF"><summary><img src="media/fonio-grain.jpg" alt="Raw fonio grain" width="56" height="56"><span><b>What is fonio?</b><small>Africa's ancient grain · tap to learn</small></span><i aria-hidden="true">＋</i></summary>
       <div class="wf-body">
@@ -690,10 +787,10 @@ function playSong(i,auto){songCur=i;clearEnd();$s('stEnd').hidden=true;autoRun=a
   document.getElementById('prev').disabled=SONGS.length<2;document.getElementById('next').disabled=SONGS.length<2;renderSongs();
   if(auto||tv.muted)tv.play().catch(()=>{});track('song_play',{song_name:x.t});}
 // ===== CH 3: Heritage Seeds (free; videos play from our seeds partner's YouTube channel) =====
-const SEEDS=[{"n":"Grains & Tubers","i":"🌾","v":[["NAL2xGcJ-so","How to Grow Fonio","Digitaria exilis, Africa's ancient grain, from seed to harvest."],["H0DoOH5bh9k","Frafra Potato (Hausa Potato)","Growing the native potato of the north: Solenostemon rotundifolius."],["Z1xJn9rk0uE","Lesser Yam: How to Grow It","Dioscorea esculenta, a small yam with big potential."],["gpdd4h7XEWE","Lesser Yam in a Minute","Uses and cultivation, the short version."],["-8NDnrO6ftc","How to Grow Tiger Nuts","Cyperus esculentus, for a better yield."],["rNNZzA3qr20","Soaking Dried Tiger Nuts","Turn dried tiger nuts back into fresh nuts."]]},{"n":"Beans & Legumes","i":"🫘","v":[["1DGY9IpzS5Y","Kersting's Groundnut","Macrotyloma geocarpum, the almost-forgotten groundnut."],["SAA5fKqT0T8","African Yam Beans","Sphenostylis stenocarpa: beans above the ground, tubers below."],["uhUWU6OtmkQ","Growing Cowpea in West Africa","Vigna unguiculata, from planting to harvest."]]},{"n":"Vegetables & Peppers","i":"🌶️","v":[["Gf2aVkuLa0A","8 Varieties of West African Okro","Abelmoschus caillei and Abelmoschus esculentus."],["DUs1YQes4OQ","20 Varieties of West African Eggplant","Garden eggs in every shape and colour."],["9ThmDkCqMHE","6 Rare West African Peppers","Heritage pepper varieties."],["qJrwwzdxGMg","African Habanero Pepper Seeds","For farms and home gardens."],["hCCLZ1ZzJ9w","Wild Bird's Eye Pepper","Capsicum frutescens."]]}];
+const SEEDS=[{"n":"ACRES Nano on Ghanaian Farms","i":"🌱","v":[["8CkHXrmPg3A","Carrot Farmer Boosts Yield","David Ayaba, Ashanti Region, shares his ACRES Nano results.","ACRES",0,192],["awMkgdfLTYk","Field Demo in Lave, Volta Region","Farmers see ACRES Nano applied in the field.","ACRES",0,292],["vMOehJeWPVU","Maize Trial at Ashaiman","Throwback 2023: ACRES Nano on maize in Greater Accra.","ACRES",0,276],["media/nano-pepper.mp4","Pepper Farm Grown with ACRES Nano","A healthy pepper crop in Ghana.","ACRES"],["media/nano-explainer.mp4","How to Use ACRES Nano","10 capsules per acre: activate, dilute, apply.","ACRES-RST"]]},{"n":"Grains & Tubers","i":"🌾","v":[["NAL2xGcJ-so","How to Grow Fonio","Digitaria exilis, Africa's ancient grain, from seed to harvest."],["H0DoOH5bh9k","Frafra Potato (Hausa Potato)","Growing the native potato of the north: Solenostemon rotundifolius."],["Z1xJn9rk0uE","Lesser Yam: How to Grow It","Dioscorea esculenta, a small yam with big potential."],["gpdd4h7XEWE","Lesser Yam in a Minute","Uses and cultivation, the short version."],["-8NDnrO6ftc","How to Grow Tiger Nuts","Cyperus esculentus, for a better yield."],["rNNZzA3qr20","Soaking Dried Tiger Nuts","Turn dried tiger nuts back into fresh nuts."]]},{"n":"Beans & Legumes","i":"🫘","v":[["1DGY9IpzS5Y","Kersting's Groundnut","Macrotyloma geocarpum, the almost-forgotten groundnut."],["SAA5fKqT0T8","African Yam Beans","Sphenostylis stenocarpa: beans above the ground, tubers below."],["uhUWU6OtmkQ","Growing Cowpea in West Africa","Vigna unguiculata, from planting to harvest."]]},{"n":"Vegetables & Peppers","i":"🌶️","v":[["Gf2aVkuLa0A","8 Varieties of West African Okro","Abelmoschus caillei and Abelmoschus esculentus."],["DUs1YQes4OQ","20 Varieties of West African Eggplant","Garden eggs in every shape and colour."],["9ThmDkCqMHE","6 Rare West African Peppers","Heritage pepper varieties."],["qJrwwzdxGMg","African Habanero Pepper Seeds","For farms and home gardens."],["hCCLZ1ZzJ9w","Wild Bird's Eye Pepper","Capsicum frutescens."]]}];
 const SEEDSEQ=[];SEEDS.forEach((f,k)=>f.v.forEach((v,j)=>SEEDSEQ.push([k,j])));
 let seedCur=0,openSeed=-1,ytPlayer=null,ytReady=null,sdTimer=null;
-const THUMB=id=>'https://i.ytimg.com/vi/'+id+'/mqdefault.jpg';
+var LOCAL=false,EXTRA=false;const ISLOC=id=>id.startsWith('media/');const THUMB=id=>ISLOC(id)?id.replace('.mp4','.jpg'):'https://i.ytimg.com/vi/'+id+'/mqdefault.jpg';
 function seedAt(q){const [k,j]=SEEDSEQ[q];return {k,j,v:SEEDS[k].v[j]};}
 function loadYT(){if(ytReady)return ytReady;ytReady=new Promise(res=>{window.onYouTubeIframeAPIReady=res;const t=document.createElement('script');t.src='https://www.youtube.com/iframe_api';document.head.appendChild(t);});return ytReady;}
 function sdClear(){if(sdTimer){clearInterval(sdTimer);sdTimer=null;}}
@@ -715,7 +812,7 @@ function ytToggle(){if(!ytPlayer||!ytPlayer.playVideo)return;const st=ytState();
 document.getElementById('ytNano').addEventListener('click',()=>track('nano_tv_badge_click',{}));
 $s('ytShield').onclick=ytToggle;$s('ytPause').onclick=ytToggle;$s('ytPlay').onclick=ytToggle;
 $s('ytProg').onclick=e=>{if(!ytPlayer||!ytPlayer.getDuration)return;const r=e.currentTarget.getBoundingClientRect();ytPlayer.seekTo((e.clientX-r.left)/r.width*ytPlayer.getDuration(),true);};
-setInterval(()=>{if(CH!==3||!ytPlayer||!ytPlayer.getCurrentTime)return;const t=ytPlayer.getCurrentTime()||0,d=ytPlayer.getDuration()||0;$s('ytFill').style.width=(d?t/d*100:0)+'%';$s('ytTime').textContent=fmtT(t)+' / '+fmtT(d);},500);
+setInterval(()=>{if(CH!==3||LOCAL||!ytPlayer||!ytPlayer.getCurrentTime)return;const t=ytPlayer.getCurrentTime()||0,d=ytPlayer.getDuration()||0;$s('ytFill').style.width=(d?t/d*100:0)+'%';$s('ytTime').textContent=fmtT(t)+' / '+fmtT(d);},500);
 // When YouTube plays a commercial, step our cover aside so viewers can see and tap "Skip".
 let ytLow=0;setInterval(()=>{if(CH!==3||!ytPlayer)return;const st=ytState();
   if(st===-1||st===5){ytLow+=400;}else ytLow=0;
@@ -745,7 +842,7 @@ function setChannel(n){if(n===CH)return;CH=n;const one=n===1,two=n===2,three=n==
   document.getElementById('bugTxt').textContent=['','CH 1: HERITAGE FOODS','CH 2: HERITAGE SONGS','CH 3: HERITAGE SEEDS'][n];document.querySelector('.screen').classList.toggle('tall',two);document.getElementById('stage').hidden=!two;if(!two){$s('stEnd').hidden=true;clearEnd();}tv.controls=one;document.getElementById('bugImg').hidden=!one;document.getElementById('tkLab').textContent=['','CH 1: FOODS','CH 2: SONGS','CH 3: SEEDS'][n];
   document.getElementById('gh').textContent='Season 1 programme guide';document.getElementById('gh').hidden=!one;document.getElementById('albSec').hidden=!two;document.getElementById('seedSec').hidden=!three;document.getElementById('guideSec').hidden=!one;
   ['guideSub','passCta','list'].forEach(id=>{const e=document.getElementById(id);if(e)e.hidden=!one;});document.getElementById('songList').hidden=!two;
-  $s('ytBox').hidden=!three;document.getElementById('bug').hidden=three;if(three){++loadId;stopLive();tv.pause();document.getElementById('loading').hidden=true;document.getElementById('still').hidden=true;document.getElementById('sound').hidden=true;}else ytStop();
+  $s('ytBox').hidden=!three;document.getElementById('ytNano').hidden=!three;document.getElementById('bug').hidden=three;if(three){++loadId;stopLive();tv.pause();document.getElementById('loading').hidden=true;document.getElementById('still').hidden=true;document.getElementById('sound').hidden=true;}else ytStop();
   try{const u=new URL(location.href);if(one)u.searchParams.delete('ch');else u.searchParams.set('ch',String(n));history.replaceState(null,'',u.pathname+u.search+u.hash);}catch(_){}
   track('channel_switch',{channel:n});
   if(two)playSong(songCur,true);else if(three)playSeed(seedCur,true);else play(cur,true);}
@@ -925,6 +1022,65 @@ const orderNum=()=>AID?String(AID.wa).replace(/\D/g,''):HQ_NUM;
   });
   upd();
 })();
+
+// ===== CH 3 swaps the market: ACRES Nano for farmers & gardeners; fonio stays on CH 1 & 2 =====
+const NANO={acre:{n:'1 Acre Farm Pack (10 capsules)',p:600,q:1},garden:{n:'Heritage Garden Pack (3 capsules + 2 seeds)',p:295,q:0},gfert:{n:'Garden Fertilizer Pack (3 capsules)',p:225,q:0}};
+function nanoUpd(){let t=0;for(const k in NANO){t+=NANO[k].q*NANO[k].p;document.getElementById('nq'+k.charAt(0).toUpperCase()+k.slice(1)).textContent=NANO[k].q;}
+  document.getElementById('nTot').innerHTML='₵'+t+'<small>+ delivery cost</small>';document.getElementById('seedWrap').hidden=!NANO.garden.q;
+  const big=NANO.acre.q>=10;document.getElementById('rstBtn').classList.toggle('hot',big);return t;}
+document.querySelectorAll('#nanoDesk .step button').forEach(b=>b.onclick=()=>{const k=b.dataset.n;NANO[k].q=Math.max(0,Math.min(k==='acre'?9:20,NANO[k].q+ +b.dataset.d));
+  if(k==='acre'&&+b.dataset.d>0&&NANO.acre.q===9){document.getElementById('nErr').textContent='For 10 acres or more, please contact RST (button above) for bulk supply.';document.getElementById('nErr').hidden=false;}nanoUpd();});
+document.getElementById('nanoOrder').addEventListener('submit',e=>{e.preventDefault();const err=document.getElementById('nErr');
+  const f=['nNm','nPh','nAddr'].map(id=>document.getElementById(id));const miss=f.filter(i=>!i.value.trim());f.forEach(i=>i.classList.toggle('bad',!i.value.trim()));
+  const none=!(NANO.acre.q+NANO.garden.q+NANO.gfert.q);err.textContent=none?'Please choose at least one pack.':'Please add your name, phone and delivery location.';err.hidden=!(none||miss.length);if(none||miss.length)return;
+  const t=nanoUpd();const L=['*ACRES NANO PRE-ORDER · ACRES Heritage TV (CH 3)*','','Name: '+f[0].value.trim(),'Phone: '+f[1].value.trim()];
+  for(const k in NANO)if(NANO[k].q)L.push(NANO[k].n+': '+NANO[k].q+' × ₵'+NANO[k].p+' = ₵'+(NANO[k].q*NANO[k].p));
+  if(NANO.garden.q)L.push('Seed choices: '+(document.getElementById('nSeeds').value.trim()||'(will choose)'));
+  L.push('Deliver to: '+f[2].value.trim(),'*Total: ₵'+t+' + delivery (please confirm)*','Payment: pre-pay by MoMo before delivery');
+  L.push(AID?'Referred by AID: '+AID.name+' ('+AID.slug+')':'Referred by: none (direct)');
+  track('nano_preorder',{value:t,currency:'GHS',acres:NANO.acre.q,garden:NANO.garden.q,gfert:NANO.gfert.q});
+  const a=document.createElement('a');a.href='https://api.whatsapp.com/send?phone='+HQ_NUM+'&text='+encodeURIComponent(L.join('\n'));a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove();});
+const SHOPLINE=document.getElementById('shopLine').innerHTML;
+function applyCh3(n){const three=n===3;
+  document.querySelector('.desk:not(.nano)').hidden=three;document.getElementById('nanoDesk').hidden=!three;
+  const ss=document.getElementById('standsSec');if(ss)ss.hidden=three;document.getElementById('learnFonio').hidden=three;document.getElementById('learnAcres').hidden=!three;
+  document.getElementById('shopLine').innerHTML=three?'Clean, living soil for your farm and garden. <b>Pre-order below</b> for delivery.':SHOPLINE;}
+const _setCh=setChannel;setChannel=function(n){_setCh(n);applyCh3(n);};
+nanoUpd();applyCh3(CH);
+
+// ===== CH 3 player: plays YouTube items and our own hosted videos (media/*.mp4) =====
+const locV=document.getElementById('locV');
+let CUR=null,rstT=null;
+function showPart(p){const c=$s('partCard');if(!p){c.hidden=true;return;}c.textContent=p;c.hidden=false;c.style.animation='none';void c.offsetWidth;c.style.animation='';setTimeout(()=>c.hidden=true,4000);}
+function afterItem(){const v=CUR;if(!v)return;if(v[3]==='ACRES'){$s('rstCard').hidden=false;track('rst_card',{video:v[1]});clearTimeout(rstT);rstT=setTimeout(()=>finishItem(),9000);}else finishItem();}
+function finishItem(){clearTimeout(rstT);$s('rstCard').hidden=true;if(!EXTRA)sdShowEnd();else{$s('ytPause').hidden=false;$s('ytPlay').textContent='▶';}}
+function playItem(v,lab,q){sdClear();$s('sdEnd').hidden=true;$s('rstCard').hidden=true;clearTimeout(rstT);CUR=v;EXTRA=q==null;if(q!=null)seedCur=q;showPart(v[6]);
+  $s('ytPause').style.backgroundImage='url('+(ISLOC(v[0])?v[0].replace('.mp4','.jpg'):'https://i.ytimg.com/vi/'+v[0]+'/hqdefault.jpg')+')';$s('ypTitle').textContent=v[1];
+  document.getElementById('nowLab').textContent=lab;document.getElementById('nowTitle').textContent=v[1];document.getElementById('nowSub').textContent=v[2]+' · Video: '+(v[3]?'ACRES':'Jibril Enterprise');
+  document.getElementById('prev').disabled=false;document.getElementById('next').disabled=false;renderSeeds();track('seed_play',{video:v[1]});
+  if(ISLOC(v[0])){LOCAL=true;try{ytPlayer&&ytPlayer.pauseVideo&&ytPlayer.pauseVideo();}catch(_){}document.getElementById('ytP').style.visibility='hidden';
+    locV.hidden=false;locV.src=v[0]+(v[4]?'#t='+v[4]:'');locV.play().catch(()=>{});ytPaint(ytState());return;}
+  LOCAL=false;locV.pause();locV.hidden=true;locV.removeAttribute('src');document.getElementById('ytP').style.visibility='';ytPaint(-1);
+  loadYT().then(()=>{if(CH!==3)return;
+    if(!ytPlayer){ytPlayer=new YT.Player('ytP',{videoId:v[0],host:'https://www.youtube-nocookie.com',playerVars:{playsinline:1,rel:0,modestbranding:1,autoplay:1,controls:0,disablekb:1,fs:0,iv_load_policy:3,cc_load_policy:0,start:v[4]||0},
+      events:{onReady:e=>{if(CH===3&&!LOCAL)e.target.playVideo();},onStateChange:e=>{if(LOCAL)return;ytPaint(e.data);if(e.data===0&&CH===3){track('seed_complete',{video:CUR&&CUR[1]});afterItem();}}}});}
+    else ytPlayer.loadVideoById({videoId:v[0],startSeconds:v[4]||0});});}
+playSeed=function(q,auto){const {k,j,v}=seedAt(q);playItem(v,'NOW SHOWING · '+SEEDS[k].n.toUpperCase()+' · '+(j+1)+' OF '+SEEDS[k].v.length,q);};
+const _ytState=ytState;ytState=function(){if(LOCAL)return locV.ended?0:(locV.paused?2:1);return _ytState();};
+const _ytToggle=ytToggle;ytToggle=function(){if(LOCAL){if(locV.paused){locV.muted=false;locV.play().catch(()=>{});}else locV.pause();return;}_ytToggle();};
+$s('ytShield').onclick=()=>ytToggle();$s('ytPause').onclick=()=>ytToggle();$s('ytPlay').onclick=()=>ytToggle();
+const _ytProg=$s('ytProg').onclick;$s('ytProg').onclick=e=>{if(LOCAL){const r=e.currentTarget.getBoundingClientRect();if(locV.duration)locV.currentTime=(e.clientX-r.left)/r.width*locV.duration;return;}_ytProg(e);};
+['play','pause','playing','waiting'].forEach(ev=>locV.addEventListener(ev,()=>ytPaint(ytState())));
+locV.addEventListener('ended',()=>{ytPaint(0);track('seed_complete',{video:$s('ypTitle').textContent});afterItem();});
+locV.addEventListener('loadedmetadata',()=>{$s('ytBox').classList.toggle('portrait',locV.videoHeight>locV.videoWidth);});
+// stop each ACRES video before its old contact details, then show the RST card
+setInterval(()=>{if(CH!==3||!CUR||!CUR[5]||!$s('rstCard').hidden)return;let t=0;if(LOCAL)t=locV.currentTime;else if(ytPlayer&&ytPlayer.getCurrentTime)t=ytPlayer.getCurrentTime();
+  if(t>=CUR[5]){try{LOCAL?locV.pause():ytPlayer.pauseVideo();}catch(_){}$s('ytPause').hidden=false;track('seed_complete',{video:CUR[1]});afterItem();}},400);
+$s('rstSkip').onclick=()=>finishItem();
+locV.addEventListener('timeupdate',()=>{if(!LOCAL)return;const t=locV.currentTime||0,d=locV.duration||0;$s('ytFill').style.width=(d?t/d*100:0)+'%';$s('ytTime').textContent=fmtT(t)+' / '+fmtT(d);});
+const _ytStop=ytStop;ytStop=function(){locV.pause();_ytStop();};
+document.querySelectorAll('.lv').forEach(b=>b.onclick=()=>{if(CH!==3)setChannel(3);playItem([b.dataset.v,b.dataset.t,b.dataset.s,b.dataset.src||'ACRES',+b.dataset.st||0,+b.dataset.en||0,b.dataset.p||''],b.dataset.p?'NOW SHOWING · THE ACRES STORY':'NOW SHOWING · LEARN ABOUT ACRES NANO',null);document.querySelector('.set').scrollIntoView({behavior:'smooth',block:'start'});});
+if(CH===3){renderSeeds();playSeed(0,true);}
 </script>
 
 </body></html>
