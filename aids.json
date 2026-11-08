@@ -18,7 +18,7 @@
   "archbishop": {
     "name": "Archbishop Enoch Osei-Poku",
     "role": "Diaspora Distributor",
-    "label": "Your Diaspora FONIO Distributor",
+    "label": "Your Diaspora Heritage Food Distributor",
     "areaText": "Send fonio to family in Ghana",
     "zone": "Diaspora",
     "wa": "15134107096",
@@ -36,7 +36,7 @@
   "bondy": {
     "name": "Osiris Ettu Bondy",
     "role": "AID",
-    "label": "Your FONIO Distributor",
+    "label": "Your Heritage Food Distributor",
     "areaText": "At Large · Nationwide",
     "zone": "Nationwide",
     "wa": "233244244823",
@@ -46,7 +46,7 @@
   "denson": {
     "name": "Dr. Mrs. Dorothy Dede Denson",
     "role": "AID",
-    "label": "Your FONIO Distributor",
+    "label": "Your Heritage Food Distributor",
     "areaText": "Central Region · Nationwide",
     "zone": "Nationwide",
     "wa": "233553489621",
@@ -72,7 +72,7 @@
   "amaike": {
     "name": "Thelma Amaike",
     "role": "AID",
-    "label": "Your FONIO Distributor",
+    "label": "Your Heritage Food Distributor",
     "areaText": "Suhum · Eastern Region",
     "zone": "Nationwide",
     "wa": "233256691826",
