@@ -947,11 +947,11 @@ const orderNum=()=>AID?String(AID.wa).replace(/\D/g,''):HQ_NUM;
 const PRICES={club:{bag:330,bagWas:375,case:670,caseWas:750,note:'Club member prices · Pickup or express delivery'},
   aid:{bag:350,bagWas:375,case:75,caseWas:0,note:'Prices from your local distributor · Pickup or express delivery'}};
 // Club members buy wholesale (the case of 10); AID customers buy single 1kg packs.
-const TWO={club:{name:'1kg Case of 10',sub:'10 × 1kg packs · share or store',img:'media/case10.jpg',alt:'Case of ten 1kg packs of DIM Fonio',unit:'case'},aid:{name:'1kg Pack',sub:'A single 1kg pack · try it first',img:'media/pack1kg.jpg',alt:'1kg pack of DIM Fonio',unit:'pack'}};
+const TWO={club:{name:'1kg Case of 10',sub:'10 × 1kg packs · share or store',img:'media/case10.jpg',alt:'Case of ten 1kg packs of DIM Fonio',unit:'case'},aid:{name:'1kg Pack',sub:'A single 1kg pack · try it first',img:'media/pack1kg.png',alt:'1kg pack of DIM Fonio',unit:'pack'}};
 const Q={bag:1,case:0};
 const PR=()=>AID?PRICES.aid:PRICES.club;
 function paintPrices(){const p=PR();document.getElementById('pBag').textContent='₵'+p.bag;document.getElementById('wBag').textContent=p.bagWas?'₵'+p.bagWas:'';
-  document.getElementById('pCase').textContent='₵'+p.case;document.getElementById('wCase').textContent=p.caseWas?'₵'+p.caseWas:'';document.getElementById('priceNote').textContent=p.note;const t=AID?TWO.aid:TWO.club,im=document.getElementById('imgTwo');document.getElementById('nmTwo').textContent=t.name;document.getElementById('subTwo').textContent=t.sub;if(!im.src.endsWith(t.img)){im.src=t.img;im.alt=t.alt;}}
+  document.getElementById('pCase').textContent='₵'+p.case;document.getElementById('wCase').textContent=p.caseWas?'₵'+p.caseWas:'';document.getElementById('priceNote').textContent=p.note;const t=AID?TWO.aid:TWO.club,im=document.getElementById('imgTwo');document.getElementById('nmTwo').textContent=t.name;document.getElementById('subTwo').textContent=t.sub;if(!im.src.endsWith(t.img)){im.src=t.img;im.alt=t.alt;im.classList.toggle('sq',!AID);}}
 (function(){
   const tot=document.getElementById('tot');
   const how=()=>document.querySelector('input[name=how]:checked').value;
