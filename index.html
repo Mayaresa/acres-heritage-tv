@@ -266,16 +266,25 @@ footer{color:var(--muted);font-size:13px;text-align:center}
 @keyframes swing{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
 @media (prefers-reduced-motion:reduce){.opensign,.opensign .plate,.opensign .plate b{animation:none}}
 @media (max-width:600px){.opensign{top:6px;width:62px}.opensign .plate small{font-size:7px}.opensign .plate b{font-size:16px;letter-spacing:1px}}
+
+/* uniform channel tiles */
+.channels{display:flex;gap:8px;flex-wrap:nowrap}
+.channels .ch{flex:1 1 0;min-width:0;flex-direction:column;justify-content:flex-start;gap:5px;border-radius:14px;padding:8px 6px 9px;text-align:center;font-size:12px;letter-spacing:.5px;line-height:1.15}
+.channels .ch img,.channels .ch .pk{width:30px;height:30px;border-radius:50%;flex:none}
+.channels .ch .pk{font-style:normal;font-size:20px;line-height:30px}
+.channels .ch .n{display:block;font-size:11px;letter-spacing:1px;margin-bottom:1px}
+.channels .ch.pass{padding:8px 6px 9px;font-size:12px;letter-spacing:.5px}
+.channels .ch.pass .n{color:inherit;opacity:.75}
 </style>
 
 <div class="wrap">
   <header class="station">
     <div class="brand"><img class="blogo" src="media/acres-badge.png" alt="ACRES: Our food. Our future"><div class="bname"><b>ACRES HERITAGE <span>TV</span></b><small>Showcasing Our Indigenous Crops</small></div></div>
     <nav class="channels" aria-label="Channels">
-      <button class="ch on" id="ch1Btn" type="button"><img src="media/fonio-tv-icon.jpg" alt=""><span><span class="n">CH 1:</span> FONIO</span></button>
-      <button class="ch" id="ch2Btn" type="button"><img src="songs/s01-cover.jpg" alt=""><span><span class="n">CH 2:</span> HERITAGE SONGS</span></button>
-      <button class="ch" id="ch3Btn" type="button" hidden><img src="https://i.ytimg.com/vi/1DGY9IpzS5Y/default.jpg" alt=""><span><span class="n">CH 3:</span> HERITAGE SEEDS</span></button>
-      <button class="ch pass" id="passBtn" type="button">🔑 <span id="passLabel">Season Pass</span></button>
+      <button class="ch on" id="ch1Btn" type="button"><img src="media/fonio-tv-icon.jpg" alt=""><span><span class="n">CH 1</span> HERITAGE FOODS</span></button>
+      <button class="ch" id="ch2Btn" type="button"><img src="songs/s01-cover.jpg" alt=""><span><span class="n">CH 2</span> HERITAGE SONGS</span></button>
+      <button class="ch" id="ch3Btn" type="button" hidden><img src="https://i.ytimg.com/vi/1DGY9IpzS5Y/default.jpg" alt=""><span><span class="n">CH 3</span> HERITAGE SEEDS</span></button>
+      <button class="ch pass" id="passBtn" type="button"><i class="pk">🔑</i><span><span class="n">MEMBERS</span> <span id="passLabel">Season Pass</span></span></button>
     </nav>
   </header>
 
@@ -316,7 +325,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
           <button type="button" class="se-next" id="sdNext">▶ Next video</button>
         </div>
       </div>
-      <div class="bug" id="bug"><img src="media/fonio-tv-icon.jpg" alt="" id="bugImg"><span id="bugTxt">CH 1: FONIO</span></div>
+      <div class="bug" id="bug"><img src="media/fonio-tv-icon.jpg" alt="" id="bugImg"><span id="bugTxt">CH 1: HERITAGE FOODS</span></div>
     </div>
     <div class="now">
       <div style="min-width:0">
@@ -329,7 +338,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
   </section>
 
   <div class="ticker" aria-label="Programme schedule">
-    <div class="tk-lab" id="tkLab">CH 1: FONIO</div>
+    <div class="tk-lab" id="tkLab">CH 1: FOODS</div>
     <div class="tk-view"><div class="tk-run" id="tk"></div></div>
   </div>
 
@@ -727,7 +736,7 @@ $s('sdNext').onclick=()=>playSeed((seedCur+1)%SEEDSEQ.length,true);
 $s('sdClub').addEventListener('click',()=>{sdClear();$s('sdNext').textContent='▶ Next video';track('seed_cta_club',{});});
 function setChannel(n){if(n===CH)return;CH=n;const one=n===1,two=n===2,three=n===3;
   ['ch1Btn','ch2Btn','ch3Btn'].forEach((id,k)=>document.getElementById(id).classList.toggle('on',n===k+1));
-  document.getElementById('bugTxt').textContent=['','CH 1: FONIO','CH 2: HERITAGE SONGS','CH 3: HERITAGE SEEDS'][n];document.querySelector('.screen').classList.toggle('tall',two);document.getElementById('stage').hidden=!two;if(!two){$s('stEnd').hidden=true;clearEnd();}tv.controls=one;document.getElementById('bugImg').hidden=!one;document.getElementById('tkLab').textContent=['','CH 1: FONIO','CH 2: SONGS','CH 3: SEEDS'][n];
+  document.getElementById('bugTxt').textContent=['','CH 1: HERITAGE FOODS','CH 2: HERITAGE SONGS','CH 3: HERITAGE SEEDS'][n];document.querySelector('.screen').classList.toggle('tall',two);document.getElementById('stage').hidden=!two;if(!two){$s('stEnd').hidden=true;clearEnd();}tv.controls=one;document.getElementById('bugImg').hidden=!one;document.getElementById('tkLab').textContent=['','CH 1: FOODS','CH 2: SONGS','CH 3: SEEDS'][n];
   document.getElementById('gh').textContent='Season 1 programme guide';document.getElementById('gh').hidden=!one;document.getElementById('albSec').hidden=!two;document.getElementById('seedSec').hidden=!three;document.getElementById('guideSec').hidden=!one;
   ['guideSub','passCta','list'].forEach(id=>{const e=document.getElementById(id);if(e)e.hidden=!one;});document.getElementById('songList').hidden=!two;
   $s('ytBox').hidden=!three;document.getElementById('bug').hidden=three;if(three){++loadId;stopLive();tv.pause();document.getElementById('loading').hidden=true;document.getElementById('still').hidden=true;document.getElementById('sound').hidden=true;}else ytStop();
