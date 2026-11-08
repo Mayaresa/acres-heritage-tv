@@ -248,7 +248,9 @@ footer{color:var(--muted);font-size:13px;text-align:center}
 .awning::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 5px,rgba(0,0,0,.25) 5px 6px)}
 .shop-board{display:flex;align-items:center;gap:16px;padding:30px 22px 22px;background:radial-gradient(120% 140% at 0 0,#2a3a17 0,#17200f 60%)}
 .shop-badge{flex:none;width:clamp(58px,15vw,84px);height:auto;border-radius:50%;box-shadow:0 0 0 3px #c9a24a,0 6px 16px rgba(0,0,0,.45)}
-.shop-txt{min-width:0}.shop-k{padding-right:clamp(90px,26vw,140px)}.shop-t{white-space:nowrap;overflow:hidden}
+.shop-txt{min-width:0}.shop-k{padding-right:clamp(90px,26vw,140px)}
+.shop-tw{max-width:calc(100% - clamp(100px,22vw,134px))!important}
+@media (max-width:600px){.shop-tw{max-width:100%!important}.shop-board{padding-top:64px}.shop-k{padding-right:0}}.shop-t{white-space:nowrap;overflow:hidden}
 @media (min-width:601px){.shop-w{--wgap:-3px}}
 .shop-tw{display:flex;flex-direction:column;align-items:flex-end;width:fit-content;max-width:100%;margin-bottom:10px}.shop-t{max-width:100%}
 .shop-w{margin:var(--wgap,1px) 0 0 0;font-style:italic;font-weight:800;color:#1d2a0c;background:var(--lemon);font-size:clamp(11px,2.7vw,14px);letter-spacing:.3px;padding:0 6px;border-radius:4px;line-height:1.15;box-shadow:0 4px 10px rgba(0,0,0,.35)}
@@ -287,7 +289,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
 .pt b{font-family:var(--display);font-weight:800;font-size:18px}.pt small{font-size:12px;opacity:.8}
 .pp{margin-top:3px}.pp i{font-style:normal;font-family:var(--display);font-weight:800;font-size:24px}.pp s{font-size:14px;opacity:.55;margin-left:5px}
 .prod{display:grid;grid-template-columns:64px 1fr auto;grid-template-areas:'img txt txt' 'img price step';column-gap:10px;row-gap:2px}.prod img{grid-area:img;align-self:center}.pt{grid-area:txt}.prod .pp{grid-area:price;align-self:center;margin:0}.prod .step{grid-area:step;flex:none}.prod .step button{width:38px;height:38px;font-size:20px}.prod .step output{min-width:28px;font-size:19px}
-.aidcorner{margin-top:4px;background:transparent;border:1.5px dashed rgba(0,0,0,.35);color:#272727;border-radius:12px;padding:9px;font-weight:800;font-size:13px;letter-spacing:.5px;cursor:pointer}
+.aidcorner{display:flex;align-items:center;gap:12px;width:100%;margin-top:10px;background:#0A8FC2;color:#fff;box-shadow:0 0 0 3px #fff,0 6px 18px rgba(10,143,194,.45);border:0;border-radius:14px;padding:12px 14px;text-align:left;cursor:pointer;font:inherit}.aidcorner i{flex:none;width:44px;height:44px;border-radius:50%;background:#fff;color:#0A8FC2;font-style:normal;font-size:20px;display:flex;align-items:center;justify-content:center}.aidcorner b{display:block;font-size:17px;font-weight:800}.aidcorner small{display:block;font-size:12px;font-weight:800;letter-spacing:1.5px;color:var(--lemon)}.aidcorner em{margin-left:auto;font-style:normal;font-weight:800;font-size:22px}
 .aidbox .am-row{display:flex;gap:8px;margin:8px 0}.aidbox .am-row input{flex:1;min-width:0;padding:12px;border-radius:10px;border:2px solid #ccc;font-size:16px;text-transform:uppercase}
 .aidbox .am-row button{padding:0 18px;border-radius:10px;border:0;background:var(--green);font-weight:800;color:#272727}
 .am-it{display:flex;align-items:center;gap:10px;border:2px solid #e5e5e5;border-radius:12px;padding:10px;margin:8px 0}
@@ -402,13 +404,13 @@ footer{color:var(--muted);font-size:13px;text-align:center}
     </div>
   </section>
 
-  <div class="aidwrap"><div class="aidcard" id="aidCard" hidden><i id="aidInit">A</i><div style="min-width:0;flex:1"><small id="aidLabel">YOUR LOCAL HERITAGE FOOD DISTRIBUTOR</small><em id="aidArea" hidden></em><b id="aidName"></b><a id="aidCall" href="#">📞 <span id="aidPhone"></span></a></div></div></div>
+  <div class="aidwrap"><div class="aidcard" id="aidCard" hidden><i id="aidInit">A</i><div style="min-width:0;flex:1"><small id="aidLabel">YOUR LOCAL HERITAGE FOOD DISTRIBUTOR</small><em id="aidArea" hidden></em><b id="aidName"></b><a id="aidCall" href="#">📞 <span id="aidPhone"></span></a></div></div><button type="button" class="aidcorner" id="aidCornerBtn"><i>🔒</i><span><small>FOR DISTRIBUTORS ONLY</small><b>AID Wholesale Corner</b></span><em>›</em></button></div>
 
   <div class="grid">
     <aside class="desk" aria-label="Order fonio">
       <div class="k">NOW SELLING</div>
       <h3>DIM Fonio</h3>
-      <p class="note" id="priceNote">Club member prices · Pickup or express delivery</p>
+      <p class="note" id="priceNote">Club member pre-order price · Pick up at an ACRES Heritage Market stand</p>
       <div class="prods">
         <div class="prod"><img src="media/bag.png" alt="5kg bag of DIM Fonio">
           <div class="pt"><b>5kg Family Bag</b><small>5 × 1kg packs in one bag</small></div><span class="pp"><i id="pBag">₵330</i><s id="wBag">₵375</s></span>
@@ -452,18 +454,17 @@ footer{color:var(--muted);font-size:13px;text-align:center}
       </form>
       <div class="wa"><div><small>OR MESSAGE US ON WHATSAPP</small><span id="num">+1 240 408 0158</span></div><button class="copy" id="copy" type="button">Copy number</button></div>
       <a class="join" href="https://chat.whatsapp.com/BsuWk5uMUHa32gczMyat8a" target="_blank" rel="noopener">Join the club on WhatsApp ›</a>
-      <button type="button" class="aidcorner" id="aidCornerBtn">🔒 AID Wholesale Corner</button>
     </aside>
   </div>
 
     <section class="stands" aria-labelledby="standsH">
       <div class="st-k">COMING TO YOUR COMMUNITY</div>
       <h3 id="standsH">ACRES Heritage Market Stands</h3>
-      <p class="st-lead">Look out for our kente-topped market stands in communities and markets across Accra.</p>
+      <p class="st-lead">Look out for our kente-topped market stands in communities and markets across Ghana, starting in Accra.</p>
       <div class="st-feats">
-        <div class="sf"><span>🌾</span><b>Fonio all year round</b><small>DIM Fonio on display every day, in 5kg family bags and 1kg packs.</small></div>
+        <div class="sf"><span>🌾</span><b>Fonio all year round</b><small>DIM Fonio on display every day. Buy on the spot, or pre-order as a club member and save.</small></div>
         <div class="sf"><span>🥣</span><b>Free fonio tasting</b><small>Taste before you buy. Fonio tasting every Friday at our stands.</small></div>
-        <div class="sf"><span>🗓️</span><b>Seasonal heritage foods</b><small>Pre-order seasonal foods and pick them up at your market stand.</small></div>
+        <div class="sf"><span>🗓️</span><b>Seasonal heritage foods</b><small>Pre-order seasonal foods like Frafra potato, wild pepper and dwarf okro, and pick them up at your stand.</small></div>
       </div>
     </section>
   </div>
@@ -944,8 +945,8 @@ const HQ_NUM='12404080158';let AID=null;
 const orderNum=()=>AID?String(AID.wa).replace(/\D/g,''):HQ_NUM;
 // order form -> prefilled WhatsApp message (two products; prices depend on who the buyer came through)
 // Direct club members (no AID) get club prices; customers of an AID see the AID's retail prices.
-const PRICES={club:{bag:330,bagWas:375,case:670,caseWas:750,note:'Club member prices · Pickup or express delivery'},
-  aid:{bag:350,bagWas:375,case:75,caseWas:0,note:'Prices from your local distributor · Pickup or express delivery'}};
+const PRICES={club:{bag:330,bagWas:350,case:670,caseWas:750,note:'Club member pre-order price · Pick up at an ACRES Heritage Market stand'},
+  aid:{bag:350,bagWas:0,case:75,caseWas:0,note:'Prices from your local distributor · Pickup or express delivery'}};
 // Club members buy wholesale (the case of 10); AID customers buy single 1kg packs.
 const TWO={club:{name:'1kg Case of 10',sub:'10 × 1kg packs · share or store',img:'media/case10.jpg',alt:'Case of ten 1kg packs of DIM Fonio',unit:'case'},aid:{name:'1kg Pack',sub:'A single 1kg pack · try it first',img:'media/pack1kg.png',alt:'1kg pack of DIM Fonio',unit:'pack'}};
 const Q={bag:1,case:0};
