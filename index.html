@@ -247,7 +247,9 @@ footer{color:var(--muted);font-size:13px;text-align:center}
 .awning::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 5px,rgba(0,0,0,.25) 5px 6px)}
 .shop-board{display:flex;align-items:center;gap:16px;padding:30px 22px 22px;background:radial-gradient(120% 140% at 0 0,#2a3a17 0,#17200f 60%)}
 .shop-badge{flex:none;width:clamp(58px,15vw,84px);height:auto;border-radius:50%;box-shadow:0 0 0 3px #c9a24a,0 6px 16px rgba(0,0,0,.45)}
-.shop-txt{min-width:0}.shop-k{padding-right:clamp(90px,26vw,140px)}.shop-t{white-space:nowrap;overflow:hidden}
+.shop-txt{min-width:0}.shop-k{padding-right:clamp(90px,26vw,140px)}
+.shop-tw{max-width:calc(100% - clamp(100px,22vw,134px))!important}
+@media (max-width:600px){.shop-tw{max-width:100%!important}.shop-board{padding-top:64px}.shop-k{padding-right:0}}.shop-t{white-space:nowrap;overflow:hidden}
 @media (min-width:601px){.shop-w{--wgap:-3px}}
 .shop-tw{display:flex;flex-direction:column;align-items:flex-end;width:fit-content;max-width:100%;margin-bottom:10px}.shop-t{max-width:100%}
 .shop-w{margin:var(--wgap,1px) 0 0 0;font-style:italic;font-weight:800;color:#1d2a0c;background:var(--lemon);font-size:clamp(11px,2.7vw,14px);letter-spacing:.3px;padding:0 6px;border-radius:4px;line-height:1.15;box-shadow:0 4px 10px rgba(0,0,0,.35)}
