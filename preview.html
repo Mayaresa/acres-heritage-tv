@@ -348,7 +348,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
           <div class="se-k">THANKS FOR LISTENING 🎵</div>
           <h3>Now taste the heritage.</h3>
           <ol class="se-steps">
-            <li><b>Try it first.</b> Order your first 5kg of DIM Fonio below and cook it at home.</li>
+            <li><b>Try it first.</b> Order your first DIM Fonio below and cook it at home.</li>
             <li><b>Love it? Share it.</b> Recommend it to family, friends and your church.</li>
             <li><b>Earn with us.</b> Become an ACRES Independent Distributor (AID). Start with just 1 case.</li>
           </ol>
@@ -402,7 +402,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
   <section class="guide" id="guideSec" aria-labelledby="gh">
     <h2 id="gh">Season 1 programme guide</h2>
     <p class="sub" id="guideSub">A new episode is free every Friday. Season Pass holders can watch all 31 now.</p>
-    <button class="passcta" id="passCta" type="button"><span><b>🔑 Full Season Pass</b><small>All 31 episodes · free with your first 5kg fonio order</small></span><em>Enter code ›</em></button>
+    <button class="passcta" id="passCta" type="button"><span><b>🔑 Full Season Pass</b><small>All 31 episodes · free with your first fonio order</small></span><em>Enter code ›</em></button>
     <div class="list" id="list"></div>
     </section>
 
@@ -921,7 +921,7 @@ function renderTicker(){
   if(firstLater)items.push(`<b>NEXT</b> ${fri(firstLater[3])} · Ep ${firstLater[0]} · ${firstLater[1]}`);
   if(avail.length>1)items.push(`<b>CATCH UP</b> ${avail.length} episodes ready to watch`);
   items.push('<i>DIM Fonio · 5kg bags & 1kg cases</i> · Order right here on this page');
-  if(!PASSKEYS)items.push('<b>SEASON PASS</b> Unlock all 31 episodes with your first 5kg order');
+  if(!PASSKEYS)items.push('<b>SEASON PASS</b> Unlock all 31 episodes with your first fonio order');
   items.push('<b>EXPRESS DELIVERY</b> Across Greater Accra · cost confirmed when you order');
   items.push('<b>FONIO FRIDAY</b> A new recipe premieres every Friday');
   const html=items.map(t=>`<span>${t}</span>`).join('');
