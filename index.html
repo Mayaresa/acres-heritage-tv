@@ -232,8 +232,9 @@ footer{color:var(--muted);font-size:13px;text-align:center}
 .alb-grid.five .folder .f-txt b{font-size:15px}
 /* ACRES HERITAGE MARKET banner */
 .shop{position:relative;margin:26px 0 22px;border-radius:18px;overflow:hidden;background:#17200f;border:3px solid var(--green);box-shadow:0 10px 30px rgba(0,0,0,.35)}
-.awning{height:34px;background:repeating-linear-gradient(90deg,var(--green) 0 34px,#f4efdc 34px 68px);position:relative}
-.awning::after{content:'';position:absolute;left:0;right:0;bottom:-13px;height:14px;background:radial-gradient(circle at 17px 0,var(--green) 16px,transparent 17px) 0 0/68px 14px repeat-x,radial-gradient(circle at 51px 0,#f4efdc 16px,transparent 17px) 0 0/68px 14px repeat-x}
+.awning{height:30px;background:linear-gradient(90deg,#d4a017 0 14%,#1a1a1a 14% 17%,#0f7a3a 17% 31%,#c8102e 31% 34%,#d4a017 34% 48%,#1a1a1a 48% 51%,#0f7a3a 51% 65%,#c8102e 65% 68%,#d4a017 68% 82%,#1a1a1a 82% 85%,#0f7a3a 85% 100%) 0 0/180px 100%,#d4a017;position:relative}
+.awning.thin{height:10px}
+.awning::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 5px,rgba(0,0,0,.25) 5px 6px)}
 .shop-board{display:flex;align-items:center;gap:16px;padding:30px 22px 22px;background:radial-gradient(120% 140% at 0 0,#2a3a17 0,#17200f 60%)}
 .shop-badge{flex:none;width:clamp(58px,15vw,84px);height:auto;border-radius:50%;box-shadow:0 0 0 3px #c9a24a,0 6px 16px rgba(0,0,0,.45)}
 .shop-txt{min-width:0}.shop-k{padding-right:clamp(90px,26vw,140px)}.shop-t{white-space:nowrap;overflow:hidden}
@@ -350,6 +351,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
         <p>Heritage foods from our indigenous seeds. <b>Order below</b> from your local distributor.</p>
       </div>
     </div>
+    <div class="awning thin"></div>
     <div class="opensign" aria-hidden="true"><span class="nail"></span>
       <svg viewBox="0 0 100 26"><path d="M50 2 L12 26 M50 2 L88 26" stroke="#c9a24a" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>
       <div class="plate"><b>OPEN</b><small>COME IN</small></div>
