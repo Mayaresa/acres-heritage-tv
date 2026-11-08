@@ -231,6 +231,14 @@ footer{color:var(--muted);font-size:13px;text-align:center}
 .sd-row{display:flex;gap:8px;flex-wrap:wrap}.sd-row>*{flex:1 1 160px;min-height:42px;padding:10px;font-size:14px}
 .seeds .sd-credit{margin:-4px 0 12px;color:var(--muted);font-size:13px}.seeds .sd-credit a{color:var(--green);font-weight:800}
 .alb-grid.five .folder .f-txt b{font-size:15px}
+/* neon frame around the whole market (banner, distributor, order box) */
+.market{position:relative;margin:30px 0 26px;padding:clamp(10px,2.5vw,18px);border-radius:24px;border:3px solid #c8ff7a;
+  box-shadow:0 0 0 1px #fff inset,0 0 6px 1px #9dff3a,0 0 18px 4px rgba(157,255,58,.75),0 0 44px 10px rgba(128,205,41,.45),inset 0 0 14px rgba(157,255,58,.45),inset 0 0 40px rgba(128,205,41,.18);
+  animation:mkGlow 3.5s ease-in-out infinite}
+.market .shop{margin-top:0}.market .grid{margin-bottom:0}
+@keyframes mkGlow{0%,100%{box-shadow:0 0 0 1px #fff inset,0 0 6px 1px #9dff3a,0 0 18px 4px rgba(157,255,58,.75),0 0 44px 10px rgba(128,205,41,.45),inset 0 0 14px rgba(157,255,58,.45),inset 0 0 40px rgba(128,205,41,.18)}
+  50%{box-shadow:0 0 0 1px #fff inset,0 0 8px 2px #b6ff5c,0 0 26px 7px rgba(157,255,58,.9),0 0 64px 16px rgba(128,205,41,.55),inset 0 0 18px rgba(157,255,58,.55),inset 0 0 50px rgba(128,205,41,.25)}}
+@media (prefers-reduced-motion:reduce){.market{animation:none}}
 /* ACRES HERITAGE MARKET banner */
 .shop{position:relative;margin:26px 0 22px;border-radius:18px;overflow:hidden;background:#17200f;border:3px solid var(--green);box-shadow:0 10px 30px rgba(0,0,0,.35)}
 .awning{height:30px;background:linear-gradient(90deg,#d4a017 0 14%,#1a1a1a 14% 17%,#0f7a3a 17% 31%,#c8102e 31% 34%,#d4a017 34% 48%,#1a1a1a 48% 51%,#0f7a3a 51% 65%,#c8102e 65% 68%,#d4a017 68% 82%,#1a1a1a 82% 85%,#0f7a3a 85% 100%) 0 0/180px 100%,#d4a017;position:relative}
@@ -343,6 +351,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
     <div class="list" id="list"></div>
     </section>
 
+  <div class="market" aria-label="ACRES Heritage Market">
   <section class="shop" aria-label="ACRES Heritage Market">
     <div class="awning"></div>
     <div class="shop-board">
@@ -409,6 +418,8 @@ footer{color:var(--muted);font-size:13px;text-align:center}
       <div class="wa"><div><small>OR MESSAGE US ON WHATSAPP</small><span id="num">+1 240 408 0158</span></div><button class="copy" id="copy" type="button">Copy number</button></div>
       <a class="join" href="https://chat.whatsapp.com/BsuWk5uMUHa32gczMyat8a" target="_blank" rel="noopener">Join the club on WhatsApp ›</a>
     </aside>
+  </div>
+
   </div>
 
   <section class="guide learn" aria-label="Learn about fonio">
