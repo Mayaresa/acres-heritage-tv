@@ -226,7 +226,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
 .yt-bar button{width:40px;height:40px}
 .yt-logo{position:absolute;top:10px;left:10px;z-index:3;pointer-events:none;line-height:0}.yt-logo img{width:clamp(40px,10.2vw,58px);height:auto;border-radius:50%;box-shadow:0 0 0 2px #c9a24a,0 3px 8px rgba(0,0,0,.5)}
 .yt-credit{position:absolute;top:12px;right:10px;z-index:3;background:rgba(20,20,20,.7);color:#e6e9e1;border-radius:999px;padding:3px 9px;font-size:10px;font-weight:800;letter-spacing:.5px;pointer-events:none}
-.ytbox.ad .yt-shield,.ytbox.ad .yt-pause,.ytbox.ad .yt-bar,.ytbox.ad .yt-logo{display:none}
+.ytbox.ad .yt-pause,.ytbox.ad .yt-bar{display:none}.ytbox.ad .yt-shield{clip-path:polygon(0 0,100% 0,100% 72%,62% 72%,62% 100%,0 100%);cursor:default}
 .sd-end{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:5% 7%;background:rgba(20,20,20,.94);text-align:left;overflow:auto}
 .sd-end h3{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(20px,5vw,30px);line-height:1.05;color:var(--lemon)}.sd-end p{margin:0;color:#e6e9e1;font-size:14px;line-height:1.35}
 .sd-row{display:flex;gap:8px;flex-wrap:wrap}.sd-row>*{flex:1 1 160px;min-height:42px;padding:10px;font-size:14px}
@@ -278,6 +278,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
 .channels .ch .n{display:block;font-size:11px;letter-spacing:1px;margin-bottom:1px}
 .channels .ch.pass{padding:8px 6px 9px;font-size:12px;letter-spacing:.5px}
 .channels .ch.pass .n{color:inherit;opacity:.75}
+.wf-vid{position:relative}.wf-shield{position:absolute;inset:0;z-index:2;cursor:pointer;display:flex;align-items:center;justify-content:center}.wf-shield span{display:none;width:64px;height:64px;border-radius:50%;background:var(--lemon);color:#272727;font-size:28px;font-weight:900;align-items:center;justify-content:center;padding-left:4px}.wf-shield.paused{background:rgba(0,0,0,.45)}.wf-shield.paused span{display:flex}
 </style>
 
 <div class="wrap">
@@ -352,7 +353,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
 
   <section class="albums seeds" id="seedSec" aria-labelledby="sh" hidden>
     <div class="alb-top"><h2 id="sh">🌱 Heritage Seeds</h2></div>
-    <p class="sd-credit">Seed videos courtesy of <a href="https://www.youtube.com/@Jibrilenterprise" target="_blank" rel="noopener">Jibril Enterprise</a>, our ACRES Alliance seeds partner.</p>
+    <p class="sd-credit">Seed videos courtesy of <b>Jibril Enterprise</b>, our ACRES Alliance seeds partner.</p>
     <div class="songs" id="seedList"></div>
   </section>
 
@@ -439,7 +440,6 @@ footer{color:var(--muted);font-size:13px;text-align:center}
     <details class="whatf" id="whatF"><summary><img src="media/fonio-grain.jpg" alt="Raw fonio grain" width="56" height="56"><span><b>What is fonio?</b><small>Africa's ancient grain · tap to learn</small></span><i aria-hidden="true">＋</i></summary>
       <div class="wf-body">
         <div class="wf-vid"><button type="button" id="storyBtn" aria-label="Play The Amaati Story video"><img src="https://i.ytimg.com/vi/vL1Gub9QdJk/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'"><span class="wf-play">▶</span><span class="wf-cap"><b>Where our fonio comes from</b><small>The Amaati Story · DIM Fonio</small></span></button></div>
-        <p class="wf-src"><a href="https://www.youtube.com/watch?v=vL1Gub9QdJk" target="_blank" rel="noopener">Watch on YouTube</a></p>
         <img class="wf-hero" src="media/fonio-pour.jpg" alt="Fonio grain being poured" loading="lazy">
         <div class="wf-stats"><div><b>~5 min</b><span>to cook</span></div><div><b>6–8 wks</b><span>to harvest</span></div><div><b>1000s</b><span>of years in West Africa</span></div></div>
         <ul><li><b>Whole grain, naturally gluten-free</b></li><li><b>Contains iron, zinc, magnesium</b> and phosphorus, plus fibre and vitamin B1</li><li><b>Contains methionine and cystine</b>, amino acids many grains are low in</li><li><b>A hardy crop</b> that grows with little water</li><li><b>Cook it like rice, couscous or quinoa</b>: jollof, waakye, porridge, banku and more</li></ul>
@@ -843,7 +843,9 @@ window.addEventListener('hashchange',goOrder);goOrder();
 document.getElementById('whatF').addEventListener('toggle',e=>{if(e.target.open)track('what_is_fonio_open',{});});
 document.getElementById('histF').addEventListener('toggle',e=>{if(e.target.open)track('fonio_history_open',{});});
 document.getElementById('storyBtn').addEventListener('click',()=>{tv.pause();const box=document.querySelector('.wf-vid');
-  box.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/vL1Gub9QdJk?autoplay=1&rel=0&playsinline=1" title="The Amaati Story" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+  box.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/vL1Gub9QdJk?autoplay=1&rel=0&playsinline=1&controls=0&disablekb=1&fs=0&iv_load_policy=3&modestbranding=1&enablejsapi=1" title="The Amaati Story" allow="autoplay; encrypted-media"></iframe><div class="wf-shield" title="Tap to pause or play"><span>▶</span></div>';
+  const fr=box.querySelector('iframe'),sh=box.querySelector('.wf-shield');let on=true;const cmd=f=>fr.contentWindow.postMessage(JSON.stringify({event:'command',func:f,args:[]}),'*');
+  sh.onclick=()=>{on=!on;cmd(on?'playVideo':'pauseVideo');sh.classList.toggle('paused',!on);};
   track('fonio_story_play',{});});
 (async()=>{let c=null;
   if(await linkUnlock())return;
