@@ -28,10 +28,10 @@ nano='''
           <div class="pt"><b>1 Acre Farm Pack</b><small>10 capsules · treats 1 acre</small></div><span class="pp"><i>₵600</i></span>
           <div class="step"><button type="button" data-n="acre" data-d="-1" aria-label="One fewer">−</button><output id="nqAcre">1</output><button type="button" data-n="acre" data-d="1" aria-label="One more">+</button></div></div>
         <div class="prod"><img src="media/nano-garden.png" alt="ACRES Nano Garden Pack">
-          <div class="pt"><b>Heritage Garden Pack</b><small>3 capsules + 2 heritage seed varieties of your choice</small></div><span class="pp"><i>₵295</i></span>
+          <div class="pt"><b>Heritage Garden Pack</b><small>ACRES Nano fertilizer + 2 heritage seed varieties of your choice</small></div><span class="pp"><i>₵295</i></span>
           <div class="step"><button type="button" data-n="garden" data-d="-1" aria-label="One fewer">−</button><output id="nqGarden">0</output><button type="button" data-n="garden" data-d="1" aria-label="One more">+</button></div></div>
         <div class="prod"><img src="media/nano-garden.png" alt="ACRES Nano Garden Fertilizer Pack">
-          <div class="pt"><b>Garden Fertilizer Pack</b><small>3 capsules · fertilizer only</small></div><span class="pp"><i>₵195</i></span>
+          <div class="pt"><b>Garden Fertilizer Pack</b><small>ACRES Nano fertilizer only</small></div><span class="pp"><i>₵195</i></span>
           <div class="step"><button type="button" data-n="gfert" data-d="-1" aria-label="One fewer">−</button><output id="nqGfert">0</output><button type="button" data-n="gfert" data-d="1" aria-label="One more">+</button></div></div>
       </div>
       <a class="rst" id="rstBtn" href="https://api.whatsapp.com/send?phone=233208168917&amp;text=Hello%20RST%2C%20I%27d%20like%20ACRES%20Nano%20Organic%20Fertilizer%20for%2010%2B%20acres." target="_blank" rel="noopener"><b>Farming 10 acres or more?</b><span>Bulk orders are handled by RST, our national distributor · WhatsApp RST ›</span></a>
@@ -94,7 +94,7 @@ css2='''
 rep2('</style>\n\n<div class="wrap">',css2+'</style>\n\n<div class="wrap">')
 js2='''
 // ===== CH 3 swaps the market: ACRES Nano for farmers & gardeners; fonio stays on CH 1 & 2 =====
-const NANO={acre:{n:'1 Acre Farm Pack (10 capsules)',p:600,q:1},garden:{n:'Heritage Garden Pack (3 capsules + 2 seeds)',p:295,q:0},gfert:{n:'Garden Fertilizer Pack (3 capsules)',p:195,q:0}};
+const NANO={acre:{n:'1 Acre Farm Pack (10 capsules)',p:600,q:1},garden:{n:'Heritage Garden Pack (Nano fertilizer + 2 seeds)',p:295,q:0},gfert:{n:'Garden Fertilizer Pack (Nano fertilizer only)',p:195,q:0}};
 function nanoUpd(){let t=0;for(const k in NANO){t+=NANO[k].q*NANO[k].p;document.getElementById('nq'+k.charAt(0).toUpperCase()+k.slice(1)).textContent=NANO[k].q;}
   document.getElementById('nTot').innerHTML='₵'+t+'<small>+ delivery cost</small>';document.getElementById('seedWrap').hidden=!NANO.garden.q;
   const big=NANO.acre.q>=10;document.getElementById('rstBtn').classList.toggle('hot',big);return t;}
@@ -132,7 +132,7 @@ def rep3(a,b,c=1):
     assert s.count(a)==c,(a[:80],s.count(a)); s=s.replace(a,b)
 # Garden fertilizer pack price
 rep3('<span class="pp"><i>₵195</i></span>','<span class="pp"><i>₵225</i></span>')
-rep3("gfert:{n:'Garden Fertilizer Pack (3 capsules)',p:195,q:0}","gfert:{n:'Garden Fertilizer Pack (3 capsules)',p:225,q:0}")
+rep3("gfert:{n:'Garden Fertilizer Pack (Nano fertilizer only)',p:195,q:0}","gfert:{n:'Garden Fertilizer Pack (Nano fertilizer only)',p:225,q:0}")
 # Farm folder first in CH 3
 a=s.index('const SEEDS=')+len('const SEEDS=');b=s.index(';\nconst SEEDSEQ')
 seeds=json.loads(s[a:b])
