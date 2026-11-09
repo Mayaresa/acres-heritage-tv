@@ -306,7 +306,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
 
 .nano .nano-why{margin:0;font-size:15px;line-height:1.4}.badges{display:flex;flex-wrap:wrap;gap:6px}.badges span{background:#17200f;color:#c8ff7a;font-weight:800;font-size:12px;border-radius:999px;padding:5px 10px}
 .rst{display:block;background:#17200f;color:#fff;border-radius:14px;padding:12px 14px;text-decoration:none}.rst.hot{box-shadow:0 0 0 3px var(--lemon)}.rst b{display:block;color:var(--lemon);font-size:16px}.rst span{font-size:13px;color:#dfe5d6}
-.np-note{background:rgba(255,255,255,.6);border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.35}
+.np-note .momo{display:block;margin-top:6px;font-size:13px}.np-note{background:rgba(255,255,255,.6);border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.35}
 .am-rw{margin-top:12px;border-top:2px solid #e5e5e5;padding-top:10px}.am-rw p{margin:4px 0;font-size:14px}
 
 .lv{display:flex;align-items:center;gap:12px;width:100%;margin:0 0 10px;background:rgba(255,255,255,.06);border:2px solid rgba(200,255,122,.35);border-radius:14px;padding:8px;color:inherit;font:inherit;text-align:left;cursor:pointer}
@@ -496,7 +496,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
       </div>
       <a class="rst" id="rstBtn" href="https://api.whatsapp.com/send?phone=233208168917&amp;text=Hello%20RST%2C%20I%27d%20like%20ACRES%20Nano%20Organic%20Fertilizer%20for%2010%2B%20acres." target="_blank" rel="noopener"><b>Farming 10 acres or more?</b><span>Bulk orders are handled by RST, our national distributor · WhatsApp RST ›</span></a>
       <form class="order" id="nanoOrder" novalidate>
-        <div class="np-note">🚚 <b>Pre-order · Pre-pay · Delivery only.</b> We confirm your order and delivery cost, you pay by MoMo, then we deliver.</div>
+        <div class="np-note">🚚 <b>Pre-order · Pre-pay · Delivery only.</b> We confirm your order and delivery cost, you pay by MoMo, then we deliver.<br><span class="momo">MoMo: <b>024 289 9470</b> · MAYARESA NUTRITION (MTN). Please pay only after we confirm your total.</span></div>
         <label class="fld" id="seedWrap" hidden><span class="fl">Your 2 seed choices (Garden Pack)</span><input id="nSeeds" type="text" placeholder="e.g. Frafra potato, dwarf okro"></label>
         <label class="fld"><span class="fl">Delivery town, region and landmark</span><input id="nAddr" type="text" placeholder="e.g. Tamale, Northern Region, near the main market"></label>
         <label class="fld"><span class="fl">Your name</span><input id="nNm" type="text" autocomplete="name"></label>
@@ -1124,7 +1124,7 @@ document.getElementById('nanoOrder').addEventListener('submit',e=>{e.preventDefa
   const t=nanoUpd();const L=['*ACRES NANO PRE-ORDER · ACRES Heritage TV (CH 3)*','','Name: '+f[0].value.trim(),'Phone: '+f[1].value.trim()];
   for(const k in NANO)if(NANO[k].q)L.push(NANO[k].n+': '+NANO[k].q+' × ₵'+NANO[k].p+' = ₵'+(NANO[k].q*NANO[k].p));
   if(NANO.garden.q)L.push('Seed choices: '+(document.getElementById('nSeeds').value.trim()||'(will choose)'));
-  L.push('Deliver to: '+f[2].value.trim(),'*Total: ₵'+t+' + delivery (please confirm)*','Payment: pre-pay by MoMo before delivery');
+  L.push('Deliver to: '+f[2].value.trim(),'*Total: ₵'+t+' + delivery (please confirm)*','Payment: pre-pay by MoMo (024 289 9470 · MAYARESA NUTRITION, MTN) once total is confirmed');
   L.push(AID?'Referred by AID: '+AID.name+' ('+AID.slug+')':'Referred by: none (direct)');
   track('nano_preorder',{value:t,currency:'GHS',acres:NANO.acre.q,garden:NANO.garden.q,gfert:NANO.gfert.q});
   const a=document.createElement('a');a.href='https://api.whatsapp.com/send?phone='+HQ_NUM+'&text='+encodeURIComponent(L.join('\n'));a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove();});
